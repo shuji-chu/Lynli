@@ -4,40 +4,66 @@ import (
 "crypto/rand"
 "crypto/tls"
 "encoding/binary"
+"encoding/json"
 "fmt"
 "net"
+"os"
 )
 
-const (
-Version = 0x01
-AuthStr = "ys2026pass"
-)
+const Version = 0x01
+
+// ServerConfig 服务端配置
+// ServerConfig for server
+type ServerConfig struct {
+Listen   string `json:"listen"`
+Password string `json:"password"`
+CertFile string `json:"cert_file"`
+KeyFile  string `json:"key_file"`
+}
+
+func loadConfig(path string) (*ServerConfig, error) {
+data, err := os.ReadFile(path)
+if err != nil {
+return nil, err
+}
+var cfg ServerConfig
+if err := json.Unmarshal(data, &cfg); err != nil {
+return nil, err
+}
+return &cfg, nil
+}
 
 func main() {
-cert, err := tls.LoadX509KeyPair("certs/server.crt", "certs/server.key")
+cfg, err := loadConfig("server/config.json")
 if err != nil {
 panic(err)
 }
-cfg := &tls.Config{
+
+cert, err := tls.LoadX509KeyPair(cfg.CertFile, cfg.KeyFile)
+if err != nil {
+panic(err)
+}
+tlsCfg := &tls.Config{
 Certificates: []tls.Certificate{cert},
 MinVersion:   tls.VersionTLS13,
 }
-ln, err := tls.Listen("tcp", ":9000", cfg)
+
+ln, err := tls.Listen("tcp", cfg.Listen, tlsCfg)
 if err != nil {
 panic(err)
 }
-fmt.Println("Lynli v0.3 服务端监听 :9000 (TLS)")
+fmt.Println("Lynli v0.4 服务端监听", cfg.Listen)
 
 for {
 conn, err := ln.Accept()
 if err != nil {
 continue
 }
-go handle(conn)
+go handle(conn, cfg)
 }
 }
 
-func handle(conn net.Conn) {
+func handle(conn net.Conn, cfg *ServerConfig) {
 defer conn.Close()
 fmt.Println("客户端:", conn.RemoteAddr())
 
@@ -47,7 +73,7 @@ if _, err := conn.Write(salt); err != nil {
 return
 }
 
-aead, err := newAEAD(AuthStr, salt)
+aead, err := newAEAD(cfg.Password, salt)
 if err != nil {
 fmt.Println("派生密钥失败:", err)
 return

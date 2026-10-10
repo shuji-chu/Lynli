@@ -1,0 +1,50 @@
+name: Build Lynli
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+            name: lynli-linux-amd64
+          - goos: linux
+            goarch: arm64
+            name: lynli-linux-arm64
+          - goos: windows
+            goarch: amd64
+            name: lynli-windows-amd64.exe
+          - goos: darwin
+            goarch: amd64
+            name: lynli-macos-amd64
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build server
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o dist/${{ matrix.name }}-server ./server
+
+      - name: Build client
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o dist/${{ matrix.name }}-client ./client
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: dist/
+          retention-days: 7
