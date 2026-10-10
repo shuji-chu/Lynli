@@ -9,14 +9,13 @@ import (
 )
 
 const (
-Magic   = "LYNL"
 Version = 0x01
 AuthStr = "ys2026pass"
 )
 
 func main() {
 if len(os.Args) < 4 {
-fmt.Println("用法: go run client/main.go <服务器> <目标域名> <目标端口>")
+fmt.Println("用法: go run client/main.go <服务器> <域名> <端口>")
 return
 }
 server := os.Args[1]
@@ -29,36 +28,51 @@ panic(err)
 }
 defer conn.Close()
 
-// 1. 发握手
-conn.Write([]byte(Magic))
-conn.Write([]byte{Version})
-conn.Write([]byte{byte(len(AuthStr))})
-conn.Write([]byte(AuthStr))
+salt := make([]byte, 32)
+if _, err := io.ReadFull(conn, salt); err != nil {
+panic(err)
+}
 
-// 2. 发目标端口
+aead, err := newAEAD(AuthStr, salt)
+if err != nil {
+panic(err)
+}
+
+hs := []byte("LYNL")
+hs = append(hs, Version)
 p := 0
 fmt.Sscanf(port, "%d", &p)
 portBuf := make([]byte, 2)
 binary.BigEndian.PutUint16(portBuf, uint16(p))
-conn.Write(portBuf)
+hs = append(hs, portBuf...)
+hs = append(hs, 2)
+hs = append(hs, byte(len(host)))
+hs = append(hs, []byte(host)...)
 
-// 3. 发地址类型和地址（这里假设是域名）
-conn.Write([]byte{2})
-conn.Write([]byte{byte(len(host))})
-conn.Write([]byte(host))
+if err := writeFrame(conn, aead, hs); err != nil {
+panic(err)
+}
 
-// 4. 读服务端响应
-resp := make([]byte, 2)
-io.ReadFull(conn, resp)
-if resp[1] != 0 {
-fmt.Println("服务端拒绝连接")
+resp, err := readFrame(conn, aead)
+if err != nil {
+panic(err)
+}
+if len(resp) < 2 || resp[1] != 0 {
+fmt.Println("服务端拒绝")
 return
 }
-fmt.Println("已连接，开始发 HTTP 请求...")
+fmt.Println("已连接，开始发 HTTP 请求")
 
-// 5. 发一个最简单的 HTTP GET 请求
-fmt.Fprintf(conn, "GET / HTTP/1.0\r\nHost: %s\r\n\r\n", host)
+req := fmt.Sprintf("GET / HTTP/1.0\r\nHost: %s\r\n\r\n", host)
+if err := writeFrame(conn, aead, []byte(req)); err != nil {
+panic(err)
+}
 
-// 6. 打印目标网站返回的数据
-io.Copy(os.Stdout, conn)
+for {
+plain, err := readFrame(conn, aead)
+if err != nil {
+break
+}
+os.Stdout.Write(plain)
+}
 }
