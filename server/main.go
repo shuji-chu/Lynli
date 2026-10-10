@@ -2,6 +2,7 @@ package main
 
 import (
 "crypto/rand"
+"crypto/tls"
 "encoding/binary"
 "fmt"
 "net"
@@ -13,11 +14,19 @@ AuthStr = "ys2026pass"
 )
 
 func main() {
-ln, err := net.Listen("tcp", ":9000")
+cert, err := tls.LoadX509KeyPair("certs/server.crt", "certs/server.key")
 if err != nil {
 panic(err)
 }
-fmt.Println("Lynli v0.2 服务端监听 :9000")
+cfg := &tls.Config{
+Certificates: []tls.Certificate{cert},
+MinVersion:   tls.VersionTLS13,
+}
+ln, err := tls.Listen("tcp", ":9000", cfg)
+if err != nil {
+panic(err)
+}
+fmt.Println("Lynli v0.3 服务端监听 :9000 (TLS)")
 
 for {
 conn, err := ln.Accept()

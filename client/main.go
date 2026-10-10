@@ -6,6 +6,8 @@ import (
 "io"
 "net"
 "os"
+
+utls "github.com/refraction-networking/utls"
 )
 
 const (
@@ -15,15 +17,24 @@ AuthStr = "ys2026pass"
 
 func main() {
 if len(os.Args) < 4 {
-fmt.Println("用法: go run client/main.go <服务器> <域名> <端口>")
+fmt.Println("用法: go run . <服务器> <域名> <端口>")
 return
 }
 server := os.Args[1]
 host := os.Args[2]
 port := os.Args[3]
 
-conn, err := net.Dial("tcp", server)
+rawConn, err := net.Dial("tcp", server)
 if err != nil {
+panic(err)
+}
+
+cfg := &utls.Config{
+ServerName:         "amd.com",
+InsecureSkipVerify: true,
+}
+conn := utls.UClient(rawConn, cfg, utls.HelloChrome_Auto)
+if err := conn.Handshake(); err != nil {
 panic(err)
 }
 defer conn.Close()
