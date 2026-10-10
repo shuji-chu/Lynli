@@ -821,7 +821,7 @@ func handleSetupConfig(params *SetupParams) string {
 }
 
 func init() {
-	adapter.UrlTestHook = func(url string, name string, delay uint16) {
+	adapter.UrlTestHook = func(url string, name string, delay uint16, timedOut bool) {
 		sendMessage(Message{
 			Type: DelayMessage,
 			Data: &Delay{
