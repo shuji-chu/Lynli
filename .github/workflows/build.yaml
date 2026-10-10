@@ -26,6 +26,15 @@ jobs:
     if: &checks true
     runs-on: ubuntu-latest
     steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -79,6 +88,15 @@ jobs:
     if: *checks
     runs-on: ubuntu-latest
     steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -170,6 +188,15 @@ jobs:
     if: *checks
     runs-on: ubuntu-latest
     steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -222,6 +249,15 @@ jobs:
     if: *checks
     runs-on: ubuntu-latest
     steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -273,6 +309,15 @@ jobs:
     if: *checks
     runs-on: ubuntu-latest
     steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       - name: Checkout
         uses: actions/checkout@v4
 
