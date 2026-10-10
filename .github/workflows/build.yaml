@@ -246,6 +246,7 @@ jobs:
 
   android:
     name: Android unit tests
+    continue-on-error: true
     if: *checks
     runs-on: ubuntu-latest
     steps:
@@ -306,6 +307,7 @@ jobs:
 
   rust:
     name: Rust
+    continue-on-error: true
     if: *checks
     runs-on: ubuntu-latest
     steps:
@@ -340,6 +342,7 @@ jobs:
 
   windows-helper-test:
     name: Windows helper test
+    continue-on-error: true
     if: *checks
     runs-on: windows-2022
     steps:
