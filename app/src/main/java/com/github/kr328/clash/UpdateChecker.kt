@@ -4,10 +4,14 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.core.content.FileProvider
 import org.json.JSONObject
 import java.io.File
@@ -41,20 +45,44 @@ object UpdateChecker {
                 if (compareVersion(latestTag, currentVersion) <= 0) return@Thread
 
                 Handler(Looper.getMainLooper()).post {
-                    AlertDialog.Builder(activity)
-                        .setTitle("发现新版本 v$latestTag")
-                        .setMessage("当前版本：$currentVersion\n最新版本：$latestTag\n\n$notes")
-                        .setCancelable(false)
-                        .setPositiveButton("立即更新") { _, _ ->
-                            downloadAndInstall(activity, apkUrl, latestTag)
-                        }
-                        .setNegativeButton("稍后", null)
-                        .show()
+                    showUpdateDialog(activity, currentVersion, latestTag, notes, apkUrl)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }.start()
+    }
+
+    private fun showUpdateDialog(
+        activity: Activity,
+        currentVersion: String,
+        latestTag: String,
+        notes: String,
+        apkUrl: String
+    ) {
+        val view = LayoutInflater.from(activity)
+            .inflate(R.layout.dialog_update, null)
+
+        view.findViewById<TextView>(R.id.tvVersion).text = "v$latestTag"
+        view.findViewById<TextView>(R.id.tvDesc).text = "当前版本 $currentVersion  ->  $latestTag"
+        view.findViewById<TextView>(R.id.tvNotes).text =
+            if (notes.isBlank()) "优化体验与问题修复" else notes
+
+        val dialog = AlertDialog.Builder(activity)
+            .setView(view)
+            .setCancelable(false)
+            .create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        view.findViewById<TextView>(R.id.btnUpdate).setOnClickListener {
+            dialog.dismiss()
+            downloadAndInstall(activity, apkUrl, latestTag)
+        }
+        view.findViewById<TextView>(R.id.btnLater).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun downloadAndInstall(activity: Activity, url: String, version: String) {
