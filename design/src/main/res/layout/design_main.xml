@@ -104,7 +104,7 @@
                         android:gravity="center_vertical"
                         app:tint="@color/white"
                         android:textColor="@color/white"
-                        android:text="YS" />
+                        android:text="Lynli" />
                     <!-- 中间的提示文本 -->
                     <!-- Spacer (to take up remaining space between left and right images) -->
                     <Space

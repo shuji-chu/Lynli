@@ -63,7 +63,7 @@ subprojects {
             if (!isApp) {
                 consumerProguardFiles("consumer-rules.pro")
             } else {
-                setProperty("archivesBaseName", "YS-$versionName")
+                setProperty("archivesBaseName", "Lynli-$versionName")
             }
         }
 
@@ -89,8 +89,8 @@ subprojects {
 
                 buildConfigField("boolean", "PREMIUM", "Boolean.parseBoolean(\"false\")")
 
-                resValue("string", "launch_name", "YS")
-                resValue("string", "application_name", "YS")
+                resValue("string", "launch_name", "Lynli")
+                resValue("string", "application_name", "Lynli")
 
                 if (isApp) {
                     applicationIdSuffix = ".alpha"
@@ -104,8 +104,8 @@ subprojects {
 
                 buildConfigField("boolean", "PREMIUM", "Boolean.parseBoolean(\"false\")")
 
-                resValue("string", "launch_name", "YS")//@string/launch_name_meta
-                resValue("string", "application_name", "YS")//@string/application_name_meta
+                resValue("string", "launch_name", "Lynli")//@string/launch_name_meta
+                resValue("string", "application_name", "Lynli")//@string/application_name_meta
 
                 if (isApp) {
                    // applicationIdSuffix = ".meta"

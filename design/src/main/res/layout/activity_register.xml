@@ -23,7 +23,7 @@
             android:id="@+id/login_welcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="欢迎使用 YS"
+            android:text="欢迎使用 Lynli"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_marginBottom="8dp" />
@@ -174,7 +174,7 @@
                 android:id="@+id/login_footerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="© 2024 · YS"
+                android:text="© 2024 · Lynli"
                 android:textSize="12sp"
                 android:textColor="@color/gray"
                 android:layout_marginTop="32dp"

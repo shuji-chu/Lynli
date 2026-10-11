@@ -300,6 +300,13 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private suspend fun configRequesting(retryCount: Int = 0){
+        // 演示模式：跳过网络请求 / Demo mode: skip network
+        if (PreferenceManager.loginToken == "demo-token") {
+            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                LoadingDialog.hide()
+            }
+            return
+        }
         val gson = Gson()
         val currentTime = System.currentTimeMillis()
         /*apiService.getConfig().let {
@@ -363,6 +370,11 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     private fun performSubscrite(){
 
+        // 演示模式：跳过网络请求 / Demo mode: skip network
+        if (PreferenceManager.loginToken == "demo-token") {
+            LoadingDialog.hide()
+            return
+        }
 
         val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
 

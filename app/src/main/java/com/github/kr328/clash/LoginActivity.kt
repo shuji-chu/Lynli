@@ -198,7 +198,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        // Perform login logic here, possibly calling an API
+        // 虚拟登录：特定账号直接放行 / Demo login: bypass with special account
+        if (email == "demo@lynli.com" && password == "123456") {
+            PreferenceManager.loginemail = email
+            PreferenceManager.loginToken = "demo-token"
+            PreferenceManager.loginauthData = "demo-auth"
+            PreferenceManager.isLoginin = true
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
 
         // Show the loading indicator with a custom message
         LoadingDialog.show(this, "正在登录...")
