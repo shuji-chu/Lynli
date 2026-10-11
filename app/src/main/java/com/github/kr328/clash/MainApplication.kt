@@ -32,6 +32,18 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val __def = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { __t, __e ->
+            try {
+                val __dir = File(getExternalFilesDir(null), "crash")
+                __dir.mkdirs()
+                File(__dir, "c_${System.currentTimeMillis()}.txt").writeText(
+                    "TIME: ${java.util.Date()}\nPROC: ${currentProcessName}\nTHREAD: ${__t.name}\n\n${__e.stackTraceToString()}"
+                )
+            } catch (_: Exception) {}
+            __def?.uncaughtException(__t, __e)
+        }
+
         val processName = currentProcessName
         extractGeoFiles()
 
