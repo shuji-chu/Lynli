@@ -174,7 +174,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 negativeButtonText = "取消",
                                 onPositiveClick = {
                                     // 执行确认操作
-                                    { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start PlansActivity\n") } catch(_:Exception){}; startActivity(PlansActivity::class.intent) }
+                                    startActivity(PlansActivity::class.intent)
                                 },
                                 onNegativeClick = {
                                     // 执行取消操作
@@ -228,24 +228,24 @@ class MainActivity : BaseActivity<MainDesign>() {
                                     design.startClash()
                             }
                             MainDesign.Request.OpenProxy ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start ProxyActivity\n") } catch(_:Exception){}; startActivity(ProxyActivity::class.intent) }
+                                startActivity(ProxyActivity::class.intent)
 
                             MainDesign.Request.OpenProfiles ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start ProfilesActivity\n") } catch(_:Exception){}; startActivity(ProfilesActivity::class.intent) }
+                                startActivity(ProfilesActivity::class.intent)
                             MainDesign.Request.OpenProviders ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start ProvidersActivity\n") } catch(_:Exception){}; startActivity(ProvidersActivity::class.intent) }
+                                startActivity(ProvidersActivity::class.intent)
                             MainDesign.Request.OpenLogs ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start LogsActivity\n") } catch(_:Exception){}; startActivity(LogsActivity::class.intent) }
+                                startActivity(LogsActivity::class.intent)
                             MainDesign.Request.OpenSettings ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start SettingsActivity\n") } catch(_:Exception){}; startActivity(SettingsActivity::class.intent) }
+                                startActivity(SettingsActivity::class.intent)
                             MainDesign.Request.OpenHelp ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start HelpActivity\n") } catch(_:Exception){}; startActivity(HelpActivity::class.intent) }
+                                startActivity(HelpActivity::class.intent)
                             MainDesign.Request.OpenAbout ->
                                 design.showAbout(queryAppVersionName())
                             MainDesign.Request.OpenSettingsDIY ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start ProfileActivity\n") } catch(_:Exception){}; startActivity(ProfileActivity::class.intent) }
+                                startActivity(ProfileActivity::class.intent)
                             MainDesign.Request.OpenSettingsKEFU ->
-                                { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start PlansActivity\n") } catch(_:Exception){}; startActivity(PlansActivity::class.intent) }
+                                startActivity(PlansActivity::class.intent)
 
                             MainDesign.Request.OpenModeDirect ->
 
@@ -449,7 +449,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 negativeButtonText = "取消",
                                 onPositiveClick = {
                                     // 执行确认操作
-                                    { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start PlansActivity\n") } catch(_:Exception){}; startActivity(PlansActivity::class.intent) }
+                                    startActivity(PlansActivity::class.intent)
                                 },
                                 onNegativeClick = {
                                     // 执行取消操作
@@ -536,7 +536,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 //            android.util.Log.i("activeProfile",">> ${activeProfile.type.name}  ${activeProfile.uuid} ${activeProfile.source} ")
 //            showToast(R.string.no_profile_selected, ToastDuration.Long) {
 //                setAction(R.string.profiles) {
-//                    { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start ProfilesActivity\n") } catch(_:Exception){}; startActivity(ProfilesActivity::class.intent) }
+//                    startActivity(ProfilesActivity::class.intent)
 //                }
 //            }
 
@@ -664,7 +664,7 @@ class MainActivity : BaseActivity<MainDesign>() {
         }else{
 //            showToast(R.string.no_profile_selected, ToastDuration.Long) {
 //                setAction(R.string.profiles) {
-//                    { try { val __d=java.io.File(getExternalFilesDir(null),"crash"); __d.mkdirs(); java.io.File(__d,"trace.txt").appendText("${java.util.Date()} start ProfilesActivity\n") } catch(_:Exception){}; startActivity(ProfilesActivity::class.intent) }
+//                    startActivity(ProfilesActivity::class.intent)
 //                }
 //            }
 

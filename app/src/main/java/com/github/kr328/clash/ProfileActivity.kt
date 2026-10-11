@@ -27,12 +27,6 @@ import java.util.concurrent.TimeUnit
 
 class ProfileActivity  : BaseActivity<ProfileDesign>()  {
 
-    private fun __trace(msg: String) {
-        try {
-            val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
-            java.io.File(__d, "trace.txt").appendText("${java.util.Date()} ProfileActivity: ${msg}\n")
-        } catch (_: Exception) {}
-    }
 
     private suspend fun queryAppVersionName(): String {
         return withContext(Dispatchers.IO) {
@@ -42,21 +36,15 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
     }
 
     override suspend fun main() {
-        __trace("main START")
         PreferenceManager.init(this)
-        __trace("after PreferenceManager.init")
 
         val design = ProfileDesign(this)
-        __trace("after ProfileDesign ctor")
         setContentDesign(design)
-        __trace("after setContentDesign")
 
-        try { design.requestdataDisible() } catch (e: Throwable) { __trace("requestdataDisible EX: " + e) }
-        __trace("after requestdataDisible")
+        try { design.requestdataDisible() } catch (e: Throwable) { }
 
         val ticker = ticker(TimeUnit.SECONDS.toMillis(1))
         design.queryVersion(queryAppVersionName())
-        __trace("after queryVersion")
         while (isActive) {
             select<Unit> {
                 events.onReceive {
