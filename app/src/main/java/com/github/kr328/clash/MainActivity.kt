@@ -74,16 +74,25 @@ class MainActivity : BaseActivity<MainDesign>() {
             try {
                 java.io.File(filesDir, "crash.txt").writeText(stack)
             } catch (_: Exception) {}
-            val msg = stack.substring(0, minOf(700, stack.length))
             android.os.Handler(android.os.Looper.getMainLooper()).post {
-                android.widget.Toast.makeText(
-                    applicationContext,
-                    msg,
-                    android.widget.Toast.LENGTH_LONG
-                ).show()
+                val tv = android.widget.TextView(applicationContext)
+                tv.text = stack.substring(0, minOf(1500, stack.length))
+                tv.setPadding(40, 40, 40, 40)
+                tv.setBackgroundColor(0xFFFFFFFF.toInt())
+                tv.setTextColor(0xFF000000.toInt())
+                tv.textSize = 9f
+                tv.isVerticalScrollBarEnabled = true
+                val sv = android.widget.ScrollView(applicationContext)
+                sv.addView(tv)
+                android.app.AlertDialog.Builder(applicationContext)
+                    .setTitle("Lynli 崩溃了")
+                    .setView(sv)
+                    .setCancelable(false)
+                    .setPositiveButton("关闭") { _, _ ->
+                        android.os.Process.killProcess(android.os.Process.myPid())
+                    }
+                    .show()
             }
-            Thread.sleep(2500)
-            android.os.Process.killProcess(android.os.Process.myPid())
         }
 
         UpdateChecker.check(this)
