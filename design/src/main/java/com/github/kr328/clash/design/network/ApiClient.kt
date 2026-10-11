@@ -4,6 +4,8 @@ import android.content.Context
 import com.github.kr328.clash.design.PreferenceManager
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,10 +26,7 @@ object ApiClient {
                     .protocol(okhttp3.Protocol.HTTP_1_1)
                     .code(200)
                     .message("OK")
-                    .body(okhttp3.ResponseBody.create(
-                        okhttp3.MediaType.parse("application/json"),
-                        "{\"data\":null,\"message\":\"demo\",\"status\":\"success\",\"code\":1}"
-                    ))
+                    .body("{\"data\":null,\"message\":\"demo\",\"status\":\"success\",\"code\":1}".toResponseBody("application/json".toMediaType()))
                     .build()
                 return@addInterceptor empty
             }
