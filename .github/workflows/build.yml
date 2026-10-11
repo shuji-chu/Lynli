@@ -1,4 +1,4 @@
-name: Build YS
+name: Build Lynli
 
 on:
   push:
@@ -73,5 +73,5 @@ jobs:
         with:
           files: app/build/outputs/apk/alpha/release/Lynli.apk
           tag_name: ${{ github.ref_name }}
-          name: YS ${{ github.ref_name }}
+          name: Lynli ${{ github.ref_name }}
           make_latest: true

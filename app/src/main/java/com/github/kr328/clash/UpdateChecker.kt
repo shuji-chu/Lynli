@@ -68,7 +68,7 @@ object UpdateChecker {
     private fun downloadAndInstall(activity: Activity, url: String, version: String) {
         val dir = File(activity.getExternalFilesDir(null), "update")
         if (!dir.exists()) dir.mkdirs()
-        val apkFile = File(dir, "YS-$version.apk")
+        val apkFile = File(dir, "Lynli-$version.apk")
 
         val progress = ProgressDialog(activity).apply {
             setTitle("正在下载更新")
