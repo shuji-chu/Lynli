@@ -39,7 +39,7 @@ object ApiClient {
         get() {
             val url = PreferenceManager.baseURL
             return if (url.isNullOrEmpty()) {
-                "http://8.210.61.146:7001/api/v1/" // Lynli API
+                "http://8.210.61.146/api/v1/" // Lynli API
             } else {
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     "https://$url"
@@ -61,7 +61,7 @@ object ApiClient {
 }
 
 object ApiClientConfig {
-        private const val ConfigURL = "http://8.210.61.146:7001/api/v1/" // BASE 请求配置文件地址 见说明文档
+        private const val ConfigURL = "http://8.210.61.146/api/v1/" // BASE 请求配置文件地址 见说明文档
 //    private const val ConfigURL = "https://uuvpn.oss-cn-hongkong.aliyuncs.com/api/test/" // BASE 请求配置文件地址 见说明文档
     //这个链接主要是为了配置转化，一般有的订阅地址被墙之后国内无法访问，这里就是了防止被墙，使用我们的香港服务器进行顶级域名防护
     //const val ConfigNodeURL = "https://api.xxxx.com/api/parseyamlclash.php?target=clashmeta&url=" //通过香港服务器转接一次Clash转化的订阅地址
