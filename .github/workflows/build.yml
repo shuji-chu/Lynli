@@ -52,6 +52,14 @@ jobs:
           printf 'keystore.password=%s\nkey.alias=%s\nkey.password=%s\n' "$KS_PASS" "$KEY_ALIAS" "$KEY_PASS" > signing.properties
           cat signing.properties
 
+      - name: Sync version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG="${{ github.ref_name }}"
+          VERSION="${TAG#v}"
+          sed -i "s/versionName = \".*\"/versionName = \"$VERSION\"/" build.gradle.kts
+          grep versionName build.gradle.kts
+
       - name: Build APK
         run: ./gradlew --no-daemon app:assembleAlphaRelease
 

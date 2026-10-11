@@ -43,7 +43,7 @@ subprojects {
 
             compileSdkVersion(34)
             targetSdkVersion(34)
-            versionName = "4.0.0"
+            versionName = "0.2.9"
             versionCode = 423001
 
             resValue("string", "release_name", "v$versionName")
@@ -85,7 +85,7 @@ subprojects {
             create("alpha") {
                 isDefault = true
                 dimension = flavorDimensionList[0]
-                versionNameSuffix = ".Alpha"
+                // versionNameSuffix = ".Alpha"
 
                 buildConfigField("boolean", "PREMIUM", "Boolean.parseBoolean(\"false\")")
 
