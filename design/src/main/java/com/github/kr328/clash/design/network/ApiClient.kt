@@ -15,6 +15,24 @@ object ApiClient {
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
+        .addInterceptor { chain ->
+            // 演示模式：所有请求直接返回空 JSON，不联网，不崩
+            // Demo mode: return empty JSON for all requests
+            if (PreferenceManager.loginToken == "demo-token") {
+                val empty = okhttp3.Response.Builder()
+                    .request(chain.request())
+                    .protocol(okhttp3.Protocol.HTTP_1_1)
+                    .code(200)
+                    .message("OK")
+                    .body(okhttp3.ResponseBody.create(
+                        okhttp3.MediaType.parse("application/json"),
+                        "{\"data\":null,\"message\":\"demo\",\"status\":\"success\",\"code\":1}"
+                    ))
+                    .build()
+                return@addInterceptor empty
+            }
+            chain.proceed(chain.request())
+        }
         .build()
 
     // Lazy initialization of configURL
