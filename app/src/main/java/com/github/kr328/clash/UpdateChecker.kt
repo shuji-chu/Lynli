@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import org.json.JSONObject
@@ -35,7 +36,19 @@ object UpdateChecker {
                 val json = JSONObject(body)
                 val latestTag = json.optString("version").trimStart('v', 'V')
                 val apkUrl = json.optString("url")
-                val notes = json.optString("notes")
+
+                val notesList = mutableListOf<String>()
+                val arr = json.optJSONArray("notes")
+                if (arr != null) {
+                    for (i in 0 until arr.length()) {
+                        val t = arr.optString(i)
+                        if (t.isNotBlank()) notesList.add(t)
+                    }
+                } else {
+                    val s = json.optString("notes")
+                    if (s.isNotBlank()) notesList.add(s)
+                }
+
                 if (apkUrl.isEmpty() || latestTag.isEmpty()) return@Thread
 
                 val currentVersion = activity.packageManager
@@ -45,7 +58,7 @@ object UpdateChecker {
                 if (compareVersion(latestTag, currentVersion) <= 0) return@Thread
 
                 Handler(Looper.getMainLooper()).post {
-                    showUpdateDialog(activity, currentVersion, latestTag, notes, apkUrl)
+                    showUpdateDialog(activity, currentVersion, latestTag, notesList, apkUrl)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -57,16 +70,26 @@ object UpdateChecker {
         activity: Activity,
         currentVersion: String,
         latestTag: String,
-        notes: String,
+        notes: List<String>,
         apkUrl: String
     ) {
         val view = LayoutInflater.from(activity)
             .inflate(R.layout.dialog_update, null)
 
         view.findViewById<TextView>(R.id.tvVersion).text = "v$latestTag"
-        view.findViewById<TextView>(R.id.tvDesc).text = "当前版本 $currentVersion  ->  $latestTag"
-        view.findViewById<TextView>(R.id.tvNotes).text =
-            if (notes.isBlank()) "优化体验与问题修复" else notes
+        view.findViewById<TextView>(R.id.tvDesc).text = "版本号：$currentVersion  →  $latestTag"
+
+        val llNotes = view.findViewById<LinearLayout>(R.id.llNotes)
+        val list = if (notes.isEmpty()) listOf("优化使用体验，修复已知问题") else notes
+        for (line in list) {
+            val tv = TextView(activity)
+            tv.text = "•  $line"
+            tv.textSize = 14f
+            tv.setTextColor(Color.parseColor("#333333"))
+            tv.setLineSpacing(8f, 1.0f)
+            tv.setPadding(0, 8, 0, 8)
+            llNotes.addView(tv)
+        }
 
         val dialog = AlertDialog.Builder(activity)
             .setView(view)

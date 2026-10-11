@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
-        android:text="发现新版本"
+        android:text="Lynli 版本更新"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#1A1A1A"/>
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_gravity="center_horizontal"
-        android:text="v0.3.13"
+        android:text="v0.3.15"
         android:textSize="14sp"
         android:textColor="#4A90D9"
         android:textStyle="bold"/>
@@ -46,19 +46,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="当前版本 0.3.12"
+        android:text="版本号：0.3.14 → 0.3.15"
         android:textSize="13sp"
         android:textColor="#888888"/>
 
     <TextView
-        android:id="@+id/tvNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="更新内容"
+        android:textSize="13sp"
+        android:textColor="#888888"/>
+
+    <LinearLayout
+        android:id="@+id/llNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="修复若干问题"
-        android:textSize="14sp"
-        android:textColor="#333333"
-        android:lineSpacingExtra="4dp"/>
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +79,7 @@
             android:gravity="center"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:text="稍后"
+            android:text="稍后提醒"
             android:textSize="14sp"
             android:textColor="#666666"
             android:background="?android:attr/selectableItemBackground"/>
