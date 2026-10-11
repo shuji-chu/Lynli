@@ -65,6 +65,27 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 全局崩溃捕获，把错误弹出来 / Global crash catch, show error
+        Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
+            val sw = java.io.StringWriter()
+            throwable.printStackTrace(java.io.PrintWriter(sw))
+            val stack = sw.toString()
+            try {
+                java.io.File(filesDir, "crash.txt").writeText(stack)
+            } catch (_: Exception) {}
+            val msg = stack.substring(0, minOf(700, stack.length))
+            android.os.Handler(android.os.Looper.getMainLooper()).post {
+                android.widget.Toast.makeText(
+                    applicationContext,
+                    msg,
+                    android.widget.Toast.LENGTH_LONG
+                ).show()
+            }
+            Thread.sleep(2500)
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
+
         UpdateChecker.check(this)
     }
 
