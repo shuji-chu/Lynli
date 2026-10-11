@@ -112,25 +112,26 @@ object UpdateChecker {
         val dir = File(activity.getExternalFilesDir(null), "update")
         if (!dir.exists()) dir.mkdirs()
         val apkFile = File(dir, "Lynli-$version.apk")
+        if (apkFile.exists()) apkFile.delete()
 
         val progress = ProgressDialog(activity).apply {
             setTitle("正在下载更新")
-            setMessage("0%")
+            setMessage("正在连接…")
             setCancelable(false)
             show()
         }
 
         Thread {
+            var errMsg: String? = null
             try {
-                val conn = URL(url).openConnection() as HttpURLConnection
-                conn.connectTimeout = 15000
-                conn.readTimeout = 15000
-                conn.instanceFollowRedirects = true
+                val conn = openWithRedirect(url)
+                val code = conn.responseCode
+                if (code != 200) throw Exception("HTTP $code")
                 val total = conn.contentLength.toLong()
                 val input = conn.inputStream
                 val output = FileOutputStream(apkFile)
 
-                val buf = ByteArray(8192)
+                val buf = ByteArray(16384)
                 var read: Int
                 var sum = 0L
                 while (input.read(buf).also { read = it } > 0) {
@@ -141,22 +142,59 @@ object UpdateChecker {
                         Handler(Looper.getMainLooper()).post {
                             progress.setMessage("$pct%")
                         }
+                    } else {
+                        Handler(Looper.getMainLooper()).post {
+                            progress.setMessage("${sum / 1024 / 1024} MB")
+                        }
                     }
                 }
+                output.flush()
                 output.close()
                 input.close()
-
-                Handler(Looper.getMainLooper()).post {
-                    progress.dismiss()
-                    installApk(activity, apkFile)
-                }
             } catch (e: Exception) {
                 e.printStackTrace()
-                Handler(Looper.getMainLooper()).post {
-                    progress.dismiss()
+                errMsg = e.message ?: e.toString()
+            }
+
+            Handler(Looper.getMainLooper()).post {
+                try { progress.dismiss() } catch (_: Exception) {}
+                if (errMsg == null) {
+                    installApk(activity, apkFile)
+                } else {
+                    AlertDialog.Builder(activity)
+                        .setTitle("下载失败")
+                        .setMessage(errMsg)
+                        .setPositiveButton("知道了", null)
+                        .show()
                 }
             }
         }.start()
+    }
+
+    private fun openWithRedirect(url: String, maxRedirects: Int = 8): HttpURLConnection {
+        var current = url
+        var hops = 0
+        while (true) {
+            val conn = URL(current).openConnection() as HttpURLConnection
+            conn.instanceFollowRedirects = false
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 10) Lynli")
+            conn.setRequestProperty("Accept", "*/*")
+            conn.connectTimeout = 15000
+            conn.readTimeout = 30000
+            val code = conn.responseCode
+            if (code in 300..399) {
+                val loc = conn.getHeaderField("Location")
+                conn.disconnect()
+                if (loc.isNullOrEmpty() || hops >= maxRedirects) {
+                    throw Exception("重定向异常 (HTTP $code)")
+                }
+                current = if (loc.startsWith("http")) loc
+                          else URL(URL(current), loc).toString()
+                hops++
+                continue
+            }
+            return conn
+        }
     }
 
     private fun installApk(activity: Activity, apk: File) {
