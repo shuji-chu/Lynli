@@ -126,6 +126,9 @@ class LoginActivity : AppCompatActivity() {
 
         //获取 Config 数据
         getconfig()
+
+        // 打开 APP 就检查更新
+        UpdateChecker.check(this)
     }
 
     private fun getconfig(){

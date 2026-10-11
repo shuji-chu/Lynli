@@ -17,31 +17,22 @@ import java.net.URL
 
 object UpdateChecker {
 
-    private const val OWNER = "shuji-chu"
-    private const val REPO = "Lynli"
+    private const val VERSION_URL = "https://yisoujiasu.pages.dev/version.json"
 
     fun check(activity: Activity) {
         Thread {
             try {
-                val url = URL("https://api.github.com/repos/$OWNER/$REPO/releases/latest")
-                val conn = url.openConnection() as HttpURLConnection
-                conn.setRequestProperty("Accept", "application/vnd.github+json")
+                val conn = URL(VERSION_URL).openConnection() as HttpURLConnection
+                conn.setRequestProperty("Accept", "application/json")
                 conn.connectTimeout = 10000
                 conn.readTimeout = 10000
                 if (conn.responseCode != 200) return@Thread
                 val body = conn.inputStream.bufferedReader().readText()
                 val json = JSONObject(body)
-                val latestTag = json.optString("tag_name").trimStart('v', 'V')
-                val assets = json.optJSONArray("assets") ?: return@Thread
-                var apkUrl: String? = null
-                for (i in 0 until assets.length()) {
-                    val name = assets.getJSONObject(i).optString("name")
-                    if (name.endsWith(".apk")) {
-                        apkUrl = assets.getJSONObject(i).optString("browser_download_url")
-                        break
-                    }
-                }
-                if (apkUrl.isNullOrEmpty()) return@Thread
+                val latestTag = json.optString("version").trimStart('v', 'V')
+                val apkUrl = json.optString("url")
+                val notes = json.optString("notes")
+                if (apkUrl.isEmpty() || latestTag.isEmpty()) return@Thread
 
                 val currentVersion = activity.packageManager
                     .getPackageInfo(activity.packageName, 0).versionName
@@ -51,8 +42,9 @@ object UpdateChecker {
 
                 Handler(Looper.getMainLooper()).post {
                     AlertDialog.Builder(activity)
-                        .setTitle("发现新版本")
-                        .setMessage("当前：$currentVersion\n最新：$latestTag")
+                        .setTitle("发现新版本 v$latestTag")
+                        .setMessage("当前版本：$currentVersion\n最新版本：$latestTag\n\n$notes")
+                        .setCancelable(false)
                         .setPositiveButton("立即更新") { _, _ ->
                             downloadAndInstall(activity, apkUrl, latestTag)
                         }
@@ -82,6 +74,7 @@ object UpdateChecker {
                 val conn = URL(url).openConnection() as HttpURLConnection
                 conn.connectTimeout = 15000
                 conn.readTimeout = 15000
+                conn.instanceFollowRedirects = true
                 val total = conn.contentLength.toLong()
                 val input = conn.inputStream
                 val output = FileOutputStream(apkFile)
