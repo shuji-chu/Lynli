@@ -63,6 +63,12 @@ import kotlin.concurrent.timer
 
 class MainActivity : BaseActivity<MainDesign>() {
 
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+        super.onCreate(savedInstanceState)
+        UpdateChecker.check(this)
+    }
+
+
 
     private lateinit var apiService: ApiService
     private  var  subData: SubscribeData? = null
