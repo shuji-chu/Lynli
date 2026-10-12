@@ -54,6 +54,12 @@ interface ApiService {
     @POST("user/order/checkout")
     suspend fun checkoutOrder(@Header("Authorization") auth_data: String,@Body request: CheckoutrderRequest): Response<PublicResponse>
 
+    @POST("user/order/pay")
+    suspend fun payOrder(@Header("Authorization") auth_data: String, @Body request: PayOrderRequest): Response<PayOrderResponse>
+
+    @GET("user/order/query")
+    suspend fun queryOrderPay(@Header("Authorization") auth_data: String, @Query("trade_no") trade_no: String): Response<QueryPayResponse>
+
     @GET("user/invite/fetch")
     suspend fun getinviteList(@Header("Authorization") auth_data: String) :Response<InviteResponse>
 
@@ -507,3 +513,33 @@ data class OrderData(
             else -> ""
         }
 }
+
+
+data class PayOrderRequest(
+    val trade_no: String,
+    val method: String
+)
+
+data class PayOrderResponse(
+    val code: Int = 0,
+    val msg: String? = null,
+    val data: PayOrderData? = null
+)
+
+data class PayOrderData(
+    val pay_info: String? = null,
+    val qrcode: String? = null,
+    val payurl: String? = null,
+    val trade_no: String? = null,
+    val amount: String? = null
+)
+
+data class QueryPayResponse(
+    val code: Int = 0,
+    val msg: String? = null,
+    val data: QueryPayData? = null
+)
+
+data class QueryPayData(
+    val paid: Boolean = false
+)

@@ -21,6 +21,10 @@ import com.github.kr328.clash.network.ApiClient
 import com.github.kr328.clash.network.ApiService
 import com.github.kr328.clash.network.CheckoutrderRequest
 import com.github.kr328.clash.network.PaymentData
+import com.github.kr328.clash.network.PayOrderRequest
+import com.github.kr328.clash.network.PayOrderResponse
+import com.github.kr328.clash.network.QueryPayResponse
+import com.github.kr328.clash.network.QueryPayData
 import com.github.kr328.clash.network.PublicResponse
 import com.github.kr328.clash.network.QueryOrderData
 import com.github.kr328.clash.network.QueryOrderRequest
@@ -61,81 +65,74 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
 
     fun request(request: Request) {
         if (request == Request.SubmitPay) {
-            //提交订单
-            LoadingDialog.show(context, "正在结账中...")
+            val method = if (currentChoose?.payment == "usdt") "usdt" else "alipay"
+            LoadingDialog.show(context, "正在创建支付...")
             CoroutineScope(Dispatchers.IO).launch {
                 val apiService = ApiClient.retrofit.create(ApiService::class.java)
-                safeApiRequestCall { apiService.checkoutOrder(PreferenceManager.loginauthData, CheckoutrderRequest(tradeNo,currentChoose?.id ?: 0 ))}.let {
-                    withContext(Dispatchers.Main) {
-                        LoadingDialog.hide()
-                    }
+                safeApiRequestCall {
+                    apiService.payOrder(PreferenceManager.loginauthData, PayOrderRequest(tradeNo, method))
+                }.let { resp ->
+                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
+                    val body = resp?.body()
+                    if (resp != null && resp.isSuccessful && body?.code == 1) {
+                        val d = body.data
+                        withContext(Dispatchers.Main) {
+                            val payUrl = d?.payurl ?: ""
+                            val qrUrl = d?.qrcode ?: ""
+                            val info = d?.pay_info ?: ""
+                            val shown = payUrl.ifEmpty { qrUrl }
 
-                    if (it != null && it.isSuccessful){
-                        if (it.body()?.data != null){
-                              val url = it.body()?.data ?: ""
-                              if (url.length > 3){
-
-                                  try {
-                                      withContext(Dispatchers.Main) {
-                                          val intent = Intent(Intent.ACTION_VIEW)
-                                          intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                                          intent.setData(Uri.parse(url))
-                                          context.startActivity(intent)
-
-                                          //弹出支付框
-                                          context.showCustomDialog(
-                                              title = "温馨提示",
-                                              message = "完成支付后若未到账，请重启一下客户端即可同步订阅套餐时长。",
-                                              positiveButtonText = "确定",
-                                              negativeButtonText = "取消",
-                                              onPositiveClick = {
-                                                  fetchTradeInfo(tradeNo)
-
-                                                  launch  {
-
-                                                      withContext(Dispatchers.Main) {
-
-                                                      }
-                                                  }
-                                              },
-                                              onNegativeClick = {
-                                                  // 执行取消操作
-                                              }
-                                          )
-
-
-
-                                      }
-                                  } catch (e: Exception) {
-                                      println("当前手机未安装浏览器")
-                                  }
-                              }
-                        }
-                        println(it.body())
-                    }else{
-                        val errorinfo =  (it?.errorBody()?.string())
-                        if (errorinfo != null){
-                            //解析错错误信息
-
-                            val gson = Gson()
-                            val submitResponse = gson.fromJson(errorinfo, PublicResponse::class.java)
-
-                            if (submitResponse?.message != null){
-                                withContext(Dispatchers.Main) {
-                                    showToast("结算请求失败:${submitResponse.message}", ToastDuration.Long)
+                            if (shown.startsWith("http://") || shown.startsWith("https://")) {
+                                val dlg = PaymentWebDialog(context, shown) {
+                                    pollPaid(tradeNo, null)
                                 }
+                                dlg.show()
+                                pollPaid(tradeNo, dlg)
+                            } else if (qrUrl.startsWith("tron:")) {
+                                showCustomDialog(
+                                    title = "USDT 支付",
+                                    message = "请向以下 TRC20 地址转入 " + (d?.amount ?: "") + " USDT：\n\n" + info + "\n\n转账后约 30 秒自动到账。",
+                                    positiveButtonText = "我已转账",
+                                    negativeButtonText = "取消",
+                                    onPositiveClick = { pollPaid(tradeNo, null) },
+                                    onNegativeClick = {}
+                                )
+                            } else {
+                                showToast("无法识别的支付返回", ToastDuration.Long)
                             }
-                        }else{
-                            withContext(Dispatchers.Main) {
-                                showToast("结算失败:请求数据失败", ToastDuration.Long)
-                            }
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            showToast("创建支付失败：" + (body?.msg ?: "网络错误"), ToastDuration.Long)
                         }
                     }
                 }
             }
-
         }
     }
+
+    private fun pollPaid(tradeNo: String, dialog: PaymentWebDialog?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            repeat(200) {
+                delay(3000)
+                try {
+                    val apiService = ApiClient.retrofit.create(ApiService::class.java)
+                    safeApiRequestCall {
+                        apiService.queryOrderPay(PreferenceManager.loginauthData, tradeNo)
+                    }.let { r ->
+                        if (r?.body()?.data?.paid == true) {
+                            withContext(Dispatchers.Main) {
+                                try { dialog?.dismiss() } catch (_: Throwable) {}
+                                showToast("支付成功，套餐已开通", ToastDuration.Long)
+                            }
+                            return@launch
+                        }
+                    }
+                } catch (_: Throwable) {}
+            }
+        }
+    }
+
     init {
         binding.self = this
         binding.activityBarLayout.applyFrom(context)
