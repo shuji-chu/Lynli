@@ -329,18 +329,6 @@
                         android:progressBackgroundTint="#E0E9FF"/>
                 </LinearLayout>
 
-                    <ProgressBar
-                        android:id="@+id/traffic_progress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:layout_marginTop="10dp"
-                        android:max="100"
-                        android:progress="0"
-                        android:progressTint="#2E5BFF"
-                        android:progressBackgroundTint="#33FFFFFF"/>
-                </LinearLayout>
-
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/mode_selection"
                     android:layout_width="match_parent"
