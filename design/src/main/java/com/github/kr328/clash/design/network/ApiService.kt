@@ -324,7 +324,7 @@ data class ConfigResponse (
     val kefuurl: String,
     val websiteURL: String,
     val crisptoken: String,
-    val banners: List<String>,
+    val banners: List<Map<String, Any>>?,
     val message: String,
     val code: Int
 )
