@@ -20,6 +20,7 @@ import com.github.kr328.clash.core.model.TunnelState
 import com.github.kr328.clash.core.util.trafficDownload
 import com.github.kr328.clash.core.util.trafficTotal
 import com.github.kr328.clash.core.util.trafficUpload
+import com.github.kr328.clash.design.adapter.BannerItem
 import com.github.kr328.clash.design.adapter.ImageSliderImagesAdapter
 import com.github.kr328.clash.design.component.ProxyMenu
 import com.github.kr328.clash.design.component.ProxyViewConfig
@@ -283,13 +284,14 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 
             val cfg = PreferenceManager.getConfigFromPreferences(context)
             val base = cfg?.baseURL?.trimEnd('/') ?: "http://8.210.61.146"
-            val imageList = cfg?.banners
+            val items = cfg?.banners
                 ?.mapNotNull { banner ->
                     val m = banner.media?.takeIf { it.isNotBlank() }
                         ?: banner.image_url?.takeIf { it.isNotBlank() }
                         ?: return@mapNotNull null
-                    if (m.startsWith("http://") || m.startsWith("https://")) m
-                    else base + "/" + m.trimStart('/')
+                    val url = if (m.startsWith("http://") || m.startsWith("https://")) m
+                              else base + "/" + m.trimStart('/')
+                    BannerItem(url, banner.title, banner.subtitle)
                 }
                 ?: emptyList()
 
@@ -297,11 +299,10 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
             // 设置适配器
             //val adapter = ImageSliderAdapter(imageList)
 
-            if (imageList != null){
+            if (items.isNotEmpty()) {
 
-                viewPager2.adapter = ImageSliderImagesAdapter(imageList){ position ->
+                viewPager2.adapter = ImageSliderImagesAdapter(items) { position ->
                     // 点击图片时的处理逻辑
-
                 }
                 // 设置 TabLayoutMediator 来同步 ViewPager2 和 TabLayout
                 TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
