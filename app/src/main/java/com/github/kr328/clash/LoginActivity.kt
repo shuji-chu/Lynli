@@ -209,8 +209,22 @@ class LoginActivity : AppCompatActivity() {
                     "https://yisoujiasu.pages.dev/terms.html"
                 else
                     "https://yisoujiasu.pages.dev/privacy.html"
-                startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url)))
+                showWebViewDialog(url)
             }
+            .show()
+    }
+
+    private fun showWebViewDialog(url: String) {
+        val webView = android.webkit.WebView(this)
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.loadUrl(url)
+
+        android.app.AlertDialog.Builder(this)
+            .setView(webView)
+            .setPositiveButton("关闭") { _, _ -> webView.destroy() }
+            .setOnDismissListener { webView.destroy() }
+            .create()
             .show()
     }
 

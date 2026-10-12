@@ -37,16 +37,16 @@ object ApiClient {
     // Lazy initialization of configURL
     private val configURL: String
         get() {
-            val url = PreferenceManager.baseURL
-            return if (url.isNullOrEmpty()) {
-                "http://8.210.61.146/api/v1/" // Lynli API
-            } else {
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    "https://$url"
-                } else {
-                    url
-                }
+            var url = PreferenceManager.baseURL
+            if (url.isNullOrEmpty()) {
+                return "http://8.210.61.146/api/v1/"
             }
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "https://$url"
+            }
+            url = url.trimEnd('/')
+            // 保证以 /api/v1 结尾（后端返回的 baseURL 不带这个路径）
+            return if (url.endsWith("/api/v1")) "$url/" else "$url/api/v1/"
         }
 
 
