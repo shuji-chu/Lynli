@@ -1,4 +1,4 @@
-package com.github.kr328.clash
+package com.github.kr328.clash.design
 
 import android.app.Dialog
 import android.content.Context
