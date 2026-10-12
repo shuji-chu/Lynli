@@ -225,6 +225,24 @@
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
+            <!-- 兼容 OrdersDataAdapter 的隐藏控件 -->
+            <TextView
+                android:id="@+id/subscriptionAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/subscriptionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <HorizontalScrollView
+                android:id="@+id/groups_Scrollview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

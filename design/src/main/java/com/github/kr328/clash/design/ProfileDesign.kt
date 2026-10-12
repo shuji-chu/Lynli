@@ -61,7 +61,6 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
     init {
         binding.self = this
 
-        binding.activityBarLayout.applyFrom(context)
         binding.navHome.setOnClickListener { request(Request.OpenTabHome) }
         binding.navPlan.setOnClickListener { request(Request.OpenTabPlan) }
         binding.navMine.setOnClickListener { request(Request.OpenTabMine) }
