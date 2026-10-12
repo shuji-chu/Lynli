@@ -24,8 +24,11 @@ interface ApiService {
     @POST("passport/auth/login")
     suspend fun loginUser(@Body request: LoginRequest): Response<LoginResponse>
 
+    @POST("passport/auth/send-code")
+    suspend fun sendCode(@Body request: SendCodeRequest): Response<SendCodeResponse>
+
     @POST("passport/auth/register")
-    suspend fun registerUser(@Body request: LoginRequest): Response<LoginResponse>
+    suspend fun registerUser(@Body request: RegisterRequest): Response<LoginResponse>
 
     @GET("user/info")
     suspend fun getUserData(@Header("Authorization") auth_data: String): Response<UserInfoResponse>
@@ -326,7 +329,20 @@ data class ConfigResponse (
     val code: Int
 )
 
-data class RegisterRequest(val username: String, val password: String)
+data class RegisterRequest(
+    val email: String,
+    val password: String,
+    val code: String
+)
+
+data class SendCodeRequest(val email: String)
+
+data class SendCodeResponse(
+    val message: String?,
+    val data: SendCodeData?
+)
+
+data class SendCodeData(val msg: String?)
 data class RegisterResponse(val success: Boolean, val message: String)
 
 data class LoginRequest(val email: String, val password: String ,val captchaData: String = "")
