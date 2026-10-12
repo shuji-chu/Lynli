@@ -101,9 +101,23 @@ tasks.getByName("clean", type = Delete::class) {
     delete(file(geoFilesDownloadDir))
 }
 android {
+    signingConfigs {
+        create("release") {
+            val keystore = rootProject.file("signing.properties")
+            if (keystore.exists()) {
+                val prop = java.util.Properties().apply {
+                    keystore.inputStream().use(this::load)
+                }
+                storeFile = rootProject.file("release.keystore")
+                storePassword = prop.getProperty("keystore.password")!!
+                keyAlias = prop.getProperty("key.alias")!!
+                keyPassword = prop.getProperty("key.password")!!
+            }
+        }
+    }
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("debug")
