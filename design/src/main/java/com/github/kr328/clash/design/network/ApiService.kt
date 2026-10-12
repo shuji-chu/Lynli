@@ -315,6 +315,17 @@ data class SubmitOrderResponse(
 )
 
 
+data class BannerData(
+    val id: Int? = null,
+    val type: String? = null,
+    val media: String? = null,
+    val image_url: String? = null,
+    val title: String? = null,
+    val subtitle: String? = null,
+    val link: String? = null,
+    val sort: Int? = null
+)
+
 data class ConfigResponse (
     val baseURL: String,
     val baseDYURL: String,
@@ -324,7 +335,7 @@ data class ConfigResponse (
     val kefuurl: String,
     val websiteURL: String,
     val crisptoken: String,
-    val banners: List<Map<String, Any>>?,
+    val banners: List<BannerData>?,
     val message: String,
     val code: Int
 )

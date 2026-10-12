@@ -267,6 +267,8 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
             )*/
 
             val imageList = PreferenceManager.getConfigFromPreferences(context)?.banners
+                ?.mapNotNull { it.media?.takeIf { m -> m.isNotBlank() } }
+                ?: emptyList()
 
             //binding.menuView.text = PreferenceManager.modeName
             // 设置适配器

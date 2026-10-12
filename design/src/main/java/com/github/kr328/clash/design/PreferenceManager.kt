@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.github.kr328.clash.network.ConfigResponse
+import com.github.kr328.clash.network.BannerData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 object PreferenceManager {
     private const val PREF_NAME = "app_preferences"
@@ -94,7 +97,7 @@ object PreferenceManager {
         editor.putString("kefuurl", configResponse.kefuurl)
         editor.putString("websiteURL", configResponse.websiteURL)
         editor.putString("crisptoken", configResponse.crisptoken)
-        editor.putString("banners", configResponse.banners.joinToString(","))
+        editor.putString("banners", Gson().toJson(configResponse.banners ?: emptyList<BannerData>()))
 
         // Apply changes
         editor.apply()
@@ -113,10 +116,12 @@ object PreferenceManager {
         val kefuurl = prefs.getString("kefuurl", null) ?: ""
         val websiteURL = prefs.getString("websiteURL", null) ?: ""
         val crisptoken = prefs.getString("crisptoken", null) ?: ""
-        val bannersString = prefs.getString("banners", null) ?: ""
-        // If any field is null, return null (you can add your own null-check handling logic)
-        // Convert the banners string back into a List
-        val banners = bannersString.split(",").map { it.trim() } ?: emptyList()
+        val bannersString = prefs.getString("banners", null) ?: "[]"
+        val banners: List<BannerData> = try {
+            Gson().fromJson(bannersString, object : TypeToken<List<BannerData>>() {}.type)
+        } catch (e: Exception) {
+            emptyList()
+        }
 
         return   ConfigResponse(
             baseURL = baseURL,
