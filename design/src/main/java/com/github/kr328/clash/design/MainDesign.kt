@@ -180,13 +180,13 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
     }
 
     init {
-        binding.bottomNavInclude.navHome.setOnClickListener {
+        binding.navHome.setOnClickListener {
             // 已经是主页，不跳
         }
-        binding.bottomNavInclude.navPlan.setOnClickListener {
+        binding.navPlan.setOnClickListener {
             request(Request.OpenSettingsKEFU)
         }
-        binding.bottomNavInclude.navMine.setOnClickListener {
+        binding.navMine.setOnClickListener {
             request(Request.OpenMineTab)
         }
 
