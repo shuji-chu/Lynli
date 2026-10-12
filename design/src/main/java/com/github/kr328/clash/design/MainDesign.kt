@@ -281,8 +281,16 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                 R.drawable.ad_banner3
             )*/
 
-            val imageList = PreferenceManager.getConfigFromPreferences(context)?.banners
-                ?.mapNotNull { it.media?.takeIf { m -> m.isNotBlank() } }
+            val cfg = PreferenceManager.getConfigFromPreferences(context)
+            val base = cfg?.baseURL?.trimEnd('/') ?: "http://8.210.61.146"
+            val imageList = cfg?.banners
+                ?.mapNotNull { banner ->
+                    val m = banner.media?.takeIf { it.isNotBlank() }
+                        ?: banner.image_url?.takeIf { it.isNotBlank() }
+                        ?: return@mapNotNull null
+                    if (m.startsWith("http://") || m.startsWith("https://")) m
+                    else base + "/" + m.trimStart('/')
+                }
                 ?: emptyList()
 
             //binding.menuView.text = PreferenceManager.modeName
