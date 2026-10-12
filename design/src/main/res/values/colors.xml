@@ -20,7 +20,12 @@
     <color name="transparent">#20FFFFFF</color>
 
     <color name="color_navi">#2f2152</color>
-    <color name="color_main_bg">#2a2a2a</color>
+    <color name="color_main_bg">#EEF4FF</color>
+    <color name="color_main_bg_light">#F5F9FF</color>
+    <color name="color_text_primary">#1F2937</color>
+    <color name="color_text_secondary">#64748B</color>
+    <color name="color_card_bg">#FFFFFF</color>
+    <color name="color_accent">#2E5BFF</color>
 
     <!-- 定义点击时的颜色 -->
     <color name="colorPressed">#FFCCCCCC</color> <!-- 灰色点击效果 -->

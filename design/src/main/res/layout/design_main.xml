@@ -263,7 +263,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@{mode}"
-                            android:textColor="@color/white"
+                            android:textColor="#1F2937"
                             android:textSize="15sp"
                             android:maxLines="1"
                             android:ellipsize="end"/>
@@ -272,7 +272,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{@string/format_traffic_forwarded(forwarded)}"
-                            android:textColor="@color/gray_light"
+                            android:textColor="#64748B"
                             android:textSize="13sp"/>
 
                         <ImageView
@@ -280,7 +280,7 @@
                             android:layout_height="20dp"
                             android:layout_marginStart="6dp"
                             android:src="@drawable/arrow_forward_24px"
-                            app:tint="@color/white"/>
+                            app:tint="#64748B"/>
                     </LinearLayout>
 
                     <ProgressBar
@@ -546,7 +546,7 @@
                            android:layout_height="wrap_content"
                            android:text="当前节点"
                            app:tint="@color/white"
-                           android:textColor="@color/gray_light"
+                           android:textColor="#64748B"
                            android:textSize="16sp"
                           />
 
@@ -557,7 +557,7 @@
                            android:layout_height="wrap_content"
                            android:text="@{selectnodeName}"
                            app:tint="@color/white"
-                           android:textColor="@color/white"
+                           android:textColor="#1F2937"
                            android:textSize="16sp"
                            />
 
