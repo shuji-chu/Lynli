@@ -81,30 +81,35 @@
                     android:layout_marginRight="10dp"
                     app:layout_constraintEnd_toEndOf="parent">
 
-                    <!-- 左侧菜单按钮 -->
-
-                    <ImageView
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:id="@+id/menu_button"
+                    <!-- 左侧客服按钮 -->
+                    <LinearLayout
+                        android:id="@+id/btn_support"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_view_list"
-                        android:focusable="true"
-                        android:clickable="true"
-                        app:tint="@color/white"
-
-                        android:onClick="@{() -> self.request(Request.OpenSettingsDIY)}"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:padding="8dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        app:tint="@color/white"
-                        android:textColor="@color/white"
-                        android:text="Lynli" />
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="12dp"
+                        android:onClick="@{() -> self.request(Request.OpenSupport)}">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_customer_service"
+                            app:tint="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="在线客服"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
                     <!-- 中间的提示文本 -->
                     <!-- Spacer (to take up remaining space between left and right images) -->
                     <Space
@@ -112,18 +117,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/icon_ai"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:onClick="@{() -> self.request(Request.OpenSettingsKEFU)}"
-                        android:padding="8dp"
-                        />
+                    <!-- 右上角已删除 -->
                     <!--
 
 
@@ -730,7 +724,7 @@
                     android:id="@+id/nav_home_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_clash"
+                    android:src="@drawable/ic_home_tab"
                     app:tint="#2E5BFF"/>
 
                 <TextView
@@ -758,7 +752,7 @@
                     android:id="@+id/nav_plan_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_baseline_view_list"
+                    android:src="@drawable/ic_plan_tab"
                     app:tint="#94A3B8"/>
 
                 <TextView
@@ -786,7 +780,7 @@
                     android:id="@+id/nav_mine_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_person_raised_hand_24px"
+                    android:src="@drawable/ic_person_tab"
                     app:tint="#94A3B8"/>
 
                 <TextView

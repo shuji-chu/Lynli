@@ -248,6 +248,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(PlansActivity::class.intent)
                             MainDesign.Request.OpenMineTab ->
                                 startActivity(ProfileActivity::class.intent)
+                            MainDesign.Request.OpenSupport ->
+                                startActivity(GongdanActivity::class.intent)
 
                             MainDesign.Request.OpenModeDirect ->
 

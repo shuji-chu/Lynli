@@ -56,6 +56,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         OpenSettingsDIY,
         OpenSettingsKEFU,
         OpenMineTab,
+        OpenSupport,
         OpenModeDirect,
         OpenChangeMode,
         OpenModeGlobal,
@@ -180,6 +181,9 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
     }
 
     init {
+        binding.btnSupport.setOnClickListener {
+            request(Request.OpenSupport)
+        }
         binding.navHome.setOnClickListener {
             // 已经是主页，不跳
         }
