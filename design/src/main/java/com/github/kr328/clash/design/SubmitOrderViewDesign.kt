@@ -89,7 +89,7 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                                 dlg.show()
                                 pollPaid(tradeNo, dlg)
                             } else if (qrUrl.startsWith("tron:")) {
-                                showCustomDialog(
+                                context.showCustomDialog(
                                     title = "USDT 支付",
                                     message = "请向以下 TRC20 地址转入 " + (d?.amount ?: "") + " USDT：\n\n" + info + "\n\n转账后约 30 秒自动到账。",
                                     positiveButtonText = "我已转账",

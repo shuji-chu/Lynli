@@ -22,7 +22,7 @@ class PaymentWebDialog(
 ) : Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
 
     private lateinit var webView: WebView
-    private lateinit var progress: ProgressBar
+    private lateinit var progressBar: ProgressBar
 
     private fun dp(v: Int): Int = (v * context.resources.displayMetrics.density).toInt()
 
@@ -73,12 +73,12 @@ class PaymentWebDialog(
         topBar.addView(paidBtn)
         root.addView(topBar)
 
-        progress = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal).apply {
+        progressBar = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal).apply {
             max = 100
             progress = 0
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(3))
         }
-        root.addView(progress)
+        root.addView(progressBar)
 
         val webFrame = FrameLayout(context)
         webView = WebView(context).apply {
@@ -89,7 +89,7 @@ class PaymentWebDialog(
             webViewClient = WebViewClient()
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    progress.progress = newProgress
+                    progressBar.progress = newProgress
                 }
             }
             loadUrl(payUrl)
