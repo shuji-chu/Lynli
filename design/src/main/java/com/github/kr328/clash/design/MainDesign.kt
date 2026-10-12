@@ -55,6 +55,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         OpenAbout,
         OpenSettingsDIY,
         OpenSettingsKEFU,
+        OpenMineTab,
         OpenModeDirect,
         OpenChangeMode,
         OpenModeGlobal,
@@ -179,6 +180,16 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
     }
 
     init {
+        binding.bottomNavInclude.navHome.setOnClickListener {
+            // 已经是主页，不跳
+        }
+        binding.bottomNavInclude.navPlan.setOnClickListener {
+            request(Request.OpenSettingsKEFU)
+        }
+        binding.bottomNavInclude.navMine.setOnClickListener {
+            request(Request.OpenMineTab)
+        }
+
         binding.self = this
 
         binding.colorClashStarted = context.resolveThemedColor(R.attr.colorPrimary)

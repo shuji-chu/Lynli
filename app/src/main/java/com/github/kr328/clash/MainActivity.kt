@@ -246,6 +246,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(ProfileActivity::class.intent)
                             MainDesign.Request.OpenSettingsKEFU ->
                                 startActivity(PlansActivity::class.intent)
+                            MainDesign.Request.OpenMineTab ->
+                                startActivity(ProfileActivity::class.intent)
 
                             MainDesign.Request.OpenModeDirect ->
 
