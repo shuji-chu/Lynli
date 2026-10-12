@@ -137,7 +137,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun refreshSubmitButton() {
-        binding.login_loginButton.isEnabled = isFormValid()
+        binding.loginLoginButton.isEnabled = isFormValid()
     }
 
     // ===================== 按钮点击 =====================
@@ -150,13 +150,13 @@ class RegisterActivity : AppCompatActivity() {
             sendCode()
         }
 
-        binding.login_loginButton.setOnClickListener {
+        binding.loginLoginButton.setOnClickListener {
             if (!isFormValid()) return@setOnClickListener
             hideKeyboard()
             doRegister()
         }
 
-        binding.login_register.setOnClickListener {
+        binding.loginRegister.setOnClickListener {
             finish()
         }
 
@@ -212,7 +212,7 @@ class RegisterActivity : AppCompatActivity() {
         val code = binding.loginCodeEditText.text.toString().trim()
 
         LoadingDialog.show(this, "正在注册...")
-        binding.login_loginButton.isEnabled = false
+        binding.loginLoginButton.isEnabled = false
 
         CoroutineScope(Dispatchers.IO).launch {
             val res = safeApiRequestCall {
@@ -220,7 +220,7 @@ class RegisterActivity : AppCompatActivity() {
             }
             withContext(Dispatchers.Main) {
                 LoadingDialog.hide()
-                binding.login_loginButton.isEnabled = true
+                binding.loginLoginButton.isEnabled = true
 
                 if (res != null && res.isSuccessful) {
                     val response: LoginResponse? = res.body()
