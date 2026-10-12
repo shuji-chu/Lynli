@@ -19,7 +19,7 @@ import java.util.concurrent.TimeoutException
 interface ApiService {
 
     @GET("config")
-    suspend fun getConfig(): Response<ConfigResponse>
+    suspend fun getConfig(): Response<ConfigEnvelope>
 
     @POST("passport/auth/login")
     suspend fun loginUser(@Body request: LoginRequest): Response<LoginResponse>
@@ -326,18 +326,24 @@ data class BannerData(
     val sort: Int? = null
 )
 
+data class ConfigEnvelope(
+    val code: Int = 0,
+    val message: String? = null,
+    val data: ConfigResponse? = null
+)
+
 data class ConfigResponse (
-    val baseURL: String,
-    val baseDYURL: String,
-    val mainregisterURL: String,
-    val paymentURL: String,
-    val telegramurl: String,
-    val kefuurl: String,
-    val websiteURL: String,
-    val crisptoken: String,
-    val banners: List<BannerData>?,
-    val message: String,
-    val code: Int
+    val baseURL: String = "",
+    @SerializedName("baseDURL") val baseDYURL: String = "",
+    val mainregisterURL: String = "",
+    val paymentURL: String = "",
+    @SerializedName("telegramUrl") val telegramurl: String = "",
+    @SerializedName("kefuUrl") val kefuurl: String = "",
+    val websiteURL: String = "",
+    val crisptoken: String = "",
+    val banners: List<BannerData>? = null,
+    val message: String = "",
+    val code: Int = 1
 )
 
 data class RegisterRequest(

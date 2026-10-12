@@ -140,15 +140,13 @@ class LoginActivity : AppCompatActivity() {
         }
         CoroutineScope(Dispatchers.IO).launch {
 
-            safeApiCall {apiService.getConfig()}.let {
-                if (it != null) {
-                    if (it.code == 1 ) {
-                        withContext(Dispatchers.Main) {
-                            LoadingDialog.hide()
-                        }
-                        PreferenceManager.saveConfigToPreferences( it)
-                        //重新初始化 ApiClint
+            safeApiCall {apiService.getConfig()}.let { env ->
+                if (env != null && env.code == 1 && env.data != null) {
+                    val cfg = env.data!!
+                    withContext(Dispatchers.Main) {
+                        LoadingDialog.hide()
                     }
+                    PreferenceManager.saveConfigToPreferences(cfg)
                 }else{
                     configRetryCount++
                     if (configRetryCount < 3) {

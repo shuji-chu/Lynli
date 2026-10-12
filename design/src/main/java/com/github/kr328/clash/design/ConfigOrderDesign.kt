@@ -106,14 +106,14 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
 
         binding.configorderPlanname2 = "${plan?.name}"
 
-        binding.configorderPlantransfer = "商品流量：${plan?.transfer_enable} GB"
-        if (plan?.onetime_price !=null) {
-            binding.configorderPlanamount = "¥ ${plan?.onetime_price.toFloat()/100}0"
-        }else{
-            if (plan?.month_price !=null) {
-                binding.configorderPlanamount = "¥ ${plan?.month_price.toFloat() / 100}0"
-            }
+        val gb = ((plan?.transfer_enable ?: 0L).toDouble()) / 1024.0 / 1024.0 / 1024.0
+        binding.configorderPlantransfer = "商品流量：%.0f GB".format(gb)
+        val priceCents: Long = when {
+            plan?.onetime_price != null && plan.onetime_price > 0 -> plan.onetime_price!!.toLong()
+            plan?.month_price != null && plan.month_price > 0 -> plan.month_price
+            else -> 0L
         }
+        binding.configorderPlanamount = "¥ %.2f".format(priceCents / 100.0)
 
         var selectedIndex = 0
         if (plan?.onetime_price != null && plan.onetime_price > 0) {
@@ -126,7 +126,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
 
             val frameLayout =  ActivityPlanItemBinding.inflate(context.layoutInflater, context.root, false)
             frameLayout.typeTextView.text = "一次性"
-            frameLayout.amountTextView.text = "¥ ${ (map.get("amount")?.toDouble() ?: 0.0)/100}0"
+            frameLayout.amountTextView.text = "¥ %.2f".format((map.get("amount")?.toDouble() ?: 0.0) / 100.0)
 
             binding.container.addView(frameLayout.root)
 
@@ -184,7 +184,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
                 val frameLayout =  ActivityPlanItemBinding.inflate(context.layoutInflater, context.root, false)
                 val item = list[i]
                 frameLayout.typeTextView.text =  item.get("type")
-                frameLayout.amountTextView.text ="¥ ${ (item.get("amount")?.toDouble() ?: 0.0)/100}0"
+                frameLayout.amountTextView.text = "¥ %.2f".format((item.get("amount")?.toDouble() ?: 0.0) / 100.0)
 
 
 
@@ -194,7 +194,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
                     currentChoose = item
 
                     binding.configorderPlantype2 = item.get("type")
-                    binding.configorderPlanamount =  "¥ ${ (item.get("amount")?.toDouble() ?: 0.0)/100}0"
+                    binding.configorderPlanamount = "¥ %.2f".format((item.get("amount")?.toDouble() ?: 0.0) / 100.0)
 
                     for (j in 0 until binding.container.childCount) {
                         val child = binding.container.getChildAt(j)

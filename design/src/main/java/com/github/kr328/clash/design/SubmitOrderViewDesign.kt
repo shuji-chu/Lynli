@@ -269,9 +269,10 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
             binding.configorderTradeno = "订单号：${data?.trade_no}"
             binding.configorderPlanname2 = data?.plan?.name
             val amount = (data?.total_amount?.toDouble() ?: 0.0)/100
-            binding.configorderPlanamount =  "¥ ${amount}0"
+            binding.configorderPlanamount = "¥ %.2f".format(amount)
             binding.configorderPlantype = "类型/周期：${data?.periodZh}"
-            binding.configorderPlantransfer =  "商品流量：${data?.plan?.transfer_enable} GB"
+            val gb = ((data?.plan?.transfer_enable ?: 0L).toDouble()) / 1024.0 / 1024.0 / 1024.0
+            binding.configorderPlantransfer = "商品流量：%.0f GB".format(gb)
             binding.configorderTimer = "创建时间：${ formatTimestamp((data?.created_at ?: 0) * 1000L)}"
             binding.orderDetailsStatus.text = data?.statusZh
             if (data?.status == 0){

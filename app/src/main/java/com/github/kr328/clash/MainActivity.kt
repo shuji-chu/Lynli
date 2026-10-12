@@ -367,18 +367,14 @@ class MainActivity : BaseActivity<MainDesign>() {
         }
          */
 
-        safeApiCall {apiService.getConfig()}.let {
-            if (it !=null){
-                if (it.code == 1 ) {
-                    PreferenceManager.saveConfigToPreferences(it)
-                    //更新缓存数据
-                    PreferenceManager.cache_timestamp = currentTime
-                    PreferenceManager.cached_data =  gson.toJson( it)
-                    println("API Response:  ${it}")
-                    //重新初始化 ApiClint
-                    //2 : 获取订阅节点信息
-                    performSubscrite()
-                }
+        safeApiCall {apiService.getConfig()}.let { env ->
+            if (env != null && env.code == 1 && env.data != null) {
+                val cfg = env.data!!
+                PreferenceManager.saveConfigToPreferences(cfg)
+                PreferenceManager.cache_timestamp = currentTime
+                PreferenceManager.cached_data = gson.toJson(cfg)
+                println("API Response:  ${env}")
+                performSubscrite()
             }else{
                 if (retryCount < 3) {
                     configRequesting(retryCount + 1)
