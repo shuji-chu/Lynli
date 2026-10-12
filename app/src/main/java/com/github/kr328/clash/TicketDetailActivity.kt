@@ -39,8 +39,8 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
     }
     override fun onCreate() {
         setTitle("在线客服")
-        setRightButtonVisible {
-            startActivity(GongdanActivity::class.intent)
+        showTicketButton {
+            startActivity(android.content.Intent(this@TicketDetailActivity, GongdanActivity::class.java))
         }
     }
 
@@ -52,7 +52,7 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
         }
     }
 
-    private fun setRightButtonVisible(onClick: () -> Unit) {
+    private fun showTicketButton(onClick: () -> Unit) {
         val btn = android.widget.ImageView(this).apply {
             setImageResource(com.github.kr328.clash.design.R.drawable.ic_ticket_24)
             setPadding(20, 20, 20, 20)
