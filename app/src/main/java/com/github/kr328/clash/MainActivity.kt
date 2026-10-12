@@ -129,7 +129,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
             val currentTime = System.currentTimeMillis()
-            val cacheExpiryTime = 10 * 60 * 1000 // 10 minutes in milliseconds
+            val cacheExpiryTime = 0  // 禁用缓存：每次启动都拉最新 /config，避免旧缓存格式冲突
 
 
 // 如果缓存数据存在且未超过 10 分钟，使用缓存数据；否则，重新请求数据
