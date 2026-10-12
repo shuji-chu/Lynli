@@ -237,7 +237,113 @@
 
 
 <!--              app:lottie_fileName="@{clashRunning?@string/animation_running:@string/animation_stopped}" -->
-                <!-- Connection Status Circle Button    -->
+                <!-- Traffic Card -->
+                <LinearLayout
+                    android:id="@+id/traffic_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:background="@drawable/status_container_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> self.request(Request.OpenProxy)}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@{mode}"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/format_traffic_forwarded(forwarded)}"
+                            android:textColor="@color/gray_light"
+                            android:textSize="13sp"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="6dp"
+                            android:src="@drawable/arrow_forward_24px"
+                            app:tint="@color/white"/>
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/traffic_progress"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="#2E5BFF"
+                        android:progressBackgroundTint="#33FFFFFF"/>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/mode_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    app:selectionRequired="true"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/connection_status"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <!-- Mode Selection Buttons style="@style/Widget.Material3.Button.ElevatedButton" -->
+                    <com.google.android.material.button.MaterialButton
+
+                        android:id="@+id/modeSelectionbutton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/direct_mode"
+                        android:backgroundTint="#40383838"
+                        android:textColor="#ffffff"
+
+
+                        />
+
+
+                    <com.google.android.material.button.MaterialButton
+
+                        android:id="@+id/modeSelectionbutton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/global_mode"
+                        android:backgroundTint="#40383838"
+                        android:textColor="#ffffff"
+                        />
+                    <com.google.android.material.button.MaterialButton
+
+                        android:id="@+id/modeSelectionbutton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_mode"
+                        android:textColor="#ffffff"
+                        android:backgroundTint="#40383838"
+                        />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+<!-- Connection Status Circle Button    -->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -355,123 +461,7 @@
                                 app:layout_constraintVertical_bias="0.5"-->
                     </LinearLayout>
 
-                <!-- Traffic Stats -->
-                <LinearLayout
-                    android:id="@+id/traffic_stats"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
-
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="50dp"
-                    android:background="@drawable/status_container_background"
-                    app:layout_constraintTop_toBottomOf="@id/connection_status"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:onClick="@{() -> self.request(Request.OpenModeSheet)}"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <TextView
-                        android:layout_marginStart="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{mode}"
-                        app:tint="@color/white"
-                        android:textColor="@color/gray_light"
-                        android:textSize="16sp"
-                        android:gravity="center_vertical"
-
-                        />
-
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:tint="@color/white"
-                        android:textColor="@color/white"
-                        android:src="@drawable/arrow_forward_24px" />
-
-
-                   <!-- <TextView
-                        android:id="@+id/upload_traffic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        app:tint="@color/white"
-                        android:textColor="@color/white"
-                        android:text="@{clashRunning ? @string/upload_traffic(uploadedseed) :  @string/no_traffic}"  />
-
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="match_parent"
-                        />
-                    <TextView
-                        android:id="@+id/download_traffic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:tint="@color/white"
-                        android:textColor="@color/white"
-                        android:text="@{clashRunning ? @string/download_traffic(downloadseed) :  @string/no_traffic}"
-                        />-->
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/mode_selection"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
-                    app:selectionRequired="true"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/connection_status"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <!-- Mode Selection Buttons style="@style/Widget.Material3.Button.ElevatedButton" -->
-                    <com.google.android.material.button.MaterialButton
-
-                        android:id="@+id/modeSelectionbutton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/direct_mode"
-                        android:backgroundTint="#40383838"
-                        android:textColor="#ffffff"
-
-
-                        />
-
-
-                    <com.google.android.material.button.MaterialButton
-
-                        android:id="@+id/modeSelectionbutton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/global_mode"
-                        android:backgroundTint="#40383838"
-                        android:textColor="#ffffff"
-                        />
-                    <com.google.android.material.button.MaterialButton
-
-                        android:id="@+id/modeSelectionbutton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rule_mode"
-                        android:textColor="#ffffff"
-                        android:backgroundTint="#40383838"
-                        />
-
-                </com.google.android.material.button.MaterialButtonToggleGroup>
+                
 
                 <!-- 当前的连接模式
 
