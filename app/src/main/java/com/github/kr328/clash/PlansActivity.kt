@@ -26,9 +26,26 @@ class PlansActivity : BaseListActivity<PlanData>() {
     }
 
     override fun onCreate() {
-        //
+        referTitle("套餐订阅")
+
+        // 底部导航
+        val nav = mainBinding?.root?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_bottom_nav)
+        nav?.visibility = android.view.View.VISIBLE
+
+        nav?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_nav_home)?.setOnClickListener {
+            finish()
+        }
+        nav?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_nav_plan)?.setOnClickListener {
+            // 已在本页
+        }
+        nav?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_nav_mine)?.setOnClickListener {
+            startActivity(ProfileActivity::class.intent)
+            finish()
+        }
+
+        // 右上角兑换按钮
         setRightButtonVisible {
-            startActivity(MyOrdersActivity::class.intent)
+            startActivity(android.content.Intent(this@PlansActivity, RedeemActivity::class.java))
         }
     }
 
