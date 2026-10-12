@@ -38,7 +38,31 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
         }
     }
     override fun onCreate() {
+        setTitle("在线客服")
+        setRightButtonVisible {
+            startActivity(GongdanActivity::class.intent)
+        }
+    }
 
+    private fun setTitle(t: String) {
+        mainBinding?.activityBarLayout?.let { bar ->
+            bar.findViewById<android.widget.TextView>(
+                com.github.kr328.clash.design.R.id.activity_bar_title_view
+            )?.text = t
+        }
+    }
+
+    private fun setRightButtonVisible(onClick: () -> Unit) {
+        val btn = android.widget.ImageView(this).apply {
+            setImageResource(com.github.kr328.clash.design.R.drawable.ic_ticket_24)
+            setPadding(20, 20, 20, 20)
+            setOnClickListener { onClick() }
+            layoutParams = android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.WRAP_CONTENT,
+                android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+        }
+        mainBinding?.activityBarLayout?.addView(btn)
     }
 
     fun encodeString(input: String): String {
@@ -67,21 +91,8 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
 
     fun onCreateInputView() {
 
-
-        // 将 dp 转换为 px 的实用函数
         fun dpToPx(dp: Int): Int {
             return (dp * resources.displayMetrics.density).toInt()
-        }
-
-        // 创建顶部分割线
-        val topDivider = View(this).apply {
-            layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                dpToPx(1) // 设置分割线高度为 1dp
-            ) .apply {
-                gravity = Gravity.TOP // 将分割线置于顶部
-            }
-            setBackgroundColor(ContextCompat.getColor(this@TicketDetailActivity, android.R.color.darker_gray)) // 设置分割线颜色
         }
 
         val rootLayout = FrameLayout(this).apply {
@@ -89,150 +100,123 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT
             )
-            addView(topDivider) // 将分割线添加到根布局
-
         }
 
-        // Create the input container layout programmatically
-        // Create the input container layout programmatically
+        // 底部输入容器
         val inputContainer = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
-            setPadding(8, 8, 8, 8)
-//            setBackgroundColor(ContextCompat.getColor(this@TicketDetailActivity, android.R.color.white))
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dpToPx(10), dpToPx(8), dpToPx(10), dpToPx(8))
+            setBackgroundColor(Color.WHITE)
             layoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT,
-                Gravity.BOTTOM // Aligns the input container to the bottom
+                Gravity.BOTTOM
             )
-            setBackgroundColor(ContextCompat.getColor(this@TicketDetailActivity, R.color.white))
         }
 
-        // Create the EditText for message input
-        val editText = EditText(this).apply {
-            hint = "输入内容回复工单..."
-            setHintTextColor(ContextCompat.getColor(this@TicketDetailActivity, R.color.gray)) // Set the placeholder color
-            // Utility function to convert dp to pixels
-            fun dpToPx2(dp: Int): Int {
-                return (dp * resources.displayMetrics.density).toInt()
+        // 相机图标
+        val cameraIcon = android.widget.ImageView(this).apply {
+            setImageResource(R.drawable.ic_camera_24)
+            layoutParams = LinearLayout.LayoutParams(dpToPx(28), dpToPx(28)).apply {
+                marginEnd = dpToPx(10)
             }
-            textSize = 14f
+            setOnClickListener {
+                Toast.makeText(this@TicketDetailActivity, "相机功能待接", Toast.LENGTH_SHORT).show()
+            }
+        }
+        inputContainer.addView(cameraIcon)
 
-            // Set other EditText properties
-            setTextColor(Color.BLACK) // Text color
+        // 图片图标
+        val imageIcon = android.widget.ImageView(this).apply {
+            setImageResource(R.drawable.ic_image_24)
+            layoutParams = LinearLayout.LayoutParams(dpToPx(28), dpToPx(28)).apply {
+                marginEnd = dpToPx(10)
+            }
+            setOnClickListener {
+                Toast.makeText(this@TicketDetailActivity, "图片选择待接", Toast.LENGTH_SHORT).show()
+            }
+        }
+        inputContainer.addView(imageIcon)
+
+        // 输入框
+        val editText = EditText(this).apply {
+            hint = "请输入消息..."
+            setHintTextColor(Color.parseColor("#94A3B8"))
+            textSize = 15f
+            setTextColor(Color.parseColor("#1F2937"))
             inputType = android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
-            setTextColor(ContextCompat.getColor(this@TicketDetailActivity, R.color.black))
-            maxLines = 1
-            // background = ContextCompat.getDrawable(this@TicketDetailActivity, R.drawable.rounded_button_background)
-
-            // 设置内边距为 4dp（上下左右）
-            // val padding = dpToPx(8)
-            //  setPadding(padding,0 ,  padding, 0)
-            layoutParams = LinearLayout.LayoutParams(
-                0,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                1f // Weight to make it fill available width
-            )
+            maxLines = 4
+            minLines = 1
+            setBackgroundColor(Color.parseColor("#F0F4FA"))
+            setPadding(dpToPx(14), dpToPx(10), dpToPx(14), dpToPx(10))
+            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                marginEnd = dpToPx(8)
+            }
         }
-
-        // Create the Send Button
-
-        val sendButton = Button(this).apply {
-            text = "回复"
-            setTextColor(ContextCompat.getColor(this@TicketDetailActivity, android.R.color.white)) // Set text color for better contrast
-
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-        }
-
-        // Set the background tint programmatically
-        ViewCompat.setBackgroundTintList(
-            sendButton,
-            ContextCompat.getColorStateList(this, R.color.blue)
-        )
-
-
-        // Add EditText and Button to the input container
         inputContainer.addView(editText)
-        inputContainer.addView(sendButton)
 
+        // 发送按钮（蓝色圆形 + 白色箭头）
+        val sendButton = android.widget.FrameLayout(this).apply {
+            setBackgroundResource(R.drawable.bg_avatar_user)
+            layoutParams = LinearLayout.LayoutParams(dpToPx(40), dpToPx(40))
+        }
+        val sendIcon = android.widget.ImageView(this).apply {
+            setImageResource(R.drawable.ic_send_24)
+            layoutParams = android.widget.FrameLayout.LayoutParams(dpToPx(20), dpToPx(20), Gravity.CENTER)
+        }
+        sendButton.addView(sendIcon)
 
         sendButton.setOnClickListener {
-            val message =  editText.text.toString()
-            if (message.isNullOrEmpty()){
-
-            }else{
+            val message = editText.text.toString()
+            if (message.isNullOrEmpty()) {
+                Toast.makeText(this@TicketDetailActivity, "请输入内容", Toast.LENGTH_SHORT).show()
+            } else {
                 val fieldMap = mutableMapOf<String, String>()
                 val messageProperty1 = encodeString(message)
-                val ticketid = intent.getIntExtra("ticketid",0)
-                fieldMap.put("message",""+messageProperty1)
-                fieldMap.put("id",""+ticketid)
+                val ticketid = intent.getIntExtra("ticketid", 0)
+                fieldMap.put("message", "" + messageProperty1)
+                fieldMap.put("id", "" + ticketid)
 
                 GlobalScope.launch {
-
                     val apiService = ApiClient.retrofit.create(ApiService::class.java)
-                    safeApiRequestCall { apiService.replyTicket(PreferenceManager.loginauthData, fieldMap)}.let {
+                    safeApiRequestCall { apiService.replyTicket(PreferenceManager.loginauthData, fieldMap) }.let {
                         if (it != null && it.isSuccessful) {
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(this@TicketDetailActivity, "回复成功",  Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@TicketDetailActivity, "发送成功", Toast.LENGTH_SHORT).show()
                                 editText.setText("")
                             }
                             refereshData()
-
-                        }else{
-                            val errorinfo = it?.errorBody()?.string()
-
-                            if (errorinfo != null){
-                                //解析错错误信息
-
-                                val gson = Gson()
-                                val submitResponse = gson.fromJson(errorinfo, PublicResponse::class.java)
-
-                                if (submitResponse?.message != null){
-                                    withContext(Dispatchers.Main) {
-                                        Toast.makeText(this@TicketDetailActivity, "回复失败: ${submitResponse.message}",  Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                            }else{
-                                withContext(Dispatchers.Main) {
-                                    Toast.makeText(this@TicketDetailActivity, "回复失败",  Toast.LENGTH_SHORT).show()
-                                }
+                        } else {
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(this@TicketDetailActivity, "发送失败", Toast.LENGTH_SHORT).show()
                             }
-
                         }
                     }
                 }
             }
         }
-
-
-        // 将分割线添加到输入容器顶部
-
+        inputContainer.addView(sendButton)
 
         rootLayout.addView(inputContainer)
-        // rootLayout.addView(topDivider) // 将分割线添加到根布局
-        // Add the input container to the root layout
         mainBinding?.mainview?.addView(rootLayout)
 
+        // 键盘弹出时把输入栏顶上去
         rootLayout.viewTreeObserver.addOnGlobalLayoutListener {
             val rect = Rect()
             rootLayout.getWindowVisibleDisplayFrame(rect)
             val screenHeight = rootLayout.rootView.height
             val keypadHeight = screenHeight - rect.bottom
-
             val params = inputContainer.layoutParams as FrameLayout.LayoutParams
             if (keypadHeight > screenHeight * 0.15) {
-                // Keyboard is visible; adjust inputContainer to stay above it
                 params.bottomMargin = keypadHeight
             } else {
-                // Keyboard is hidden; reset inputContainer to bottom
                 params.bottomMargin = 0
             }
             inputContainer.layoutParams = params
         }
-
     }
+
     override suspend fun loadData(page: Int, callback: (List<TicketMessage>?, Throwable?) -> Unit) {
         val ticketid = intent.getIntExtra("ticketid",0)
         val apiService = ApiClient.retrofit.create(ApiService::class.java)

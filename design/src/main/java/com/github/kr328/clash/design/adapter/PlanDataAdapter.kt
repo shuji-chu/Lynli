@@ -81,7 +81,7 @@ class SubscriptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
         planName.text = data.name
 
         if (data.onetime_price == null) {
-            planPrice.text = "流量：${data.transfer_enable ?: 0}GB"
+            planPrice.text = "流量：${(data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L}GB"
             planDescription.text = "¥${(data.month_price ?: 0.00).toDouble()/100}"
 
             val month_price = (data.month_price ?: 0.00).toDouble()/100
@@ -120,10 +120,10 @@ class SubscriptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
         }else{
             onemohtthtest.text = "一次性"
-            planPrice.text = "流量：${data.transfer_enable ?: 0}GB 一次性"
+            planPrice.text = "流量：${(data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L}GB 一次性"
             planDescription.text = "¥${(data.onetime_price ?:  0.00).toDouble()/100}"
             val month_price = (data.onetime_price ?: 0.00).toDouble()/100
-            val transform = data.transfer_enable ?: 0
+            val transform = ((data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L).toInt()
             onemonthprice.text = "${month_price}"
             onemonthpriceday.text = "${String.format ("%.2f",month_price/transform)}元/GB"
 

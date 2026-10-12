@@ -1,580 +1,581 @@
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <data>
-    <variable
-        name="self"
-        type="com.github.kr328.clash.design.ProfileDesign" />
-
+    <variable name="self" type="com.github.kr328.clash.design.ProfileDesign" />
     <import type="android.view.View" />
-
-    <variable
-        name="account_email"
-        type="String" />
-
-    <variable
-        name="account_planname"
-        type="String" />
-
-    <variable
-        name="account_plantime"
-        type="String" />
-
-    <variable
-        name="account_planuseinfo"
-        type="String" />
-
-    <variable
-        name="account_blance"
-        type="String" />
-    <variable
-        name="account_yongjin"
-        type="String" />
-    <variable
-        name="account_ProgressValue"
-        type="Integer" />
+    <variable name="account_email" type="String" />
+    <variable name="account_planname" type="String" />
+    <variable name="account_plantime" type="String" />
+    <variable name="account_planuseinfo" type="String" />
+    <variable name="account_blance" type="String" />
+    <variable name="account_yongjin" type="String" />
+    <variable name="account_ProgressValue" type="Integer" />
     <import type="com.github.kr328.clash.design.ProfileDesign.Request" />
-
 </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEF4FF"
+    android:paddingStart="@{self.surface.insets.start}"
+    android:paddingEnd="@{self.surface.insets.end}">
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
-        android:paddingStart="@{self.surface.insets.start}"
-        android:paddingEnd="@{self.surface.insets.end}">
+        android:scrollbars="none">
 
-        <ScrollView
-        android:id="@+id/scroll_root"
-        android:scrollbars="none"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        android:padding="16dp">
-
-
-
-        <!-- Header with gradient background -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingTop="@{self.surface.insets.top}"
+            android:paddingBottom="90dp">
 
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Account Information Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/view_accountinfo"
-
-            app:cardElevation="4dp"
-            app:cardCornerRadius="6dp"
-            android:layout_margin="4dp" >
-
+            <!-- 顶部栏 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:src="@drawable/arrow_back_24px"
+                    app:tint="#1F2937"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="账号信息:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginStart="12dp"
+                    android:text="我的"
+                    android:textColor="#1F2937"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
 
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/btn_redeem"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{account_email}"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_marginTop="4dp" />
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_ticket_24"
+                        app:tint="#2E5BFF"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="兑换码"
+                        android:textColor="#2E5BFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <!-- Subscription Information Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-
-            app:cardElevation="4dp"
-            app:cardCornerRadius="6dp"
-            android:layout_margin="4dp"
-            android:id="@+id/view_accountinfo2"
-            >
-
-            <LinearLayout
+            <!-- 用户卡片 -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="我的订阅"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <!-- Divider between TextViews -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_marginTop="5dp"
-                    android:alpha="0.3"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{account_planname}"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{account_plantime}"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Progress bar for data usage -->
-                <ProgressBar
-                    android:id="@+id/useedprogress_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:progress="@{account_ProgressValue}"
-                    android:background="@color/gray_light"
-                    android:progressTint="@android:color/holo_green_light"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{account_planuseinfo}"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="14dp" />
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Other sections -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-
-            app:cardElevation="4dp"
-            app:cardCornerRadius="6dp"
-            android:layout_margin="4dp"
-            android:id="@+id/view_accountinfo3"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="购买订阅"
-                    android:gravity="center_vertical"
-                    android:drawablePadding="10dp"
-                    android:drawableEnd="@drawable/arrow_forward_24px"
-                    android:padding="8dp"
-                    android:focusable="true"
-                    android:textSize="16sp"
-                    android:clickable="true"
-                    android:textColor="@color/black"
-                    android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
-                    android:background="?attr/selectableItemBackground" />
-
-                <!-- Divider between TextViews -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@android:color/darker_gray"
-                    android:alpha="0.3"
-                     />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="我的订单"
-                    android:gravity="center_vertical"
-                    android:drawablePadding="10dp"
-                    android:textColor="@color/black"
-                    android:drawableEnd="@drawable/arrow_forward_24px"
-                    android:padding="8dp"
-                    android:clickable="true"
-                    android:textSize="16sp"
-                    android:onClick="@{() -> self.request(Request.OpenMyOrders)}"
-
-                    android:focusable="true"
-                    android:background="?attr/selectableItemBackground" />
-
-                <!-- Divider between TextViews -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@android:color/darker_gray"
-                    android:alpha="0.3"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="我的邀请"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:drawableEnd="@drawable/arrow_forward_24px"
-                    android:onClick="@{() -> self.request(Request.OpenMyInvites)}"
-                    android:drawablePadding="8dp"
-                    android:padding="8dp"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:background="?attr/selectableItemBackground" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:focusable="true"
-            android:src="@drawable/profile_buy"
-            android:layout_margin="4dp"
-            android:layout_gravity="center_horizontal"
-            android:textSize="16sp"
-            android:clickable="true"
-            android:textColor="@color/black"
-            android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
-
-            android:layout_marginBottom="16dp" />
-
-
-        <!-- Other sections -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-
-            android:id="@+id/view_accountinfo4"
-
-            app:cardElevation="4dp"
-            app:cardCornerRadius="6dp"
-            android:layout_margin="4dp" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:textColor="@color/black"
-                    android:text="我的工单"
-                    android:drawableEnd="@drawable/arrow_forward_24px"
-                    android:drawablePadding="8dp"
-                    android:padding="8dp"
-                    android:clickable="true"
-                    android:onClick="@{() -> self.request(Request.OpenMyGongdan)}"
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:focusable="true"
-                    android:background="?attr/selectableItemBackground" />
-                <!-- Divider between TextViews -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:alpha="0.3"
-                    android:background="@android:color/darker_gray"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="在线客服"
-                    android:drawableEnd="@drawable/arrow_forward_24px"
-                    android:drawablePadding="8dp"
-                    android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:clickable="true"
-                    android:onClick="@{() -> self.request(Request.OpenCustomView)}"
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:focusable="true"
-                    android:background="?attr/selectableItemBackground" />
-                <!-- Divider between TextViews -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@android:color/darker_gray"
-                    android:alpha="0.3"
-                    />
-                <!--    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:focusable="true"
-                        android:textSize="16sp"
-                        android:text="我的工单"
-                        android:onClick="@{() -> self.request(Request.OpenMyGongdan)}"
-                        android:drawableEnd="@drawable/arrow_forward_24px"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
-                        android:gravity="center_vertical"
-                        android:textColor="@android:color/black"
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackground" />
-                     Divider between TextViews -->
-
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:textSize="16sp"
-                        android:gravity="center_vertical"
-                        android:text="当前版本"
-                        android:textColor="@color/black"
-                        android:onClick="@{() -> self.request(Request.OpenGSettings)}"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackground" />
-                    <Space
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_person_tab"
+                        app:tint="#2E5BFF"
+                        android:background="@drawable/status_container_background"/>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"/>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="易搜用户"
+                            android:textColor="#1F2937"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@{account_email}"
+                            android:textColor="#64748B"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="end">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="开通会员"
+                            android:textColor="#2E5BFF"
+                            android:textSize="13sp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="提升连接体验"
+                            android:textColor="#64748B"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 订阅卡片 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:text="我的订阅"
+                        android:textColor="#1F2937"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
 
-                        android:id="@+id/text_version"
-                        android:gravity="center_vertical|right"
-                        android:textColor="@color/black"
-                         />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@{account_planname}"
+                        android:textColor="#1F2937"
+                        android:textSize="14sp"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@{account_planuseinfo}"
+                        android:textColor="#64748B"
+                        android:textSize="13sp"/>
+
+                    <ProgressBar
+                        android:id="@+id/useedprogress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="@{account_ProgressValue}"
+                        android:progressTint="#2E5BFF"
+                        android:progressBackgroundTint="#E0E9FF"/>
+
+                    <Button
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="12dp"
+                        android:text="购买订阅"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textAllCaps="false"
+                        android:backgroundTint="#2E5BFF"
+                        android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
+                        app:cornerRadius="20dp"/>
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            <!-- 6 宫格 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-        <!-- Other sections -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:id="@+id/view_accountinfo5"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="6dp"
-            android:layout_margin="4dp" >
-        <android.widget.GridLayout
-            android:layout_width="350dp"
+                <android.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:rowCount="2"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> self.request(Request.OpenCustomView)}"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_customer_service"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="官方网页"
+                            android:textColor="#1F2937"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="咨询问题"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_shopping_cart_24px"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="商务合作"
+                            android:textColor="#1F2937"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="开通套餐"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> self.request(Request.OpenGSettings)}"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_baseline_assignment"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="设置"
+                            android:textColor="#1F2937"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="系统配置"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> self.request(Request.OpenMyGongdan)}"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_baseline_help_center"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="常见问题"
+                            android:textColor="#1F2937"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="帮助中心"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> self.request(Request.OpenCustomViewIPtest)}"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_host_24px"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="IP 查询"
+                            android:textColor="#1F2937"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="查看当前IP"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> self.request(Request.OpenCustomViewSpeed)}"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_swap_driving_apps_wheel_24px"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="网速测试"
+                            android:textColor="#1F2937"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="检测连接质量"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                </android.widget.GridLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 退出登录 -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:text="退出登录"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:backgroundTint="#2E5BFF"
+                android:onClick="@{() -> self.request(Request.OpenLogout)}"
+                app:cornerRadius="26dp"/>
+
+            <TextView
+                android:id="@+id/text_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:textColor="#94A3B8"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 底部导航 -->
+    <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:columnCount="3"
-            android:layout_gravity="center_horizontal"
-            android:rowCount="3"
-            android:padding="10dp"
-            android:background="@color/white">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
-            <!-- 第一行 -->
-            <Button
-                android:id="@+id/button1"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home_tab"
+                app:tint="#94A3B8"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="10dp"
+                android:text="主页"
+                android:textSize="12sp"
+                android:textColor="#94A3B8"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
-                android:background="?attr/selectableItemBackground"
-                android:drawableTop="@drawable/ic_baseline_help_center"
+        <LinearLayout
+            android:id="@+id/nav_plan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
-                android:drawableTint="@color/black"
-
-                android:onClick="@{() -> self.request(Request.OpenCustomView)}"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:text="在线客服"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
-
-            <Button
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_plan_tab"
+                app:tint="#94A3B8"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:padding="10dp"
-                android:layout_rowWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:text="购买订阅"
-                android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:drawableTop="@drawable/ic_shopping_cart_24px"
-                android:drawableTint="@color/black"
-                android:drawablePadding="8dp"
-                android:layout_margin="8dp"
-               />
+                android:text="套餐"
+                android:textSize="12sp"
+                android:textColor="#94A3B8"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/button3"
+        <LinearLayout
+            android:id="@+id/nav_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_person_tab"
+                app:tint="#2E5BFF"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:background="?attr/selectableItemBackground"
-                android:text="邀请管理"
-                android:textColor="@android:color/black"
-                android:onClick="@{() -> self.request(Request.OpenMyInvites)}"
-                android:textSize="16sp"
-                android:drawableTop="@drawable/ic_baseline_assignment"
-                android:drawableTint="@color/black"
-                android:drawablePadding="8dp"
-                android:layout_margin="8dp" />
-
-            <!-- 第二行 -->
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:padding="10dp"
-                android:layout_rowWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:text="常见问题"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:drawableTop="@drawable/ic_person_raised_hand_24px"
-                android:drawableTint="@color/black"
-                android:drawablePadding="8dp"
-                android:onClick="@{() -> self.request(Request.OpenMyGongdan)}"
-                android:layout_margin="8dp"/>
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:padding="10dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:text="IP 查询"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:drawableTop="@drawable/ic_host_24px"
-                android:drawableTint="@color/black"
-                android:drawablePadding="8dp"
-                android:onClick="@{() -> self.request(Request.OpenCustomViewIPtest)}"
-                android:layout_margin="8dp"/>
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:backgroundTint="@color/white"
-                android:text="网速测试"
-                android:onClick="@{() -> self.request(Request.OpenCustomViewSpeed)}"
-                android:padding="10dp"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:drawableTop="@drawable/ic_swap_driving_apps_wheel_24px"
-                android:drawableTint="@color/black"
-                android:drawablePadding="8dp"
-                android:layout_margin="8dp"
-                />
-
-
-        </android.widget.GridLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Logout Button -->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="退出登录"
-            android:textSize="16sp"
-            android:backgroundTint="@color/blue"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp"
-            android:layout_margin="4dp"
-            android:onClick="@{() -> self.request(Request.OpenLogout)}"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text=""
-            android:gravity="center_horizontal"
-            android:drawablePadding="10dp"
-            android:textColor="@color/gray"
-            android:padding="8dp"
-            android:textSize="14sp"  />
-
-
+                android:text="我的"
+                android:textSize="12sp"
+                android:textColor="#2E5BFF"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
     </LinearLayout>
-</ScrollView>
 
-        <com.github.kr328.clash.design.view.ActivityBarLayout
-            android:id="@+id/activity_bar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@{self.surface.insets.top}"
-            android:paddingEnd="@dimen/item_tailing_margin">
-
-            <include layout="@layout/common_activity_bar" />
-        </com.github.kr328.clash.design.view.ActivityBarLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

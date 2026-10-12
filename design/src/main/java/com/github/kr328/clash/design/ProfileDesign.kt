@@ -42,7 +42,11 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         OpenLogout,
         OpenGSettings,
         OpenCustomViewIPtest,
-        OpenCustomViewSpeed
+        OpenCustomViewSpeed,
+        OpenTabHome,
+        OpenTabPlan,
+        OpenTabMine,
+        OpenRedeem
     }
 
     private  var  subData: SubscribeData? = null
@@ -58,6 +62,11 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         binding.self = this
 
         binding.activityBarLayout.applyFrom(context)
+        binding.navHome.setOnClickListener { request(Request.OpenTabHome) }
+        binding.navPlan.setOnClickListener { request(Request.OpenTabPlan) }
+        binding.navMine.setOnClickListener { request(Request.OpenTabMine) }
+        binding.btnBack.setOnClickListener { request(Request.OpenTabHome) }
+        binding.btnRedeem.setOnClickListener { request(Request.OpenRedeem) }
 
 //        binding.viewAccountinfo.setBackgroundColor(Color.parseColor("#FFFFFF")) // Semi-transparent white color
 //        binding.viewAccountinfo2.setBackgroundColor(Color.parseColor("#FFFFFF")) // Semi-transparent white color

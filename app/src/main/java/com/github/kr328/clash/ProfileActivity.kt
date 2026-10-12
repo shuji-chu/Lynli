@@ -124,6 +124,13 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         ProfileDesign.Request.OpenMyGongdan ->startActivity(GongdanActivity::class.intent)
                         ProfileDesign.Request.OpenCustomViewIPtest -> startActivity(H5WebActivity::class.intent.putExtra("url","https://ipcelou.com"))
                         ProfileDesign.Request.OpenCustomViewSpeed ->  startActivity(H5WebActivity::class.intent.putExtra("url","https://fast.com/"))
+                        ProfileDesign.Request.OpenTabHome -> finish()
+                        ProfileDesign.Request.OpenTabPlan -> {
+                            startActivity(PlansActivity::class.intent)
+                            finish()
+                        }
+                        ProfileDesign.Request.OpenTabMine -> { /* 已在本页 */ }
+                        ProfileDesign.Request.OpenRedeem -> startActivity(android.content.Intent(this@ProfileActivity, RedeemActivity::class.java))
                     }
                 }
             }
