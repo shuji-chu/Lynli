@@ -39,6 +39,15 @@
         <variable
             name="selectmodeName"
             type="String" />
+        <variable
+            name="trafficUsed"
+            type="String" />
+        <variable
+            name="trafficTotal"
+            type="String" />
+        <variable
+            name="trafficPercent"
+            type="int" />
 
         <import type="android.view.View" />
         <import type="com.github.kr328.clash.design.MainDesign.Request" />
@@ -292,7 +301,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@{@string/format_traffic_forwarded(forwarded)}"
+                            android:text="@{trafficUsed + ' / ' + trafficTotal}"
                             android:textColor="#1F2937"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -303,7 +312,7 @@
                             android:id="@+id/traffic_percent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0%"
+                            android:text="@{String.valueOf(trafficPercent) + '%'}"
                             android:textColor="#2E5BFF"
                             android:textSize="22sp"
                             android:textStyle="bold"/>
@@ -324,7 +333,7 @@
                         android:layout_height="8dp"
                         android:layout_marginTop="12dp"
                         android:max="100"
-                        android:progress="0"
+                        android:progress="@{trafficPercent}"
                         android:progressTint="#2E5BFF"
                         android:progressBackgroundTint="#E0E9FF"/>
                 </LinearLayout>

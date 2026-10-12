@@ -137,6 +137,17 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         }
     }
 
+    suspend fun setUserTraffic(usedBytes: Long, totalBytes: Long) {
+        withContext(Dispatchers.Main) {
+            val usedGb = usedBytes / 1024.0 / 1024.0 / 1024.0
+            val totalGb = totalBytes / 1024.0 / 1024.0 / 1024.0
+            binding.trafficUsed = String.format("%.2f GB", usedGb)
+            binding.trafficTotal = String.format("%.2f GB", totalGb)
+            val percent = if (totalBytes > 0) ((usedBytes.toDouble() / totalBytes) * 100).toInt() else 0
+            binding.trafficPercent = percent.coerceIn(0, 100)
+        }
+    }
+
     suspend fun setMode(mode: TunnelState.Mode) {
         withContext(Dispatchers.Main) {
             binding.mode = when (mode) {

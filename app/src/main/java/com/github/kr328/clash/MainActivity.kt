@@ -101,6 +101,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
     private lateinit var apiService: ApiService
+    private var isSubscribing = false
     private  var  subData: SubscribeData? = null
 
 
@@ -401,6 +402,8 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private fun performSubscrite(){
+        if (isSubscribing) return
+        isSubscribing = true
 
         // 演示模式：跳过网络请求 / Demo mode: skip network
         if (PreferenceManager.loginToken == "demo-token") {
@@ -421,6 +424,13 @@ class MainActivity : BaseActivity<MainDesign>() {
                     it.isSuccessful) {
                     println(" performSubscrite : ${it.body()?.data}")
                     subData = it.body()?.data
+
+                    // 首页流量卡片：显示真实已用/总量/百分比
+                    it.body()?.data?.let { d ->
+                        val used = (d.u ?: 0) + (d.d ?: 0)
+                        val total = d.transfer_enable ?: 0
+                        design.setUserTraffic(used, total)
+                    }
 
                     val gson = Gson()
                     PreferenceManager.cached_userSubscritedata =  gson.toJson( it.body())
