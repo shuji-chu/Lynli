@@ -309,7 +309,6 @@
                             android:ellipsize="end"/>
 
                         <TextView
-                            android:id="@+id/traffic_percent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{String.valueOf(trafficPercent) + '%'}"
