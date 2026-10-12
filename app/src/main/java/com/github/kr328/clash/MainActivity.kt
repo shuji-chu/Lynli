@@ -429,7 +429,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                     it.body()?.data?.let { d ->
                         val used = (d.u ?: 0) + (d.d ?: 0)
                         val total = d.transfer_enable ?: 0
-                        design.setUserTraffic(used, total)
+                        design?.setUserTraffic(used, total)
                     }
 
                     val gson = Gson()
