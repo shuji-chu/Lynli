@@ -111,6 +111,8 @@ class LoginActivity : AppCompatActivity() {
             // Navigate to Forgot Password screen or show dialog
         }
 
+        binding.loginPrivacy.setOnClickListener { showAgreementDialog() }
+
         binding.loginRegister.setOnClickListener {
             // Navigate to Register screen
             //startActivity(RegisterActivity::class::intent)
@@ -198,6 +200,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
         this.dayNight =  DayNight.Night //dayNight
+    }
+
+    private fun showAgreementDialog() {
+        val items = arrayOf("《用户协议》", "《隐私政策》")
+        android.app.AlertDialog.Builder(this)
+            .setTitle("协议")
+            .setItems(items) { _, which ->
+                val url = if (which == 0)
+                    "https://yisoujiasu.pages.dev/terms.html"
+                else
+                    "https://yisoujiasu.pages.dev/privacy.html"
+                startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url)))
+            }
+            .show()
     }
 
     private fun performLogin(email: String, password: String) {

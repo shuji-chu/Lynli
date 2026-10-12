@@ -163,6 +163,8 @@ class RegisterActivity : AppCompatActivity() {
         binding.loginForgotPassword.setOnClickListener {
             // 预留
         }
+
+        binding.loginPrivacy.setOnClickListener { showAgreementDialog() }
     }
 
     // ===================== 发验证码 =====================
@@ -262,6 +264,20 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     // ===================== 主题 =====================
+    private fun showAgreementDialog() {
+        val items = arrayOf("《用户协议》", "《隐私政策》")
+        android.app.AlertDialog.Builder(this)
+            .setTitle("协议")
+            .setItems(items) { _, which ->
+                val url = if (which == 0)
+                    "https://yisoujiasu.pages.dev/terms.html"
+                else
+                    "https://yisoujiasu.pages.dev/privacy.html"
+                startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)))
+            }
+            .show()
+    }
+
     private fun applyDayNight(config: Configuration = resources.configuration) {
         window.isAllowForceDarkCompat = false
         window.isSystemBarsTranslucentCompat = true
