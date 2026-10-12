@@ -228,6 +228,13 @@
             />
 
         <activity
+            android:name=".RedeemActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="兑换码"
+            />
+
+        <activity
             android:name=".GongdanActivity"
             android:configChanges="uiMode"
             android:exported="false"

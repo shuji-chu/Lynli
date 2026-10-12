@@ -250,6 +250,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(ProfileActivity::class.intent)
                             MainDesign.Request.OpenSupport ->
                                 startActivity(GongdanActivity::class.intent)
+                            MainDesign.Request.OpenRedeem ->
+                                startActivity(android.content.Intent(this, RedeemActivity::class.java))
 
                             MainDesign.Request.OpenModeDirect ->
 

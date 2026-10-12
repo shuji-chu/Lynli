@@ -99,14 +99,14 @@
                             android:layout_width="22dp"
                             android:layout_height="22dp"
                             android:src="@drawable/ic_customer_service"
-                            app:tint="@color/white"/>
+                            app:tint="#1F2937"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:text="在线客服"
-                            android:textColor="@color/white"
+                            android:textColor="#1F2937"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -116,6 +116,36 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
+
+                    <!-- 右上角：兑换码 -->
+                    <LinearLayout
+                        android:id="@+id/btn_redeem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="4dp"
+                        android:onClick="@{() -> self.request(Request.OpenRedeem)}">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_customer_service"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="兑换码"
+                            android:textColor="#2E5BFF"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <!-- 右上角已删除 -->
                     <!--
@@ -437,7 +467,7 @@
                                 android:layout_height="25dp"
                                 android:src="@{clashRunning ? @drawable/shield_lock_svgrepo_com : @drawable/no_security_svgrepo_com}"
                                 android:scaleType="fitXY"
-                                app:tint="@color/cardview_light_background"
+                                app:tint="#1F2937"
                                  />
             <!--            @{clashRunning ? @color/cardview_light_background : @android:color/holo_green_dark}-->
                             <TextView
@@ -445,7 +475,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:tint="@color/white"
-                                android:textColor="@color/white"
+                                android:textColor="#1F2937"
                                 android:text="@{clashRunning ? @string/running : @string/stopped}"
                                 android:textAlignment="center"
                                 android:textSize="18sp"

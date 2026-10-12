@@ -59,6 +59,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         OpenMineTab,
         OpenSupport,
         OpenModeDirect,
+        OpenRedeem,
         OpenChangeMode,
         OpenModeGlobal,
         OpenModeRule,
