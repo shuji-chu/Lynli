@@ -276,7 +276,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="12dp"
                     android:orientation="vertical"
-                    android:padding="14dp"
+                    android:padding="18dp"
                     android:background="@drawable/status_container_background"
                     android:clickable="true"
                     android:focusable="true"
@@ -292,26 +292,42 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@{mode}"
+                            android:text="@{@string/format_traffic_forwarded(forwarded)}"
                             android:textColor="#1F2937"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:maxLines="1"
                             android:ellipsize="end"/>
 
                         <TextView
+                            android:id="@+id/traffic_percent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/format_traffic_forwarded(forwarded)}"
-                            android:textColor="#64748B"
-                            android:textSize="13sp"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="6dp"
-                            android:src="@drawable/arrow_forward_24px"
-                            app:tint="#64748B"/>
+                            android:text="0%"
+                            android:textColor="#2E5BFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"/>
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="本月流量"
+                        android:textColor="#64748B"
+                        android:textSize="13sp"/>
+
+                    <ProgressBar
+                        android:id="@+id/traffic_progress"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="12dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="#2E5BFF"
+                        android:progressBackgroundTint="#E0E9FF"/>
+                </LinearLayout>
 
                     <ProgressBar
                         android:id="@+id/traffic_progress"
@@ -330,46 +346,70 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
                     app:selectionRequired="true"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/connection_status"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:singleSelection="true">
 
-                    <!-- Mode Selection Buttons style="@style/Widget.Material3.Button.ElevatedButton" -->
                     <com.google.android.material.button.MaterialButton
-
                         android:id="@+id/modeSelectionbutton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/direct_mode"
-                        android:backgroundTint="#40383838"
-                        android:textColor="#ffffff"
-
-
-                        />
-
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="智能分流"
+                        android:textSize="13sp"
+                        android:textAllCaps="false"
+                        android:textColor="#1F2937"
+                        android:backgroundTint="#FFFFFF"
+                        app:cornerRadius="23dp"
+                        app:strokeColor="#E0E9FF"
+                        app:strokeWidth="1dp"
+                        app:icon="@drawable/ic_check_circle"
+                        app:iconGravity="textStart"
+                        app:iconTint="#2E5BFF"
+                        app:iconSize="16dp"
+                        app:iconPadding="4dp"/>
 
                     <com.google.android.material.button.MaterialButton
-
                         android:id="@+id/modeSelectionbutton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/global_mode"
-                        android:backgroundTint="#40383838"
-                        android:textColor="#ffffff"
-                        />
-                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="全局代理"
+                        android:textSize="13sp"
+                        android:textAllCaps="false"
+                        android:textColor="#1F2937"
+                        android:backgroundTint="#FFFFFF"
+                        app:cornerRadius="23dp"
+                        app:strokeColor="#E0E9FF"
+                        app:strokeWidth="1dp"
+                        app:icon="@drawable/ic_check_circle"
+                        app:iconGravity="textStart"
+                        app:iconTint="#2E5BFF"
+                        app:iconSize="16dp"
+                        app:iconPadding="4dp"/>
 
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/modeSelectionbutton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rule_mode"
-                        android:textColor="#ffffff"
-                        android:backgroundTint="#40383838"
-                        />
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:text="单应用分流"
+                        android:textSize="13sp"
+                        android:textAllCaps="false"
+                        android:textColor="#1F2937"
+                        android:backgroundTint="#FFFFFF"
+                        app:cornerRadius="23dp"
+                        app:strokeColor="#E0E9FF"
+                        app:strokeWidth="1dp"
+                        app:icon="@drawable/ic_check_circle"
+                        app:iconGravity="textStart"
+                        app:iconTint="#2E5BFF"
+                        app:iconSize="16dp"
+                        app:iconPadding="4dp"/>
 
                 </com.google.android.material.button.MaterialButtonToggleGroup>
 
