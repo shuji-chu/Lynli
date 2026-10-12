@@ -292,7 +292,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                         ?: return@mapNotNull null
                     val url = if (m.startsWith("http://") || m.startsWith("https://")) m
                               else base + "/" + m.trimStart('/')
-                    BannerItem(url, banner.title, banner.subtitle)
+                    BannerItem(url, banner.title, banner.subtitle, banner.link)
                 }
                 ?: emptyList()
 
@@ -302,8 +302,21 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 
             if (items.isNotEmpty()) {
 
-                viewPager2.adapter = ImageSliderImagesAdapter(items) { position ->
-                    // 点击图片时的处理逻辑
+                viewPager2.adapter = ImageSliderImagesAdapter(items) { banner ->
+                    val link = banner.link
+                    if (!link.isNullOrBlank()) {
+                        try {
+                            val intent = android.content.Intent(
+                                android.content.Intent.ACTION_VIEW,
+                                android.net.Uri.parse(link)
+                            )
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            android.widget.Toast.makeText(
+                                context, "无法打开链接", android.widget.Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
                 // 设置 TabLayoutMediator 来同步 ViewPager2 和 TabLayout
                 TabLayoutMediator(tabLayout, viewPager2) { tab, position ->

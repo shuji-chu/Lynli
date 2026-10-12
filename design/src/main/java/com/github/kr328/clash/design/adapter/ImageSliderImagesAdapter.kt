@@ -12,12 +12,13 @@ import com.github.kr328.clash.design.R
 data class BannerItem(
     val imageUrl: String,
     val title: String? = null,
-    val subtitle: String? = null
+    val subtitle: String? = null,
+    val link: String? = null
 )
 
 class ImageSliderImagesAdapter(
     private val items: List<BannerItem>,
-    private val onItemClick: (Int) -> Unit
+    private val onItemClick: (BannerItem) -> Unit
 ) : RecyclerView.Adapter<ImageSliderImagesAdapter.ImageSliderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageSliderViewHolder {
@@ -49,7 +50,7 @@ class ImageSliderImagesAdapter(
             holder.subtitleView.text = item.subtitle
         }
 
-        holder.imageView.setOnClickListener { onItemClick(position) }
+        holder.imageView.setOnClickListener { onItemClick(item) }
     }
 
     override fun getItemCount(): Int = items.size
