@@ -93,7 +93,6 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         withContext(Dispatchers.Main) {
             binding.clashRunning = running
             if (running){
-                binding.serverSelection.visibility = View.VISIBLE
 
 //                withContext(Dispatchers.Main){
 //                    LoadingDialog.hide()
@@ -200,7 +199,6 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 
         binding.connectionButton?.setOnClickListener { request(Request.ToggleStatus) }
         binding.connectionButtonLottie?.setOnClickListener { request(Request.ToggleStatus) }
-        binding.serverSelection?.setOnClickListener { request(Request.OpenProxy) }
         binding.trafficStats?.setOnClickListener { request(Request.OpenProxy) }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
         binding.btnSupport.setOnClickListener {
