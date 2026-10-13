@@ -93,7 +93,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         withContext(Dispatchers.Main) {
             binding.clashRunning = running
             if (running){
-                binding.connectionButton.setAnimation("51a05581.json")
+                binding.connectionButtonLottie.setAnimation("51a05581.json")
                 binding.serverSelection.visibility = View.VISIBLE
 
 //                withContext(Dispatchers.Main){
@@ -104,13 +104,13 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 //                binding.modeImg2.visibility = View.VISIBLE
 //                binding.menuView.visibility = View.VISIBLE
                 binding.connectionButtonText.setText("点击断开")
-                binding.connectionButton.loop(false)
+                binding.connectionButtonLottie.loop(false)
                 binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.white))
             }else{
-                binding.trafficStats.visibility = View.GONE
-                binding.connectionButton.setAnimation("1d2a0fe5.json")
-                binding.connectionButton.loop(true)
-                binding.serverSelection.visibility = View.GONE
+                // keep visible
+                binding.connectionButtonLottie.setAnimation("1d2a0fe5.json")
+                binding.connectionButtonLottie.loop(true)
+                // keep visible
                 binding.connectionButtonText.setText("点击连接")
                 binding.connectionButtonText.setTextColor(ContextCompat.getColor(context,R.color.black))
 //                binding.modeImg1.visibility = View.GONE
@@ -203,6 +203,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         } catch (_: Throwable) {}
 
         binding.connectionButton?.setOnClickListener { request(Request.ToggleStatus) }
+        binding.connectionButtonLottie?.setOnClickListener { request(Request.ToggleStatus) }
         binding.serverSelection?.setOnClickListener { request(Request.OpenProxy) }
         binding.trafficStats?.setOnClickListener { request(Request.OpenProxy) }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
