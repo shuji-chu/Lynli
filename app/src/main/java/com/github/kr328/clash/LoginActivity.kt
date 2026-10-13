@@ -141,12 +141,11 @@ class LoginActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
 
             safeApiCall {apiService.getConfig()}.let { env ->
-                if (env != null && env.code == 1 && env.data != null) {
-                    val cfg = env.data!!
+                if (env != null && env.code == 1) {
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
-                    PreferenceManager.saveConfigToPreferences(cfg)
+                    PreferenceManager.saveConfigToPreferences(env)
                 }else{
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
