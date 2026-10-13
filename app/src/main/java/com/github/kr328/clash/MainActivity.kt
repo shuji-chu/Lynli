@@ -167,21 +167,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
                         //删除所有节点文件
 
-                        withContext(Dispatchers.Main) {
-                            showCustomDialog(
-                                title = "提示",
-                                message = "您的订阅已到期，请续费订阅开启服务",
-                                positiveButtonText = "确定",
-                                negativeButtonText = "取消",
-                                onPositiveClick = {
-                                    // 执行确认操作
-                                    startActivity(PlansActivity::class.intent)
-                                },
-                                onNegativeClick = {
-                                    // 执行取消操作
-                                }
-                            )
-                        }
 
                     }
 
@@ -456,21 +441,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
                         //删除所有节点文件
 
-                        withContext(Dispatchers.Main) {
-                            showCustomDialog(
-                                title = "提示",
-                                message = "您的订阅已到期，请续费订阅开启服务",
-                                positiveButtonText = "确定",
-                                negativeButtonText = "取消",
-                                onPositiveClick = {
-                                    // 执行确认操作
-                                    startActivity(PlansActivity::class.intent)
-                                },
-                                onNegativeClick = {
-                                    // 执行取消操作
-                                }
-                            )
-                        }
 
                     }else{
                         //更新本地节点

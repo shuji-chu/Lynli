@@ -71,6 +71,8 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
+          repository: shuji-chu/Lynli-Release
+          token: ${{ secrets.RELEASE_TOKEN }}
           files: app/build/outputs/apk/alpha/release/Lynli.apk
           tag_name: ${{ github.ref_name }}
           name: Lynli ${{ github.ref_name }}
