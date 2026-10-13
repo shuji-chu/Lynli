@@ -144,10 +144,15 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
             binding.trafficUsed = String.format("%.2f GB", usedGb)
             binding.trafficTotal = String.format("%.2f GB", totalGb)
             try {
-                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text)
+                val r = binding.root
+                r.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text)
                     .text = String.format("%.2f GB / %.2f GB", usedGb, totalGb)
-                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_percent_text)
-                    .text = "${percent.coerceIn(0, 100)}%"
+                r.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_percent_text)
+                    .text = percent.coerceIn(0, 100).toString() + "%"
+                r.findViewById<android.widget.ProgressBar>(com.github.kr328.clash.design.R.id.traffic_progress)
+                    .progress = percent.coerceIn(0, 100)
+                r.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.connection_status_icon)
+                    .setImageResource(if (binding.clashRunning) com.github.kr328.clash.design.R.drawable.shield_lock_svgrepo_com else com.github.kr328.clash.design.R.drawable.no_security_svgrepo_com)
             } catch (_: Throwable) {}
             val percent = if (totalBytes > 0) ((usedBytes.toDouble() / totalBytes) * 100).toInt() else 0
             binding.trafficPercent = percent.coerceIn(0, 100)

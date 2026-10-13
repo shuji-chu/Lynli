@@ -263,7 +263,7 @@
                         android:layout_height="8dp"
                         android:layout_marginTop="12dp"
                         android:max="100"
-                        android:progress="@{trafficPercent}"
+                        android:progress="0"
                         android:progressTint="#2E5BFF"
                         android:progressBackgroundTint="#E0E9FF"/>
                 </LinearLayout>
@@ -352,7 +352,8 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:src="@{clashRunning ? @drawable/shield_lock_svgrepo_com : @drawable/no_security_svgrepo_com}"
+                                android:id="@+id/connection_status_icon"
+                                android:src="@drawable/no_security_svgrepo_com"
                                 android:scaleType="fitXY"
                                 app:tint="#1F2937"/>
 
@@ -362,7 +363,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:textColor="#1F2937"
-                                android:text="@{clashRunning ? @string/running : @string/stopped}"
+                                android:text="已断开连接"
                                 android:textSize="14sp"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -400,7 +401,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="@{selectnodeName}"
+                            android:text="自动选择"
                             android:textColor="#1F2937"
                             android:textSize="15sp"/>
                     </LinearLayout>
