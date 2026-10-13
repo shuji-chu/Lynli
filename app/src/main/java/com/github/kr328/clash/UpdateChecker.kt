@@ -213,6 +213,10 @@ object UpdateChecker {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
         activity.startActivity(intent)
+        // 安装界面弹出后，杀掉当前进程，用户装完新版本重新打开就是新版
+        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }, 2000)
     }
 
     private fun compareVersion(a: String, b: String): Int {

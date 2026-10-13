@@ -69,15 +69,25 @@ class PlansActivity : BaseListActivity<PlanData>() {
 
 
     override suspend fun loadData(page: Int, callback: (List<PlanData>?, Throwable?) -> Unit) {
-
-        val apiService = ApiClient.retrofit.create(ApiService::class.java)
-        val _auth = PreferenceManager.loginauthData ?: ""
-        safeApiRequestCall { apiService.getplans(_auth)}.let {
-            if (it != null && it.isSuccessful) {
-                callback(it.body()?.data,null)
-            }else{
-                callback(null, Throwable("请求失败"))
+        try {
+            _log("loadData 进入")
+            val apiService = ApiClient.retrofit.create(ApiService::class.java)
+            val _auth = PreferenceManager.loginauthData ?: ""
+            _log("auth=[" + _auth + "]")
+            safeApiRequestCall { apiService.getplans(_auth)}.let { resp ->
+                _log("resp code=" + (resp?.code() ?: -1) + " ok=" + (resp?.isSuccessful ?: false))
+                if (resp != null && resp.isSuccessful) {
+                    val data = resp.body()?.data
+                    _log("数据 size=" + (data?.size ?: -1))
+                    callback(data, null)
+                    _log("callback OK")
+                } else {
+                    callback(null, Throwable("请求失败"))
+                    _log("callback 失败")
+                }
             }
+        } catch (e: Throwable) {
+            _log("loadData CRASH: " + e.stackTraceToString())
         }
     }
 
