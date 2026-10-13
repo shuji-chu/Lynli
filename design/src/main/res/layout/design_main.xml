@@ -9,6 +9,13 @@
         <variable name="trafficUsed" type="String" />
         <variable name="trafficTotal" type="String" />
         <variable name="trafficPercent" type="int" />
+        <variable name="forwarded" type="String" />
+        <variable name="uploadedseed" type="String" />
+        <variable name="downloadseed" type="String" />
+        <variable name="mode" type="String" />
+        <variable name="hasProviders" type="boolean" />
+        <variable name="colorClashStarted" type="int" />
+        <variable name="colorClashStopped" type="int" />
         <import type="android.view.View" />
     </data>
 
@@ -290,14 +297,14 @@
                         </LinearLayout>
 
                         <FrameLayout
-                            android:id="@+id/connection_button"
+                            android:id="@+id/connection_button_wrap"
                             android:layout_width="110dp"
                             android:layout_height="110dp"
                             android:clickable="true"
                             android:focusable="true">
 
                             <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/connection_button_lottie"
+                                android:id="@+id/connection_button"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 app:lottie_autoPlay="true"
@@ -317,6 +324,13 @@
                         </FrameLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/mode_selection"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
