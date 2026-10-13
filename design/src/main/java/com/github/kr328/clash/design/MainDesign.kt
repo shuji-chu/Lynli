@@ -143,6 +143,12 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
             val totalGb = totalBytes / 1024.0 / 1024.0 / 1024.0
             binding.trafficUsed = String.format("%.2f GB", usedGb)
             binding.trafficTotal = String.format("%.2f GB", totalGb)
+            try {
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text)
+                    .text = String.format("%.2f GB / %.2f GB", usedGb, totalGb)
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_percent_text)
+                    .text = "${percent.coerceIn(0, 100)}%"
+            } catch (_: Throwable) {}
             val percent = if (totalBytes > 0) ((usedBytes.toDouble() / totalBytes) * 100).toInt() else 0
             binding.trafficPercent = percent.coerceIn(0, 100)
         }
