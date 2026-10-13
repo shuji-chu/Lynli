@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -53,10 +54,10 @@ class SubscriptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     private val planPrice: TextView = itemView.findViewById(R.id.subscriptionTime)
     private val planDescription: TextView = itemView.findViewById(R.id.subscriptionDescription)
 
-    private val grouponemonth: RelativeLayout =  itemView.findViewById(R.id.grouponemohtthtest)
-    private val groupquitytthtest: RelativeLayout =  itemView.findViewById(R.id.groupquitytthtest)
-    private val grouphelfyear: RelativeLayout =  itemView.findViewById(R.id.grouphelfyear)
-    private val grouponeyear: RelativeLayout =  itemView.findViewById(R.id.grouponeyear)
+    private val grouponemonth: LinearLayout =  itemView.findViewById(R.id.grouponemohtthtest)
+    private val groupquitytthtest: LinearLayout =  itemView.findViewById(R.id.groupquitytthtest)
+    private val grouphelfyear: LinearLayout =  itemView.findViewById(R.id.grouphelfyear)
+    private val grouponeyear: LinearLayout =  itemView.findViewById(R.id.grouponeyear)
 
     private val onemohtthtest: TextView = itemView.findViewById(R.id.onemohtthtest)
     private val onequietythtest: TextView = itemView.findViewById(R.id.onequietythtest)
