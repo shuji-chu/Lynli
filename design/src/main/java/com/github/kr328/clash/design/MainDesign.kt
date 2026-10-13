@@ -295,7 +295,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
             )*/
 
             val cfg = PreferenceManager.getConfigFromPreferences(context)
-            val base = cfg?.baseURL?.trimEnd('/') ?: "https://lynli.abrdns.com"
+            val base = cfg?.baseURL?.trimEnd('/') ?: "https://lynli.kz.ci"
             val items = cfg?.banners
                 ?.mapNotNull { banner ->
                     val m = banner.media?.takeIf { it.isNotBlank() }
