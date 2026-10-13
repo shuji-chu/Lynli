@@ -2,53 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable
-            name="self"
-            type="com.github.kr328.clash.design.MainDesign" />
-        <variable
-            name="clashRunning"
-            type="boolean" />
-        <variable
-            name="forwarded"
-            type="String" />
-        <variable
-            name="uploadedseed"
-            type="String" />
-        <variable
-            name="downloadseed"
-            type="String" />
-        <variable
-            name="mode"
-            type="String" />
-        <variable
-            name="profileName"
-            type="String" />
-        <variable
-            name="colorClashStarted"
-            type="int" />
-        <variable
-            name="colorClashStopped"
-            type="int" />
-        <variable
-            name="hasProviders"
-            type="boolean" />
-        <variable
-            name="selectnodeName"
-            type="String" />
-
-        <variable
-            name="selectmodeName"
-            type="String" />
-        <variable
-            name="trafficUsed"
-            type="String" />
-        <variable
-            name="trafficTotal"
-            type="String" />
-        <variable
-            name="trafficPercent"
-            type="int" />
-
+        <variable name="self" type="com.github.kr328.clash.design.MainDesign" />
+        <variable name="clashRunning" type="boolean" />
+        <variable name="mode" type="String" />
+        <variable name="profileName" type="String" />
+        <variable name="selectnodeName" type="String" />
+        <variable name="trafficUsed" type="String" />
+        <variable name="trafficTotal" type="String" />
+        <variable name="trafficPercent" type="int" />
         <import type="android.view.View" />
         <import type="com.github.kr328.clash.design.MainDesign.Request" />
     </data>
@@ -56,41 +17,34 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_main_bg"
+        android:background="#EEF4FF"
         android:paddingStart="@{self.surface.insets.start}"
         android:paddingEnd="@{self.surface.insets.end}">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none">
-
+            android:scrollbars="none"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:clipToPadding="false"
                 android:orientation="vertical"
                 android:paddingTop="@{self.surface.insets.top}"
-                android:paddingBottom="@{self.surface.insets.bottom}">
+                android:clipToPadding="false"
+                android:paddingBottom="90dp">
 
-<!--
-                android:paddingHorizontal="@dimen/main_padding_horizontal"      -->
-
-
+                <!-- 顶部栏：左客服 右铃铛 -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="56dp"
                     android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginTop="8dp">
 
-                    <!-- 左侧客服按钮 -->
                     <LinearLayout
                         android:id="@+id/btn_support"
                         android:layout_width="wrap_content"
@@ -100,33 +54,20 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="12dp"
                         android:onClick="@{() -> self.request(Request.OpenSupport)}">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_customer_service"
                             app:tint="#1F2937"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="在线客服"
-                            android:textColor="#1F2937"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
                     </LinearLayout>
-                    <!-- 中间的提示文本 -->
-                    <!-- Spacer (to take up remaining space between left and right images) -->
+
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
 
-                    <!-- 右上角：兑换码 -->
                     <LinearLayout
                         android:id="@+id/btn_redeem"
                         android:layout_width="wrap_content"
@@ -136,154 +77,142 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="4dp"
                         android:onClick="@{() -> self.request(Request.OpenRedeem)}">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_customer_service"
+                            app:tint="#1F2937"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Banner 轮播 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/ad_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="6dp"
+                    app:tabGravity="center"
+                    app:tabBackground="@drawable/tab_pager_selector"
+                    android:background="@android:color/transparent"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabPaddingEnd="6dp"
+                    app:tabPaddingStart="6dp"/>
+
+                <!-- 三个模式胶囊 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/modeSelectionbutton1"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/bg_mode_pill"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginEnd="6dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_check_circle"
                             app:tint="#2E5BFF"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="兑换码"
-                            android:textColor="#2E5BFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
+                            android:layout_marginStart="4dp"
+                            android:text="智能分流"
+                            android:textColor="#1F2937"
+                            android:textSize="12sp"/>
                     </LinearLayout>
 
-                    <!-- 右上角已删除 -->
-                    <!--
-
-
-
-                    -->
- <!--
-                    <ImageView
-                        android:background="?attr/selectableItemBackgroundBorderless"
-
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/autorenew_24px"
-                        android:focusable="true"
+                    <LinearLayout
+                        android:id="@+id/modeSelectionbutton2"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/bg_mode_pill"
                         android:clickable="true"
-                        app:tint="@color/white"
-                        android:id="@+id/mode_img1"
-                        android:visibility="gone"
-                        />
-                    <TextView
-                        android:id="@+id/menu_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:focusable="true"
-                        android:text="@{mode}"
-                        android:textAlignment="center"
-                        android:textSize="14sp"
+                        android:layout_marginEnd="6dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="全局代理"
+                            android:textColor="#1F2937"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/modeSelectionbutton3"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/bg_mode_pill"
                         android:clickable="true"
-                        android:onClick="@{() -> self.request(Request.OpenChangeMode)}"
-                        android:textColor="@color/white"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintVertical_bias="0.5"
-                        android:visibility="gone"
-                        />
-                    <ImageView
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:id="@+id/mode_img2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/keyboard_arrow_down_24px"
-                        app:tint="@color/white"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:visibility="gone"
-                         />
- -->
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="单应用分流"
+                            android:textColor="#1F2937"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
                 </LinearLayout>
 
-                <!-- 顶部横向滚动广告栏 -->
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardViewad_banner"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:background="@android:color/white"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="4dp"
-                        android:clipChildren="false"
-                        android:clipToPadding="false"
-                        app:layout_constraintDimensionRatio="H,16:9"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
-
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/ad_banner"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <!-- TabLayout作为页指示器 -->
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/cardViewad_banner"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:tabIndicatorFullWidth="false"
-
-                    android:layout_marginTop="3dp"
-                    app:tabGravity="center"
-                    app:tabBackground="@drawable/tab_pager_selector"
-                    android:background="@android:color/transparent"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabPaddingEnd="10dp"
-                    app:tabPaddingStart="10dp"
-                    />
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="170dp"-->
-<!--                    android:src="@drawable/ad_banner"-->
-<!--                    android:scaleType="fitCenter"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:id="@+id/ad_banner"-->
-<!--                    app:cardCornerRadius="16dp"-->
-<!--                    app:cardElevation="4dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent">-->
-
-<!--                    <ImageView-->
-
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:src="@drawable/ad_banner"-->
-<!--                        android:scaleType="centerCrop"/>-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-
-
-<!--              app:lottie_fileName="@{clashRunning?@string/animation_running:@string/animation_stopped}" -->
-                <!-- Traffic Card -->
+                <!-- 流量卡 -->
                 <LinearLayout
                     android:id="@+id/traffic_stats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     android:padding="18dp"
                     android:background="@drawable/status_container_background"
@@ -304,9 +233,7 @@
                             android:text="@{trafficUsed + ' / ' + trafficTotal}"
                             android:textColor="#1F2937"
                             android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -337,297 +264,144 @@
                         android:progressBackgroundTint="#E0E9FF"/>
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/mode_selection"
+                <!-- 套餐 + 连接卡 -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="12dp"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/modeSelectionbutton1"
-                        android:layout_width="0dp"
-                        android:layout_height="46dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="6dp"
-                        android:text="智能分流"
-                        android:textSize="13sp"
-                        android:textAllCaps="false"
-                        android:textColor="#1F2937"
-                        android:backgroundTint="#FFFFFF"
-                        app:cornerRadius="23dp"
-                        app:strokeColor="#E0E9FF"
-                        app:strokeWidth="1dp"
-                        app:icon="@drawable/ic_check_circle"
-                        app:iconGravity="textStart"
-                        app:iconTint="#2E5BFF"
-                        app:iconSize="16dp"
-                        app:iconPadding="4dp"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/modeSelectionbutton2"
-                        android:layout_width="0dp"
-                        android:layout_height="46dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="6dp"
-                        android:text="全局代理"
-                        android:textSize="13sp"
-                        android:textAllCaps="false"
-                        android:textColor="#1F2937"
-                        android:backgroundTint="#FFFFFF"
-                        app:cornerRadius="23dp"
-                        app:strokeColor="#E0E9FF"
-                        app:strokeWidth="1dp"
-                        app:icon="@drawable/ic_check_circle"
-                        app:iconGravity="textStart"
-                        app:iconTint="#2E5BFF"
-                        app:iconSize="16dp"
-                        app:iconPadding="4dp"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/modeSelectionbutton3"
-                        android:layout_width="0dp"
-                        android:layout_height="46dp"
-                        android:layout_weight="1"
-                        android:text="单应用分流"
-                        android:textSize="13sp"
-                        android:textAllCaps="false"
-                        android:textColor="#1F2937"
-                        android:backgroundTint="#FFFFFF"
-                        app:cornerRadius="23dp"
-                        app:strokeColor="#E0E9FF"
-                        app:strokeWidth="1dp"
-                        app:icon="@drawable/ic_check_circle"
-                        app:iconGravity="textStart"
-                        app:iconTint="#2E5BFF"
-                        app:iconSize="16dp"
-                        app:iconPadding="4dp"/>
-
-                </com.google.android.material.button.MaterialButtonToggleGroup>
-
-<!-- Connection Status Circle Button    -->
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <!-- 第一个 FrameLayout
-                    <FrameLayout
-                        android:id="@+id/frame1"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        android:orientation="vertical"
+                        android:padding="18dp">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_gravity="center_horizontal">
+                            android:gravity="center_vertical">
 
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/connection_button1"
-                                android:layout_width="250dp"
-                                android:layout_height="250dp"
-                                app:lottie_autoPlay="true"
-                                app:lottie_fileName="75eaa6a4.json"
-                                app:lottie_imageAssetsFolder="assets/"
-                                app:lottie_loop="true" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{profileName != null ? profileName : '标准套餐'}"
+                                    android:textColor="#1F2937"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/expire_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="到期时间 --"
+                                    android:textColor="#64748B"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <FrameLayout
+                                android:layout_width="120dp"
+                                android:layout_height="120dp">
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:id="@+id/connection_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:lottie_autoPlay="true"
+                                    app:lottie_fileName="75eaa6a4.json"
+                                    android:onClick="@{() -> self.request(Request.ToggleStatus)}"
+                                    app:lottie_imageAssetsFolder="assets/"
+                                    app:lottie_loop="false"/>
+
+                                <TextView
+                                    android:id="@+id/connection_button_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal|bottom"
+                                    android:layout_marginBottom="30dp"
+                                    android:text="点击连接"
+                                    android:textColor="#1F2937"
+                                    android:textSize="12sp"/>
+                            </FrameLayout>
                         </LinearLayout>
 
-                    </FrameLayout>
- -->
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center_horizontal">
-
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/connection_button"
-                            android:layout_width="200dp"
-                            android:layout_height="200dp"
-                            app:lottie_autoPlay="true"
-                            app:lottie_fileName="75eaa6a4.json"
-                            android:onClick="@{() -> self.request(Request.ToggleStatus)}"
-                            app:lottie_imageAssetsFolder="assets/"
-
-                            app:lottie_loop="false" />
-
-
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/connection_button_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:layout_marginBottom="50dp"
-                        android:textSize="16dp"
-
-                        android:textColor="@color/black"
-                        android:text="点击连接">
-
-                    </TextView>
-                </FrameLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <!-- Connection Status Text -->
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout_mode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center_horizontal">
+                        <LinearLayout
+                            android:id="@+id/linearLayout_mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="4dp">
 
                             <ImageView
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
                                 android:src="@{clashRunning ? @drawable/shield_lock_svgrepo_com : @drawable/no_security_svgrepo_com}"
                                 android:scaleType="fitXY"
-                                app:tint="#1F2937"
-                                 />
-            <!--            @{clashRunning ? @color/cardview_light_background : @android:color/holo_green_dark}-->
+                                app:tint="#1F2937"/>
+
                             <TextView
                                 android:id="@+id/connection_status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:tint="@color/white"
+                                android:layout_marginStart="4dp"
                                 android:textColor="#1F2937"
                                 android:text="@{clashRunning ? @string/running : @string/stopped}"
-                                android:textAlignment="center"
-                                android:textSize="18sp"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintVertical_bias="0.5"
-                                />
-
-            <!--            android:layout_marginTop="16dp"
-                                app:layout_constraintTop_toBottomOf="@id/connection_button"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintVertical_bias="0.5"-->
+                                android:textSize="14sp"/>
+                        </LinearLayout>
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                
-
-                <!-- 当前的连接模式
-
-                  <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:orientation="horizontal"
-
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/server_content_mode"
-
-                    android:background="@drawable/status_container_background"
-
-                    android:padding="12dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    android:gravity="bottom|center"
-                    android:layout_weight="1"
-
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="26dp"
-                    android:layout_marginTop="60dp"
-
-                    android:onClick="@{() -> self.request(Request.OpenModeMenu)}">
-
-
-
-                    <TextView
-                        android:id="@+id/server_content_mode_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{mode}"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:layout_marginStart="8dp" />
-
-
-                </LinearLayout>
- -->
-                <!-- 连接状态栏 -->
+                <!-- 当前节点 -->
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:orientation="horizontal"
-
                     android:clickable="true"
                     android:focusable="true"
                     android:id="@+id/server_selection"
-
                     android:background="@drawable/status_container_background"
-
-                    android:padding="12dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    android:gravity="bottom|center"
-                    android:layout_weight="1"
-
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="50dp"
-                    android:layout_marginTop="50dp"
-
+                    android:padding="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
                     android:onClick="@{() -> self.request(Request.OpenProxy)}">
-<!--                    android:visibility="gone"-->
 
-                   <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginStart="8dp"
-                       android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                       <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前节点"
+                            android:textColor="#64748B"
+                            android:textSize="13sp"/>
 
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="当前节点"
-                           app:tint="@color/white"
-                           android:textColor="#64748B"
-                           android:textSize="16sp"
-                          />
-
-
-                       <TextView
-                           android:id="@+id/status_text"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@{selectnodeName}"
-                           app:tint="@color/white"
-                           android:textColor="#1F2937"
-                           android:textSize="16sp"
-                           />
-
-                   </LinearLayout>
+                        <TextView
+                            android:id="@+id/status_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@{selectnodeName}"
+                            android:textColor="#1F2937"
+                            android:textSize="15sp"/>
+                    </LinearLayout>
 
                     <Space
                         android:layout_width="0dp"
@@ -635,128 +409,16 @@
                         android:layout_weight="1"/>
 
                     <ImageView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:tint="@color/white"
-                        android:textColor="@color/white"
-                        android:src="@drawable/arrow_forward_24px" />
-
-
-                    <!--
-                     <ImageView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:src="@drawable/ic_baseline_clear_all"
-                         android:layout_marginStart="8dp"
-                         app:tint="#31a75d" />
-                    -->
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/arrow_forward_24px"
+                        app:tint="#94A3B8"/>
                 </LinearLayout>
 
-
-
-
-                <!--
-
-                  <com.airbnb.lottie.LottieAnimationView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="2c630b55.json"
-                    app:lottie_imageAssetsFolder="assets/"
-                    app:lottie_loop="true" />
-
-                 <com.github.kr328.clash.design.view.LargeActionCard
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_card_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.ToggleStatus)}"
-                   android:theme="@style/AppThemeDark"
-                   app:cardBackgroundColor="@{clashRunning ? colorClashStarted : colorClashStopped}"
-                   app:icon="@{clashRunning ? @drawable/ic_outline_check_circle : @drawable/ic_outline_not_interested}"
-                   app:subtext="@{clashRunning ? @string/format_traffic_forwarded(forwarded) : @string/tap_to_start}"
-                   app:text="@{clashRunning ? @string/running : @string/stopped}" />
-
-
-
-
-
-               <com.github.kr328.clash.design.view.LargeActionCard
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_card_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenProxy)}"
-                   app:icon="@drawable/ic_baseline_apps"
-                   app:subtext="@{mode}"
-                   app:text="@string/proxy" />
-              android:visibility="@{clashRunning ? View.VISIBLE : View.GONE}"
-
-               <com.github.kr328.clash.design.view.LargeActionCard
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_card_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenProfiles)}"
-                   app:icon="@drawable/ic_baseline_view_list"
-                   app:subtext="@{profileName != null ? @string/format_profile_activated(profileName) : @string/not_selected}"
-                   app:text="@string/profile" />
-
-                   <com.github.kr328.clash.design.view.LargeActionLabel
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_marginVertical="@dimen/main_label_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenProviders)}"
-                   android:visibility="@{clashRunning &amp;&amp; hasProviders ? View.VISIBLE : View.GONE}"
-                   app:icon="@drawable/ic_baseline_swap_vertical_circle"
-                   app:text="@string/providers" />
-
-               <com.github.kr328.clash.design.view.LargeActionLabel
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_label_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenLogs)}"
-                   app:icon="@drawable/ic_baseline_assignment"
-                   app:text="@string/logs" />
-
-               <com.github.kr328.clash.design.view.LargeActionLabel
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_label_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenSettings)}"
-                   app:icon="@drawable/ic_baseline_settings"
-                   app:text="@string/settings" />
-
-               <com.github.kr328.clash.design.view.LargeActionLabel
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_label_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenHelp)}"
-                   app:icon="@drawable/ic_baseline_help_center"
-                   app:text="@string/help" />
-
-               <com.github.kr328.clash.design.view.LargeActionLabel
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="@dimen/main_label_margin_vertical"
-                   android:onClick="@{() -> self.request(Request.OpenAbout)}"
-                   app:icon="@drawable/ic_baseline_info"
-                   app:text="@string/about" />
-
-               -->
             </LinearLayout>
         </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            >
-
-            <!-- 在底部绘制弧形渐变 -->
-            <com.github.kr328.clash.design.view.BottomArcGradientView
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-
-        </RelativeLayout>
+        <!-- 底部导航 -->
         <LinearLayout
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
