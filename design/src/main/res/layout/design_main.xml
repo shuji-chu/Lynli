@@ -24,8 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EEF4FF"
-        android:paddingStart="@{self.surface.insets.start}"
-        android:paddingEnd="@{self.surface.insets.end}">
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="@{self.surface.insets.top}"
+                android:paddingTop="24dp"
                 android:clipToPadding="false"
                 android:paddingBottom="90dp">
 
@@ -59,7 +59,7 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="@{() -> self.request(Request.OpenSupport)}">
+                        >
 
                         <ImageView
                             android:layout_width="24dp"
@@ -82,7 +82,7 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="@{() -> self.request(Request.OpenRedeem)}">
+                        >
 
                         <ImageView
                             android:layout_width="24dp"
@@ -220,7 +220,7 @@
                     android:background="@drawable/status_container_background"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="@{() -> self.request(Request.OpenProxy)}">
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -324,7 +324,7 @@
                                     android:layout_height="match_parent"
                                     app:lottie_autoPlay="true"
                                     app:lottie_fileName="75eaa6a4.json"
-                                    android:onClick="@{() -> self.request(Request.ToggleStatus)}"
+                                    
                                     app:lottie_imageAssetsFolder="assets/"
                                     app:lottie_loop="false"/>
 
@@ -382,7 +382,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="12dp"
-                    android:onClick="@{() -> self.request(Request.OpenProxy)}">
+                    >
 
                     <LinearLayout
                         android:layout_width="wrap_content"

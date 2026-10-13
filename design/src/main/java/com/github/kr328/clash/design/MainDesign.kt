@@ -205,6 +205,10 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
     }
 
     init {
+        binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
+        binding.connectionButton?.setOnClickListener { request(Request.ToggleStatus) }
+        binding.serverSelection?.setOnClickListener { request(Request.OpenProxy) }
+        binding.trafficStats?.setOnClickListener { request(Request.OpenProxy) }
         binding.btnSupport.setOnClickListener {
             request(Request.OpenSupport)
         }
