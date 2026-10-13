@@ -148,14 +148,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                     PreferenceManager.saveConfigToPreferences(cfg)
                 }else{
-                    configRetryCount++
-                    if (configRetryCount < 3) {
-                        getconfig()
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            LoadingDialog.hide()
-                            Toast.makeText(this@LoginActivity, "初始化失败，请检查配置是否正确", Toast.LENGTH_LONG).show()
-                        }
+                    withContext(Dispatchers.Main) {
+                        LoadingDialog.hide()
                     }
                 }
             }
