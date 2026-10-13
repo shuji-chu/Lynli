@@ -4,18 +4,18 @@
     <data>
         <variable name="self" type="com.github.kr328.clash.design.MainDesign" />
         <variable name="clashRunning" type="boolean" />
-        <variable name="profileName" type="String" />
-        <variable name="selectnodeName" type="String" />
-        <variable name="trafficUsed" type="String" />
-        <variable name="trafficTotal" type="String" />
-        <variable name="trafficPercent" type="int" />
         <variable name="forwarded" type="String" />
         <variable name="uploadedseed" type="String" />
         <variable name="downloadseed" type="String" />
         <variable name="mode" type="String" />
+        <variable name="profileName" type="String" />
+        <variable name="selectnodeName" type="String" />
         <variable name="hasProviders" type="boolean" />
         <variable name="colorClashStarted" type="int" />
         <variable name="colorClashStopped" type="int" />
+        <variable name="trafficUsed" type="String" />
+        <variable name="trafficTotal" type="String" />
+        <variable name="trafficPercent" type="int" />
         <import type="android.view.View" />
     </data>
 
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="24dp"
+                android:paddingTop="16dp"
                 android:paddingBottom="90dp">
 
                 <LinearLayout
@@ -48,18 +48,27 @@
                     <LinearLayout
                         android:id="@+id/btn_support"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="36dp"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:background="@drawable/bg_support_btn"
                         android:clickable="true"
                         android:focusable="true">
 
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_customer_service"
-                            app:tint="#1F2937"/>
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_headset"
+                            app:tint="#FFFFFF"/>
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/ic_chat_bubble"
+                            app:tint="#FFFFFF"/>
                     </LinearLayout>
 
                     <Space
@@ -67,22 +76,21 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
 
-                    <LinearLayout
+                    <FrameLayout
                         android:id="@+id/btn_redeem"
-                        android:layout_width="wrap_content"
+                        android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:background="@drawable/bg_bell_btn"
                         android:clickable="true"
                         android:focusable="true">
 
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_customer_service"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_bell"
                             app:tint="#1F2937"/>
-                    </LinearLayout>
+                    </FrameLayout>
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
@@ -195,64 +203,69 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:id="@+id/traffic_stats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    android:orientation="vertical"
-                    android:padding="18dp"
-                    android:background="@drawable/status_container_background"
-                    android:clickable="true"
-                    android:focusable="true">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:orientation="vertical"
+                        android:padding="18dp">
 
-                        <TextView
-                            android:id="@+id/traffic_used_text"
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="0.00 GB / 0.00 GB"
-                            android:textColor="#1F2937"
-                            android:textSize="20sp"
-                            android:textStyle="bold"/>
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/traffic_used_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="已用 0.0GB / 50GB"
+                                android:textColor="#1F2937"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/traffic_percent_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="#2E5BFF"
+                                android:textSize="22sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/traffic_percent_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0%"
-                            android:textColor="#2E5BFF"
-                            android:textSize="22sp"
-                            android:textStyle="bold"/>
+                            android:layout_marginTop="4dp"
+                            android:text="本月流量"
+                            android:textColor="#64748B"
+                            android:textSize="13sp"/>
+
+                        <ProgressBar
+                            android:id="@+id/traffic_progress"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:layout_marginTop="12dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressTint="#2E5BFF"
+                            android:progressBackgroundTint="#E0E9FF"/>
                     </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="本月流量"
-                        android:textColor="#64748B"
-                        android:textSize="13sp"/>
-
-                    <ProgressBar
-                        android:id="@+id/traffic_progress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="12dp"
-                        android:max="100"
-                        android:progress="0"
-                        android:progressTint="#2E5BFF"
-                        android:progressBackgroundTint="#E0E9FF"/>
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -283,7 +296,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="标准套餐"
                                 android:textColor="#1F2937"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold"/>
 
                             <TextView
@@ -297,14 +310,14 @@
                         </LinearLayout>
 
                         <FrameLayout
-                            android:id="@+id/connection_button_wrap"
-                            android:layout_width="110dp"
-                            android:layout_height="110dp"
+                            android:id="@+id/connection_button"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
                             android:clickable="true"
                             android:focusable="true">
 
                             <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/connection_button"
+                                android:id="@+id/connection_button_lottie"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 app:lottie_autoPlay="true"
@@ -324,13 +337,6 @@
                         </FrameLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:id="@+id/mode_selection"
-                    android:layout_width="1dp"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
