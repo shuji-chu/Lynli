@@ -325,67 +325,61 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private suspend fun configRequesting(retryCount: Int = 0){
-        // 演示模式：跳过网络请求 / Demo mode: skip network
         if (PreferenceManager.loginToken == "demo-token") {
-            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
-                LoadingDialog.hide()
-            }
+            withContext(Dispatchers.Main) { LoadingDialog.hide() }
             return
         }
         val gson = Gson()
         val currentTime = System.currentTimeMillis()
-        /*apiService.getConfig().let {
-            if (it.isSuccessful) {
-                val response: ConfigResponse = it.body()  ?: throw Exception("Response body is null")
-
-                if (response.code == 1 ) {
-                    PreferenceManager.saveConfigToPreferences(response)
-                    //更新缓存数据
-                    PreferenceManager.cache_timestamp = currentTime
-                    PreferenceManager.cached_data =  gson.toJson( it.body())
-                    println("API Response:  ${gson.toJson( it.body())}")
-                    //重新初始化 ApiClint
-                    //2 : 获取订阅节点信息
-                    performSubscrite()
-                }
-
-            } else {
-                println("API Error: ${it.errorBody()}")
-                configRequesting()
-            }
-
-
+        val env = try {
+            safeApiCall { apiService.getConfig() }
+        } catch (e: Exception) {
+            println("getConfig 异常: " + e.message)
+            null
         }
-         */
-
-        safeApiCall {apiService.getConfig()}.let { env ->
-            if (env != null && env.code == 1 && env.data != null) {
-                val cfg = env.data!!
-                PreferenceManager.saveConfigToPreferences(cfg)
+        if (env != null && env.code == 1) {
+            try {
+                PreferenceManager.saveConfigToPreferences(env)
                 PreferenceManager.cache_timestamp = currentTime
-                PreferenceManager.cached_data = gson.toJson(cfg)
-                println("API Response:  ${env}")
-                performSubscrite()
-            }else{
-                if (retryCount < 3) {
-                    configRequesting(retryCount + 1)
-                } else {
-                    withContext(Dispatchers.Main) {
-                        LoadingDialog.hide()
-                        showCustomDialog(
-                            title = "提示",
-                            message = "初始化失败，请检查配置是否正确",
-                            positiveButtonText = "确定",
-                            negativeButtonText = "",
-                            onPositiveClick = {
-                            },
-                            onNegativeClick = {
-                            }
-                        )
+                PreferenceManager.cached_data = gson.toJson(env)
+                println("config 网络获取成功")
+            } catch (e: Exception) {
+                println("saveConfig 异常: " + e.message)
+            }
+        } else {
+            println("config 网络失败，走兜底")
+            var restored = false
+            try {
+                val cached = PreferenceManager.cached_data
+                if (!cached.isNullOrEmpty()) {
+                    val cfg = gson.fromJson(cached, ConfigResponse::class.java)
+                    if (cfg != null && cfg.baseURL.isNotEmpty()) {
+                        PreferenceManager.saveConfigToPreferences(cfg)
+                        restored = true
+                        println("已从缓存恢复 config")
                     }
                 }
+            } catch (e: Exception) {
+                println("缓存恢复异常: " + e.message)
             }
-
+            if (!restored) {
+                try {
+                    PreferenceManager.saveConfigToPreferences(ConfigResponse(baseURL = "https://lynli.kz.ci"))
+                    println("使用默认 config 兜底")
+                } catch (e: Exception) {
+                    println("默认 config 异常: " + e.message)
+                }
+            }
+        }
+        try {
+            withContext(Dispatchers.Main) { LoadingDialog.hide() }
+        } catch (e: Exception) {
+            println("hide loading 异常: " + e.message)
+        }
+        try {
+            performSubscrite()
+        } catch (e: Exception) {
+            println("performSubscrite 异常: " + e.message)
         }
     }
 

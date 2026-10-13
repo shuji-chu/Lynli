@@ -19,7 +19,7 @@ import java.util.concurrent.TimeoutException
 interface ApiService {
 
     @GET("config")
-    suspend fun getConfig(): Response<ConfigEnvelope>
+    suspend fun getConfig(): Response<ConfigResponse>
 
     @POST("passport/auth/login")
     suspend fun loginUser(@Body request: LoginRequest): Response<LoginResponse>

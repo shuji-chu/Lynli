@@ -108,11 +108,11 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
                     swipeRefreshLayout.isRefreshing = true
                 }
                 loadData(1) { data, error ->
-                    swipeRefreshLayout.isRefreshing = false
+                    runOnUiThread { swipeRefreshLayout.isRefreshing = false }
                     if (error != null) {
                         showError(error)
                     } else {
-                        swipeRefreshLayout.isRefreshing = false
+                        runOnUiThread { swipeRefreshLayout.isRefreshing = false }
                         initList(data)
                     }
                 }
@@ -148,10 +148,10 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
             }
             loadData(currentPage) { data, error ->
                 if (error != null) {
-                    swipeRefreshLayout.isRefreshing = false
+                    runOnUiThread { swipeRefreshLayout.isRefreshing = false }
                     showError(error)
                 } else {
-                    swipeRefreshLayout.isRefreshing = false
+                    runOnUiThread { swipeRefreshLayout.isRefreshing = false }
                     initList(data)
                 }
             }
