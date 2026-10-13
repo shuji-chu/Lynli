@@ -33,14 +33,17 @@ class PlansActivity : BaseListActivity<PlanData>() {
         nav?.visibility = android.view.View.VISIBLE
 
         nav?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_nav_home)?.setOnClickListener {
-            finish()
+            startActivity(android.content.Intent(this, MainActivity::class.java).apply {
+                addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            })
         }
         nav?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_nav_plan)?.setOnClickListener {
             // 已在本页
         }
         nav?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_nav_mine)?.setOnClickListener {
-            startActivity(ProfileActivity::class.intent)
-            finish()
+            startActivity(android.content.Intent(this, ProfileActivity::class.java).apply {
+                addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            })
         }
 
         // 右上角兑换按钮

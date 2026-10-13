@@ -35,6 +35,11 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
         }
     }
 
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0, 0)
+    }
+
     override suspend fun main() {
         PreferenceManager.init(this)
 
@@ -124,10 +129,15 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         ProfileDesign.Request.OpenMyGongdan ->startActivity(GongdanActivity::class.intent)
                         ProfileDesign.Request.OpenCustomViewIPtest -> startActivity(H5WebActivity::class.intent.putExtra("url","https://ipcelou.com"))
                         ProfileDesign.Request.OpenCustomViewSpeed ->  startActivity(H5WebActivity::class.intent.putExtra("url","https://fast.com/"))
-                        ProfileDesign.Request.OpenTabHome -> finish()
+                        ProfileDesign.Request.OpenTabHome -> {
+                            startActivity(android.content.Intent(this@ProfileActivity, MainActivity::class.java).apply {
+                                addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                            })
+                        }
                         ProfileDesign.Request.OpenTabPlan -> {
-                            startActivity(PlansActivity::class.intent)
-                            finish()
+                            startActivity(android.content.Intent(this@ProfileActivity, PlansActivity::class.java).apply {
+                                addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                            })
                         }
                         ProfileDesign.Request.OpenTabMine -> { /* 已在本页 */ }
                         ProfileDesign.Request.OpenRedeem -> startActivity(android.content.Intent(this@ProfileActivity, RedeemActivity::class.java))

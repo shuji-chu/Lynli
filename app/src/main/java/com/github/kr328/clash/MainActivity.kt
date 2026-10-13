@@ -247,8 +247,11 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(ProfileActivity::class.intent)
                             MainDesign.Request.OpenSettingsKEFU ->
                                 startActivity(PlansActivity::class.intent)
-                            MainDesign.Request.OpenMineTab ->
-                                startActivity(ProfileActivity::class.intent)
+                            MainDesign.Request.OpenMineTab -> {
+                                startActivity(android.content.Intent(this@MainActivity, ProfileActivity::class.java).apply {
+                                    addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                                })
+                            }
                             MainDesign.Request.OpenSupport ->
                                 startActivity(GongdanActivity::class.intent)
                             MainDesign.Request.OpenRedeem ->

@@ -64,7 +64,6 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         binding.navHome.setOnClickListener { request(Request.OpenTabHome) }
         binding.navPlan.setOnClickListener { request(Request.OpenTabPlan) }
         binding.navMine.setOnClickListener { request(Request.OpenTabMine) }
-        binding.btnBack.setOnClickListener { request(Request.OpenTabHome) }
         binding.btnRedeem.setOnClickListener { request(Request.OpenRedeem) }
 
 //        binding.viewAccountinfo.setBackgroundColor(Color.parseColor("#FFFFFF")) // Semi-transparent white color
