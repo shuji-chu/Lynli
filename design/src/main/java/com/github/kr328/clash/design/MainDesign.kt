@@ -64,7 +64,10 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         OpenModeGlobal,
         OpenModeRule,
         OpenModeMenu,
-        OpenModeSheet
+        OpenModeSheet,
+        OpenTabHome,
+        OpenTabPlan,
+        OpenTabMine
     }
     private var menu:PopupMenu? = null
     private val binding = DesignMainBinding
@@ -203,14 +206,8 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         binding.serverSelection?.setOnClickListener { request(Request.OpenProxy) }
         binding.trafficStats?.setOnClickListener { request(Request.OpenProxy) }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
-        binding.navHome.setOnClickListener { request(Request.OpenTabHome) }
-        binding.navPlan.setOnClickListener { request(Request.OpenTabPlan) }
-        binding.navMine.setOnClickListener { request(Request.OpenTabMine) }
         binding.btnSupport.setOnClickListener {
             request(Request.OpenSupport)
-        }
-        binding.navHome.setOnClickListener {
-            // 已经是主页，不跳
         }
         binding.navPlan.setOnClickListener {
             request(Request.OpenSettingsKEFU)
@@ -376,63 +373,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
             }
             binding.linearLayoutMode.addView(screen.root)
 */
-            binding.modeSelection.addOnButtonCheckedListener { group, checkedId, isChecked ->
-
-//
-//                if(button.id == checkedId){
-//                    button.backgroundTintList = checkedColor // 选中状态颜色
-//                }else{
-//                    button.backgroundTintList = uncheckedColor // 未选中状态颜色
-//                }
-
-               /*
-                for (buttonId in listOf(binding.modeSelectionbutton1,binding.modeSelectionbutton2,binding.modeSelectionbutton3)) {
-                    if (buttonId.id != checkedId) {
-//                        binding.modeSelection.uncheck(buttonId.id)
-                        buttonId.backgroundTintList = uncheckedColor
-
-                    }
-                }
-
-
-                val button = group.findViewById<MaterialButton>(checkedId)
-                button.backgroundTintList = checkedColor // 选中状态颜色
-*/
-
-//                binding.modeSelectionbutton1.invalidate()
-//                binding.modeSelectionbutton2.invalidate()
-//                binding.modeSelectionbutton3.invalidate()
-
-                // Reset all buttons to default background tint
-//                binding.modeSelectionbutton1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#40383838"))
-//                binding.modeSelectionbutton2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#40383838"))
-//                binding.modeSelectionbutton3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#40383838"))
-//
-
-
-                when (checkedId) {
-                    R.id.modeSelectionbutton1 -> {
-                        request(Request.OpenModeDirect)
-                        binding.modeSelectionbutton1.backgroundTintList = checkedColor // 选中状态颜色
-                       // binding.modeSelectionbutton1.backgroundTintList =  ColorStateList.valueOf(Color.parseColor("#2b9a45"))
-                    }
-
-                    R.id.modeSelectionbutton2 -> {
-
-                        request(Request.OpenModeGlobal)
-                        binding.modeSelectionbutton2.backgroundTintList = checkedColor // 选中状态颜色
-                        //binding.modeSelectionbutton2.backgroundTintList =  ColorStateList.valueOf(Color.parseColor("#2b9a45"))
-                    }
-
-                    R.id.modeSelectionbutton3 -> {
-                        request(Request.OpenModeRule)
-                        binding.modeSelectionbutton3.backgroundTintList = checkedColor // 选中状态颜色
-                       // binding.modeSelectionbutton3.backgroundTintList =  ColorStateList.valueOf(Color.parseColor("#2b9a45"))
-                    }
-                }
-
-
-            }
+// modeSelection listener removed (XML is now LinearLayout)
         }
 
 
