@@ -25,7 +25,17 @@ class PlansActivity : BaseListActivity<PlanData>() {
         }
     }
 
+
+    private fun _log(msg: String) {
+        try {
+            val d = java.io.File(getExternalFilesDir(null), "crash"); d.mkdirs()
+            java.io.File(d, "plan.txt").appendText("${java.util.Date()} $msg\n")
+        } catch (_: Exception) {}
+    }
+
     override fun onCreate() {
+        _log("进入 onCreate")
+        try {
         referTitle("套餐订阅")
 
         // 底部导航
@@ -50,13 +60,19 @@ class PlansActivity : BaseListActivity<PlanData>() {
         setRightButtonVisible {
             startActivity(android.content.Intent(this@PlansActivity, RedeemActivity::class.java))
         }
+        _log("onCreate 完成")
+        } catch (e: Throwable) {
+            _log("CRASH: " + e.stackTraceToString())
+            android.widget.Toast.makeText(this, "套餐页加载出错", android.widget.Toast.LENGTH_LONG).show()
+        }
     }
 
 
     override suspend fun loadData(page: Int, callback: (List<PlanData>?, Throwable?) -> Unit) {
 
         val apiService = ApiClient.retrofit.create(ApiService::class.java)
-        safeApiRequestCall { apiService.getplans(PreferenceManager.loginauthData)}.let {
+        val _auth = PreferenceManager.loginauthData ?: ""
+        safeApiRequestCall { apiService.getplans(_auth)}.let {
             if (it != null && it.isSuccessful) {
                 callback(it.body()?.data,null)
             }else{
