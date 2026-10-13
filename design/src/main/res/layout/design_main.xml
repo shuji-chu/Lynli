@@ -41,7 +41,6 @@
                 android:clipToPadding="false"
                 android:paddingBottom="90dp">
 
-                <!-- 顶部栏：左客服 右铃铛 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
@@ -93,7 +92,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Banner 轮播 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
@@ -121,7 +119,6 @@
                     app:tabPaddingEnd="6dp"
                     app:tabPaddingStart="6dp"/>
 
-                <!-- 三个模式胶囊 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -211,7 +208,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- 流量卡 -->
                 <LinearLayout
                     android:id="@+id/traffic_stats"
                     android:layout_width="match_parent"
@@ -270,7 +266,6 @@
                         android:progressBackgroundTint="#E0E9FF"/>
                 </LinearLayout>
 
-                <!-- 套餐 + 连接卡 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -302,7 +297,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text='@{profileName != null ? profileName : "标准套餐"}'
+                                    android:text="标准套餐"
                                     android:textColor="#1F2937"
                                     android:textSize="18sp"
                                     android:textStyle="bold"/>
@@ -371,7 +366,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- 当前节点 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -424,7 +418,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- 底部导航 -->
         <LinearLayout
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
