@@ -207,6 +207,13 @@ class MainActivity : BaseActivity<MainDesign>() {
                     }
                     design.requests.onReceive {
                         when (it) {
+                            MainDesign.Request.OpenTabHome -> { /* 已在主页 */ }
+                            MainDesign.Request.OpenTabPlan -> {
+                                startActivity(PlansActivity::class.intent)
+                            }
+                            MainDesign.Request.OpenTabMine -> {
+                                startActivity(ProfileActivity::class.intent)
+                            }
                             MainDesign.Request.ToggleStatus -> {
                                 if (clashRunning)
                                     stopClashService()
