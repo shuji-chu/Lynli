@@ -265,8 +265,10 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
     }
 
     private fun showError(error: Throwable) {
+        // 只在用户主动下拉刷新失败时才提示；初始加载失败静默（避免弹"请求失败"骚扰用户）
+        if (!swipeRefreshLayout.isRefreshing) return
         runOnUiThread {
-            Toast.makeText(this, "加载失败: ${error.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "网络异常，请稍后再试", Toast.LENGTH_SHORT).show()
         }
     }
 
