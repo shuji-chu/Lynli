@@ -93,7 +93,6 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         withContext(Dispatchers.Main) {
             binding.clashRunning = running
             if (running){
-                binding.connectionButtonLottie.setAnimation("51a05581.json")
                 binding.serverSelection.visibility = View.VISIBLE
 
 //                withContext(Dispatchers.Main){
@@ -104,12 +103,9 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 //                binding.modeImg2.visibility = View.VISIBLE
 //                binding.menuView.visibility = View.VISIBLE
                 binding.connectionButtonText.setText("点击断开")
-                binding.connectionButtonLottie.loop(false)
                 binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.white))
             }else{
                 // keep visible
-                binding.connectionButtonLottie.setAnimation("1d2a0fe5.json")
-                binding.connectionButtonLottie.loop(true)
                 // keep visible
                 binding.connectionButtonText.setText("点击连接")
                 binding.connectionButtonText.setTextColor(ContextCompat.getColor(context,R.color.black))
