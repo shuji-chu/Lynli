@@ -316,21 +316,32 @@
                             android:clickable="true"
                             android:focusable="true">
 
-                            <com.airbnb.lottie.LottieAnimationView
+                            <View
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/bg_connect_outer"/>
+
+                            <View
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/bg_connect_inner"/>
+
+                            <ImageView
                                 android:id="@+id/connection_button_lottie"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_autoPlay="true"
-                                app:lottie_fileName="75eaa6a4.json"
-                                app:lottie_imageAssetsFolder="assets/"
-                                app:lottie_loop="false"/>
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_power"
+                                app:tint="#1F2937"/>
 
                             <TextView
                                 android:id="@+id/connection_button_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal|bottom"
-                                android:layout_marginBottom="28dp"
+                                android:layout_marginBottom="20dp"
                                 android:text="点击连接"
                                 android:textColor="#1F2937"
                                 android:textSize="12sp"/>
@@ -338,144 +349,4 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/server_selection"
-                    android:background="@drawable/status_container_background"
-                    android:padding="14dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="12dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="当前节点"
-                            android:textColor="#64748B"
-                            android:textSize="13sp"/>
-
-                        <TextView
-                            android:id="@+id/status_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="自动选择"
-                            android:textColor="#1F2937"
-                            android:textSize="15sp"/>
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/arrow_forward_24px"
-                        app:tint="#94A3B8"/>
-                </LinearLayout>
-
-            </LinearLayout>
-        </ScrollView>
-
-        <LinearLayout
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:background="#FFFFFF"
-            android:elevation="8dp">
-
-            <LinearLayout
-                android:id="@+id/nav_home"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/nav_home_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_home_tab"
-                    app:tint="#2E5BFF"/>
-
-                <TextView
-                    android:id="@+id/nav_home_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="主页"
-                    android:textSize="12sp"
-                    android:textColor="#2E5BFF"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/nav_plan"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/nav_plan_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_plan_tab"
-                    app:tint="#94A3B8"/>
-
-                <TextView
-                    android:id="@+id/nav_plan_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="套餐"
-                    android:textSize="12sp"
-                    android:textColor="#94A3B8"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/nav_mine"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/nav_mine_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_person_tab"
-                    app:tint="#94A3B8"/>
-
-                <TextView
-                    android:id="@+id/nav_mine_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="我的"
-                    android:textSize="12sp"
-                    android:textColor="#94A3B8"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+                

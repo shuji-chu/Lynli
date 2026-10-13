@@ -198,7 +198,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 
     init {
         try {
-            binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text).text = String.format("%.2f GB / %.2f GB", 0.0, 0.0)
+            binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text).text = String.format("已用 %.1fGB / %.0fGB", 0.0, 0.0)
             binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_percent_text).text = "0%"
         } catch (_: Throwable) {}
 
