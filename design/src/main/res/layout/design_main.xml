@@ -10,6 +10,12 @@
         <variable name="trafficUsed" type="String" />
         <variable name="trafficTotal" type="String" />
         <variable name="trafficPercent" type="int" />
+        <variable name="forwarded" type="String" />
+        <variable name="uploadedseed" type="String" />
+        <variable name="downloadseed" type="String" />
+        <variable name="hasProviders" type="boolean" />
+        <variable name="colorClashStarted" type="int" />
+        <variable name="colorClashStopped" type="int" />
         <import type="android.view.View" />
         <import type="com.github.kr328.clash.design.MainDesign.Request" />
     </data>
