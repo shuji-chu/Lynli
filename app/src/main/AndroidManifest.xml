@@ -329,5 +329,11 @@
             android:exported="false"
             android:label="设置" />
 
+        <activity
+            android:name=".TextPageActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="文本页" />
+
     </application>
 </manifest>

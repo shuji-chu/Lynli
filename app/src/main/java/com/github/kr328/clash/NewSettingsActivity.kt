@@ -92,14 +92,16 @@ class NewSettingsActivity : AppCompatActivity() {
 
         // 隐私政策
         findViewById<View>(R.id.item_privacy)?.setOnClickListener {
-            startActivity(Intent(this, H5WebActivity::class.java).apply {
-                putExtra("url", "https://yisoujiasu.pages.dev/privacy.html")
+            startActivity(Intent(this, TextPageActivity::class.java).apply {
+                putExtra(TextPageActivity.EXTRA_TITLE, "隐私政策")
+                putExtra(TextPageActivity.EXTRA_CONTENT, LegalTexts.PRIVACY)
             })
         }
         // 用户协议
         findViewById<View>(R.id.item_terms)?.setOnClickListener {
-            startActivity(Intent(this, H5WebActivity::class.java).apply {
-                putExtra("url", "https://yisoujiasu.pages.dev/terms.html")
+            startActivity(Intent(this, TextPageActivity::class.java).apply {
+                putExtra(TextPageActivity.EXTRA_TITLE, "用户协议")
+                putExtra(TextPageActivity.EXTRA_CONTENT, LegalTexts.TERMS)
             })
         }
         // 官网

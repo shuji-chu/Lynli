@@ -269,11 +269,17 @@ class RegisterActivity : AppCompatActivity() {
         android.app.AlertDialog.Builder(this)
             .setTitle("协议")
             .setItems(items) { _, which ->
-                val url = if (which == 0)
-                    "https://yisoujiasu.pages.dev/terms.html"
-                else
-                    "https://yisoujiasu.pages.dev/privacy.html"
-                startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)))
+                if (which == 0) {
+                    startActivity(android.content.Intent(this, TextPageActivity::class.java).apply {
+                        putExtra(TextPageActivity.EXTRA_TITLE, "用户协议")
+                        putExtra(TextPageActivity.EXTRA_CONTENT, LegalTexts.TERMS)
+                    })
+                } else {
+                    startActivity(android.content.Intent(this, TextPageActivity::class.java).apply {
+                        putExtra(TextPageActivity.EXTRA_TITLE, "隐私政策")
+                        putExtra(TextPageActivity.EXTRA_CONTENT, LegalTexts.PRIVACY)
+                    })
+                }
             }
             .show()
     }
