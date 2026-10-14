@@ -256,6 +256,11 @@
             android:configChanges="uiMode"
             android:exported="false"
             />
+
+        <activity
+            android:name=".IpQueryActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
         <activity
             android:name=".TicketDetailActivity"
             android:configChanges="uiMode"

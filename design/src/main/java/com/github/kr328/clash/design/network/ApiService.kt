@@ -42,6 +42,9 @@ interface ApiService {
     @POST("user/update-password")
     suspend fun updatePassword(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
 
+
+    @GET("user/ip")
+    suspend fun getIP(@Header("Authorization") auth_data: String): Response<IPResponse>
     @GET("user/getSubscribe")
     suspend fun getSubscribe(@Header("Authorization") auth_data: String): Response<SubscribeResponse>
 
@@ -223,6 +226,22 @@ data class InviteCustomer(
     val created_at: Long?,
     val charge: Long?,
     val commission: Long?
+)
+
+data class IPResponse(
+    val `data`: IPData?,
+    val message: String?,
+    val status: String?
+)
+
+data class IPData(
+    val ip: String?,
+    val country: String?,
+    val region: String?,
+    val city: String?,
+    val isp: String?,
+    val org: String?,
+    val `as`: String?
 )
 
 data class InviteResponse(
