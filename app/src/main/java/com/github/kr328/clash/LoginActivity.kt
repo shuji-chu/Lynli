@@ -268,8 +268,16 @@ class LoginActivity : AppCompatActivity() {
                 java.io.File(__d, "login.txt").appendText("${java.util.Date()} 准备发请求\n")
             } catch (_: Throwable) {}
 
-            val _resp = safeApiRequestCall {
-                apiServiceApp.loginUser(LoginRequest(email,password))
+            var _resp: retrofit2.Response<LoginResponse>? = null
+            try {
+                _resp = safeApiRequestCall {
+                    apiServiceApp.loginUser(LoginRequest(email,password))
+                }
+            } catch (e: Throwable) {
+                try {
+                    val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
+                    java.io.File(__d, "login.txt").appendText("${java.util.Date()} 登录异常: " + e.javaClass.name + ": " + e.message + "\n" + e.stackTraceToString() + "\n")
+                } catch (_: Throwable) {}
             }
             try {
                 val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
