@@ -121,13 +121,12 @@
                     app:tabIndicatorHeight="0dp"
                     app:tabPaddingEnd="4dp"
                     app:tabPaddingStart="4dp"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -205,6 +204,8 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
+
                 <!-- 三个模式胶囊 -->
                 
 
@@ -212,7 +213,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/traffic_stats"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="12dp"
@@ -273,11 +274,6 @@
                             android:progressBackgroundTint="#E0E9FF"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
 
                 <!-- 套餐 + 连接卡 -->
                 <androidx.cardview.widget.CardView
