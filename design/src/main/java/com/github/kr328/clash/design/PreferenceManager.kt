@@ -137,6 +137,25 @@ object PreferenceManager {
     }
 
 
+
+    // ===== 设置页字段 =====
+    var darkMode: String
+        get() = prefs.getString("darkMode", "light") ?: "light"
+        set(value) {
+            prefs.edit().putString("darkMode", value).apply()
+        }
+
+    var notifyConn: Boolean
+        get() = prefs.getBoolean("notifyConn", true)
+        set(value) {
+            prefs.edit().putBoolean("notifyConn", value).apply()
+        }
+
+    var notifyMsg: Boolean
+        get() = prefs.getBoolean("notifyMsg", true)
+        set(value) {
+            prefs.edit().putBoolean("notifyMsg", value).apply()
+        }
 }
 
 

@@ -323,5 +323,11 @@
             android:exported="false"
             android:label="商务合作" />
 
+        <activity
+            android:name=".NewSettingsActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="设置" />
+
     </application>
 </manifest>

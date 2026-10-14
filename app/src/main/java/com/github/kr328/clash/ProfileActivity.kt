@@ -125,10 +125,9 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                             )
 
                         }
-                        ProfileDesign.Request.OpenGSettings -> {
-                            //查看是否有更新
-                            design.showToast("当前版本是最新版本",ToastDuration.Long)
-                        }//  startActivity(NetworkSettingsActivity::class.intent)
+                        ProfileDesign.Request.OpenGSettings -> startActivity(
+                            android.content.Intent(this@ProfileActivity, NewSettingsActivity::class.java)
+                        )//  startActivity(NetworkSettingsActivity::class.intent)
                         ProfileDesign.Request.OpenMyGongdan ->startActivity(GongdanActivity::class.intent)
                         ProfileDesign.Request.OpenCustomViewIPtest -> startActivity(H5WebActivity::class.intent.putExtra("url","https://ipcelou.com"))
                         ProfileDesign.Request.OpenCustomViewSpeed ->  startActivity(H5WebActivity::class.intent.putExtra("url","https://fast.com/"))
