@@ -317,5 +317,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity
+            android:name=".BusinessActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="商务合作" />
+
     </application>
 </manifest>

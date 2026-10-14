@@ -369,7 +369,7 @@
                         android:padding="10dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
+                        android:onClick="@{() -> self.request(Request.OpenBusiness)}"
                         android:background="?attr/selectableItemBackground">
 
                         <ImageView
@@ -389,7 +389,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="开通套餐"
+                            android:text="合作洽谈"
                             android:textColor="#94A3B8"
                             android:textSize="11sp"/>
                     </LinearLayout>
