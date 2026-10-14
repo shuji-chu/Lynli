@@ -32,6 +32,24 @@ object PreferenceManager {
         set(value) {
             prefs.edit().putLong("cache_timestamp", value).apply()
         }
+    var cached_plans: String
+        get() = prefs.getString("cached_plans", "") ?: ""
+        set(value) {
+            prefs.edit().putString("cached_plans", value).apply()
+        }
+
+    var cached_nickname: String
+        get() = prefs.getString("cached_nickname", "") ?: ""
+        set(value) {
+            prefs.edit().putString("cached_nickname", value).apply()
+        }
+
+    var cached_avatar: String
+        get() = prefs.getString("cached_avatar", "") ?: ""
+        set(value) {
+            prefs.edit().putString("cached_avatar", value).apply()
+        }
+
     var cached_data: String
         get() = prefs.getString("cached_data", "") ?: ""
         set(value) {

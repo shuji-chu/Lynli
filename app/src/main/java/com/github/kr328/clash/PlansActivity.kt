@@ -86,19 +86,47 @@ class PlansActivity : BaseListActivity<PlanData>() {
     override suspend fun loadData(page: Int, callback: (List<PlanData>?, Throwable?) -> Unit) {
         try {
             _log("loadData 进入")
+            val gson = com.google.gson.Gson()
+
+            var showedCache = false
+            if (page == 0) {
+                val cached = PreferenceManager.cached_plans
+                if (cached.isNotEmpty()) {
+                    try {
+                        val t = object : com.google.gson.reflect.TypeToken<List<PlanData>>() {}.type
+                        val cachedList = gson.fromJson<List<PlanData>>(cached, t)
+                        if (!cachedList.isNullOrEmpty()) {
+                            callback(cachedList, null)
+                            showedCache = true
+                            _log("使用缓存 size=" + cachedList.size)
+                        }
+                    } catch (e: Throwable) {
+                        _log("缓存解析失败，忽略: " + e.message)
+                    }
+                }
+            }
+
             val apiService = ApiClient.retrofit.create(ApiService::class.java)
             val _auth = PreferenceManager.loginauthData ?: ""
-            _log("auth=[" + _auth + "]")
             safeApiRequestCall { apiService.getplans(_auth)}.let { resp ->
                 _log("resp code=" + (resp?.code() ?: -1) + " ok=" + (resp?.isSuccessful ?: false))
                 if (resp != null && resp.isSuccessful) {
                     val data = resp.body()?.data
                     _log("数据 size=" + (data?.size ?: -1))
+                    if (page == 0 && !data.isNullOrEmpty()) {
+                        try {
+                            PreferenceManager.cached_plans = gson.toJson(data)
+                        } catch (_: Throwable) {}
+                    }
                     callback(data, null)
                     _log("callback OK")
                 } else {
-                    callback(null, Throwable("请求失败"))
-                    _log("callback 失败")
+                    if (!showedCache) {
+                        callback(null, Throwable("请求失败"))
+                        _log("callback 失败（无缓存兜底）")
+                    } else {
+                        _log("请求失败，但已有缓存展示，静默")
+                    }
                 }
             }
         } catch (e: Throwable) {

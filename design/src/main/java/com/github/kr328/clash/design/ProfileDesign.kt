@@ -121,6 +121,25 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             binding.accountEmail = "ID: " + _sid.toString()
         } catch (_: Throwable) {}
 
+        // 先显示缓存（昵称 + 头像），秒开
+        try {
+            val cachedNick = PreferenceManager.cached_nickname
+            if (cachedNick.isNotBlank()) {
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.tv_profile_nickname)?.text = cachedNick
+            }
+            val cachedAv = PreferenceManager.cached_avatar
+            if (cachedAv.startsWith("data:image")) {
+                try {
+                    val b64 = cachedAv.substringAfter(",")
+                    val bytes = android.util.Base64.decode(b64, android.util.Base64.DEFAULT)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    val iv = binding.root.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.iv_profile_avatar)
+                    iv?.setImageBitmap(bmp)
+                    iv?.imageTintList = null
+                } catch (_: Throwable) {}
+            }
+        } catch (_: Throwable) {}
+
         // 拉 user/info 更新昵称 + 头像
         try {
             val _api2 = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
@@ -130,6 +149,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val _nick = _info?.nickname ?: ""
             if (_nick.isNotBlank()) {
                 binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.tv_profile_nickname)?.text = _nick
+                PreferenceManager.cached_nickname = _nick
             }
             val _av = _info?.avatarURL ?: ""
             if (_av.startsWith("data:image")) {
@@ -140,6 +160,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
                     val iv = binding.root.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.iv_profile_avatar)
                     iv?.setImageBitmap(bmp)
                     iv?.imageTintList = null
+                    PreferenceManager.cached_avatar = _av
                 } catch (_: Throwable) {}
             }
         } catch (_: Throwable) {}
