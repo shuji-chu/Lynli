@@ -14,6 +14,10 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
     private val okHttpClient = OkHttpClient.Builder()
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
+        .retryOnConnectionFailure(true)
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
@@ -31,6 +35,20 @@ object ApiClient {
                 return@addInterceptor empty
             }
             chain.proceed(chain.request())
+        }
+        .addInterceptor { chain ->
+            val req = chain.request()
+            if (req.method != "GET") return@addInterceptor chain.proceed(req)
+            var lastEx: java.io.IOException? = null
+            for (i in 0..2) {
+                try {
+                    return@addInterceptor chain.proceed(req)
+                } catch (e: java.io.IOException) {
+                    lastEx = e
+                    if (i < 2) try { Thread.sleep(300L * (i + 1)) } catch (_: InterruptedException) {}
+                }
+            }
+            throw lastEx ?: java.io.IOException("request failed after retries")
         }
         .build()
 
@@ -68,6 +86,10 @@ object ApiClientConfig {
     const val ConfigNodeURL = ""
 
     private val okHttpClient = OkHttpClient.Builder()
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
+        .retryOnConnectionFailure(true)
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
