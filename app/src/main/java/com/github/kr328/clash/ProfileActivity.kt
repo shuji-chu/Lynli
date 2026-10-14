@@ -63,6 +63,11 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         ProfileDesign.Request.OpenMyOrders -> startActivity(MyOrdersActivity::class.intent)
                         ProfileDesign.Request.OpenMyBlance -> startActivity(SubmitOrderActivity::class.intent)
                         ProfileDesign.Request.OpenMyInvites ->startActivity(InvitationActivity::class.intent)
+                        ProfileDesign.Request.OpenBusiness -> startActivity(
+                            android.content.Intent(this@ProfileActivity, H5WebActivity::class.java).apply {
+                                putExtra("url", "https://t.me/lynli_business")
+                            }
+                        )
                         ProfileDesign.Request.OpenCustomView ->{ startActivity(H5WebActivity::class.intent) }
                             /*try {
 
