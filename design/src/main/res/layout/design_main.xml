@@ -124,7 +124,6 @@
 
                 <!-- 三个模式胶囊 -->
                 
-                </LinearLayout>
 
                 <!-- 流量卡 -->
                 <androidx.cardview.widget.CardView
