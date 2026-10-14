@@ -7,6 +7,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:descendantFocusability="blocksDescendants"
         app:cardCornerRadius="16dp"
         app:cardElevation="2dp"
         app:cardBackgroundColor="@color/bg_card">
@@ -14,235 +18,152 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="horizontal">
 
-            <!-- 顶部：套餐名 + 流量 -->
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="#2E5BFF"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/subscriptionName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="套餐"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
+
+                    <TextView
+                        android:id="@+id/subscriptionTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/subscriptionName"
-                    android:layout_width="0dp"
+                    android:id="@+id/subscriptionDescription"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="套餐"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"/>
-
-                <TextView
-                    android:id="@+id/subscriptionTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text=""
                     android:textSize="13sp"
                     android:textColor="@color/text_secondary"/>
-            </LinearLayout>
 
-            <TextView
-                android:id="@+id/subscriptionDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text=""
-                android:textSize="13sp"
-                android:textColor="@color/text_secondary"/>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:scrollbars="none"
+                    android:clipToPadding="false">
 
-            <!-- 价格横排 -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:scrollbars="none"
-                android:clipToPadding="false">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/grouponemohtthtest"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:background="@drawable/bg_plan_price_box">
+                            <TextView android:id="@+id/onemohtthtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1个月" android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                            <TextView android:id="@+id/onemonthprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
+                            <TextView android:id="@+id/onemonthpriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/groupquitytthtest"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:background="@drawable/bg_plan_price_box">
+                            <TextView android:id="@+id/onequietythtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="季度" android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                            <TextView android:id="@+id/onequietyprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
+                            <TextView android:id="@+id/onequietypriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/grouphelfyear"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:background="@drawable/bg_plan_price_box">
+                            <TextView android:id="@+id/helfyearthtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="半年" android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                            <TextView android:id="@+id/helfyearprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
+                            <TextView android:id="@+id/helfyearpriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/grouponeyear"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:background="@drawable/bg_plan_price_box">
+                            <TextView android:id="@+id/oneyearthtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1年" android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                            <TextView android:id="@+id/oneyearprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
+                            <TextView android:id="@+id/oneyearpriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- 1个月 -->
-                    <LinearLayout
-                        android:id="@+id/grouponemohtthtest"
-                        android:layout_width="100dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="end|center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
-                        android:background="@drawable/bg_plan_price_box">
-
-                        <TextView
-                            android:id="@+id/onemohtthtest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1个月"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_secondary"/>
-
-                        <TextView
-                            android:id="@+id/onemonthprice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="0"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="#2E5BFF"/>
-
-                        <TextView
-                            android:id="@+id/onemonthpriceday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0.00元/天"
-                            android:textSize="11sp"
-                            android:textColor="@color/text_hint"/>
-                    </LinearLayout>
-
-                    <!-- 季度 -->
-                    <LinearLayout
-                        android:id="@+id/groupquitytthtest"
-                        android:layout_width="100dp"
+                        android:text="立即订购"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#2E5BFF"/>
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
-                        android:background="@drawable/bg_plan_price_box">
-
-                        <TextView
-                            android:id="@+id/onequietythtest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="季度"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_secondary"/>
-
-                        <TextView
-                            android:id="@+id/onequietyprice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="0"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="#2E5BFF"/>
-
-                        <TextView
-                            android:id="@+id/onequietypriceday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0.00元/天"
-                            android:textSize="11sp"
-                            android:textColor="@color/text_hint"/>
-                    </LinearLayout>
-
-                    <!-- 半年 -->
-                    <LinearLayout
-                        android:id="@+id/grouphelfyear"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
-                        android:background="@drawable/bg_plan_price_box">
-
-                        <TextView
-                            android:id="@+id/helfyearthtest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="半年"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_secondary"/>
-
-                        <TextView
-                            android:id="@+id/helfyearprice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="0"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="#2E5BFF"/>
-
-                        <TextView
-                            android:id="@+id/helfyearpriceday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0.00元/天"
-                            android:textSize="11sp"
-                            android:textColor="@color/text_hint"/>
-                    </LinearLayout>
-
-                    <!-- 1年 -->
-                    <LinearLayout
-                        android:id="@+id/grouponeyear"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
-                        android:background="@drawable/bg_plan_price_box">
-
-                        <TextView
-                            android:id="@+id/oneyearthtest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1年"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_secondary"/>
-
-                        <TextView
-                            android:id="@+id/oneyearprice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="0"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="#2E5BFF"/>
-
-                        <TextView
-                            android:id="@+id/oneyearpriceday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0.00元/天"
-                            android:textSize="11sp"
-                            android:textColor="@color/text_hint"/>
-                    </LinearLayout>
+                        android:text=" ›"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#2E5BFF"/>
                 </LinearLayout>
-            </HorizontalScrollView>
-            <!-- 兼容 OrdersDataAdapter 的隐藏控件 -->
-            <TextView
-                android:id="@+id/subscriptionAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/subscriptionStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <HorizontalScrollView
-                android:id="@+id/groups_Scrollview"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"/>
+                <TextView android:id="@+id/subscriptionAmount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"/>
+                <TextView android:id="@+id/subscriptionStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"/>
+                <HorizontalScrollView android:id="@+id/groups_Scrollview" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>
