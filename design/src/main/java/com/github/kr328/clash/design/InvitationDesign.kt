@@ -94,6 +94,12 @@ class InvitationDesign  (context: Context) : Design<InvitationDesign.Request>(co
 
             showDiag(firstLink)
         }
+
+        binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.success_block)?.setOnClickListener {
+            val i = Intent()
+            i.setClassName(context, "com.github.kr328.clash.MyCustomersActivity")
+            context.startActivity(i)
+        }
     }
 
 

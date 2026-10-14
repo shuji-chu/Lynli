@@ -280,6 +280,10 @@
             android:label="我的邀请"
             />
 
+        <activity
+            android:name=".MyCustomersActivity"
+            android:exported="false" />
+
         <service
             android:name=".LogcatService"
             android:exported="false"

@@ -75,6 +75,9 @@ interface ApiService {
     @GET("user/invite/save")
     suspend fun saveinvite(@Header("Authorization") auth_data: String) :Response<SaveInviteCodeResponse>
 
+    @GET("user/invite/customers")
+    suspend fun getinviteCustomers(@Header("Authorization") auth_data: String) :Response<InviteCustomersResponse>
+
     @GET("user/ticket/fetch")
     suspend fun getTickets(@Header("Authorization") auth_data: String): Response<TicketsResponse>
 
@@ -201,6 +204,26 @@ suspend fun <T> safeApiRequestCall(
 
 
 
+
+
+data class InviteCustomersResponse(
+    val `data`: InviteCustomersData?,
+    val message: String?,
+    val status: String?
+)
+
+data class InviteCustomersData(
+    val list: List<InviteCustomer>?,
+    val rate: Int?
+)
+
+data class InviteCustomer(
+    val nickname: String?,
+    val short_id: Int?,
+    val created_at: Long?,
+    val charge: Long?,
+    val commission: Long?
+)
 
 data class InviteResponse(
     val `data`: InviteData?,

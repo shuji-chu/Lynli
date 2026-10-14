@@ -185,7 +185,10 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
                                 android:gravity="center"
-                                android:layout_weight="1">
+                                android:layout_weight="1"
+                                android:id="@+id/success_block"
+                                android:clickable="true"
+                                android:focusable="true">
 
                                 <TextView
                                     android:id="@+id/success_count_label"
