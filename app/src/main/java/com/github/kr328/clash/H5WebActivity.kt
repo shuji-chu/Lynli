@@ -18,7 +18,7 @@ class H5WebActivity : BaseActivity<H5WebViewDesign>() {
         val url = intent.getStringExtra("url")
 
         if (url != null && url.length > 1){
-            title = url
+            title = "易搜加速"
             design.refereshApplyFrom()
             design.breaseURL(url)
         }else{
