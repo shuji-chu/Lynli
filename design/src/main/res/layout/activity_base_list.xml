@@ -18,6 +18,61 @@
                 android:paddingStart="@{self.surface.insets.start}"
                 android:paddingEnd="@{self.surface.insets.end}">
 
+        <LinearLayout
+            android:id="@+id/plan_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/plan_btn_support"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/bg_support_btn">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_headset"
+                    app:tint="#FFFFFF"/>
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_chat_bubble"
+                    app:tint="#FFFFFF"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <FrameLayout
+                android:id="@+id/plan_btn_redeem"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_bell_btn">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_bell"
+                    app:tint="#1F2937"/>
+            </FrameLayout>
+        </LinearLayout>
+
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/base_swipeRefreshLayout"

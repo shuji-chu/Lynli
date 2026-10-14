@@ -38,6 +38,21 @@ class PlansActivity : BaseListActivity<PlanData>() {
         try {
         referTitle("套餐订阅")
 
+        // 隐藏旧蓝色顶栏，显示新白底顶栏
+        try {
+            mainBinding?.root?.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.activity_bar_layout)?.visibility = android.view.View.GONE
+            val topBar = mainBinding?.root?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.plan_top_bar)
+            topBar?.visibility = android.view.View.VISIBLE
+            topBar?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.plan_btn_support)?.setOnClickListener {
+                startActivity(android.content.Intent(this, ProfileActivity::class.java).apply {
+                    addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                })
+            }
+            topBar?.findViewById<android.widget.FrameLayout>(com.github.kr328.clash.design.R.id.plan_btn_redeem)?.setOnClickListener {
+                startActivity(android.content.Intent(this@PlansActivity, RedeemActivity::class.java))
+            }
+        } catch (_: Throwable) {}
+
         // 底部导航
         val nav = mainBinding?.root?.findViewById<android.widget.LinearLayout>(com.github.kr328.clash.design.R.id.base_bottom_nav)
         nav?.visibility = android.view.View.VISIBLE
