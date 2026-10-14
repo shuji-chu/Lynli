@@ -112,12 +112,23 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
                     if (error != null) {
                         showError(error)
                     } else {
-                        runOnUiThread { swipeRefreshLayout.isRefreshing = false }
+                        runOnUiThread {
+                            swipeRefreshLayout.isRefreshing = false
+                            hideError()
+                        }
                         initList(data)
                     }
                 }
             }
         }
+
+        try {
+            mainBinding?.root?.findViewById<View>(R.id.base_error_retry)?.setOnClickListener {
+                hideError()
+                refereshData()
+            }
+        } catch (_: Throwable) {}
+
         refereshData()
 
     }
@@ -151,7 +162,10 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
                     runOnUiThread { swipeRefreshLayout.isRefreshing = false }
                     showError(error)
                 } else {
-                    runOnUiThread { swipeRefreshLayout.isRefreshing = false }
+                    runOnUiThread {
+                        swipeRefreshLayout.isRefreshing = false
+                        hideError()
+                    }
                     initList(data)
                 }
             }
@@ -272,8 +286,21 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
 
     private fun showError(error: Throwable) {
         runOnUiThread {
-            Toast.makeText(this, "加载失败: ${error.message}", Toast.LENGTH_SHORT).show()
+            try {
+                val overlay = mainBinding?.root?.findViewById<View>(R.id.base_error_layout)
+                val text = mainBinding?.root?.findViewById<android.widget.TextView>(R.id.base_error_text)
+                text?.text = "网络慢，请稍后重试"
+                overlay?.visibility = View.VISIBLE
+            } catch (_: Throwable) {
+                Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun hideError() {
+        try {
+            mainBinding?.root?.findViewById<View>(R.id.base_error_layout)?.visibility = View.GONE
+        } catch (_: Throwable) {}
     }
 
     // 调用此方法来处理列表项点击

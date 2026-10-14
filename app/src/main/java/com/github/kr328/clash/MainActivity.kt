@@ -66,32 +66,54 @@ class MainActivity : BaseActivity<MainDesign>() {
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 全局崩溃捕获，把错误弹出来 / Global crash catch, show error
-        Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
-            val sw = java.io.StringWriter()
-            throwable.printStackTrace(java.io.PrintWriter(sw))
-            val stack = sw.toString()
+        // 全局崩溃捕获：只记日志，不再给用户看堆栈
+        val __prevHandler = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { t, throwable ->
             try {
-                java.io.File(filesDir, "crash.txt").writeText(stack)
-            } catch (_: Exception) {}
-            android.os.Handler(android.os.Looper.getMainLooper()).post {
-                val tv = android.widget.TextView(applicationContext)
-                tv.text = stack.substring(0, minOf(1500, stack.length))
-                tv.setPadding(40, 40, 40, 40)
-                tv.setBackgroundColor(0xFFFFFFFF.toInt())
-                tv.setTextColor(0xFF000000.toInt())
-                tv.textSize = 9f
-                tv.isVerticalScrollBarEnabled = true
-                val sv = android.widget.ScrollView(applicationContext)
-                sv.addView(tv)
-                android.app.AlertDialog.Builder(applicationContext)
-                    .setTitle("Lynli 崩溃了")
-                    .setView(sv)
-                    .setCancelable(false)
-                    .setPositiveButton("关闭") { _, _ ->
-                        android.os.Process.killProcess(android.os.Process.myPid())
+                val sw = java.io.StringWriter()
+                throwable.printStackTrace(java.io.PrintWriter(sw))
+                val stack = sw.toString()
+                try {
+                    java.io.File(filesDir, "crash.txt").writeText(stack)
+                } catch (_: Exception) {}
+
+                // 非主线程崩溃：只记日志，不弹窗，不闪退
+                if (t !== android.os.Looper.getMainLooper().thread) {
+                    return@setDefaultUncaughtExceptionHandler
+                }
+
+                // 主线程崩溃：弹一句人话，然后走系统默认流程（进程重启）
+                android.os.Handler(android.os.Looper.getMainLooper()).post {
+                    try {
+                        val tv = android.widget.TextView(applicationContext)
+                        tv.text = "抱歉，程序遇到了一点小问题。\n\n请点击下方按钮重新进入。"
+                        tv.setPadding(60, 60, 60, 60)
+                        tv.textSize = 15f
+                        tv.setTextColor(0xFF333333.toInt())
+                        val sv = android.widget.ScrollView(applicationContext)
+                        sv.addView(tv)
+                        android.app.AlertDialog.Builder(applicationContext)
+                            .setTitle("出错了")
+                            .setView(sv)
+                            .setCancelable(false)
+                            .setPositiveButton("重新进入") { _, _ ->
+                                try {
+                                    val i = android.content.Intent(applicationContext, MainActivity::class.java)
+                                    i.addFlags(
+                                        android.content.Intent.FLAG_ACTIVITY_NEW_TASK or
+                                        android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    )
+                                    applicationContext.startActivity(i)
+                                } catch (_: Throwable) {}
+                                android.os.Process.killProcess(android.os.Process.myPid())
+                            }
+                            .show()
+                    } catch (_: Throwable) {
+                        __prevHandler?.uncaughtException(t, throwable)
                     }
-                    .show()
+                }
+            } catch (_: Throwable) {
+                __prevHandler?.uncaughtException(t, throwable)
             }
         }
 
