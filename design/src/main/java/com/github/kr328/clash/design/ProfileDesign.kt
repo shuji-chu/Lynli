@@ -93,7 +93,15 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val cached_userSubscritedata =  gson.fromJson(PreferenceManager.cached_userSubscritedata, SubscribeResponse::class.java)
             APIGlobalObject.subData =  cached_userSubscritedata.data
         }
-        binding.accountEmail = PreferenceManager.loginemail
+        // 显示 ID 而不是邮箱
+        try {
+            val _api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+            val _resp = com.github.kr328.clash.network.safeApiRequestCall { _api.getUserData(PreferenceManager.loginauthData ?: "") }
+            val _sid = _resp?.body()?.data?.shortId ?: 0
+            binding.accountEmail = "ID: $_sid"
+        } catch (_: Throwable) {
+            binding.accountEmail = "ID: ----"
+        }
 
 
         if ((APIGlobalObject.subData?.plan?.id ?:0) > 0){

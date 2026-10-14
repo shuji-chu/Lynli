@@ -444,7 +444,8 @@ data class UserInfoData (
     val balance: Long?,
     val commissionBalance: Long?,
     val uuid: String,
-    val avatarURL: String?
+    val avatarURL: String?,
+    val shortId: Int? = 0
 )
 
  data class PlansResponse(
