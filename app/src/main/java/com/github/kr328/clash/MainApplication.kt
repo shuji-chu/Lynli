@@ -50,6 +50,14 @@ class MainApplication : Application() {
                     "TIME: ${java.util.Date()}\nPROC: ${currentProcessName}\nTHREAD: ${__t.name}\n\n${__e.stackTraceToString()}"
                 )
             } catch (_: Exception) {}
+
+            // 非主线程崩溃：记录日志，不闪退，继续运行
+            if (__t != android.os.Looper.getMainLooper().thread) {
+                Log.d("LynliCrash: non-main thread crash: " + __e.message)
+                return@setDefaultUncaughtExceptionHandler
+            }
+
+            // 主线程崩溃：走系统默认（闪退），日志已保留
             __def?.uncaughtException(__t, __e)
         }
 
