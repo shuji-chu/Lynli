@@ -15,6 +15,11 @@ class NewSettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_new)
 
+        // 应用主题颜色
+        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") {
+            ThemeHelper.apply(window.decorView, true)
+        }
+
         // 返回
         findViewById<ImageView>(R.id.btn_back).setOnClickListener { finish() }
 
