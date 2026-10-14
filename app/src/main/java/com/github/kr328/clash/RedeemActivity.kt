@@ -218,6 +218,7 @@ class RedeemActivity : AppCompatActivity() {
         ).apply { topMargin = dp(20) })
 
         setContentView(root)
+        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") { ThemeHelper.apply(window.decorView, true) }
     }
 
     private fun space(w: Int): android.view.View {

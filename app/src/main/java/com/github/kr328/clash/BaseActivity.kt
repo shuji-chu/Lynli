@@ -83,6 +83,20 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
         }
     }
 
+        override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
+        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") {
+            ThemeHelper.apply(window.decorView, true)
+        }
+    }
+
+    override fun setContentView(view: android.view.View?) {
+        super.setContentView(view)
+        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") {
+            ThemeHelper.apply(window.decorView, true)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         applyDayNight()
         super.onCreate(savedInstanceState)

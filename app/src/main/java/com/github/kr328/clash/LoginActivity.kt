@@ -65,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
             .inflate(this.layoutInflater, this.root, false)
 
         setContentView(binding.root)
+        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") { ThemeHelper.apply(window.decorView, true) }
 
         PreferenceManager.init(this)
 

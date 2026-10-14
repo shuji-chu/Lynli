@@ -15,6 +15,7 @@ class TextPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_page)
+        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") { ThemeHelper.apply(window.decorView, true) }
 
         val title = intent.getStringExtra(EXTRA_TITLE) ?: "文本"
         val content = intent.getStringExtra(EXTRA_CONTENT) ?: ""
