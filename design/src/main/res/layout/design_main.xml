@@ -34,12 +34,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingTop="44dp"
+                android:paddingBottom="84dp">
 
+                <!-- 顶栏 -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="40dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
@@ -78,28 +79,29 @@
 
                     <FrameLayout
                         android:id="@+id/btn_redeem"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:background="@drawable/bg_bell_btn"
                         android:clickable="true"
                         android:focusable="true">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_bell"
                             app:tint="#1F2937"/>
                     </FrameLayout>
                 </LinearLayout>
 
+                <!-- Banner -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="150dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="8dp"
-                    app:cardCornerRadius="16dp"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="14dp"
                     app:cardElevation="2dp">
 
                     <androidx.viewpager2.widget.ViewPager2
@@ -111,27 +113,28 @@
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="4dp"
                     app:tabGravity="center"
                     app:tabBackground="@drawable/tab_pager_selector"
                     android:background="@android:color/transparent"
                     app:tabIndicatorHeight="0dp"
-                    app:tabPaddingEnd="6dp"
-                    app:tabPaddingStart="6dp"/>
+                    app:tabPaddingEnd="4dp"
+                    app:tabPaddingStart="4dp"/>
 
+                <!-- 三个模式胶囊 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/modeSelectionbutton1"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:gravity="center"
@@ -139,8 +142,8 @@
                         android:layout_marginEnd="6dp">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
                             android:src="@drawable/ic_check_circle"
                             app:tint="#2E5BFF"/>
 
@@ -156,7 +159,7 @@
                     <LinearLayout
                         android:id="@+id/modeSelectionbutton2"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:gravity="center"
@@ -164,8 +167,8 @@
                         android:layout_marginEnd="6dp">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
                             android:src="@drawable/ic_check_circle"
                             app:tint="#2E5BFF"/>
 
@@ -181,15 +184,15 @@
                     <LinearLayout
                         android:id="@+id/modeSelectionbutton3"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:background="@drawable/bg_mode_pill">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
                             android:src="@drawable/ic_check_circle"
                             app:tint="#2E5BFF"/>
 
@@ -203,14 +206,15 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!-- 流量卡 -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/traffic_stats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="16dp"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="14dp"
                     app:cardElevation="2dp"
                     app:cardBackgroundColor="#FFFFFF">
 
@@ -218,7 +222,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="18dp">
+                        android:padding="16dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -231,9 +235,9 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="已用 0.0GB / 50GB"
+                                android:text="已用0.0GB/50GB"
                                 android:textColor="#1F2937"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold"/>
 
                             <TextView
@@ -242,24 +246,25 @@
                                 android:layout_height="wrap_content"
                                 android:text="0%"
                                 android:textColor="#2E5BFF"
-                                android:textSize="22sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold"/>
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/traffic_month_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="本月流量"
+                            android:layout_marginTop="2dp"
+                            android:text="本月流量0%"
                             android:textColor="#64748B"
-                            android:textSize="13sp"/>
+                            android:textSize="12sp"/>
 
                         <ProgressBar
                             android:id="@+id/traffic_progress"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="8dp"
-                            android:layout_marginTop="12dp"
+                            android:layout_height="6dp"
+                            android:layout_marginTop="10dp"
                             android:max="100"
                             android:progress="0"
                             android:progressTint="#2E5BFF"
@@ -267,85 +272,103 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- 套餐 + 连接卡 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="16dp"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="14dp"
                     app:cardElevation="2dp"
                     app:cardBackgroundColor="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="18dp"
-                        android:gravity="center_vertical">
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
-                            <TextView
-                                android:id="@+id/plan_name_text"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="标准套餐"
-                                android:textColor="#1F2937"
-                                android:textSize="20sp"
-                                android:textStyle="bold"/>
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/expire_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
-                                android:text="到期时间 --"
-                                android:textColor="#64748B"
-                                android:textSize="13sp"/>
+                                <TextView
+                                    android:id="@+id/plan_name_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="标准套餐"
+                                    android:textColor="#1F2937"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:id="@+id/expire_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="到期时间 --"
+                                    android:textColor="#64748B"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <FrameLayout
+                                android:id="@+id/connection_button"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <View
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/bg_connect_outer"/>
+
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/bg_connect_inner"/>
+
+                                <ImageView
+                                    android:id="@+id/connection_button_lottie"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_power"
+                                    app:tint="#1F2937"/>
+
+                                <TextView
+                                    android:id="@+id/connection_button_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal|bottom"
+                                    android:layout_marginBottom="10dp"
+                                    android:text="点击连接"
+                                    android:textColor="#1F2937"
+                                    android:textSize="11sp"/>
+                            </FrameLayout>
                         </LinearLayout>
 
-                        <FrameLayout
-                            android:id="@+id/connection_button"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <View
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/bg_connect_outer"/>
-
-                            <View
-                                android:layout_width="96dp"
-                                android:layout_height="96dp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/bg_connect_inner"/>
-
-                            <ImageView
-                                android:id="@+id/connection_button_lottie"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_power"
-                                app:tint="#1F2937"/>
-
-                            <TextView
-                                android:id="@+id/connection_button_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal|bottom"
-                                android:layout_marginBottom="20dp"
-                                android:text="点击连接"
-                                android:textColor="#1F2937"
-                                android:textSize="12sp"/>
-                        </FrameLayout>
+                        <TextView
+                            android:id="@+id/connection_status_big"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="已断开连接"
+                            android:textColor="#1F2937"
+                            android:textSize="15sp"
+                            android:textStyle="bold"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
