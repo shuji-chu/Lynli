@@ -111,7 +111,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val cached_userSubscritedata =  gson.fromJson(PreferenceManager.cached_userSubscritedata, SubscribeResponse::class.java)
             APIGlobalObject.subData =  cached_userSubscritedata.data
         }
-        // 显示 ID：直接调 getSubscribe（避免本地缓存里没 short_id）
+        // 显示 ID
         binding.accountEmail = "ID: ----"
         try {
             val _api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
@@ -119,12 +119,30 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val _r = com.github.kr328.clash.network.safeApiRequestCall { _api.getSubscribe(_auth) }
             val _sid = _r?.body()?.data?.short_id ?: 0
             binding.accountEmail = "ID: " + _sid.toString()
-        } catch (e: Throwable) {
-            try {
-                val __d = java.io.File(context.getExternalFilesDir(null), "crash"); __d.mkdirs()
-                java.io.File(__d, "profile.txt").appendText("${java.util.Date()} CRASH: ${e.stackTraceToString()}\n")
-            } catch (_: Throwable) {}
-        }
+        } catch (_: Throwable) {}
+
+        // 拉 user/info 更新昵称 + 头像
+        try {
+            val _api2 = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+            val _auth2 = PreferenceManager.loginauthData ?: ""
+            val _r2 = com.github.kr328.clash.network.safeApiRequestCall { _api2.getUserData(_auth2) }
+            val _info = _r2?.body()?.data
+            val _nick = _info?.nickname ?: ""
+            if (_nick.isNotBlank()) {
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.tv_profile_nickname)?.text = _nick
+            }
+            val _av = _info?.avatarURL ?: ""
+            if (_av.startsWith("data:image")) {
+                try {
+                    val b64 = _av.substringAfter(",")
+                    val bytes = android.util.Base64.decode(b64, android.util.Base64.DEFAULT)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    val iv = binding.root.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.iv_profile_avatar)
+                    iv?.setImageBitmap(bmp)
+                    iv?.setColorFilter(null)
+                } catch (_: Throwable) {}
+            }
+        } catch (_: Throwable) {}
 
         if ((APIGlobalObject.subData?.plan?.id ?:0) > 0){
 
