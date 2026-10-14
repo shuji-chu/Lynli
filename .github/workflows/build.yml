@@ -63,9 +63,35 @@ jobs:
       - name: Build APK
         run: ./gradlew --no-daemon app:assembleAlphaRelease
 
-      - name: Rename APK
+      - name: List APKs
+        run: ls -la app/build/outputs/apk/alpha/release/
+
+      - name: Sign APK manually
+        env:
+          KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.KEY_PASSWORD }}
         run: |
-          cp app/build/outputs/apk/alpha/release/*universal*.apk app/build/outputs/apk/alpha/release/Lynli.apk
+          # 找未签名的 APK
+          UNSIGNED=$(ls app/build/outputs/apk/alpha/release/*.apk | grep -v Lynli.apk | head -1)
+          echo "找到 APK: $UNSIGNED"
+
+          # 找 apksigner
+          APKSIGNER=$(find ${ANDROID_HOME}/build-tools -name apksigner 2>/dev/null | sort -r | head -1)
+          echo "apksigner: $APKSIGNER"
+
+          # 手动签
+          $APKSIGNER sign \
+            --ks release.keystore \
+            --ks-pass "pass:$KS_PASS" \
+            --ks-key-alias "$KEY_ALIAS" \
+            --key-pass "pass:$KEY_PASS" \
+            --out app/build/outputs/apk/alpha/release/Lynli.apk \
+            "$UNSIGNED"
+
+          # 验证签名
+          $APKSIGNER verify --print-certs app/build/outputs/apk/alpha/release/Lynli.apk
+          ls -la app/build/outputs/apk/alpha/release/Lynli.apk
 
       - name: Upload to Release
         if: startsWith(github.ref, 'refs/tags/')
