@@ -93,27 +93,13 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val cached_userSubscritedata =  gson.fromJson(PreferenceManager.cached_userSubscritedata, SubscribeResponse::class.java)
             APIGlobalObject.subData =  cached_userSubscritedata.data
         }
-        // 显示 ID 而不是邮箱
+        // 显示 ID
         try {
-            val __d = java.io.File(context.getExternalFilesDir(null), "crash"); __d.mkdirs()
-            val __f = java.io.File(__d, "profile.txt")
-            __f.appendText("${java.util.Date()} 进入 ID try\n")
-            __f.appendText("auth=[" + (PreferenceManager.loginauthData ?: "NULL") + "]\n")
-            val _api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
-            __f.appendText("api created\n")
-            val _resp = com.github.kr328.clash.network.safeApiRequestCall { _api.getUserData(PreferenceManager.loginauthData ?: "") }
-            __f.appendText("resp code=" + (_resp?.code() ?: -1) + " body null=" + (_resp?.body() == null) + "\n")
-            val _sid = _resp?.body()?.data?.shortId ?: 0
-            __f.appendText("sid=$_sid\n")
-            binding.accountEmail = "ID: $_sid"
-        } catch (e: Throwable) {
-            try {
-                val __d = java.io.File(context.getExternalFilesDir(null), "crash"); __d.mkdirs()
-                java.io.File(__d, "profile.txt").appendText("${java.util.Date()} CRASH: ${e.stackTraceToString()}\n")
-            } catch (_: Throwable) {}
+            val _sid = APIGlobalObject.subData?.short_id ?: 0
+            binding.accountEmail = "ID: " + _sid.toString()
+        } catch (_: Throwable) {
             binding.accountEmail = "ID: ----"
         }
-
 
         if ((APIGlobalObject.subData?.plan?.id ?:0) > 0){
 

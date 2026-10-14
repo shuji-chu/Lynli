@@ -388,6 +388,7 @@ data class SubscribeResponse (
 
 data class SubscribeData  (
 
+    @SerializedName("short_id") val short_id : Int? = 0,
     @SerializedName("plan_id") val plan_id : Int?,
     @SerializedName("token") val token : String,
     @SerializedName("expired_at") val expired_at : Long?,
