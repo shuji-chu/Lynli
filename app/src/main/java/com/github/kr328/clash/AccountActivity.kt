@@ -15,9 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.kr328.clash.design.PreferenceManager
-import com.github.kr328.clash.design.network.ApiClient
-import com.github.kr328.clash.design.network.ApiService
-import com.github.kr328.clash.design.network.safeApiRequestCall
+import com.github.kr328.clash.network.ApiClient
+import com.github.kr328.clash.network.ApiService
+import com.github.kr328.clash.network.safeApiRequestCall
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
