@@ -337,6 +337,17 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                 TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
                     // Tab 的自定义逻辑可以放在这里
                 }.attach()
+
+                // 3 秒自动轮播
+                kotlinx.coroutines.GlobalScope.launch(kotlinx.coroutines.Dispatchers.Main) {
+                    var __idx = 0
+                    while (true) {
+                        kotlinx.coroutines.delay(3000)
+                        if (items.isEmpty()) break
+                        __idx = (__idx + 1) % items.size
+                        try { viewPager2.setCurrentItem(__idx, true) } catch (_: Throwable) {}
+                    }
+                }
             }
 
             val uncheckedColor = ColorStateList(
