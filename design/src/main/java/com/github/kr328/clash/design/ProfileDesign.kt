@@ -64,6 +64,9 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         binding.navHome.setOnClickListener { request(Request.OpenTabHome) }
         binding.navPlan.setOnClickListener { request(Request.OpenTabPlan) }
         binding.navMine.setOnClickListener { request(Request.OpenTabMine) }
+        binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_open_vip)?.setOnClickListener {
+            request(Request.OpenBuyPlan)
+        }
         binding.btnRedeem.setOnClickListener { request(Request.OpenRedeem) }
 
 //        binding.viewAccountinfo.setBackgroundColor(Color.parseColor("#FFFFFF")) // Semi-transparent white color
