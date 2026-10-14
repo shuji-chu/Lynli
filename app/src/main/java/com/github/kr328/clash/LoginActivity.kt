@@ -98,6 +98,10 @@ class LoginActivity : AppCompatActivity() {
             } else {
 
                 // Hide the keyboard
+                try {
+                    val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
+                    java.io.File(__d, "login.txt").appendText("${java.util.Date()} 点登录 email=" + email + "\n")
+                } catch (_: Throwable) {}
                 val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 val currentFocusView = currentFocus
                 if (currentFocusView != null) {
@@ -222,6 +226,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
+        try {
+            val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
+            java.io.File(__d, "login.txt").appendText("${java.util.Date()} 进入 performLogin\n")
+        } catch (_: Throwable) {}
         // 虚拟登录：特定账号直接放行 / Demo login: bypass with special account
         if (email == "demo@lynli.com" && password == "123456") {
             PreferenceManager.loginemail = email
@@ -242,9 +250,19 @@ class LoginActivity : AppCompatActivity() {
 
         //获取 Config 数据
         CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
+                java.io.File(__d, "login.txt").appendText("${java.util.Date()} 准备发请求\n")
+            } catch (_: Throwable) {}
 
-            safeApiRequestCall {
-                apiServiceApp.loginUser(LoginRequest(email,password))}.let {
+            val _resp = safeApiRequestCall {
+                apiServiceApp.loginUser(LoginRequest(email,password))
+            }
+            try {
+                val __d = java.io.File(getExternalFilesDir(null), "crash"); __d.mkdirs()
+                java.io.File(__d, "login.txt").appendText("${java.util.Date()} 收到响应 code=" + (_resp?.code() ?: -1) + "\n")
+            } catch (_: Throwable) {}
+            _resp.let {
                 withContext(Dispatchers.Main) {
                     LoadingDialog.hide()
                 }
