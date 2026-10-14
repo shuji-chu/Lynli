@@ -140,7 +140,7 @@
                             android:id="@+id/description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="好友安装App后，填写您的邀请码，即算推荐成功；当其每次推荐成功，您均可获得 20% 的佣金！永久有效！"
+                            android:text="好友安装 App 并注册，即算推荐成功。好友获赠 3 天 5GB 流量畅享，您获得 15% 佣金永久绑定！"
                             android:textSize="14sp"
 
                             android:textColor="@color/black"
@@ -255,7 +255,7 @@
                                     android:id="@+id/success_count_label2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="佣金比例"
+                                    android:text="我的佣金比例"
                                     android:textSize="14sp"
                                     android:textColor="@color/black"/>
 
