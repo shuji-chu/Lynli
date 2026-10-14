@@ -335,5 +335,11 @@
             android:exported="false"
             android:label="文本页" />
 
+        <activity
+            android:name=".FaqActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="帮助中心" />
+
     </application>
 </manifest>

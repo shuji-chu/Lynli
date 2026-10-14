@@ -430,6 +430,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_faq"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -439,7 +440,7 @@
                         android:padding="10dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="@{() -> self.request(Request.OpenMyGongdan)}"
+                        android:onClick="@{() -> self.request(Request.OpenFaq)}"
                         android:background="?attr/selectableItemBackground">
 
                         <ImageView
