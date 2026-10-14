@@ -152,7 +152,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
             val currentTime = System.currentTimeMillis()
-            val cacheExpiryTime = 0  // 禁用缓存：每次启动都拉最新 /config，避免旧缓存格式冲突
+            val cacheExpiryTime = 5 * 60 * 1000
 
 
 // 如果缓存数据存在且未超过 10 分钟，使用缓存数据；否则，重新请求数据
@@ -199,11 +199,8 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
             }else{
-                // 缓存已过期，重新请求数据
-                println("Cache expired, requesting new data")
-                // 重新请求数据
-                //requestNewData()
-                LoadingDialog.show(this, "正在更新节点数据...")
+                // 缓存已过期，后台静默刷新（不弹窗，避免打扰用户）
+                println("Cache expired, silent refresh")
                 configRequesting()
 
             }
