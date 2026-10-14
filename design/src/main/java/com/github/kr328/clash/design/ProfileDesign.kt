@@ -139,7 +139,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
                     val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                     val iv = binding.root.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.iv_profile_avatar)
                     iv?.setImageBitmap(bmp)
-                    iv?.setColorFilter(null)
+                    iv?.imageTintList = null
                 } catch (_: Throwable) {}
             }
         } catch (_: Throwable) {}
