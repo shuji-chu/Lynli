@@ -22,7 +22,7 @@ import java.net.URL
 
 object UpdateChecker {
 
-    private const val VERSION_URL = "https://cdn.jsdelivr.net/gh/shuji-chu/Lynli-Release@main/version.json"
+    private const val VERSION_URL = "https://dl.yisoujiasu.de5.net/version.json"
 
     fun check(activity: Activity) {
         Thread {
