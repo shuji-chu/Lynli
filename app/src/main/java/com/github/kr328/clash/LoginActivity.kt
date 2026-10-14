@@ -57,14 +57,14 @@ class LoginActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyDayNight()
         super.onCreate(savedInstanceState)
+        applySystemBars()
 
           val binding = ActivityLoginBinding
             .inflate(this.layoutInflater, this.root, false)
 
         setContentView(binding.root)
-
-        applyDayNight()
 
         PreferenceManager.init(this)
 
@@ -171,6 +171,7 @@ class LoginActivity : AppCompatActivity() {
      * */
 
     private fun applyDayNight(config: Configuration = resources.configuration) {
+        // 主题样式部分（必须在 super.onCreate 之前调用）
         val mode = com.github.kr328.clash.design.PreferenceManager.darkMode
         val dayNight = when (mode) {
             "dark" -> DayNight.Night
@@ -183,20 +184,24 @@ class LoginActivity : AppCompatActivity() {
                 DayNight.Day -> theme.applyStyle(R.style.AppThemeLight, true)
             }
         } catch (_: Throwable) {}
-
-        window.isAllowForceDarkCompat = false
-        window.isSystemBarsTranslucentCompat = true
-        window.statusBarColor = resolveThemedColor(android.R.attr.statusBarColor)
-        window.navigationBarColor = resolveThemedColor(android.R.attr.navigationBarColor)
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            window.isLightStatusBarsCompat = resolveThemedBoolean(android.R.attr.windowLightStatusBar)
-        }
-        if (Build.VERSION.SDK_INT >= 27) {
-            window.isLightNavigationBarCompat = resolveThemedBoolean(android.R.attr.windowLightNavigationBar)
-        }
         this.dayNight = dayNight
     }
+
+    private fun applySystemBars() {
+        window.isAllowForceDarkCompat = false
+        window.isSystemBarsTranslucentCompat = true
+        try {
+            window.statusBarColor = resolveThemedColor(android.R.attr.statusBarColor)
+            window.navigationBarColor = resolveThemedColor(android.R.attr.navigationBarColor)
+        } catch (_: Throwable) {}
+        if (Build.VERSION.SDK_INT >= 23) {
+            try { window.isLightStatusBarsCompat = resolveThemedBoolean(android.R.attr.windowLightStatusBar) } catch (_: Throwable) {}
+        }
+        if (Build.VERSION.SDK_INT >= 27) {
+            try { window.isLightNavigationBarCompat = resolveThemedBoolean(android.R.attr.windowLightNavigationBar) } catch (_: Throwable) {}
+        }
+    }
+
 
     private fun showAgreementDialog() {
         val items = arrayOf("《用户协议》", "《隐私政策》")
