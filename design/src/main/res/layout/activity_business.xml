@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEF4FF">
+    android:background="@color/bg_page">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="商务合作"
-                    android:textColor="#1F2937"
+                    android:textColor="@color/text_primary"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -98,7 +98,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="10dp"
                 android:text="合作项目"
-                android:textColor="#1F2937"
+                android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -110,7 +110,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="易支付对接"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -146,7 +146,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="支付宝 / 微信 / USDT 全渠道，到账即时，支持自定义费率"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -161,7 +161,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="动态节点 API"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -197,7 +197,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="自动同步 x-ui / Hysteria2 节点，节点故障自动切换，用户无感知"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -212,7 +212,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -239,7 +239,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="二级域名 IP 隔离"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -248,7 +248,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="每个用户的节点独立绑定二级域名，IP 干净纯净，规避共享封禁风险"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -263,7 +263,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -290,7 +290,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="签到机器人克隆"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -299,7 +299,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Lynli 官方同款签到机器人，扶持新人快速起盘，一键克隆、开箱即用"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -314,7 +314,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -341,7 +341,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="广告投放"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -350,7 +350,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="首页 Banner / 弹窗 / 站内推荐位，精准触达 VPN 目标用户"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -365,7 +365,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -392,7 +392,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="白标定制"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -401,7 +401,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="私有部署 / 独立品牌 / 源码交付，快速搭建属于你的加速平台"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -416,7 +416,7 @@
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -443,7 +443,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="定制落地页"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -452,7 +452,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="专属官网 / 高转化落地页 / 独立域名，专业设计，助力营销推广"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="2dp"/>
                     </LinearLayout>
@@ -466,7 +466,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:text="联系方式"
-                android:textColor="#1F2937"
+                android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -478,7 +478,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -497,7 +497,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Telegram"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"
                             android:minWidth="90dp"/>
 
@@ -515,7 +515,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#EEEEEE"/>
+                        android:background="@color/divider2"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -528,7 +528,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Mivra"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"
                             android:minWidth="90dp"/>
 
@@ -546,7 +546,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#EEEEEE"/>
+                        android:background="@color/divider2"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -559,7 +559,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="邮箱"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"
                             android:minWidth="90dp"/>
 
@@ -579,7 +579,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="工作时间：周一至周五 10:00–19:00（GMT+8）"
-                        android:textColor="#94A3B8"
+                        android:textColor="@color/text_hint"
                         android:textSize="11sp"
                         android:gravity="center"/>
                 </LinearLayout>

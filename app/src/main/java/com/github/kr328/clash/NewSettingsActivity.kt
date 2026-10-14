@@ -15,11 +15,6 @@ class NewSettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_new)
 
-        // 应用主题颜色
-        if (com.github.kr328.clash.design.PreferenceManager.darkMode == "dark") {
-            ThemeHelper.apply(window.decorView, true)
-        }
-
         // 返回
         findViewById<ImageView>(R.id.btn_back).setOnClickListener { finish() }
 
@@ -33,18 +28,21 @@ class NewSettingsActivity : AppCompatActivity() {
         // 外观 - 白屏
         findViewById<View>(R.id.item_theme_white)?.setOnClickListener {
             PreferenceManager.darkMode = "light"
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO)
             updateThemeTicks(0)
             Toast.makeText(this, "已切换白屏", Toast.LENGTH_SHORT).show()
             recreate()
         }
         findViewById<View>(R.id.item_theme_dark)?.setOnClickListener {
             PreferenceManager.darkMode = "dark"
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES)
             updateThemeTicks(1)
             Toast.makeText(this, "已切换黑屏", Toast.LENGTH_SHORT).show()
             recreate()
         }
         findViewById<View>(R.id.item_theme_auto)?.setOnClickListener {
             PreferenceManager.darkMode = "auto"
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             updateThemeTicks(2)
             Toast.makeText(this, "已跟随系统", Toast.LENGTH_SHORT).show()
             recreate()

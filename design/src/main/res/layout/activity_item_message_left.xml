@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <TextView
                     android:id="@+id/messageTextView"
@@ -45,7 +45,7 @@
                     android:paddingEnd="14dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:textColor="#1F2937"
+                    android:textColor="@color/text_primary"
                     android:textSize="15sp"
                     android:lineSpacingExtra="2dp"
                     android:text=""/>
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="4dp"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_hint"
                 android:textSize="11sp"/>
         </LinearLayout>
     </LinearLayout>

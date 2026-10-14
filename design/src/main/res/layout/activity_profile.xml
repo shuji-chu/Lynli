@@ -16,7 +16,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEF4FF"
+    android:background="@color/bg_page"
     android:paddingStart="@{self.surface.insets.start}"
     android:paddingEnd="@{self.surface.insets.end}">
 
@@ -98,7 +98,7 @@
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="易搜用户"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
 
@@ -134,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@{account_email}"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp"/>
                     </LinearLayout>
 
@@ -158,7 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="提升连接体验"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="11sp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -173,7 +173,7 @@
                 android:layout_marginTop="12dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -185,7 +185,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="我的订阅"
-                        android:textColor="#1F2937"
+                        android:textColor="@color/text_primary"
                         android:textSize="15sp"
                         android:textStyle="bold"/>
 
@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="@{account_planname}"
-                        android:textColor="#1F2937"
+                        android:textColor="@color/text_primary"
                         android:textSize="14sp"/>
 
                     <TextView
@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@{account_planuseinfo}"
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp"/>
 
                     <ProgressBar
@@ -240,7 +240,7 @@
                 android:layout_marginTop="12dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -259,7 +259,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="邀请奖励"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold"/>
 
@@ -268,7 +268,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="邀请好友注册，双方都有奖励"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"/>
 
                         <TextView
@@ -276,7 +276,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="邀请一个人永久绑定 15%"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"/>
 
                         <TextView
@@ -284,7 +284,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="满 100 元可提现"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"/>
                     </LinearLayout>
 
@@ -314,7 +314,7 @@
                 android:layout_marginTop="12dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <android.widget.GridLayout
                     android:layout_width="match_parent"
@@ -347,14 +347,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="官方网页"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="咨询问题"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>
 
@@ -383,14 +383,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="商务合作"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="合作洽谈"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>
 
@@ -418,14 +418,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="设置"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="系统配置"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>
 
@@ -453,14 +453,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="常见问题"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="帮助中心"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>
 
@@ -488,14 +488,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="IP 查询"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="查看当前IP"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>
 
@@ -523,14 +523,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="网速测试"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="检测连接质量"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>
                 </android.widget.GridLayout>
@@ -544,7 +544,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_hint"
                 android:textSize="12sp"/>
 
         </LinearLayout>
@@ -557,7 +557,7 @@
         android:layout_height="64dp"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:background="#FFFFFF"
+        android:background="@color/bg_card"
         android:elevation="8dp"
         android:gravity="center_vertical">
 
@@ -582,7 +582,7 @@
                 android:layout_height="wrap_content"
                 android:text="主页"
                 android:textSize="12sp"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_hint"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
@@ -607,7 +607,7 @@
                 android:layout_height="wrap_content"
                 android:text="套餐"
                 android:textSize="12sp"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_hint"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 

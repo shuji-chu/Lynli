@@ -9,7 +9,7 @@
         android:layout_marginTop="10dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="2dp"
-        app:cardBackgroundColor="#FFFFFF">
+        app:cardBackgroundColor="@color/bg_card">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:text="套餐"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:textColor="#1F2937"/>
+                    android:textColor="@color/text_primary"/>
 
                 <TextView
                     android:id="@+id/subscriptionTime"
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="13sp"
-                    android:textColor="#64748B"/>
+                    android:textColor="@color/text_secondary"/>
             </LinearLayout>
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_marginTop="4dp"
                 android:text=""
                 android:textSize="13sp"
-                android:textColor="#64748B"/>
+                android:textColor="@color/text_secondary"/>
 
             <!-- 价格横排 -->
             <HorizontalScrollView
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:text="1个月"
                             android:textSize="12sp"
-                            android:textColor="#64748B"/>
+                            android:textColor="@color/text_secondary"/>
 
                         <TextView
                             android:id="@+id/onemonthprice"
@@ -102,7 +102,7 @@
                             android:layout_marginTop="4dp"
                             android:text="0.00元/天"
                             android:textSize="11sp"
-                            android:textColor="#94A3B8"/>
+                            android:textColor="@color/text_hint"/>
                     </LinearLayout>
 
                     <!-- 季度 -->
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:text="季度"
                             android:textSize="12sp"
-                            android:textColor="#64748B"/>
+                            android:textColor="@color/text_secondary"/>
 
                         <TextView
                             android:id="@+id/onequietyprice"
@@ -142,7 +142,7 @@
                             android:layout_marginTop="4dp"
                             android:text="0.00元/天"
                             android:textSize="11sp"
-                            android:textColor="#94A3B8"/>
+                            android:textColor="@color/text_hint"/>
                     </LinearLayout>
 
                     <!-- 半年 -->
@@ -163,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:text="半年"
                             android:textSize="12sp"
-                            android:textColor="#64748B"/>
+                            android:textColor="@color/text_secondary"/>
 
                         <TextView
                             android:id="@+id/helfyearprice"
@@ -182,7 +182,7 @@
                             android:layout_marginTop="4dp"
                             android:text="0.00元/天"
                             android:textSize="11sp"
-                            android:textColor="#94A3B8"/>
+                            android:textColor="@color/text_hint"/>
                     </LinearLayout>
 
                     <!-- 1年 -->
@@ -202,7 +202,7 @@
                             android:layout_height="wrap_content"
                             android:text="1年"
                             android:textSize="12sp"
-                            android:textColor="#64748B"/>
+                            android:textColor="@color/text_secondary"/>
 
                         <TextView
                             android:id="@+id/oneyearprice"
@@ -221,7 +221,7 @@
                             android:layout_marginTop="4dp"
                             android:text="0.00元/天"
                             android:textSize="11sp"
-                            android:textColor="#94A3B8"/>
+                            android:textColor="@color/text_hint"/>
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>

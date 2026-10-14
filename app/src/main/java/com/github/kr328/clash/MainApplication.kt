@@ -31,6 +31,15 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        try {
+            val mode = com.github.kr328.clash.design.PreferenceManager.darkMode
+            val nightMode = when (mode) {
+                "dark" -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+                "auto" -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                else -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+            }
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(nightMode)
+        } catch (_: Throwable) {}
 
         val __def = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { __t, __e ->

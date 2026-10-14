@@ -22,7 +22,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EEF4FF">
+        android:background="@color/bg_page">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                     android:layout_marginTop="20dp"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="2dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardBackgroundColor="@color/bg_card">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="已用0.0GB/50GB"
-                                android:textColor="#1F2937"
+                                android:textColor="@color/text_primary"
                                 android:textSize="18sp"
                                 android:textStyle="bold"/>
 
@@ -171,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="本月流量0%"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"/>
 
                         <ProgressBar
@@ -196,7 +196,7 @@
                     android:layout_marginTop="12dp"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="2dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardBackgroundColor="@color/bg_card">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -216,7 +216,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="标准套餐"
-                                android:textColor="#1F2937"
+                                android:textColor="@color/text_primary"
                                 android:textSize="18sp"
                                 android:textStyle="bold"/>
 
@@ -226,7 +226,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="到期时间 --"
-                                android:textColor="#64748B"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="13sp"/>
                         </LinearLayout>
 
@@ -271,7 +271,7 @@
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginTop="72dp"
                                     android:text="点击连接"
-                                    android:textColor="#1F2937"
+                                    android:textColor="@color/text_primary"
                                     android:textSize="12sp"/>
                             </FrameLayout>
 
@@ -281,7 +281,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="已断开连接"
-                                android:textColor="#1F2937"
+                                android:textColor="@color/text_primary"
                                 android:textSize="14sp"
                                 android:textStyle="bold"/>
                         </LinearLayout>
@@ -297,7 +297,7 @@
             android:layout_height="64dp"
             android:layout_gravity="bottom"
             android:orientation="horizontal"
-            android:background="#FFFFFF"
+            android:background="@color/bg_card"
             android:elevation="8dp">
 
             <LinearLayout
@@ -348,7 +348,7 @@
                     android:layout_height="wrap_content"
                     android:text="套餐"
                     android:textSize="12sp"
-                    android:textColor="#94A3B8"
+                    android:textColor="@color/text_hint"
                     android:layout_marginTop="4dp"/>
             </LinearLayout>
 
@@ -374,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:text="我的"
                     android:textSize="12sp"
-                    android:textColor="#94A3B8"
+                    android:textColor="@color/text_hint"
                     android:layout_marginTop="4dp"/>
             </LinearLayout>
         </LinearLayout>

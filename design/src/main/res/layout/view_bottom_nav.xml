@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:orientation="horizontal"
-    android:background="#FFFFFF"
+    android:background="@color/bg_card"
     android:elevation="8dp"
     android:gravity="center_vertical">
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="套餐"
             android:textSize="12sp"
-            android:textColor="#94A3B8"
+            android:textColor="@color/text_hint"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="我的"
             android:textSize="12sp"
-            android:textColor="#94A3B8"
+            android:textColor="@color/text_hint"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 

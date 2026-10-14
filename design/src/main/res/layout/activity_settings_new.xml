@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEF4FF">
+    android:background="@color/bg_page">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="设置"
-                    android:textColor="#1F2937"
+                    android:textColor="@color/text_primary"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -55,7 +55,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="外观"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"/>
 
             <androidx.cardview.widget.CardView
@@ -65,7 +65,7 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="白屏（默认）"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <View
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_theme_dark"
@@ -122,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="黑屏"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <View
@@ -137,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_theme_auto"
@@ -156,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="跟随系统"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <View
@@ -177,7 +177,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="代理设置"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"/>
 
             <androidx.cardview.widget.CardView
@@ -187,7 +187,7 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -211,14 +211,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="分应用代理"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="›"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="20sp"/>
                     </LinearLayout>
 
@@ -234,7 +234,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="通知"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"/>
 
             <androidx.cardview.widget.CardView
@@ -244,7 +244,7 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -268,7 +268,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="连接状态通知"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <androidx.appcompat.widget.SwitchCompat
@@ -282,7 +282,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_notify_msg"
@@ -301,7 +301,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="消息推送"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <androidx.appcompat.widget.SwitchCompat
@@ -321,7 +321,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="通用"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"/>
 
             <androidx.cardview.widget.CardView
@@ -331,7 +331,7 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -355,7 +355,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="检查更新"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
@@ -363,7 +363,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="13sp"/>
                     </LinearLayout>
 
@@ -371,7 +371,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_clear_cache"
@@ -390,7 +390,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="清除缓存"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
@@ -398,7 +398,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="13sp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -412,7 +412,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="关于"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"/>
 
             <androidx.cardview.widget.CardView
@@ -422,7 +422,7 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -446,14 +446,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="隐私政策"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="›"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="20sp"/>
                     </LinearLayout>
 
@@ -461,7 +461,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_terms"
@@ -480,14 +480,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="用户协议"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="›"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="20sp"/>
                     </LinearLayout>
 
@@ -495,7 +495,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_official"
@@ -514,14 +514,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="官网"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="›"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="20sp"/>
                     </LinearLayout>
 
@@ -529,7 +529,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
+                        android:background="@color/divider"/>
 
                     <LinearLayout
                         android:id="@+id/item_about"
@@ -548,7 +548,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="关于 Lynli"
-                            android:textColor="#1F2937"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"/>
 
                         <TextView
@@ -556,7 +556,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_hint"
                             android:textSize="13sp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -571,7 +571,7 @@
                 android:layout_marginTop="24dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardBackgroundColor="@color/bg_card">
 
                 <TextView
                     android:id="@+id/item_logout"
