@@ -75,7 +75,7 @@ class AccountActivity : AppCompatActivity() {
                             val bytes = Base64.decode(base64, Base64.DEFAULT)
                             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                             ivAvatar.setImageBitmap(bmp)
-                            ivAvatar.setColorFilter(null)
+                            ivAvatar.imageTintList = null
                         } catch (_: Throwable) {}
                     }
                 }
@@ -201,7 +201,7 @@ class AccountActivity : AppCompatActivity() {
                 finalBmp.compress(Bitmap.CompressFormat.JPEG, 80, baos)
                 val b64 = "data:image/jpeg;base64," + Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP)
                 ivAvatar.setImageBitmap(finalBmp)
-                ivAvatar.setColorFilter(null)
+                ivAvatar.imageTintList = null
                 uploadAvatar(b64)
             } catch (e: Throwable) {
                 Toast.makeText(this, "读取图片失败", Toast.LENGTH_SHORT).show()

@@ -67,7 +67,6 @@
                         android:layout_height="88dp"
                         android:src="@drawable/ic_person_tab"
                         android:scaleType="centerCrop"
-                        app:tint="#2E5BFF"
                         android:background="@drawable/status_container_background"/>
 
                     <View
