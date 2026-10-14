@@ -18,12 +18,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:background="#2E5BFF"/>
+            <TextView
+                android:id="@+id/tv_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#2E5BFF"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="推荐"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="套餐"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
 
@@ -65,82 +75,62 @@
                     android:textSize="13sp"
                     android:textColor="@color/text_secondary"/>
 
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:scrollbars="none"
-                    android:clipToPadding="false">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:id="@+id/grouponemohtthtest"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="14dp"
+                        android:background="@drawable/bg_plan_price_box">
 
-                        <LinearLayout
-                            android:id="@+id/grouponemohtthtest"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/onemohtthtest"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:paddingTop="14dp"
-                            android:paddingBottom="14dp"
-                            android:background="@drawable/bg_plan_price_box">
-                            <TextView android:id="@+id/onemohtthtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1个月" android:textSize="12sp" android:textColor="@color/text_secondary"/>
-                            <TextView android:id="@+id/onemonthprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
-                            <TextView android:id="@+id/onemonthpriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
-                        </LinearLayout>
+                            android:text="1个月"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"/>
 
-                        <LinearLayout
-                            android:id="@+id/groupquitytthtest"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/onemonthprice"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:paddingTop="14dp"
-                            android:paddingBottom="14dp"
-                            android:background="@drawable/bg_plan_price_box">
-                            <TextView android:id="@+id/onequietythtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="季度" android:textSize="12sp" android:textColor="@color/text_secondary"/>
-                            <TextView android:id="@+id/onequietyprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
-                            <TextView android:id="@+id/onequietypriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
-                        </LinearLayout>
+                            android:layout_marginTop="6dp"
+                            android:text="0"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:textColor="#2E5BFF"/>
 
-                        <LinearLayout
-                            android:id="@+id/grouphelfyear"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/onemonthpriceday"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:paddingTop="14dp"
-                            android:paddingBottom="14dp"
-                            android:background="@drawable/bg_plan_price_box">
-                            <TextView android:id="@+id/helfyearthtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="半年" android:textSize="12sp" android:textColor="@color/text_secondary"/>
-                            <TextView android:id="@+id/helfyearprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
-                            <TextView android:id="@+id/helfyearpriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/grouponeyear"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:paddingTop="14dp"
-                            android:paddingBottom="14dp"
-                            android:background="@drawable/bg_plan_price_box">
-                            <TextView android:id="@+id/oneyearthtest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1年" android:textSize="12sp" android:textColor="@color/text_secondary"/>
-                            <TextView android:id="@+id/oneyearprice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="#2E5BFF"/>
-                            <TextView android:id="@+id/oneyearpriceday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="0.00元/天" android:textSize="11sp" android:textColor="@color/text_hint"/>
-                        </LinearLayout>
+                            android:layout_marginTop="4dp"
+                            android:text="0.00元/天"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_hint"/>
                     </LinearLayout>
-                </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/tv_features"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="14dp"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="6dp"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -151,25 +141,38 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="14dp"
                     android:orientation="horizontal"
                     android:gravity="end|center_vertical">
+
                     <TextView
+                        android:id="@+id/btn_order"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
+                        android:gravity="center"
+                        android:paddingStart="28dp"
+                        android:paddingEnd="28dp"
                         android:text="立即订购"
-                        android:textSize="13sp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="#2E5BFF"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" ›"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="#2E5BFF"/>
+                        android:backgroundTint="#2E5BFF"
+                        android:clickable="true"
+                        android:focusable="true"/>
                 </LinearLayout>
 
+                <LinearLayout android:id="@+id/groupquitytthtest" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <LinearLayout android:id="@+id/grouphelfyear" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <LinearLayout android:id="@+id/grouponeyear" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/onequietythtest" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/helfyearthtest" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/oneyearthtest" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/onequietyprice" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/helfyearprice" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/oneyearprice" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/onequietypriceday" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/helfyearpriceday" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+                <TextView android:id="@+id/oneyearpriceday" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
                 <TextView android:id="@+id/subscriptionAmount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"/>
                 <TextView android:id="@+id/subscriptionStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"/>
                 <HorizontalScrollView android:id="@+id/groups_Scrollview" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>

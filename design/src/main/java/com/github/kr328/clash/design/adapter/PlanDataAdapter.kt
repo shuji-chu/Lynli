@@ -53,6 +53,9 @@ class SubscriptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     private val planName: TextView = itemView.findViewById(R.id.subscriptionName)
     private val planPrice: TextView = itemView.findViewById(R.id.subscriptionTime)
     private val planDescription: TextView = itemView.findViewById(R.id.subscriptionDescription)
+    private val badge: TextView = itemView.findViewById(R.id.tv_badge)
+    private val features: TextView = itemView.findViewById(R.id.tv_features)
+    private val btnOrder: TextView = itemView.findViewById(R.id.btn_order)
 
     private val grouponemonth: LinearLayout =  itemView.findViewById(R.id.grouponemohtthtest)
     private val groupquitytthtest: LinearLayout =  itemView.findViewById(R.id.groupquitytthtest)
@@ -78,64 +81,45 @@ class SubscriptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 
     fun bind(data: PlanData) {
-        // 绑定数据
         planName.text = data.name
 
-        if (data.onetime_price == null) {
-            planPrice.text = "流量：${(data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L}GB"
-            planDescription.text = data.content ?: ""
+        val gb = (data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L
+        planPrice.text = "流量：${gb}GB"
 
-            val month_price = (data.month_price ?: 0.00).toDouble()/100
-            val quarter_price = (data.quarter_price ?: 0.00).toDouble()/100
-            val half_year_price = (data.half_year_price ?: 0.00).toDouble()/100
-            val year_price = (data.year_price ?: 0.00).toDouble()/100
+        planDescription.text = data.tagline ?: data.content ?: ""
 
-            if (month_price > 0.0) {
-                onemonthprice.text = "${month_price}"
-                onemonthpriceday.text = "${String.format ("%.2f",month_price/30)}元/天"
-            }else{
-                grouponemonth.visibility = View.GONE
-            }
-
-            if (quarter_price > 0.0) {
-                onequietyprice.text = "${quarter_price}"
-                onequietypriceday.text = "${String.format ("%.2f",quarter_price/90)}元/天"
-            }else{
-                groupquitytthtest.visibility = View.GONE
-            }
-
-            if (half_year_price > 0.0) {
-                helfyearprice.text = "${half_year_price}"
-                helfyearpriceday.text = "${String.format ("%.2f",half_year_price/180)}元/天"
-            }else{
-                grouphelfyear.visibility = View.GONE
-            }
-
-            if (year_price > 0.0) {
-                oneyearprice.text = "${year_price}"
-                oneyearpriceday.text = "${String.format ("%.2f",year_price/360)}元/天"
-            }else{
-                grouponeyear.visibility = View.GONE
-            }
-
-
-        }else{
-            onemohtthtest.text = "一次性"
-            planPrice.text = "流量：${(data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L}GB 一次性"
-            planDescription.text = data.content ?: ""
-            val month_price = (data.onetime_price ?: 0.00).toDouble()/100
-            val transform = ((data.transfer_enable ?: 0L) / 1024L / 1024L / 1024L).toInt()
-            onemonthprice.text = "${month_price}"
-            onemonthpriceday.text = "${String.format ("%.2f",month_price/transform)}元/GB"
-
-            groupquitytthtest.visibility = View.GONE
-            grouphelfyear.visibility = View.GONE
-            grouponeyear.visibility = View.GONE
+        if ((data.hot ?: 0) == 1) {
+            badge.visibility = View.VISIBLE
+            badge.text = "推荐"
+        } else {
+            badge.visibility = View.GONE
         }
 
-        //// 如果需要加载图片，可以使用图像加载库，如 Glide 或 Picasso
-        //        Glide.with(itemView.context)
-        //            .load(subscription.planImageUrl)
-        //            .into(planImage)
+        val isOnetime = data.onetime_price != null
+        if (isOnetime) {
+            val p = (data.onetime_price ?: 0).toDouble() / 100
+            onemohtthtest.text = "一次性"
+            onemonthprice.text = "${p}"
+            val trans = if (gb > 0) gb.toInt() else 1
+            onemonthpriceday.text = "${String.format("%.2f", p / trans)}元/GB"
+        } else {
+            val p = (data.month_price ?: 0L).toDouble() / 100
+            onemohtthtest.text = "1个月"
+            onemonthprice.text = "${p}"
+            onemonthpriceday.text = "${String.format("%.2f", p / 30)}元/天"
+        }
+
+        val feats = data.features ?: emptyList()
+        val sb = StringBuilder()
+        for (f in feats) {
+            if (sb.isNotEmpty()) sb.append("\n")
+            sb.append("✓  ").append(f)
+        }
+        features.text = sb.toString()
+
+        btnOrder.setOnClickListener {
+            itemView.performClick()
+        }
     }
+
 }

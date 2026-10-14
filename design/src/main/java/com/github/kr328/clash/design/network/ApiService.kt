@@ -478,8 +478,12 @@ data class PlanData (
     @SerializedName("reset_traffic_method") val reset_traffic_method : String?,
     @SerializedName("capacity_limit") val capacity_limit : Long?,
     @SerializedName("created_at") val created_at : Long?,
-    @SerializedName("updated_at") val updated_at : Long?
-) : Serializable // 添加 Serializable 接口
+    @SerializedName("updated_at") val updated_at : Long?,
+    @SerializedName("tagline") val tagline : String? = null,
+    @SerializedName("speed") val speed : String? = null,
+    @SerializedName("hot") val hot : Int? = 0,
+    @SerializedName("features") val features : List<String>? = null
+) : Serializable
 
 
 
