@@ -260,28 +260,44 @@
                             android:layout_height="wrap_content"
                             android:text="邀请奖励"
                             android:textColor="#1F2937"
-                            android:textSize="19sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
+                            android:layout_marginTop="10dp"
                             android:text="邀请好友注册，双方都有奖励"
                             android:textColor="#64748B"
-                            android:textSize="13sp"/>
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="邀请一个人永久绑定 15%"
+                            android:textColor="#64748B"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="满 100 元可提现"
+                            android:textColor="#64748B"
+                            android:textSize="14sp"/>
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/btn_invite"
                         android:layout_width="wrap_content"
-                        android:layout_height="42dp"
+                        android:layout_height="46dp"
                         android:gravity="center"
-                        android:paddingStart="22dp"
-                        android:paddingEnd="22dp"
+                        android:paddingStart="26dp"
+                        android:paddingEnd="26dp"
                         android:text="去邀请"
                         android:textColor="#FFFFFF"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         android:background="@drawable/bg_invite_btn"
                         android:clickable="true"
