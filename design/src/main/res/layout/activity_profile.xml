@@ -246,7 +246,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="24dp"
                     android:gravity="center_vertical">
 
                     <LinearLayout
@@ -260,28 +260,28 @@
                             android:layout_height="wrap_content"
                             android:text="邀请奖励"
                             android:textColor="#1F2937"
-                            android:textSize="16sp"
+                            android:textSize="19sp"
                             android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="6dp"
                             android:text="邀请好友注册，双方都有奖励"
                             android:textColor="#64748B"
-                            android:textSize="12sp"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/btn_invite"
                         android:layout_width="wrap_content"
-                        android:layout_height="36dp"
+                        android:layout_height="42dp"
                         android:gravity="center"
-                        android:paddingStart="18dp"
-                        android:paddingEnd="18dp"
+                        android:paddingStart="22dp"
+                        android:paddingEnd="22dp"
                         android:text="去邀请"
                         android:textColor="#FFFFFF"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:background="@drawable/bg_invite_btn"
                         android:clickable="true"
@@ -520,19 +520,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- 退出登录 -->
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                android:text="退出登录"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
-                android:textAllCaps="false"
-                android:backgroundTint="#2E5BFF"
-                android:onClick="@{() -> self.request(Request.OpenLogout)}"
-                app:cornerRadius="26dp"/>
 
             <TextView
                 android:id="@+id/text_version"
