@@ -286,64 +286,66 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="0dp"
+                            <TextView
+                                android:id="@+id/plan_name_text"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:text="标准套餐"
+                                android:textColor="#1F2937"
+                                android:textSize="18sp"
+                                android:textStyle="bold"/>
 
-                                <TextView
-                                    android:id="@+id/plan_name_text"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="标准套餐"
-                                    android:textColor="#1F2937"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/expire_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="到期时间 --"
+                                android:textColor="#64748B"
+                                android:textSize="13sp"/>
+                        </LinearLayout>
 
-                                <TextView
-                                    android:id="@+id/expire_text"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="6dp"
-                                    android:text="到期时间 --"
-                                    android:textColor="#64748B"
-                                    android:textSize="13sp"/>
-                            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
 
                             <FrameLayout
                                 android:id="@+id/connection_button"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
                                 android:clickable="true"
                                 android:focusable="true">
+
+                                <View
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/bg_connect_outer"/>
 
                                 <View
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/bg_connect_outer"/>
-
-                                <View
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
                                     android:background="@drawable/bg_connect_inner"/>
 
                                 <ImageView
                                     android:id="@+id/connection_button_lottie"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center"
+                                    android:layout_width="42dp"
+                                    android:layout_height="42dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="24dp"
                                     android:src="@drawable/ic_power"
                                     app:tint="#1F2937"/>
 
@@ -351,24 +353,23 @@
                                     android:id="@+id/connection_button_text"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal|bottom"
-                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="72dp"
                                     android:text="点击连接"
                                     android:textColor="#1F2937"
-                                    android:textSize="11sp"/>
+                                    android:textSize="12sp"/>
                             </FrameLayout>
-                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/connection_status_big"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="8dp"
-                            android:text="已断开连接"
-                            android:textColor="#1F2937"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/connection_status_big"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="已断开连接"
+                                android:textColor="#1F2937"
+                                android:textSize="14sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
