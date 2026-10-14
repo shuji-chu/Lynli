@@ -30,16 +30,19 @@ class NewSettingsActivity : AppCompatActivity() {
             PreferenceManager.darkMode = "light"
             updateThemeTicks(0)
             Toast.makeText(this, "已切换白屏", Toast.LENGTH_SHORT).show()
+            recreate()
         }
         findViewById<View>(R.id.item_theme_dark)?.setOnClickListener {
             PreferenceManager.darkMode = "dark"
             updateThemeTicks(1)
             Toast.makeText(this, "已切换黑屏", Toast.LENGTH_SHORT).show()
+            recreate()
         }
         findViewById<View>(R.id.item_theme_auto)?.setOnClickListener {
             PreferenceManager.darkMode = "auto"
             updateThemeTicks(2)
             Toast.makeText(this, "已跟随系统", Toast.LENGTH_SHORT).show()
+            recreate()
         }
         // 初始状态
         val cur = PreferenceManager.darkMode ?: "light"
@@ -47,13 +50,12 @@ class NewSettingsActivity : AppCompatActivity() {
 
         // 分应用代理
         findViewById<View>(R.id.item_per_app_proxy)?.setOnClickListener {
-            try { startActivity(Intent(this, NetworkSettingsActivity::class.java)) } catch (_: Throwable) {}
+            try { startActivity(Intent(this, AccessControlActivity::class.java)) } catch (e: Throwable) {
+                Toast.makeText(this, "打不开：" + e.message, Toast.LENGTH_SHORT).show()
+            }
         }
 
-        // 代理模式
-        findViewById<View>(R.id.item_proxy_mode)?.setOnClickListener {
-            startActivity(Intent(this, ProxyActivity::class.java))
-        }
+        // 代理模式项已删（首页顶部胶囊已有）
 
         // 通知开关 - 连接状态
         val swConn = findViewById<androidx.appcompat.widget.SwitchCompat>(R.id.switch_notify_conn)

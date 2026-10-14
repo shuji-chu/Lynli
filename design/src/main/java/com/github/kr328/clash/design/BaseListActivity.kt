@@ -164,30 +164,31 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
         mainBinding?.activityBarLayout?.applyFrom(this)
     }
     private fun applyDayNight(config: Configuration = resources.configuration) {
-        // val dayNight =  theme.applyStyle(R.style.AppThemeLight, true) //默认白天模式
-
-        /*
-        val dayNight =   queryDayNight(config)
-        when (dayNight) {
-            DayNight.Night -> theme.applyStyle(R.style.AppThemeDark, true)
-            DayNight.Day -> theme.applyStyle(R.style.AppThemeLight, true)
-        }*/
+        val mode = com.github.kr328.clash.design.PreferenceManager.darkMode
+        val dayNight = when (mode) {
+            "dark" -> DayNight.Night
+            "auto" -> if (config.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) DayNight.Night else DayNight.Day
+            else -> DayNight.Day
+        }
+        try {
+            when (dayNight) {
+                DayNight.Night -> theme.applyStyle(R.style.AppThemeDark, true)
+                DayNight.Day -> theme.applyStyle(R.style.AppThemeLight, true)
+            }
+        } catch (_: Throwable) {}
 
         window.isAllowForceDarkCompat = false
         window.isSystemBarsTranslucentCompat = true
-
         window.statusBarColor = resolveThemedColor(android.R.attr.statusBarColor)
         window.navigationBarColor = resolveThemedColor(android.R.attr.navigationBarColor)
 
         if (Build.VERSION.SDK_INT >= 23) {
             window.isLightStatusBarsCompat = resolveThemedBoolean(android.R.attr.windowLightStatusBar)
         }
-
         if (Build.VERSION.SDK_INT >= 27) {
             window.isLightNavigationBarCompat = resolveThemedBoolean(android.R.attr.windowLightNavigationBar)
         }
-
-        this.dayNight =  DayNight.Night //dayNight
+        this.dayNight = dayNight
     }
 
    

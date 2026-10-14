@@ -222,39 +222,7 @@
                             android:textSize="20sp"/>
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="18dp"
-                        android:background="#F0F0F0"/>
 
-                    <LinearLayout
-                        android:id="@+id/item_proxy_mode"
-                        android:layout_width="match_parent"
-                        android:layout_height="52dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:paddingStart="18dp"
-                        android:paddingEnd="18dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="代理模式"
-                            android:textColor="#1F2937"
-                            android:textSize="15sp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="›"
-                            android:textColor="#94A3B8"
-                            android:textSize="20sp"/>
-                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
