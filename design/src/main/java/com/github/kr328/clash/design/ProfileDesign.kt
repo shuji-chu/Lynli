@@ -93,12 +93,19 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val cached_userSubscritedata =  gson.fromJson(PreferenceManager.cached_userSubscritedata, SubscribeResponse::class.java)
             APIGlobalObject.subData =  cached_userSubscritedata.data
         }
-        // 显示 ID
+        // 显示 ID：直接调 getSubscribe（避免本地缓存里没 short_id）
+        binding.accountEmail = "ID: ----"
         try {
-            val _sid = APIGlobalObject.subData?.short_id ?: 0
+            val _api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+            val _auth = PreferenceManager.loginauthData ?: ""
+            val _r = com.github.kr328.clash.network.safeApiRequestCall { _api.getSubscribe(_auth) }
+            val _sid = _r?.body()?.data?.short_id ?: 0
             binding.accountEmail = "ID: " + _sid.toString()
-        } catch (_: Throwable) {
-            binding.accountEmail = "ID: ----"
+        } catch (e: Throwable) {
+            try {
+                val __d = java.io.File(context.getExternalFilesDir(null), "crash"); __d.mkdirs()
+                java.io.File(__d, "profile.txt").appendText("${java.util.Date()} CRASH: ${e.stackTraceToString()}\n")
+            } catch (_: Throwable) {}
         }
 
         if ((APIGlobalObject.subData?.plan?.id ?:0) > 0){
