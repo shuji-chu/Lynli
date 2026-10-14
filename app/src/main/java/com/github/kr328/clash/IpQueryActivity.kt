@@ -54,6 +54,25 @@ class IpQueryActivity : AppCompatActivity() {
                 tvCity.text = d.city ?: "--"
                 tvIsp.text = d.isp ?: "--"
                 tvAs.text = d.`as` ?: "--"
+
+                val red = android.graphics.Color.parseColor("#E53935")
+                val green = android.graphics.Color.parseColor("#2E7D32")
+
+                val tvHosting = findViewById<TextView>(R.id.tv_hosting)
+                val tvProxy = findViewById<TextView>(R.id.tv_proxy)
+                val tvMobile = findViewById<TextView>(R.id.tv_mobile)
+
+                val h = d.hosting == true
+                tvHosting.text = if (h) "是" else "否"
+                tvHosting.setTextColor(if (h) red else green)
+
+                val px = d.proxy == true
+                tvProxy.text = if (px) "是" else "否"
+                tvProxy.setTextColor(if (px) red else green)
+
+                val mb = d.mobile == true
+                tvMobile.text = if (mb) "是" else "否"
+                tvMobile.setTextColor(if (mb) red else green)
             }
         }
     }

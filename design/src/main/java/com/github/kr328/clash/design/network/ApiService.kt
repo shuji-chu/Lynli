@@ -241,7 +241,10 @@ data class IPData(
     val city: String?,
     val isp: String?,
     val org: String?,
-    val `as`: String?
+    val `as`: String?,
+    val mobile: Boolean?,
+    val proxy: Boolean?,
+    val hosting: Boolean?
 )
 
 data class InviteResponse(

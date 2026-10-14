@@ -119,6 +119,25 @@
                         <TextView style="@style/IpLabelStyle" android:text="ASN"/>
                         <TextView android:id="@+id/tv_as" style="@style/IpValueStyle" android:text="--"/>
                     </LinearLayout>
+
+                    <View style="@style/IpDividerStyle"/>
+
+                    <LinearLayout style="@style/IpRowStyle">
+                        <TextView style="@style/IpLabelStyle" android:text="机房 IP"/>
+                        <TextView android:id="@+id/tv_hosting" style="@style/IpValueStyle" android:text="--"/>
+                    </LinearLayout>
+                    <View style="@style/IpDividerStyle"/>
+
+                    <LinearLayout style="@style/IpRowStyle">
+                        <TextView style="@style/IpLabelStyle" android:text="代理 IP"/>
+                        <TextView android:id="@+id/tv_proxy" style="@style/IpValueStyle" android:text="--"/>
+                    </LinearLayout>
+                    <View style="@style/IpDividerStyle"/>
+
+                    <LinearLayout style="@style/IpRowStyle">
+                        <TextView style="@style/IpLabelStyle" android:text="移动网络"/>
+                        <TextView android:id="@+id/tv_mobile" style="@style/IpValueStyle" android:text="--"/>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
