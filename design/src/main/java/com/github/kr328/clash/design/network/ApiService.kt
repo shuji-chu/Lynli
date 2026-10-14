@@ -33,6 +33,15 @@ interface ApiService {
     @GET("user/info")
     suspend fun getUserData(@Header("Authorization") auth_data: String): Response<UserInfoResponse>
 
+    @POST("user/update-nickname")
+    suspend fun updateNickname(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
+
+    @POST("user/update-avatar")
+    suspend fun updateAvatar(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
+
+    @POST("user/update-password")
+    suspend fun updatePassword(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
+
     @GET("user/getSubscribe")
     suspend fun getSubscribe(@Header("Authorization") auth_data: String): Response<SubscribeResponse>
 
@@ -446,7 +455,8 @@ data class UserInfoData (
     val commissionBalance: Long?,
     val uuid: String,
     val avatarURL: String?,
-    val shortId: Int? = 0
+    val shortId: Int? = 0,
+    val nickname: String? = ""
 )
 
  data class PlansResponse(

@@ -39,6 +39,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         OpenMyInvites,
         OpenBusiness,
         OpenFaq,
+        OpenAccount,
         OpenCustomView,
         OpenMyGongdan,
         OpenLogout,
@@ -78,6 +79,9 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         }
         binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_faq)?.setOnClickListener {
             request(Request.OpenFaq)
+        }
+        binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_user_card)?.setOnClickListener {
+            request(Request.OpenAccount)
         }
 
 //        binding.viewAccountinfo.setBackgroundColor(Color.parseColor("#FFFFFF")) // Semi-transparent white color

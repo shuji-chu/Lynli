@@ -101,6 +101,7 @@
                 app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
+                    android:id="@+id/btn_user_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

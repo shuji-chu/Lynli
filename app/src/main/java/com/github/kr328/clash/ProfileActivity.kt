@@ -63,6 +63,9 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         ProfileDesign.Request.OpenMyOrders -> startActivity(MyOrdersActivity::class.intent)
                         ProfileDesign.Request.OpenMyBlance -> startActivity(SubmitOrderActivity::class.intent)
                         ProfileDesign.Request.OpenMyInvites ->startActivity(InvitationActivity::class.intent)
+                        ProfileDesign.Request.OpenAccount -> startActivity(
+                            android.content.Intent(this@ProfileActivity, AccountActivity::class.java)
+                        )
                         ProfileDesign.Request.OpenFaq -> startActivity(
                             android.content.Intent(this@ProfileActivity, FaqActivity::class.java)
                         )
