@@ -249,6 +249,18 @@
                 android:gravity="center"
                 android:visibility="gone"/>
 
+            <Button
+                android:id="@+id/btn_goto_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="14dp"
+                android:text="去提现"
+                android:textColor="#2E5BFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:backgroundTint="#EAF0FF"
+                app:cornerRadius="24dp"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

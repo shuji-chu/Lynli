@@ -43,6 +43,18 @@ interface ApiService {
     suspend fun updatePassword(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
 
 
+    @POST("user/wallet/submit")
+    suspend fun submitWallet(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
+
+    @GET("user/wallet/info")
+    suspend fun getWalletInfo(@Header("Authorization") auth_data: String): Response<WalletInfoResponse>
+
+    @POST("user/withdraw/submit")
+    suspend fun submitWithdraw(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<PublicResponse>
+
+    @GET("user/withdraw/list")
+    suspend fun getWithdrawList(@Header("Authorization") auth_data: String): Response<WithdrawListResponse>
+
     @GET("user/ip")
     suspend fun getIP(@Header("Authorization") auth_data: String): Response<IPResponse>
     @GET("user/getSubscribe")
@@ -404,6 +416,34 @@ data class ConfigResponse (
     val banners: List<BannerData>? = null,
     val message: String = "",
     val code: Int = 1
+)
+
+data class WalletInfoResponse(
+    val data: WalletInfoData?,
+    val message: String?,
+    val status: String?
+)
+data class WalletInfoData(
+    val real_name: String?,
+    val usdt_addr: String?,
+    val alipay: String?,
+    val wallet_status: Int?
+)
+
+data class WithdrawListResponse(
+    val data: WithdrawListData?,
+    val message: String?,
+    val status: String?
+)
+data class WithdrawListData(
+    val list: List<WithdrawItem>?
+)
+data class WithdrawItem(
+    val id: Int?,
+    val amount: Long?,
+    val method: String?,
+    val status: Int?,
+    val created_at: Long?
 )
 
 data class RegisterRequest(
