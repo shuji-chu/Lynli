@@ -176,7 +176,22 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                                                         )
                                                     val item = it[i]
                                                     frameLayout.typeTextView.text = item.name
-                                                    frameLayout.amountTextView.text =  "手续费：${item.handling_fee_percent ?: "0.00"}%"
+                                                    val sub = when (item.payment) {
+                                                        "usdt" -> "支持 TRC20 / ERC20 支付"
+                                                        else -> "推荐使用支付宝完成支付"
+                                                    }
+                                                    frameLayout.amountTextView.text = sub
+                                                    val iconTv = frameLayout.root.findViewById<android.widget.TextView>(R.id.tv_pay_icon)
+                                                    when (item.payment) {
+                                                        "usdt" -> {
+                                                            iconTv?.text = "₮"
+                                                            iconTv?.background?.setTint(android.graphics.Color.parseColor("#26A17B"))
+                                                        }
+                                                        else -> {
+                                                            iconTv?.text = "支"
+                                                            iconTv?.background?.setTint(android.graphics.Color.parseColor("#1677FF"))
+                                                        }
+                                                    }
 
 
                                                     frameLayout.planitemFrameLayout.setOnClickListener {
@@ -193,6 +208,8 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                                                                     if (j == selectedIndex) R.drawable.card_border_selected else R.drawable.card_border
                                                                 )
                                                         }
+                                                            val _ck = child.findViewById<android.widget.TextView>(R.id.tv_check)
+                                                            _ck?.visibility = if (j == selectedIndex) android.view.View.VISIBLE else android.view.View.GONE
                                                     }
                                                     binding.container.addView(frameLayout.root)
 
@@ -207,6 +224,9 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                                                         frameLayout.planitemFrameLayout.background = ContextCompat.getDrawable(
                                                             context,  R.drawable.card_border_selected
                                                         )
+                                                        try {
+                                                            frameLayout.root.findViewById<android.widget.TextView>(R.id.tv_check)?.visibility = android.view.View.VISIBLE
+                                                        } catch (_: Throwable) {}
 
                                                     }
 
