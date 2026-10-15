@@ -216,6 +216,15 @@
                                 android:text="到期时间 --"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="13sp"/>
+
+                                <TextView
+                                    android:id="@+id/node_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="当前节点：易搜加速·美西"
+                                    android:textColor="@color/text_hint"
+                                    android:textSize="12sp"/>
                         </LinearLayout>
 
                         <LinearLayout

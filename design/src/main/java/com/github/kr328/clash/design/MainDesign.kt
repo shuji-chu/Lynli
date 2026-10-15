@@ -134,6 +134,14 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         }
     }
 
+    suspend fun setNodeLocation(text: String) {
+        withContext(Dispatchers.Main) {
+            try {
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.node_text)?.text = text
+            } catch (_: Throwable) {}
+        }
+    }
+
     suspend fun setUserTraffic(usedBytes: Long, totalBytes: Long) {
         withContext(Dispatchers.Main) {
             val usedGb = usedBytes / 1024.0 / 1024.0 / 1024.0

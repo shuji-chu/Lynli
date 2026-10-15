@@ -404,8 +404,34 @@ class MainActivity : BaseActivity<MainDesign>() {
         }
         try {
             performSubscrite()
+            loadNodeLocation()
         } catch (e: Exception) {
             println("performSubscrite 异常: " + e.message)
+        }
+    }
+
+    private fun loadNodeLocation() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val api = ApiClient.retrofit.create(ApiService::class.java)
+                val auth = PreferenceManager.loginauthData ?: ""
+                val r = com.github.kr328.clash.network.safeApiRequestCall { api.getIP(auth) }
+                val d = r?.body()?.data
+                if (d != null) {
+                    val c = d.country ?: ""
+                    val city = d.city ?: ""
+                    val region = d.region ?: ""
+                    val loc = when {
+                        c.isNotEmpty() && city.isNotEmpty() -> "$c·$city"
+                        c.isNotEmpty() && region.isNotEmpty() -> "$c·$region"
+                        c.isNotEmpty() -> c
+                        else -> d.ip ?: ""
+                    }
+                    if (loc.isNotEmpty()) {
+                        design?.setNodeLocation("当前节点：$loc")
+                    }
+                }
+            } catch (_: Throwable) {}
         }
     }
 
