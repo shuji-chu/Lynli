@@ -27,6 +27,11 @@ jobs:
         with:
           go-version: '1.26'
 
+      - name: Setup NDK
+        run: |
+          yes | sdkmanager "ndk;27.0.12077973" || true
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/27.0.12077973" >> $GITHUB_ENV
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
