@@ -106,7 +106,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
         binding.configorderPlanname2 = "${plan?.name}"
 
         val gb = ((plan?.transfer_enable ?: 0L).toDouble()) / 1024.0 / 1024.0 / 1024.0
-        binding.configorderPlantransfer = "商品流量：%.0f GB".format(gb)
+        binding.configorderPlantransfer = "%.0f GB".format(gb)
         val priceCents: Long = when {
             plan?.onetime_price != null && plan.onetime_price > 0 -> plan.onetime_price!!.toLong()
             plan?.month_price != null && plan.month_price > 0 -> plan.month_price
