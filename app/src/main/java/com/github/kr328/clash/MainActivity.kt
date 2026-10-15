@@ -165,6 +165,16 @@ class MainActivity : BaseActivity<MainDesign>() {
                 println("Using cached_userSubscritedata  : ${PreferenceManager.cached_userSubscritedata}")
                 if (PreferenceManager.cached_userSubscritedata.length > 0){
                     val subcache =  gson.fromJson(PreferenceManager.cached_userSubscritedata, SubscribeResponse::class.java)
+
+                    // 用缓存更新流量卡（避免 5 分钟内进 APP 显示旧数据）
+                    try {
+                        val _d = subcache.data
+                        if (_d != null) {
+                            val _used = (_d.u ?: 0) + (_d.d ?: 0)
+                            val _total = _d.transfer_enable ?: 0
+                            design?.setUserTraffic(_used.toLong(), _total.toLong())
+                        }
+                    } catch (_: Throwable) {}
                     subData =  subcache.data
 
                     //存储到本地
