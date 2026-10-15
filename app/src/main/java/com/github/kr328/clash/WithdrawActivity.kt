@@ -89,10 +89,26 @@ class WithdrawActivity : AppCompatActivity() {
             val bal = rl?.body()?.data?.balance ?: 0L
             val tot = rl?.body()?.data?.total ?: 0L
             val wdSum = rl?.body()?.data?.withdrawn ?: 0L
+            val notif = rl?.body()?.data?.notif
             withContext(Dispatchers.Main) {
                 findViewById<TextView>(R.id.tv_balance).text = "¥ %.2f".format(bal / 100.0)
                 findViewById<TextView>(R.id.tv_total).text = "累计佣金 ¥%.2f".format(tot / 100.0)
                 findViewById<TextView>(R.id.tv_done).text = "已提现 ¥%.2f".format(wdSum / 100.0)
+
+                // 有打款/拒绝通知 → 弹提示
+                if (notif != null) {
+                    val amt = (notif.amount ?: 0L) / 100.0
+                    val title = if ((notif.status ?: 0) == 1) "✅ 提现已打款" else "❌ 提现被拒绝"
+                    val msg = if ((notif.status ?: 0) == 1)
+                        "¥%.2f 已打款到你的收款账号".format(amt)
+                    else
+                        "¥%.2f 被拒绝，金额已退回余额".format(amt)
+                    android.app.AlertDialog.Builder(this@WithdrawActivity)
+                        .setTitle(title)
+                        .setMessage(msg)
+                        .setPositiveButton("知道了", null)
+                        .show()
+                }
                 val container = findViewById<LinearLayout>(R.id.container)
                 val tvEmpty = findViewById<TextView>(R.id.tv_empty)
                 if (list.isEmpty()) {

@@ -439,7 +439,13 @@ data class WithdrawListData(
     val list: List<WithdrawItem>?,
     val balance: Long? = 0,
     val total: Long? = 0,
-    val withdrawn: Long? = 0
+    val withdrawn: Long? = 0,
+    val notif: WithdrawNotif? = null
+)
+data class WithdrawNotif(
+    val id: Int?,
+    val amount: Long?,
+    val status: Int?
 )
 data class WithdrawItem(
     val id: Int?,
