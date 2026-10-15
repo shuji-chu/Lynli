@@ -146,10 +146,22 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         withContext(Dispatchers.Main) {
             val usedGb = usedBytes / 1024.0 / 1024.0 / 1024.0
             val totalGb = totalBytes / 1024.0 / 1024.0 / 1024.0
+            val percent = if (totalBytes > 0) ((usedBytes.toDouble() / totalBytes) * 100).toInt().coerceIn(0, 100) else 0
+            try {
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text)
+                    ?.text = String.format("已用 %.2fGB / %.0fGB", usedGb, totalGb)
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_percent_text)
+                    ?.text = "${percent}%"
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_month_text)
+                    ?.text = "本月流量 ${percent}%"
+                binding.root.findViewById<android.widget.ProgressBar>(com.github.kr328.clash.design.R.id.traffic_progress)
+                    ?.progress = percent
+            } catch (e: Throwable) {
+                println("[setUserTraffic] err: " + e.message)
+            }
             binding.trafficUsed = String.format("%.2f GB", usedGb)
             binding.trafficTotal = String.format("%.2f GB", totalGb)
-            val percent = if (totalBytes > 0) ((usedBytes.toDouble() / totalBytes) * 100).toInt() else 0
-            binding.trafficPercent = percent.coerceIn(0, 100)
+            binding.trafficPercent = percent
         }
     }
 
