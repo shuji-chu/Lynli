@@ -92,53 +92,37 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
             com.github.kr328.clash.design.R.id.activity_bar_title_view
         )?.text = "客服与工单"
 
-        // 左上角"对话客服"按钮
-        val chatBtn = Button(this).apply {
-            text = "对话客服"
+        // 右上角按钮组：对话客服 + 新建工单
+        val btnRow = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
             layoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT,
-                Gravity.TOP or Gravity.START
+                Gravity.TOP or Gravity.END
             ).apply {
-                marginStart = 180
-                topMargin = 16
+                marginEnd = 12
+                topMargin = 10
             }
+        }
+        val chatBtn = Button(this).apply {
+            text = "对话客服"
+            textSize = 13f
+            setPadding(24, 0, 24, 0)
             setOnClickListener {
                 startActivity(Intent(this@GongdanActivity, ChatActivity::class.java))
             }
         }
-        mainBinding?.activityBarLayout?.addView(chatBtn)
-
-        // Create the top-right icon
-        val iconView = Button(this)
-        iconView.setText("新建工单")
-        iconView.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            Gravity.TOP or Gravity.END
-        ).apply {
-            marginEnd = 16
-            topMargin = 16
+        btnRow.addView(chatBtn)
+        val iconView = Button(this).apply {
+            text = "新建工单"
+            textSize = 13f
+            setPadding(24, 0, 24, 0)
+            setOnClickListener {
+                resultLauncher.launch(Intent(this@GongdanActivity, NewGongdanActivity::class.java))
+            }
         }
-        // Set the background tint programmatically
-  /*      ViewCompat.setBackgroundTintList(
-            iconView,
-            ContextCompat.getColorStateList(this, R.color.blue)
-        )
-*/
-        val colorStateList: ColorStateList = ColorStateList(
-            arrayOf<IntArray>(intArrayOf(android.R.attr.state_pressed)), intArrayOf(
-                R.color.blue
-            )
-        )
-        iconView.setBackgroundTintList(colorStateList)
-        iconView.setOnClickListener {
-            val intent = Intent(this@GongdanActivity, NewGongdanActivity::class.java)
-            //startActivity(intent)
-            resultLauncher.launch(intent)
-
-        }
-        mainBinding?.activityBarLayout?.addView(iconView)
+        btnRow.addView(iconView)
+        mainBinding?.activityBarLayout?.addView(btnRow)
 
 
 
