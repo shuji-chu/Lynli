@@ -207,9 +207,9 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                                                                     context,
                                                                     if (j == selectedIndex) R.drawable.card_border_selected else R.drawable.card_border
                                                                 )
-                                                        }
                                                             val _ck = child.findViewById<android.widget.TextView>(R.id.tv_check)
                                                             _ck?.visibility = if (j == selectedIndex) android.view.View.VISIBLE else android.view.View.GONE
+                                                        }
                                                     }
                                                     binding.container.addView(frameLayout.root)
 
