@@ -90,6 +90,18 @@ class InvitationDesign  (context: Context) : Design<InvitationDesign.Request>(co
             }
         }
 
+        try {
+            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_wallet)?.setOnClickListener {
+                try {
+                    val _i = android.content.Intent()
+                    _i.setClassName(context, "com.github.kr328.clash.WalletActivity")
+                    context.startActivity(_i)
+                } catch (e: Throwable) {
+                    android.widget.Toast.makeText(context, "钱包功能开发中", android.widget.Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (_: Throwable) {}
+
         binding.shareLinkButton.setOnClickListener {
 
             showDiag(firstLink)
