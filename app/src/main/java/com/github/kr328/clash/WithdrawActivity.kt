@@ -142,17 +142,47 @@ class WithdrawActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 val api = ApiClient.retrofit.create(ApiService::class.java)
                 val auth = PreferenceManager.loginauthData ?: ""
+                // 提交前先记最大记录 id
+                var maxIdBefore = 0L
+                try {
+                    val l0 = safeApiRequestCall { api.getWithdrawList(auth) }
+                    val list0 = l0?.body()?.data?.list ?: emptyList()
+                    for (it0 in list0) { val i = (it0.id ?: 0).toLong(); if (i > maxIdBefore) maxIdBefore = i }
+                } catch (_: Throwable) {}
+
                 val r = safeApiRequestCall {
                     api.submitWithdraw(auth, mapOf("amount" to v.toString(), "method" to method))
                 }
                 val body = r?.body()
+
+                // 判断真成功还是真失败
+                var ok = false
+                var msg = "提交失败"
+
+                if (body?.status == "success") {
+                    ok = true
+                } else if (r == null || !r.isSuccessful) {
+                    // 响应丢了 → 拉一次记录看后端是不是真存了
+                    try {
+                        Thread.sleep(800)
+                        val l1 = safeApiRequestCall { api.getWithdrawList(auth) }
+                        val list1 = l1?.body()?.data?.list ?: emptyList()
+                        var maxIdAfter = 0L
+                        for (it1 in list1) { val i = (it1.id ?: 0).toLong(); if (i > maxIdAfter) maxIdAfter = i }
+                        if (maxIdAfter > maxIdBefore) ok = true
+                    } catch (_: Throwable) {}
+                    if (!ok) msg = "网络超时，请重试"
+                } else if (!body.message.isNullOrEmpty()) {
+                    msg = body.message
+                }
+
                 withContext(Dispatchers.Main) {
-                    if (body?.status == "success") {
+                    if (ok) {
                         Toast.makeText(this@WithdrawActivity, "已提交，等待审核", Toast.LENGTH_LONG).show()
                         etAmount.setText("")
                         recreate()
                     } else {
-                        Toast.makeText(this@WithdrawActivity, body?.message ?: "提交失败", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@WithdrawActivity, msg, Toast.LENGTH_LONG).show()
                     }
                 }
             }
