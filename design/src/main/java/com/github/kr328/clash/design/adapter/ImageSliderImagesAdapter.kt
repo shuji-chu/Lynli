@@ -1,10 +1,13 @@
 package com.github.kr328.clash.design.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.MediaController
 import android.widget.TextView
+import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.kr328.clash.design.R
@@ -27,14 +30,39 @@ class ImageSliderImagesAdapter(
         return ImageSliderViewHolder(view)
     }
 
+    private fun isVideo(url: String): Boolean {
+        val u = url.lowercase().substringBefore('?')
+        return u.endsWith(".mp4") || u.endsWith(".mov") || u.endsWith(".m3u8") || u.endsWith(".webm")
+    }
+
     override fun onBindViewHolder(holder: ImageSliderViewHolder, position: Int) {
         val item = items[position]
 
-        Glide.with(holder.imageView.context)
-            .load(item.imageUrl)
-            .placeholder(R.drawable.placeholder)
-            .error(R.drawable.placeholder)
-            .into(holder.imageView)
+        if (isVideo(item.imageUrl)) {
+            // 视频
+            holder.imageView.visibility = View.GONE
+            holder.videoView.visibility = View.VISIBLE
+            try {
+                val mc = MediaController(holder.videoView.context)
+                mc.setVisibility(View.GONE)
+                holder.videoView.setMediaController(mc)
+                holder.videoView.setVideoURI(Uri.parse(item.imageUrl))
+                holder.videoView.setOnPreparedListener { mp ->
+                    mp.isLooping = true
+                    mp.setVolume(0f, 0f)
+                    holder.videoView.start()
+                }
+                holder.videoView.setOnErrorListener { _, _, _ -> true }
+            } catch (_: Throwable) {}
+        } else {
+            // 图片
+            holder.videoView.visibility = View.GONE
+            holder.imageView.visibility = View.VISIBLE
+            Glide.with(holder.imageView.context)
+                .load(item.imageUrl)
+                .centerCrop()
+                .into(holder.imageView)
+        }
 
         if (item.title.isNullOrBlank()) {
             holder.titleView.visibility = View.GONE
@@ -50,13 +78,21 @@ class ImageSliderImagesAdapter(
             holder.subtitleView.text = item.subtitle
         }
 
-        holder.imageView.setOnClickListener { onItemClick(item) }
+        holder.itemView.setOnClickListener { onItemClick(item) }
+    }
+
+    override fun onViewRecycled(holder: ImageSliderViewHolder) {
+        super.onViewRecycled(holder)
+        try {
+            holder.videoView.stopPlayback()
+        } catch (_: Throwable) {}
     }
 
     override fun getItemCount(): Int = items.size
 
     class ImageSliderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.imageView)
+        val videoView: VideoView = view.findViewById(R.id.videoView)
         val titleView: TextView = view.findViewById(R.id.titleView)
         val subtitleView: TextView = view.findViewById(R.id.subtitleView)
     }

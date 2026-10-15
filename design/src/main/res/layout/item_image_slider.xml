@@ -9,12 +9,19 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/rounded_corners"
-        android:scaleType="fitCenter" />
+        android:scaleType="centerCrop"
+        android:background="@color/bg_soft"
+        android:contentDescription="" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:background="@drawable/banner_bottom_scrim" />
 
@@ -25,7 +32,7 @@
         android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="12dp">
+        android:paddingBottom="14dp">
 
         <TextView
             android:id="@+id/titleView"
