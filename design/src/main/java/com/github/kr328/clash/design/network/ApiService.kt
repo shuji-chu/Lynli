@@ -365,12 +365,10 @@ data class QueryOrderData(
 }
 
 data class SaveOrderRequest(
-//    period=half_year_price&plan_id=2&coupon_code=
-
-val  period: String,
-val  plan_id: Int,
-val  coupon_code: String?
-
+    val period: String,
+    val plan_id: Int,
+    val coupon_code: String?,
+    val payment: String = "alipay"
 )
 
 
