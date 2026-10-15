@@ -1,38 +1,21 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable
-            name="self"
-            type="com.github.kr328.clash.design.ConfigOrderDesign" />
-
+        <variable name="self" type="com.github.kr328.clash.design.ConfigOrderDesign" />
         <import type="android.view.View" />
-
-        <variable
-            name="configorder_planname"
-            type="String" />
-        <variable
-            name="configorder_planname2"
-            type="String" />
-        <variable
-            name="configorder_plantype"
-            type="String" />
-        <variable
-            name="configorder_plantype2"
-            type="String" />
-        <variable
-            name="configorder_plantransfer"
-            type="String" />
-        <variable
-            name="configorder_planamount"
-            type="String" />
-
+        <variable name="configorder_planname" type="String" />
+        <variable name="configorder_planname2" type="String" />
+        <variable name="configorder_plantype" type="String" />
+        <variable name="configorder_plantype2" type="String" />
+        <variable name="configorder_plantransfer" type="String" />
+        <variable name="configorder_planamount" type="String" />
         <import type="com.github.kr328.clash.design.ConfigOrderDesign.Request" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_page"
+        android:background="#EEF4FF"
         android:paddingStart="@{self.surface.insets.start}"
         android:paddingEnd="@{self.surface.insets.end}">
 
@@ -40,7 +23,8 @@
             android:id="@+id/scroll_root"
             android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,10 +32,10 @@
                 android:orientation="vertical"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingTop="64dp"
+                android:paddingTop="16dp"
                 android:paddingBottom="24dp">
 
-                <!-- 顶部：套餐名 + 价格 + 流量 -->
+                <!-- 顶部蓝卡：套餐名 + 流量 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,42 +47,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="20dp">
+                        android:padding="18dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="订阅套餐"
-                            android:textColor="#CCFFFFFF"
+                            android:textColor="#B3FFFFFF"
                             android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/tvTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="6dp"
                             android:text="@{configorder_planname2}"
                             android:textColor="#FFFFFF"
-                            android:textSize="28sp"
+                            android:textSize="26sp"
                             android:textStyle="bold"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/order_total_top"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/order_total_top"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@{configorder_plantransfer}"
-                                android:textColor="#FFFFFF"
-                                android:textSize="15sp"
-                                android:textStyle="bold"/>
-                        </LinearLayout>
+                            android:layout_marginTop="6dp"
+                            android:text="@{configorder_plantransfer}"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="14sp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -108,8 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     app:cardCornerRadius="14dp"
-                    app:cardElevation="1dp"
-                    app:cardBackgroundColor="@color/bg_card">
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -121,7 +96,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="选择周期"
-                            android:textColor="@color/text_primary"
+                            android:textColor="#1F2937"
                             android:textSize="15sp"
                             android:textStyle="bold"/>
 
@@ -129,13 +104,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
+                            android:fillViewport="true"
                             android:scrollbars="none">
 
                             <LinearLayout
                                 android:id="@+id/container"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal" />
+                                android:orientation="horizontal"
+                                android:gravity="center" />
                         </HorizontalScrollView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -146,43 +123,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     app:cardCornerRadius="14dp"
-                    app:cardElevation="1dp"
-                    app:cardBackgroundColor="@color/bg_card">
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:padding="18dp">
+                        android:padding="16dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="应付总额"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="13sp"/>
-
-                            <TextView
-                                android:id="@+id/product_name_bottom"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:text=""
-                                android:visibility="gone"/>
-                        </LinearLayout>
+                            android:text="应付总额"
+                            android:textColor="#64748B"
+                            android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/order_total2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#E53935"
-                            android:textSize="28sp"
+                            android:textSize="26sp"
                             android:textStyle="bold"
                             android:text="@{configorder_planamount}"/>
                     </LinearLayout>
@@ -192,14 +156,15 @@
                 <Button
                     android:id="@+id/confirm_payment_button"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="52dp"
                     android:layout_marginTop="20dp"
                     android:text="立即支付"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#2E5BFF"
-                    app:cornerRadius="27dp"
+                    app:cornerRadius="26dp"
+                    android:stateListAnimator="@null"
                     android:onClick="@{() -> self.request(Request.SubmitOrder)}"/>
             </LinearLayout>
         </ScrollView>

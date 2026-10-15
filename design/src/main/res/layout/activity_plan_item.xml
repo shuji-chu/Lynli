@@ -1,40 +1,32 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 <FrameLayout
     android:id="@+id/planitemFrameLayout"
-    android:layout_width="100dp"
-    android:layout_height="60dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_width="108dp"
+    android:layout_height="64dp"
+    android:layout_marginEnd="12dp"
     android:background="@drawable/card_border">
+
     <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
 
-        <!-- 上文本 -->
         <TextView
             android:id="@+id/typeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="15sp"
+            android:textColor="#1F2937"
+            android:textStyle="bold"/>
 
-        <!-- 下文本 -->
         <TextView
             android:id="@+id/amountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:textStyle="normal"/>
-
+            android:layout_marginTop="2dp"
+            android:textSize="13sp"
+            android:textColor="#2E5BFF"/>
     </LinearLayout>
 </FrameLayout>
-
 </layout>
