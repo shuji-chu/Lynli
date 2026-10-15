@@ -33,6 +33,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
     public  var trade_no:String = ""
     private  var couponCode: String = ""
     private  var originalAmountCents: Long = 0L
+    private  var paymentMethod: String = "alipay"
     enum class Request {
         SubmitOrder,
     }
@@ -47,6 +48,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
     init {
         binding.self = this
         binding.activityBarLayout.applyFrom(context)
+        selectPayment("alipay")
     }
 
     fun request(request: Request) {
@@ -58,7 +60,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
             CoroutineScope(Dispatchers.IO).launch {
                 val apiService = ApiClient.retrofit.create(ApiService::class.java)
 
-                safeApiRequestCall { apiService.saveOrder(PreferenceManager.loginauthData, SaveOrderRequest("${currentChoose?.get("period")}",(currentChoose?.get("plan_id") ?: "0").toInt(),couponCode))}.let {
+                safeApiRequestCall { apiService.saveOrder(PreferenceManager.loginauthData, SaveOrderRequest("${currentChoose?.get("period")}",(currentChoose?.get("plan_id") ?: "0").toInt(),couponCode,paymentMethod))}.let {
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
@@ -109,7 +111,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
         binding.configorderPlanname2 = "${plan?.name}"
 
         val gb = ((plan?.transfer_enable ?: 0L).toDouble()) / 1024.0 / 1024.0 / 1024.0
-        binding.configorderPlantransfer = "%.0f GB".format(gb)
+        binding.configorderPlantransfer = "商品流量：%.0f GB".format(gb)
         val priceCents: Long = when {
             plan?.onetime_price != null && plan.onetime_price > 0 -> plan.onetime_price!!.toLong()
             plan?.month_price != null && plan.month_price > 0 -> plan.month_price
@@ -226,6 +228,21 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
             }
         }
 
+    }
+
+    fun selectPayment(method: String) {
+        paymentMethod = if (method == "usdt") "usdt" else "alipay"
+        val alipaySel = paymentMethod == "alipay"
+        binding.payAlipay.background = ContextCompat.getDrawable(
+            context,
+            if (alipaySel) R.drawable.pay_method_card_selected else R.drawable.pay_method_card
+        )
+        binding.payUsdt.background = ContextCompat.getDrawable(
+            context,
+            if (alipaySel) R.drawable.pay_method_card else R.drawable.pay_method_card_selected
+        )
+        binding.checkAlipay.visibility = if (alipaySel) android.view.View.VISIBLE else android.view.View.GONE
+        binding.checkUsdt.visibility = if (alipaySel) android.view.View.GONE else android.view.View.VISIBLE
     }
 
     /**

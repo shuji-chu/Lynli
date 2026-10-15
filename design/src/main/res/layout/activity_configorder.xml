@@ -5,8 +5,6 @@
         <import type="android.view.View" />
         <variable name="configorder_planname" type="String" />
         <variable name="configorder_planname2" type="String" />
-        <variable name="configorder_plantype" type="String" />
-        <variable name="configorder_plantype2" type="String" />
         <variable name="configorder_plantransfer" type="String" />
         <variable name="configorder_planamount" type="String" />
         <import type="com.github.kr328.clash.design.ConfigOrderDesign.Request" />
@@ -35,52 +33,71 @@
                 android:paddingTop="72dp"
                 android:paddingBottom="32dp">
 
-                <!-- 顶部套餐卡 -->
+                <!-- 顶部订阅套餐卡 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="2dp"
-                    app:cardBackgroundColor="@color/primary">
+                    app:cardBackgroundColor="@color/bg_card">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:paddingTop="18dp"
-                        android:paddingBottom="18dp">
+                        android:orientation="horizontal"
+                        android:padding="18dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="订阅套餐"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="@{configorder_planname}"
+                                android:textColor="@color/text_body"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="@{configorder_plantransfer}"
+                                android:textColor="@color/text_body"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="@{`应付总额：` + configorder_planamount}"
+                                android:textColor="@color/text_body"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="订阅套餐"
-                            android:textColor="@color/text_on_primary_dim"
-                            android:textSize="12sp"/>
-
-                        <TextView
-                            android:id="@+id/tvTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="@{configorder_planname2}"
-                            android:textColor="@color/white"
-                            android:textSize="24sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/order_total_top"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@{configorder_plantransfer}"
-                            android:textColor="@color/text_on_primary_dim"
-                            android:textSize="14sp"/>
+                            android:textColor="@color/danger"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:text="@{configorder_planamount}"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- 周期 + 优惠码 合并卡 -->
+                <!-- 选择周期 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -117,17 +134,27 @@
                                 android:orientation="horizontal"
                                 android:gravity="center" />
                         </HorizontalScrollView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="14dp"
-                            android:background="@color/divider"/>
+                <!-- 优惠码 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/bg_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14dp"
                             android:text="优惠码"
                             android:textColor="@color/text_primary"
                             android:textSize="15sp"
@@ -172,7 +199,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- 应付总额 -->
+                <!-- 选择支付方式 -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,33 +211,124 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:paddingStart="18dp"
-                        android:paddingEnd="18dp"
-                        android:paddingTop="18dp"
-                        android:paddingBottom="18dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="应付总额"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="14sp"/>
-
-                        <TextView
-                            android:id="@+id/order_total2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/danger"
-                            android:textSize="26sp"
-                            android:textStyle="bold"
-                            android:text="@{configorder_planamount}"/>
+                            android:text="选择支付方式"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:id="@+id/pay_alipay"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/pay_method_card_selected"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:onClick="@{() -> self.selectPayment(`alipay`)}">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:background="@drawable/ic_pay_alipay_bg"
+                                        android:gravity="center"
+                                        android:text="支"
+                                        android:textColor="@color/white"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="支付宝"
+                                        android:textColor="@color/text_primary"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"/>
+                                </LinearLayout>
+
+                                <View
+                                    android:id="@+id/check_alipay"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="top|end"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/ic_radio_checked"/>
+                            </FrameLayout>
+
+                            <Space
+                                android:layout_width="12dp"
+                                android:layout_height="match_parent"/>
+
+                            <FrameLayout
+                                android:id="@+id/pay_usdt"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/pay_method_card"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:onClick="@{() -> self.selectPayment(`usdt`)}">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:background="@drawable/ic_pay_usdt_bg"
+                                        android:gravity="center"
+                                        android:text="₮"
+                                        android:textColor="@color/white"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="USDT"
+                                        android:textColor="@color/text_primary"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"/>
+                                </LinearLayout>
+
+                                <View
+                                    android:id="@+id/check_usdt"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="top|end"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/ic_radio_checked"
+                                    android:visibility="gone"/>
+                            </FrameLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- 支付按钮 -->
+                <!-- 立即支付 -->
                 <Button
                     android:id="@+id/confirm_payment_button"
                     android:layout_width="match_parent"
