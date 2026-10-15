@@ -266,6 +266,14 @@
             android:configChanges="uiMode"
             android:exported="false" />
         <activity
+            android:name=".WalletActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
+        <activity
+            android:name=".WithdrawActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
+        <activity
             android:name=".TicketDetailActivity"
             android:configChanges="uiMode"
             android:exported="false"

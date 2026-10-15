@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_page">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/text_primary"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text="提现"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 余额卡 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#2E5BFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="22dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可提现余额"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="¥ 0.00"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_total"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="累计佣金 ¥0.00"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_done"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已提现 ¥0.00"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 提现方式 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="提现方式"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/divider"/>
+
+                    <LinearLayout
+                        android:id="@+id/row_alipay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
+
+                        <RadioButton
+                            android:id="@+id/rb_alipay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="#2E5BFF"
+                            android:checked="true"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="支付宝"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_alipay_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未绑定"
+                            android:textColor="@color/text_hint"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/row_usdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
+
+                        <RadioButton
+                            android:id="@+id/rb_usdt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="#2E5BFF"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="USDT-TRC20"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_usdt_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未绑定"
+                            android:textColor="@color/text_hint"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 提现金额 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="提现金额"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/divider"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¥"
+                            android:textColor="@color/text_primary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"/>
+
+                        <EditText
+                            android:id="@+id/et_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:background="@null"
+                            android:hint="请输入提现金额"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_hint"
+                            android:textSize="22sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="最低 100 元起提 · 手续费 8%"
+                        android:textColor="@color/text_hint"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_fee_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text=""
+                        android:textColor="#2E5BFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="22dp"
+                android:text="申请提现"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:backgroundTint="#2E5BFF"
+                app:cornerRadius="24dp"/>
+
+            <!-- 提现记录 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="提现记录"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:id="@+id/container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"/>
+
+                    <TextView
+                        android:id="@+id/tv_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="暂无提现记录"
+                        android:textColor="@color/text_hint"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
