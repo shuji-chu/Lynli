@@ -179,16 +179,6 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             }
         } catch (_: Throwable) {}
 
-        try {
-            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_my_plan)?.setOnClickListener {
-                try {
-                    val _i = android.content.Intent()
-                    _i.setClassName(context, "com.github.kr328.clash.TrafficDetailActivity")
-                    context.startActivity(_i)
-                } catch (_: Throwable) {}
-            }
-        } catch (_: Throwable) {}
-
         if ((APIGlobalObject.subData?.plan?.id ?:0) > 0){
 
             binding.accountPlanname =  APIGlobalObject.subData?.plan?.name ?: ""
