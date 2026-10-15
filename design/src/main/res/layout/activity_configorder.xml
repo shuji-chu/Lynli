@@ -5,6 +5,8 @@
         <import type="android.view.View" />
         <variable name="configorder_planname" type="String" />
         <variable name="configorder_planname2" type="String" />
+        <variable name="configorder_plantype" type="String" />
+        <variable name="configorder_plantype2" type="String" />
         <variable name="configorder_plantransfer" type="String" />
         <variable name="configorder_planamount" type="String" />
         <import type="com.github.kr328.clash.design.ConfigOrderDesign.Request" />
