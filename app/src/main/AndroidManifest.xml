@@ -235,6 +235,13 @@
             />
 
         <activity
+            android:name=".CashierActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="收银台"
+            />
+
+        <activity
             android:name=".ChatActivity"
             android:configChanges="uiMode"
             android:exported="false"

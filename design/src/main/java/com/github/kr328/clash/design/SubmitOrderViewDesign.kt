@@ -82,12 +82,17 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                             val info = d?.pay_info ?: ""
                             val shown = payUrl.ifEmpty { qrUrl }
 
-                            if (shown.startsWith("http://") || shown.startsWith("https://")) {
-                                val dlg = PaymentWebDialog(context, shown) {
-                                    pollPaid(tradeNo, null)
-                                }
-                                dlg.show()
-                                pollPaid(tradeNo, dlg)
+                            if (qrUrl.isNotEmpty() || info.isNotEmpty() || shown.startsWith("http")) {
+                                val it = android.content.Intent()
+                                it.setClassName(context.packageName, "com.github.kr328.clash.CashierActivity")
+                                it.putExtra("trade_no", tradeNo)
+                                it.putExtra("method", method)
+                                it.putExtra("amount", d?.amount ?: "")
+                                it.putExtra("qrcode", qrUrl)
+                                it.putExtra("pay_info", info)
+                                it.putExtra("payurl", payUrl)
+                                it.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(it)
                             } else if (qrUrl.startsWith("tron:")) {
                                 context.showCustomDialog(
                                     title = "USDT 支付",
