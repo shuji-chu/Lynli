@@ -142,7 +142,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="22dp">
+                        android:padding="20dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -151,14 +151,12 @@
                             android:gravity="center_vertical">
 
                             <TextView
-                                android:id="@+id/traffic_used_text"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="已用0.0GB/50GB"
-                                android:textColor="@color/text_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:text="流量使用"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp"/>
 
                             <TextView
                                 android:id="@+id/traffic_percent_text"
@@ -166,29 +164,78 @@
                                 android:layout_height="wrap_content"
                                 android:text="0%"
                                 android:textColor="@color/primary"
-                                android:textSize="20sp"
-                                android:textStyle="bold"/>
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:background="@drawable/pill_bg_primary"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"/>
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/traffic_month_text"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="本月流量0%"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"/>
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:gravity="bottom">
+
+                            <TextView
+                                android:id="@+id/traffic_used_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.00 GB"
+                                android:textColor="@color/text_primary"
+                                android:textSize="28sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/traffic_total_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginBottom="4dp"
+                                android:text="/ 0 GB"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
 
                         <ProgressBar
                             android:id="@+id/traffic_progress"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="8dp"
-                            android:layout_marginTop="14dp"
+                            android:layout_marginTop="12dp"
                             android:max="100"
                             android:progress="0"
-                            android:progressTint="@color/primary"
+                            android:progressTint="@color/progress_ok"
                             android:progressBackgroundTint="@color/progress_bg"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/traffic_month_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="本月流量 0%"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"/>
+
+                            <TextView
+                                android:id="@+id/traffic_expire_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_hint"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

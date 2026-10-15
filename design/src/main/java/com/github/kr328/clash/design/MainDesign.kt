@@ -146,26 +146,35 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         }
     }
 
-    suspend fun setUserTraffic(usedBytes: Long, totalBytes: Long) {
+    suspend fun setUserTraffic(usedBytes: Long, totalBytes: Long, expireText: String? = null) {
         withContext(Dispatchers.Main) {
             val usedGb = usedBytes / 1024.0 / 1024.0 / 1024.0
             val totalGb = totalBytes / 1024.0 / 1024.0 / 1024.0
             val percent = if (totalBytes > 0) ((usedBytes.toDouble() / totalBytes) * 100).toInt().coerceIn(0, 100) else 0
             try {
-                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_used_text)
-                    ?.text = String.format("已用 %.2fGB / %.0fGB", usedGb, totalGb)
-                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_percent_text)
+                binding.root.findViewById<android.widget.TextView>(R.id.traffic_used_text)
+                    ?.text = String.format("%.2f GB", usedGb)
+                binding.root.findViewById<android.widget.TextView>(R.id.traffic_total_text)
+                    ?.text = String.format("/ %.0f GB", totalGb)
+                binding.root.findViewById<android.widget.TextView>(R.id.traffic_percent_text)
                     ?.text = "${percent}%"
-                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.traffic_month_text)
+                binding.root.findViewById<android.widget.TextView>(R.id.traffic_month_text)
                     ?.text = "本月流量 ${percent}%"
-                binding.root.findViewById<android.widget.ProgressBar>(com.github.kr328.clash.design.R.id.traffic_progress)
-                    ?.progress = percent
-            } catch (e: Throwable) {
-                println("[setUserTraffic] err: " + e.message)
-            }
-            binding.trafficUsed = String.format("%.2f GB", usedGb)
-            binding.trafficTotal = String.format("%.2f GB", totalGb)
-            binding.trafficPercent = percent
+                if (!expireText.isNullOrEmpty()) {
+                    binding.root.findViewById<android.widget.TextView>(R.id.traffic_expire_text)
+                        ?.text = expireText
+                }
+                val pb = binding.root.findViewById<android.widget.ProgressBar>(R.id.traffic_progress)
+                pb?.progress = percent
+                val colorHex = when {
+                    percent >= 80 -> "#E53935"
+                    percent >= 50 -> "#F59E0B"
+                    else -> "#22C55E"
+                }
+                pb?.progressTintList = android.content.res.ColorStateList.valueOf(
+                    android.graphics.Color.parseColor(colorHex)
+                )
+            } catch (e: Throwable) { println("[setUserTraffic] err: " + e.message) }
         }
     }
 

@@ -35,4 +35,7 @@
     <color name="success_deep">#2A9843</color>
     <color name="btn_disabled">#D1D5D9</color>
     <color name="login_gradient_start">#2E4A8E</color>
+    <color name="progress_ok">#22C55E</color>
+    <color name="progress_warn">#F59E0B</color>
+    <color name="progress_danger">#E53935</color>
 </resources>

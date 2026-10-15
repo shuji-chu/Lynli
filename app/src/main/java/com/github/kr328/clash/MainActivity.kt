@@ -63,6 +63,9 @@ import kotlin.concurrent.timer
 
 class MainActivity : BaseActivity<MainDesign>() {
 
+    private var trafficTimer: kotlinx.coroutines.Job? = null
+    private var lastForeground = false
+
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -928,6 +931,32 @@ class MainActivity : BaseActivity<MainDesign>() {
         return withContext(Dispatchers.IO) {
             packageManager.getPackageInfo(packageName, 0).versionName// + "\n" + Bridge.nativeCoreVersion().replace("_", "-")
 
+        }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        if (!lastForeground) {
+            lastForeground = true
+            startTrafficPolling()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        lastForeground = false
+        trafficTimer?.cancel()
+        trafficTimer = null
+    }
+
+    private fun startTrafficPolling() {
+        trafficTimer?.cancel()
+        trafficTimer = CoroutineScope(Dispatchers.IO).launch {
+            while (true) {
+                kotlinx.coroutines.delay(30_000)
+                try { performSubscrite() } catch (_: Throwable) {}
+            }
         }
     }
 }
