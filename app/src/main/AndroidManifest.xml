@@ -262,6 +262,10 @@
             android:configChanges="uiMode"
             android:exported="false" />
         <activity
+            android:name=".TrafficDetailActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
+        <activity
             android:name=".TicketDetailActivity"
             android:configChanges="uiMode"
             android:exported="false"
