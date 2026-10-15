@@ -205,6 +205,19 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         } catch (_: Throwable) {}
 
         binding.connectionButton?.setOnClickListener { request(Request.ToggleStatus) }
+
+        try {
+            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.checkin_button)?.setOnClickListener {
+                try {
+                    val url = "https://t.me/mivra_official"  // 占位，替换成真实 Mivra 链接
+                    val i = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                    context.startActivity(i)
+                } catch (e: Throwable) {
+                    android.widget.Toast.makeText(context, "无法打开，请手动前往 Mivra 机器人签到", android.widget.Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (_: Throwable) {}
+
         binding.connectionButtonLottie?.setOnClickListener { request(Request.ToggleStatus) }
         binding.trafficStats?.setOnClickListener { request(Request.OpenProxy) }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
