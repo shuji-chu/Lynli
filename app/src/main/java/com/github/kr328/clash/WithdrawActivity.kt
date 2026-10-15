@@ -189,7 +189,7 @@ class WithdrawActivity : AppCompatActivity() {
                     } catch (_: Throwable) {}
                     if (!ok) msg = "网络超时，请重试"
                 } else {
-                    val _m = body.message
+                    val _m = body?.message
                     if (!_m.isNullOrEmpty()) msg = _m
                 }
 
