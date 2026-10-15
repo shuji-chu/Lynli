@@ -350,14 +350,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="官方网页"
+                            android:text="签到群"
                             android:textColor="@color/text_primary"
                             android:textSize="13sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="咨询问题"
+                            android:text="每日签到领流量"
                             android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
                     </LinearLayout>

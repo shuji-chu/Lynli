@@ -6,7 +6,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="套餐"
-                        android:textSize="20sp"
+                        android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
 
@@ -70,9 +70,9 @@
                     android:id="@+id/subscriptionDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:text=""
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textColor="@color/text_secondary"/>
 
                 <LinearLayout
@@ -84,12 +84,12 @@
 
                     <LinearLayout
                         android:id="@+id/grouponemohtthtest"
-                        android:layout_width="120dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:paddingTop="14dp"
-                        android:paddingBottom="14dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:background="@drawable/bg_plan_price_box">
 
                         <TextView
@@ -125,33 +125,33 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="14dp"
+                        android:layout_marginStart="10dp"
                         android:text=""
-                        android:textSize="13sp"
-                        android:lineSpacingExtra="6dp"
+                        android:textSize="12sp"
+                        android:lineSpacingExtra="3dp"
                         android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/divider"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:gravity="end|center_vertical">
 
                     <TextView
                         android:id="@+id/btn_order"
                         android:layout_width="wrap_content"
-                        android:layout_height="42dp"
+                        android:layout_height="36dp"
                         android:gravity="center"
-                        android:paddingStart="28dp"
-                        android:paddingEnd="28dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
                         android:text="立即订购"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp"

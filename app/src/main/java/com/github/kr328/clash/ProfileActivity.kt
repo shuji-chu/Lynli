@@ -72,7 +72,17 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         ProfileDesign.Request.OpenBusiness -> startActivity(
                             android.content.Intent(this@ProfileActivity, BusinessActivity::class.java)
                         )
-                        ProfileDesign.Request.OpenCustomView ->{ startActivity(H5WebActivity::class.intent) }
+                        ProfileDesign.Request.OpenCustomView -> {
+                            try {
+                                val _i = android.content.Intent(
+                                    android.content.Intent.ACTION_VIEW,
+                                    android.net.Uri.parse("https://m.mivra.im/SOCKS5")
+                                )
+                                startActivity(_i)
+                            } catch (_: Throwable) {
+                                android.widget.Toast.makeText(this@ProfileActivity, "无法打开签到群，请手动前往", android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        }
                             /*try {
 
 
