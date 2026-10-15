@@ -109,18 +109,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </androidx.cardview.widget.CardView>
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp"
-                    android:layout_marginTop="4dp"
-                    app:tabGravity="center"
-                    app:tabBackground="@drawable/tab_pager_selector"
-                    android:background="@android:color/transparent"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabPaddingEnd="4dp"
-                    app:tabPaddingStart="4dp"/>
                 <!-- 流量卡 -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/traffic_stats"

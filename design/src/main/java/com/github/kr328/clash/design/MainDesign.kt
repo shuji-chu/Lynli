@@ -32,7 +32,6 @@ import com.github.kr328.clash.design.util.resolveThemedColor
 import com.github.kr328.clash.design.util.root
 import com.github.kr328.clash.service.model.AccessControlMode
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
@@ -290,7 +289,6 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         withContext(Dispatchers.Main) {
             //sart ad bannsers
             val viewPager2  = binding.adBanner
-            val tabLayout = binding.tabLayout
             // 创建图片资源列表
            /* val imageList = listOf(
                 R.drawable.ad_banner,
@@ -333,8 +331,6 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                         }
                     }
                 }
-                // 设置 TabLayoutMediator 来同步 ViewPager2 和 TabLayout
-                TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
                     // Tab 的自定义逻辑可以放在这里
                 }.attach()
 
