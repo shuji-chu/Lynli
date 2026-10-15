@@ -136,6 +136,15 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         }
     }
 
+    suspend fun setPlanInfo(planName: String, expireText: String) {
+        withContext(Dispatchers.Main) {
+            try {
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.plan_name_text)?.text = planName
+                binding.root.findViewById<android.widget.TextView>(com.github.kr328.clash.design.R.id.expire_text)?.text = expireText
+            } catch (_: Throwable) {}
+        }
+    }
+
     suspend fun setUserTraffic(usedBytes: Long, totalBytes: Long) {
         withContext(Dispatchers.Main) {
             val usedGb = usedBytes / 1024.0 / 1024.0 / 1024.0

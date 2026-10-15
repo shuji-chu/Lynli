@@ -162,6 +162,15 @@ class MainActivity : BaseActivity<MainDesign>() {
                     val _d = _resp?.data
                     if (_d != null) {
                         design?.setUserTraffic(((_d.u ?: 0) + (_d.d ?: 0)).toLong(), (_d.transfer_enable ?: 0).toLong())
+                        try {
+                            val pName = _d.plan?.name ?: "标准套餐"
+                            val exp = _d.expired_at ?: 0L
+                            val expTxt = if (exp > 0) {
+                                "到期时间：" + java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                                    .format(java.util.Date(exp * 1000L))
+                            } else "到期时间 --"
+                            design?.setPlanInfo(pName, expTxt)
+                        } catch (_: Throwable) {}
                     }
                 }
             } catch (_: Throwable) {}
@@ -190,6 +199,15 @@ class MainActivity : BaseActivity<MainDesign>() {
                             val _total = _d.transfer_enable ?: 0
                             println("[traffic-cache] used=$_used total=$_total")
                             design?.setUserTraffic(_used.toLong(), _total.toLong())
+                            try {
+                                val pName = _d.plan?.name ?: "标准套餐"
+                                val exp = _d.expired_at ?: 0L
+                                val expTxt = if (exp > 0) {
+                                    "到期时间：" + java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                                        .format(java.util.Date(exp * 1000L))
+                                } else "到期时间 --"
+                                design?.setPlanInfo(pName, expTxt)
+                            } catch (_: Throwable) {}
                         }
                     } catch (e: Throwable) {
                         println("[traffic-cache] err: " + e.message)
@@ -493,6 +511,15 @@ class MainActivity : BaseActivity<MainDesign>() {
                         val used = (d.u ?: 0) + (d.d ?: 0)
                         val total = d.transfer_enable ?: 0
                         design?.setUserTraffic(used, total)
+                        try {
+                            val pName = d.plan?.name ?: "标准套餐"
+                            val exp = d.expired_at ?: 0L
+                            val expTxt = if (exp > 0) {
+                                "到期时间：" + java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                                    .format(java.util.Date(exp * 1000L))
+                            } else "到期时间 --"
+                            design?.setPlanInfo(pName, expTxt)
+                        } catch (_: Throwable) {}
                     }
 
                     val gson = Gson()
