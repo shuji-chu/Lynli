@@ -331,8 +331,6 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                         }
                     }
                 }
-                    // Tab 的自定义逻辑可以放在这里
-                }.attach()
 
                 // 3 秒自动轮播
                 kotlinx.coroutines.GlobalScope.launch(kotlinx.coroutines.Dispatchers.Main) {
