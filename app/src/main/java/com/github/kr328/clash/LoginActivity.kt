@@ -312,23 +312,21 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 }else{
-                    // Handle error response, even if it's 422
                     try {
-                        val errorResponse = it?.errorBody()?.string()  ?: ""
-                        print(errorResponse)
-                        val errorJson = JSONObject(errorResponse)
-                        val message = errorJson.optString("message")
-                        // Process the error message or show it to the user
-                        if (!message.isNullOrEmpty()) {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(this@LoginActivity, "登录失败：${message}", Toast.LENGTH_LONG).show()
-                            }
+                        val errorResponse = it?.errorBody()?.string() ?: ""
+                        var message = ""
+                        if (errorResponse.isNotEmpty()) {
+                            try {
+                                message = JSONObject(errorResponse).optString("message")
+                            } catch (_: Throwable) {}
                         }
-                        println( "Message: $message,  ")
-                    } catch (e: JSONException) {
-                        // Handle JSON parsing error
+                        if (message.isNullOrEmpty()) message = "网络异常，请检查网络后重试"
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@LoginActivity, "登录失败：${e.message}", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
+                        }
+                    } catch (_: Throwable) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@LoginActivity, "登录失败，请重试", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
