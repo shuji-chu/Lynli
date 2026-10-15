@@ -91,25 +91,19 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
     suspend fun setClashRunning(running: Boolean) {
         withContext(Dispatchers.Main) {
             binding.clashRunning = running
-            if (running){
-
-//                withContext(Dispatchers.Main){
-//                    LoadingDialog.hide()
-//                }
+            val outer = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.connection_ring_outer)
+            val inner = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.connection_ring_inner)
+            if (running) {
                 binding.trafficStats.visibility = View.VISIBLE
-//                binding.modeImg1.visibility = View.VISIBLE
-//                binding.modeImg2.visibility = View.VISIBLE
-//                binding.menuView.visibility = View.VISIBLE
                 binding.connectionButtonText.setText("点击断开")
                 binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.white))
-            }else{
-                // keep visible
-                // keep visible
+                outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer_red)
+                inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner_red)
+            } else {
                 binding.connectionButtonText.setText("点击连接")
-                binding.connectionButtonText.setTextColor(ContextCompat.getColor(context,R.color.black))
-//                binding.modeImg1.visibility = View.GONE
-//                binding.modeImg2.visibility = View.GONE
-//                binding.menuView.visibility = View.GONE
+                binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.text_primary))
+                outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer)
+                inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner)
             }
         }
     }
