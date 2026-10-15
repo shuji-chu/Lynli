@@ -154,6 +154,21 @@ class MainActivity : BaseActivity<MainDesign>() {
             val currentTime = System.currentTimeMillis()
             val cacheExpiryTime = 5 * 60 * 1000
 
+            // 大厂模式：先用缓存秒渲，再后台拉最新覆盖
+            try {
+                val _cached = PreferenceManager.cached_userSubscritedata
+                if (_cached.isNotEmpty()) {
+                    val _resp = Gson().fromJson(_cached, SubscribeResponse::class.java)
+                    val _d = _resp?.data
+                    if (_d != null) {
+                        design?.setUserTraffic(((_d.u ?: 0) + (_d.d ?: 0)).toLong(), (_d.transfer_enable ?: 0).toLong())
+                    }
+                }
+            } catch (_: Throwable) {}
+
+            // 进 APP 无条件拉一次订阅，保证首页流量卡有数据
+            try { performSubscrite() } catch (_: Throwable) {}
+
 
 // 如果缓存数据存在且未超过 10 分钟，使用缓存数据；否则，重新请求数据
             if (  PreferenceManager.cached_data != null && (currentTime - PreferenceManager.cache_timestamp) <= cacheExpiryTime)  {

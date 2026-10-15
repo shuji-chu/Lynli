@@ -117,6 +117,11 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val _api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
             val _auth = PreferenceManager.loginauthData ?: ""
             val _r = com.github.kr328.clash.network.safeApiRequestCall { _api.getSubscribe(_auth) }
+            try {
+                if (_r != null && _r.isSuccessful && _r.body() != null) {
+                    PreferenceManager.cached_userSubscritedata = Gson().toJson(_r.body())
+                }
+            } catch (_: Throwable) {}
             var _sid = _r?.body()?.data?.short_id ?: 0
             if (_sid == 0) {
                 try {
