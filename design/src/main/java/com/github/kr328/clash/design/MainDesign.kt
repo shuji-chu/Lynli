@@ -221,7 +221,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         } catch (_: Throwable) {}
 
         binding.connectionButtonLottie?.setOnClickListener { request(Request.ToggleStatus) }
-        binding.trafficStats?.setOnClickListener { try { context.startActivity(android.content.Intent(context, com.github.kr328.clash.TrafficDetailActivity::class.java)) } catch (_: Throwable) {} }
+        binding.trafficStats?.setOnClickListener { try { val _i = android.content.Intent(); _i.setClassName(context, "com.github.kr328.clash.TrafficDetailActivity"); context.startActivity(_i) } catch (_: Throwable) {} }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
         binding.btnSupport.setOnClickListener {
             request(Request.OpenSupport)
