@@ -88,11 +88,11 @@ class WithdrawActivity : AppCompatActivity() {
             val list = rl?.body()?.data?.list ?: emptyList()
             val bal = rl?.body()?.data?.balance ?: 0L
             val tot = rl?.body()?.data?.total ?: 0L
-            val wd = rl?.body()?.data?.withdrawn ?: 0L
+            val wdSum = rl?.body()?.data?.withdrawn ?: 0L
             withContext(Dispatchers.Main) {
                 findViewById<TextView>(R.id.tv_balance).text = "¥ %.2f".format(bal / 100.0)
                 findViewById<TextView>(R.id.tv_total).text = "累计佣金 ¥%.2f".format(tot / 100.0)
-                findViewById<TextView>(R.id.tv_done).text = "已提现 ¥%.2f".format(wd / 100.0)
+                findViewById<TextView>(R.id.tv_done).text = "已提现 ¥%.2f".format(wdSum / 100.0)
                 val container = findViewById<LinearLayout>(R.id.container)
                 val tvEmpty = findViewById<TextView>(R.id.tv_empty)
                 if (list.isEmpty()) {
