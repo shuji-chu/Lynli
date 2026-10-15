@@ -192,6 +192,29 @@
                             android:background="?android:attr/selectableItemBackground" />
                     </LinearLayout>
 
+                    <!-- 邀请码（选填） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/rounded_edittext"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp">
+
+                        <EditText
+                            android:id="@+id/login_inviteCodeEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="邀请码（选填）"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="16"
+                            android:textColorHint="#94A3B8"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
                     <Button
                         android:id="@+id/login_loginButton"
                         android:layout_width="match_parent"

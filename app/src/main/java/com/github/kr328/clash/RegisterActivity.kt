@@ -212,13 +212,16 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.loginEmailEditText.text.toString().trim()
         val password = binding.loginPasswordEditText.text.toString()
         val code = binding.loginCodeEditText.text.toString().trim()
+        val inviteCode = try {
+            binding.loginInviteCodeEditText.text.toString().trim().uppercase()
+        } catch (_: Throwable) { "" }
 
         LoadingDialog.show(this, "正在注册...")
         binding.loginLoginButton.isEnabled = false
 
         CoroutineScope(Dispatchers.IO).launch {
             val res = safeApiRequestCall {
-                apiService.registerUser(RegisterRequest(email, password, code))
+                apiService.registerUser(RegisterRequest(email, password, code, inviteCode))
             }
             withContext(Dispatchers.Main) {
                 LoadingDialog.hide()

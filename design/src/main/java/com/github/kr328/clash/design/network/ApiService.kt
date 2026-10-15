@@ -452,7 +452,8 @@ data class WithdrawItem(
 data class RegisterRequest(
     val email: String,
     val password: String,
-    val code: String
+    val code: String,
+    val invite_code: String = ""
 )
 
 data class SendCodeRequest(val email: String)
