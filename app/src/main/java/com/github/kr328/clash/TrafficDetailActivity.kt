@@ -69,6 +69,7 @@ class TrafficDetailActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.tv_used).text = String.format("%.2f GB", usedGb)
         findViewById<TextView>(R.id.tv_remain).text = String.format("%.2f GB", remainGb)
+        findViewById<TextView>(R.id.tv_total_label).text = String.format("总计 %.0f GB", totalGb)
         findViewById<TextView>(R.id.tv_total).text = String.format("%.0f GB", totalGb)
         findViewById<TextView>(R.id.tv_percent).text = "${percent.coerceIn(0, 100)}%"
 
