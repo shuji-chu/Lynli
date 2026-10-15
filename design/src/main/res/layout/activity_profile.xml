@@ -96,7 +96,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
@@ -155,7 +155,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="开通会员"
-                            android:textColor="#2E5BFF"
+                            android:textColor="@color/primary"
                             android:textSize="13sp"
                             android:textStyle="bold"/>
                         <TextView
@@ -175,7 +175,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="12dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
@@ -225,11 +225,11 @@
                         android:layout_height="42dp"
                         android:layout_marginTop="12dp"
                         android:text="购买订阅"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textAllCaps="false"
-                        android:backgroundTint="#2E5BFF"
+                        android:backgroundTint="@color/primary"
                         android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
                         app:cornerRadius="21dp"/>
                 </LinearLayout>
@@ -242,7 +242,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="12dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
@@ -300,7 +300,7 @@
                         android:paddingStart="26dp"
                         android:paddingEnd="26dp"
                         android:text="去邀请"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:background="@drawable/bg_invite_btn"
@@ -316,7 +316,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="12dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
@@ -637,7 +637,7 @@
                 android:layout_height="wrap_content"
                 android:text="我的"
                 android:textSize="12sp"
-                android:textColor="#2E5BFF"
+                android:textColor="@color/primary"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
     </LinearLayout>

@@ -97,9 +97,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="32dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#1A2547">
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/bg_card_dark">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="联系我们"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
 
@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="若以上内容未能解决您的问题，欢迎随时联系我们的客服团队"
-                        android:textColor="#98A2B3"
+                        android:textColor="@color/text_hint"
                         android:textSize="12sp"
                         android:lineSpacingExtra="4dp"/>
 
@@ -142,7 +142,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Telegram"
-                            android:textColor="#98A2B3"
+                            android:textColor="@color/text_hint"
                             android:textSize="13sp"
                             android:minWidth="90dp"/>
 
@@ -151,7 +151,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@qingtian_boss"
-                            android:textColor="#5AA8F0"
+                            android:textColor="@color/primary_light"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -167,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Mivra"
-                            android:textColor="#98A2B3"
+                            android:textColor="@color/text_hint"
                             android:textSize="13sp"
                             android:minWidth="90dp"/>
 
@@ -176,7 +176,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@yisou1"
-                            android:textColor="#5AA8F0"
+                            android:textColor="@color/primary_light"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -192,7 +192,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="邮箱"
-                            android:textColor="#98A2B3"
+                            android:textColor="@color/text_hint"
                             android:textSize="13sp"
                             android:minWidth="90dp"/>
 
@@ -201,7 +201,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="adityabhosale001@yahoo.com"
-                            android:textColor="#5AA8F0"
+                            android:textColor="@color/primary_light"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>

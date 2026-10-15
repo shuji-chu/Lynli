@@ -115,9 +115,9 @@
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:text="重试"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/white"
                             android:textSize="14sp"
-                            android:backgroundTint="#2E5BFF"/>
+                            android:backgroundTint="@color/primary"/>
                     </LinearLayout>
                 </FrameLayout>
 
@@ -225,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:text="套餐"
                     android:textSize="12sp"
-                    android:textColor="#2E5BFF"
+                    android:textColor="@color/primary"
                     android:layout_marginTop="4dp"/>
             </LinearLayout>
 

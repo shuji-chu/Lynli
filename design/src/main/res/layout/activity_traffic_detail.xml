@@ -47,7 +47,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="0.00 GB"
-                        android:textColor="#2E5BFF"
+                        android:textColor="@color/primary"
                         android:textSize="32sp"
                         android:textStyle="bold"/>
 
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
@@ -153,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="16dp">
 
                     <LinearLayout style="@style/IpRowStyle">
                         <TextView style="@style/IpLabelStyle" android:text="上传"/>
@@ -192,10 +192,10 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="24dp"
                 android:text="前往套餐页"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:backgroundTint="#2E5BFF"/>
+                android:backgroundTint="@color/primary"/>
 
         </LinearLayout>
     </ScrollView>

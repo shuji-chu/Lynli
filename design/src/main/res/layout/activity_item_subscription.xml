@@ -12,7 +12,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:descendantFocusability="blocksDescendants"
         app:cardCornerRadius="14dp"
-        app:cardElevation="1dp"
+        app:cardElevation="2dp"
         app:cardBackgroundColor="@color/bg_card">
 
         <LinearLayout
@@ -30,7 +30,7 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:text="推荐"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:visibility="gone"/>
@@ -108,7 +108,7 @@
                             android:text="0"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="#2E5BFF"/>
+                            android:textColor="@color/primary"/>
 
                         <TextView
                             android:id="@+id/onemonthpriceday"
@@ -161,10 +161,10 @@
                         android:paddingStart="22dp"
                         android:paddingEnd="22dp"
                         android:text="立即订购 ›"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        android:backgroundTint="#2E5BFF"
+                        android:backgroundTint="@color/primary"
                         android:clickable="true"
                         android:focusable="true"/>
                 </LinearLayout>

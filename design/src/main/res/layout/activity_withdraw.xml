@@ -48,9 +48,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#2E5BFF">
+                app:cardBackgroundColor="@color/primary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="可提现余额"
-                        android:textColor="#CCFFFFFF"
+                        android:textColor="@color/text_on_primary_dim"
                         android:textSize="13sp"/>
 
                     <TextView
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="¥ 0.00"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="34sp"
                         android:textStyle="bold"/>
 
@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="累计佣金 ¥0.00"
-                            android:textColor="#CCFFFFFF"
+                            android:textColor="@color/text_on_primary_dim"
                             android:textSize="12sp"/>
 
                         <TextView
@@ -95,7 +95,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="已提现 ¥0.00"
-                            android:textColor="#CCFFFFFF"
+                            android:textColor="@color/text_on_primary_dim"
                             android:textSize="12sp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
@@ -209,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout
@@ -276,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text=""
-                        android:textColor="#2E5BFF"
+                        android:textColor="@color/primary"
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:visibility="gone"/>
@@ -289,10 +289,10 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="22dp"
                 android:text="申请提现"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:backgroundTint="#2E5BFF"
+                android:backgroundTint="@color/primary"
                 app:cornerRadius="24dp"/>
 
             <!-- 提现记录 -->
@@ -301,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
                 app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/bg_card">
 
                 <LinearLayout

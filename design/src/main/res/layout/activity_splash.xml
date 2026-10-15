@@ -21,7 +21,7 @@
             android:text="Lynli"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="全球网络加速服务"
             android:textSize="13sp"
-            android:textColor="#B8C4E0"
+            android:textColor="@color/text_hint"
             android:layout_marginBottom="60dp" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="© 2024 · Lynli"
             android:textSize="12sp"
-            android:textColor="#8892B0"
+            android:textColor="@color/text_hint"
             android:gravity="center" />
 
     </LinearLayout>

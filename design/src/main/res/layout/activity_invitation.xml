@@ -74,8 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_margin="4dp"
-                    app:cardElevation="4dp"
-                    app:cardCornerRadius="6dp" >
+                    app:cardElevation="2dp"
+                    app:cardCornerRadius="14dp" >
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -315,9 +315,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:cardElevation="4dp"
+                    app:cardElevation="2dp"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="6dp" >
+                    app:cardCornerRadius="14dp" >
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -413,8 +413,8 @@
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="12dp"
                     android:gravity="center"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:background="@drawable/bg_wallet_btn"
                     android:clickable="true"
                     android:focusable="true"
@@ -422,7 +422,7 @@
                     android:drawablePadding="4dp"
                     android:drawableTint="#2E5BFF"
                     android:text="钱包"
-                    android:textColor="#2E5BFF"
+                    android:textColor="@color/primary"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
             </FrameLayout>

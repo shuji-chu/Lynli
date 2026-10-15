@@ -52,9 +52,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#2E5BFF">
+                app:cardBackgroundColor="@color/primary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lynli 商务合作"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"/>
 
@@ -76,14 +76,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="携手共赢 · 共建全球加速生态"
-                        android:textColor="#DCE8FF"
+                        android:textColor="@color/text_on_primary_dim"
                         android:textSize="13sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lynli 依托自有香港、美国、日本、新加坡、德国、英国等多地机房 + 遍布全球的动态节点，为合作伙伴提供稳定可靠的一站式加速服务解决方案"
-                        android:textColor="#DCE8FF"
+                        android:textColor="@color/text_on_primary_dim"
                         android:textSize="12sp"
                         android:gravity="center"
                         android:lineSpacingExtra="4dp"
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -167,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -218,7 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -269,7 +269,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -320,7 +320,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -371,7 +371,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -422,7 +422,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="18dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -507,7 +507,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@qingtian_boss"
-                            android:textColor="#2E5BFF"
+                            android:textColor="@color/primary"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -538,7 +538,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@yisou1"
-                            android:textColor="#2E5BFF"
+                            android:textColor="@color/primary"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -569,7 +569,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="adityabhosale001@yahoo.com"
-                            android:textColor="#2E5BFF"
+                            android:textColor="@color/primary"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
