@@ -12,6 +12,8 @@ plugins {
 }
 
 dependencies {
+
+    implementation("com.google.zxing:core:3.5.3")
     compileOnly(project(":hideapi"))
     implementation(project(":core"))
     implementation(project(":service"))

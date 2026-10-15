@@ -102,6 +102,20 @@ class InvitationDesign  (context: Context) : Design<InvitationDesign.Request>(co
             }
         } catch (_: Throwable) {}
 
+        try {
+            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_poster)?.setOnClickListener {
+                try {
+                    val _code = firstLink.ifEmpty { "" }
+                    val _i = android.content.Intent()
+                    _i.setClassName(context, "com.github.kr328.clash.PosterActivity")
+                    _i.putExtra("invite_code", _code)
+                    context.startActivity(_i)
+                } catch (e: Throwable) {
+                    android.widget.Toast.makeText(context, "生成失败: " + e.message, android.widget.Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (_: Throwable) {}
+
         binding.shareLinkButton.setOnClickListener {
 
             showDiag(firstLink)

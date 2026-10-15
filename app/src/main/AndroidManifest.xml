@@ -270,6 +270,10 @@
             android:configChanges="uiMode"
             android:exported="false" />
         <activity
+            android:name=".PosterActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
+        <activity
             android:name=".WithdrawActivity"
             android:configChanges="uiMode"
             android:exported="false" />
