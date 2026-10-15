@@ -207,15 +207,17 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         binding.connectionButton?.setOnClickListener { request(Request.ToggleStatus) }
 
         try {
-            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.checkin_button)?.setOnClickListener {
+            val _openCheckin = android.view.View.OnClickListener {
                 try {
-                    val url = "https://t.me/mivra_official"  // 占位，替换成真实 Mivra 链接
+                    val url = "https://m.mivra.im/MTProxybot"
                     val i = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
                     context.startActivity(i)
                 } catch (e: Throwable) {
                     android.widget.Toast.makeText(context, "无法打开，请手动前往 Mivra 机器人签到", android.widget.Toast.LENGTH_SHORT).show()
                 }
             }
+            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.checkin_card)?.setOnClickListener(_openCheckin)
+            binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.checkin_button)?.setOnClickListener(_openCheckin)
         } catch (_: Throwable) {}
 
         binding.connectionButtonLottie?.setOnClickListener { request(Request.ToggleStatus) }
