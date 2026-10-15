@@ -436,7 +436,10 @@ data class WithdrawListResponse(
     val status: String?
 )
 data class WithdrawListData(
-    val list: List<WithdrawItem>?
+    val list: List<WithdrawItem>?,
+    val balance: Long? = 0,
+    val total: Long? = 0,
+    val withdrawn: Long? = 0
 )
 data class WithdrawItem(
     val id: Int?,
