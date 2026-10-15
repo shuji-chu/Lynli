@@ -220,18 +220,36 @@
                         android:progressTint="#2E5BFF"
                         android:progressBackgroundTint="#E0E9FF"/>
 
-                    <Button
-                        android:layout_width="140dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="购买订阅"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13sp"
-                        android:textAllCaps="false"
-                        android:backgroundTint="#2E5BFF"
-                        android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
-                        app:cornerRadius="20dp"/>
+                        android:orientation="horizontal"
+                        android:gravity="end">
+
+                        <Button
+                            android:id="@+id/btn_my_plan"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:text="我的套餐"
+                            android:textColor="#2E5BFF"
+                            android:textSize="13sp"
+                            android:textAllCaps="false"
+                            android:backgroundTint="#EAF0FF"
+                            app:cornerRadius="20dp"/>
+
+                        <Button
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:text="购买订阅"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp"
+                            android:textAllCaps="false"
+                            android:backgroundTint="#2E5BFF"
+                            android:onClick="@{() -> self.request(Request.OpenBuyPlan)}"
+                            app:cornerRadius="20dp"/>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
