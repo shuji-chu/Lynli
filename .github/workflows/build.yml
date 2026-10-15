@@ -92,6 +92,9 @@ jobs:
             --ks-pass "pass:$KS_PASS" \
             --ks-key-alias "$KEY_ALIAS" \
             --key-pass "pass:$KEY_PASS" \
+            --v1-signing-enabled true \
+            --v2-signing-enabled true \
+            --v3-signing-enabled true \
             --out app/build/outputs/apk/alpha/release/Lynli.apk \
             "$UNSIGNED"
 
