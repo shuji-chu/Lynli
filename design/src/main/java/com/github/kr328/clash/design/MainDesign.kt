@@ -59,6 +59,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         OpenSupport,
         OpenModeDirect,
         OpenRedeem,
+        OpenNotice,
         OpenChangeMode,
         OpenModeGlobal,
         OpenModeRule,
@@ -238,6 +239,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         binding.connectionButtonLottie?.setOnClickListener { request(Request.ToggleStatus) }
         binding.trafficStats?.setOnClickListener { try { val _i = android.content.Intent(); _i.setClassName(context, "com.github.kr328.clash.TrafficDetailActivity"); context.startActivity(_i) } catch (_: Throwable) {} }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
+        binding.btnNotice?.setOnClickListener { request(Request.OpenNotice) }
         binding.btnSupport.setOnClickListener {
             request(Request.OpenSupport)
         }

@@ -78,6 +78,23 @@
                         android:layout_weight="1"/>
 
                     <FrameLayout
+                        android:id="@+id/btn_notice"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_bell_btn"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_bell"
+                            app:tint="@color/icon_default"/>
+                    </FrameLayout>
+
+                    <FrameLayout
                         android:id="@+id/btn_redeem"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
@@ -89,8 +106,8 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_bell"
-                            app:tint="@color/icon_default"/>
+                            android:src="@drawable/ic_ticket_24"
+                            app:tint="@color/primary"/>
                     </FrameLayout>
                 </LinearLayout>
 

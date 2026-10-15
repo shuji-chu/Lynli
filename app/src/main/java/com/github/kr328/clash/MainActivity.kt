@@ -333,6 +333,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(GongdanActivity::class.intent)
                             MainDesign.Request.OpenRedeem ->
                                 startActivity(android.content.Intent(this@MainActivity, RedeemActivity::class.java))
+                            MainDesign.Request.OpenNotice ->
+                                startActivity(android.content.Intent(this@MainActivity, NoticeActivity::class.java))
 
                             MainDesign.Request.OpenModeDirect ->
 

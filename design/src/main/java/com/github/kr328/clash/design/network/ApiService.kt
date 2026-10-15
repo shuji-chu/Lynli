@@ -111,6 +111,12 @@ interface ApiService {
     @POST("user/ticket/reply")
     suspend fun replyTicket(@Header("Authorization") auth_data: String,@Body request: MutableMap<String, String>): Response<PublicResponse>
 
+    @POST("user/redeem")
+    suspend fun redeemCode(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<RedeemResponse>
+
+    @GET("user/notices")
+    suspend fun getNotices(@Header("Authorization") auth_data: String): Response<NoticesResponse>
+
 }
 
 
@@ -401,6 +407,32 @@ data class PublicResponse(
     val data: String?,
     val message: String?,
     val status: String?
+)
+
+
+data class RedeemData(
+    val reward_gb: Double? = null,
+    val reward_days: Int? = null
+)
+
+data class RedeemResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: RedeemData? = null
+)
+
+data class NoticeData(
+    val id: Int? = null,
+    val type: String? = null,
+    val title: String? = null,
+    val content: String? = null,
+    val created_at: Long? = null
+)
+
+data class NoticesResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: List<NoticeData>? = null
 )
 
 data class SubmitOrderResponse(

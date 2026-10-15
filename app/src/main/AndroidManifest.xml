@@ -235,6 +235,13 @@
             />
 
         <activity
+            android:name=".NoticeActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="公告"
+            />
+
+        <activity
             android:name=".GongdanActivity"
             android:configChanges="uiMode"
             android:exported="false"
