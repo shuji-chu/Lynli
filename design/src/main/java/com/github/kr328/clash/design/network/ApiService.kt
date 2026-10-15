@@ -114,6 +114,12 @@ interface ApiService {
     @POST("user/redeem")
     suspend fun redeemCode(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<RedeemResponse>
 
+    @POST("user/chat/send")
+    suspend fun chatSend(@Header("Authorization") auth_data: String, @Body request: Map<String, String>): Response<ChatSendResponse>
+
+    @GET("user/chat/history")
+    suspend fun chatHistory(@Header("Authorization") auth_data: String, @Query("since") since: Long): Response<ChatHistoryResponse>
+
     @GET("user/notices")
     suspend fun getNotices(@Header("Authorization") auth_data: String): Response<NoticesResponse>
 
@@ -409,6 +415,36 @@ data class PublicResponse(
     val status: String?
 )
 
+
+data class ChatMessageData(
+    val id: Int? = null,
+    val ticket_id: Int? = null,
+    val sender: String? = null,
+    val content: String? = null,
+    val created_at: Long? = null
+)
+
+data class ChatSendData(
+    val room_id: Int? = null,
+    val created_at: Long? = null
+)
+
+data class ChatSendResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: ChatSendData? = null
+)
+
+data class ChatHistoryData(
+    val room_id: Int? = null,
+    val messages: List<ChatMessageData>? = null
+)
+
+data class ChatHistoryResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: ChatHistoryData? = null
+)
 
 data class RedeemData(
     val reward_gb: Double? = null,

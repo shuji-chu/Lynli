@@ -235,6 +235,13 @@
             />
 
         <activity
+            android:name=".ChatActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="在线客服"
+            />
+
+        <activity
             android:name=".NoticeActivity"
             android:configChanges="uiMode"
             android:exported="false"

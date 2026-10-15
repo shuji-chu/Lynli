@@ -87,6 +87,28 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
     }
 
     override fun onCreate() {
+        // 标题改"客服与工单"
+        mainBinding?.activityBarLayout?.findViewById<android.widget.TextView>(
+            com.github.kr328.clash.design.R.id.activity_bar_title_view
+        )?.text = "客服与工单"
+
+        // 左上角"对话客服"按钮
+        val chatBtn = Button(this).apply {
+            text = "对话客服"
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.TOP or Gravity.START
+            ).apply {
+                marginStart = 180
+                topMargin = 16
+            }
+            setOnClickListener {
+                startActivity(Intent(this@GongdanActivity, ChatActivity::class.java))
+            }
+        }
+        mainBinding?.activityBarLayout?.addView(chatBtn)
+
         // Create the top-right icon
         val iconView = Button(this)
         iconView.setText("新建工单")
@@ -95,8 +117,8 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
             FrameLayout.LayoutParams.WRAP_CONTENT,
             Gravity.TOP or Gravity.END
         ).apply {
-            marginEnd = 16  // Add margin to the right
-            topMargin = 16  // Add margin to the top
+            marginEnd = 16
+            topMargin = 16
         }
         // Set the background tint programmatically
   /*      ViewCompat.setBackgroundTintList(
