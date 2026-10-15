@@ -48,7 +48,7 @@
                 android:orientation="vertical"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingTop="84dp"
+                android:paddingTop="16dp"
                 android:paddingBottom="24dp">
 
                 <!-- 顶部：套餐名 + 价格 + 流量 -->
