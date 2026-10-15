@@ -71,8 +71,7 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
         input.forEach { char ->
             when {
                 char.isWhitespace() -> {
-                    // 编码空格为 %20
-                    encoded.append("")
+                    encoded.append("%20")
                 }
                 char.isLetterOrDigit() || char.toInt() in 0x4E00..0x9FFF -> {
                     // 保留字母、数字和中文字符
@@ -186,6 +185,10 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
                                 Toast.makeText(this@TicketDetailActivity, "发送成功", Toast.LENGTH_SHORT).show()
                                 editText.setText("")
                             }
+                            // 等 AI 回复落库（智谱响应 1-5s），两次刷新兜底
+                            kotlinx.coroutines.delay(2500)
+                            refereshData()
+                            kotlinx.coroutines.delay(4000)
                             refereshData()
                         } else {
                             withContext(Dispatchers.Main) {

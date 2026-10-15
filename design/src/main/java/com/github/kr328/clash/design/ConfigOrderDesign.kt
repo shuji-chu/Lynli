@@ -234,12 +234,12 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
     fun applyCoupon() {
         val code = binding.couponInput.text?.toString()?.trim()?.uppercase() ?: ""
         if (code.isEmpty()) {
-            showToast("请输入优惠码", ToastDuration.Short)
+            CoroutineScope(Dispatchers.Main).launch { showToast("请输入优惠码", ToastDuration.Short) }
             return
         }
         val choose = currentChoose
         if (choose == null) {
-            showToast("请先选择周期", ToastDuration.Short)
+            CoroutineScope(Dispatchers.Main).launch { showToast("请先选择周期", ToastDuration.Short) }
             return
         }
         LoadingDialog.show(context, "校验中...")
