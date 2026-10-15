@@ -10,7 +10,7 @@
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/rounded_corners"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitCenter" />
 
     <View
         android:layout_width="match_parent"
