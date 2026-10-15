@@ -401,17 +401,22 @@
                 <TextView
                     android:id="@+id/btn_wallet"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="12dp"
                     android:gravity="center"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:background="@drawable/bg_wallet_btn"
                     android:clickable="true"
                     android:focusable="true"
+                    android:drawableStart="@android:drawable/ic_menu_myplaces"
+                    android:drawablePadding="4dp"
+                    android:drawableTint="#2E5BFF"
                     android:text="钱包"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"/>
+                    android:textColor="#2E5BFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
             </FrameLayout>
         </com.github.kr328.clash.design.view.ActivityBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
