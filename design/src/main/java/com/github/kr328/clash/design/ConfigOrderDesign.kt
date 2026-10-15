@@ -16,6 +16,7 @@ import com.github.kr328.clash.network.ApiService
 import com.github.kr328.clash.network.ConfigResponse
 import com.github.kr328.clash.network.PlanData
 import com.github.kr328.clash.network.SaveOrderRequest
+import com.github.kr328.clash.network.PayOrderRequest
 import com.github.kr328.clash.network.CouponCheckRequest
 import com.github.kr328.clash.network.SubmitOrderResponse
 import com.github.kr328.clash.network.safeApiRequestCall
@@ -68,8 +69,35 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
                     if(it != null && it.isSuccessful){
                         if (it.body()?.data != null){
                             //tradeNO 订单号 成功
-                            trade_no = it.body()?.data ?: ""
-                            requests.trySend(request)
+                            val tn = it.body()?.data ?: ""
+                            trade_no = tn
+                            // 直接拉起收银台，不再经过订单详情页
+                            try {
+                                val payResp = safeApiRequestCall {
+                                    apiService.payOrder(PreferenceManager.loginauthData, PayOrderRequest(tn, paymentMethod))
+                                }
+                                val pb = payResp?.body()
+                                if (payResp != null && payResp.isSuccessful && pb?.code == 1) {
+                                    val d = pb.data
+                                    withContext(Dispatchers.Main) {
+                                        val i = android.content.Intent()
+                                        i.setClassName(context.packageName, "com.github.kr328.clash.CashierActivity")
+                                        i.putExtra("trade_no", tn)
+                                        i.putExtra("method", paymentMethod)
+                                        i.putExtra("amount", d?.amount ?: "")
+                                        i.putExtra("qrcode", d?.qrcode ?: "")
+                                        i.putExtra("pay_info", d?.pay_info ?: "")
+                                        i.putExtra("payurl", d?.payurl ?: "")
+                                        i.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        context.startActivity(i)
+                                    }
+                                } else {
+                                    // 拉起失败时退回订单详情页
+                                    requests.trySend(request)
+                                }
+                            } catch (_: Throwable) {
+                                requests.trySend(request)
+                            }
                         }
                     }else{
                         val errorinfo =  (it?.errorBody()?.string())
