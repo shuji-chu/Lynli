@@ -188,8 +188,9 @@ class WithdrawActivity : AppCompatActivity() {
                         if (maxIdAfter > maxIdBefore) ok = true
                     } catch (_: Throwable) {}
                     if (!ok) msg = "网络超时，请重试"
-                } else if (!body.message.isNullOrEmpty()) {
-                    msg = body.message
+                } else {
+                    val _m = body.message
+                    if (!_m.isNullOrEmpty()) msg = _m
                 }
 
                 withContext(Dispatchers.Main) {
