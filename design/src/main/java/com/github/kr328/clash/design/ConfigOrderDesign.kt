@@ -41,39 +41,9 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
         get() = binding.root
 
 
-    private var paymentMethod: String = "alipay"
-
-    private fun selectPayment(m: String) {
-        paymentMethod = m
-        try {
-            val selBg = androidx.core.content.ContextCompat.getDrawable(context, R.drawable.card_border_selected)
-            val defBg = androidx.core.content.ContextCompat.getDrawable(context, R.drawable.card_border)
-            val alipayRow = binding.root.findViewById<android.view.View>(R.id.pay_row_alipay)
-            val usdtRow = binding.root.findViewById<android.view.View>(R.id.pay_row_usdt)
-            val alipayCheck = binding.root.findViewById<android.view.View>(R.id.pay_check_alipay)
-            val usdtCheck = binding.root.findViewById<android.view.View>(R.id.pay_check_usdt)
-            if (m == "alipay") {
-                alipayRow?.background = selBg
-                usdtRow?.background = defBg
-                alipayCheck?.visibility = android.view.View.VISIBLE
-                usdtCheck?.visibility = android.view.View.GONE
-            } else {
-                alipayRow?.background = defBg
-                usdtRow?.background = selBg
-                alipayCheck?.visibility = android.view.View.GONE
-                usdtCheck?.visibility = android.view.View.VISIBLE
-            }
-        } catch (_: Throwable) {}
-    }
-
     init {
         binding.self = this
         binding.activityBarLayout.applyFrom(context)
-
-        try {
-            binding.root.findViewById<android.view.View>(R.id.pay_row_alipay)?.setOnClickListener { selectPayment("alipay") }
-            binding.root.findViewById<android.view.View>(R.id.pay_row_usdt)?.setOnClickListener { selectPayment("usdt") }
-        } catch (_: Throwable) {}
     }
 
     fun request(request: Request) {
@@ -85,7 +55,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
             CoroutineScope(Dispatchers.IO).launch {
                 val apiService = ApiClient.retrofit.create(ApiService::class.java)
 
-                safeApiRequestCall { apiService.saveOrder(PreferenceManager.loginauthData, SaveOrderRequest("${currentChoose?.get("period")}",(currentChoose?.get("plan_id") ?: "0").toInt(),"", paymentMethod))}.let {
+                safeApiRequestCall { apiService.saveOrder(PreferenceManager.loginauthData, SaveOrderRequest("${currentChoose?.get("period")}",(currentChoose?.get("plan_id") ?: "0").toInt(),""))}.let {
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
