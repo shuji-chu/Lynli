@@ -129,7 +129,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="12dp"
-                        android:background="#2A3654"/>
+                        android:background="@color/bg_card_dark"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

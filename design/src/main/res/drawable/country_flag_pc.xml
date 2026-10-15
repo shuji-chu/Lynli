@@ -14,18 +14,18 @@
         android:translateY="440.125">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <path
         android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <group
         android:rotation="-10.3"
         android:translateX="-42.20422"
         android:translateY="48.32664">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-30.9"
@@ -33,7 +33,7 @@
         android:translateY="163.5065">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-20.6"
@@ -41,7 +41,7 @@
         android:translateY="103.4207">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-51.5"
@@ -49,7 +49,7 @@
         android:translateY="290.8087">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-72.1"
@@ -57,7 +57,7 @@
         android:translateY="413.9536">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-61.8"
@@ -65,7 +65,7 @@
         android:translateY="353.9221">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-41.2"
@@ -73,7 +73,7 @@
         android:translateY="226.6475">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="87.3"
@@ -83,7 +83,7 @@
         android:translateY="517.1934">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="66.7"
@@ -93,7 +93,7 @@
         android:translateY="587.3257">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="77"
@@ -103,7 +103,7 @@
         android:translateY="557.0743">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="46.1"
@@ -113,7 +113,7 @@
         android:translateY="615.3818">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="25.5"
@@ -123,7 +123,7 @@
         android:translateY="597.774">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="35.8"
@@ -133,7 +133,7 @@
         android:translateY="612.2823">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="56.4"
@@ -143,7 +143,7 @@
         android:translateY="606.9726">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-82.4"
@@ -151,7 +151,7 @@
         android:translateY="468.9684">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="4.9"
@@ -161,7 +161,7 @@
         android:translateY="536.754">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-5.4"
@@ -171,7 +171,7 @@
         android:translateY="492.2089">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-36.3"
@@ -181,7 +181,7 @@
         android:translateY="320.244">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-56.9"
@@ -191,7 +191,7 @@
         android:translateY="192.4416">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-46.6"
@@ -201,7 +201,7 @@
         android:translateY="256.3108">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-26"
@@ -211,7 +211,7 @@
         android:translateY="382.1808">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="15.2"
@@ -221,7 +221,7 @@
         android:translateY="572.3245">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-67.2"
@@ -231,7 +231,7 @@
         android:translateY="130.6951">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-77.5"
@@ -241,7 +241,7 @@
         android:translateY="73.06124">
         <path
             android:pathData="M419 280.3l-8.9 1.7 -1.1 9 -4.4 -8 -9 1.7 6.3 -6.6 -4.4 -8 8.2 3.9 6.3 -6.7 -1.2 9z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <path
         android:pathData="M389.2 334a161 161 0 0 1 -161.9 84.2"
@@ -249,11 +249,11 @@
         android:strokeWidth="14.6" />
     <path
         android:pathData="M420.6 307.7s-26.9 -12 -81.3 -12.2c-54.4 -0.2 -112.2 14.8 -144.1 14.4 -32 -0.4 -41.4 -0.4 -60.5 -4 0 0 28.9 9.6 59.5 12.4 30.7 2.9 101.6 -11.1 137 -13.4 36.2 -2.2 64.4 -2.2 89.4 2.8"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <path
         android:pathData="M208 323.4s20.5 1 59.8 -3.2 67.2 -10 98.2 -10.8c31 -0.8 65.3 4.6 72.5 6.5 0 0 -51.7 -1.4 -73.4 1.7 -21.7 3 -77.8 10.1 -107.4 10.8 -29.6 0.7 -39.7 -3.3 -49.7 -5m-85.9 -29.6s54.4 14.5 103.8 5c55.7 -10.9 88.5 -10.7 113.4 -10.8 25 -0.1 51 6.2 51 6.2S288 187.3 180.9 130.7c0 0 -8 90.1 -58.7 163"
         android:fillColor="#00AEC7" />
     <path
         android:pathData="M207.2 210.7s-1.5 -5.7 -9 -4.9c0 0 4.8 -2 7 -1 2 1.2 2.5 1.5 2 5.9m-17.9 -10s1.7 -0.6 2.3 -0.3c0 0 1.2 3.4 3.5 4.7 0 0 -4 -0.3 -5.8 -4.5M213 206a13.3 13.3 0 0 0 -9.3 -5.1c-1.8 0 -6.3 3.6 -6.3 3.6 -1.1 -2 -0.6 -3.6 -0.6 -3.6 2.2 0.3 4 1 4 1a9 9 0 0 0 -2.2 -3.9c4.3 -1.1 9.4 2.6 9.4 2.6a17.8 17.8 0 0 0 -11.8 -7.3c-1.2 0 -2.8 1.8 -2.8 1.8 -8.3 0 -10.5 4.6 -10.5 4.6 3.4 5.4 10.6 6.7 10.6 6.7 -12.6 -1.4 -12.3 8.4 -12.3 8.4l11.6 -6c-4.4 25.8 -22.4 37.3 -23.9 38.8 -1.4 1.5 -0.5 3.1 1.7 3.3 1.1 0.2 2.6 1.1 6.6 -3.5a70 70 0 0 0 17.5 -37.8l0.2 0.2c1.2 3 0.4 5.8 0.6 7.8 0.3 2 4.7 6.3 4.7 6.3s2.4 -4.7 2 -7.5c-0.3 -2.8 -5.8 -8.1 -5.8 -8.1 8.4 -1.5 8.9 12.4 8.9 12.4 3.2 -3.8 2.5 -7.8 2.5 -7.8s6.7 -4.9 5.2 -6.9"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
 </vector>

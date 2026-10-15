@@ -10,5 +10,5 @@
     <path
         android:pathData="M0 256h512v256H0z"
         android:fillType="evenOdd"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
 </vector>

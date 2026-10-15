@@ -19,7 +19,7 @@
         <path
             android:pathData="M0 0l300 225L0 450z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M151.4 169.8l0.1 -3.4s-1.9 -3 0.3 -6.2c0 0 -4.6 -2.5 -3.5 -6.3 0 0 -4.2 -1 -3.9 -5.6 0 0 -4.5 -0.3 -5 -4.2 0 0 -4.5 0.8 -6.4 -3 0 0 -4.4 0.9 -5.7 -2.2 0 0 -4.2 1.5 -6.8 -2.1 0 0 -4.5 1.8 -6.4 -1.6 -1.8 3.4 -6.3 1.6 -6.3 1.6 -2.5 3.6 -6.8 2 -6.8 2 -1.2 3.2 -5.6 2.3 -5.6 2.3 -2 3.7 -6.5 3 -6.5 3 -0.4 3.8 -5 4.1 -5 4.1a5.3 5.3 0 0 1 -3.7 5.7c1 3.8 -3.5 6.2 -3.5 6.2 2.2 3.2 0.3 6.2 0.3 6.2v3.2z"
             android:fillColor="#FFFF00" />
@@ -41,7 +41,7 @@
             android:fillColor="#80CFE1" />
         <path
             android:pathData="M150.3 233.7l-0.1 -17.9h2.2L125 198.1V189h2.6l-13.7 -9.8 -13.6 9.8h2.6v9.1l-27 17.7h2l0.2 17.8h72"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="1.0075"
             android:scaleY="1.0074"
@@ -54,7 +54,7 @@
         </group>
         <path
             android:pathData="M158.7 257.1v5.6h-88V257h88"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="1.0075"
             android:scaleY="1.0074"
@@ -67,7 +67,7 @@
         </group>
         <path
             android:pathData="M76.5 256.8v-19H80l-0.2 19.2 0.2 -19 -5 -0.1v-4h78.6v4h-4.9l0.1 19.2 -0.1 -19.2h3.6v19"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="1.0075"
             android:scaleY="1.0074"
@@ -150,7 +150,7 @@
         </group>
         <path
             android:pathData="M129.8 226.7l0.1 30.4H99.4l-0.1 -30.5h30.5"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="1.0075"
             android:scaleY="1.0074"
@@ -173,7 +173,7 @@
         </group>
         <path
             android:pathData="M150.6 177.6c2.6 0 3.2 10.6 3.2 15.9a24 24 0 0 1 9.3 6.5h-24.8a24 24 0 0 1 9.1 -6.5c0 -5.3 0.6 -16 3.2 -15.9"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="1.0075"
             android:scaleY="1.0074"
@@ -289,7 +289,7 @@
             android:fillColor="#FFFF00" />
         <path
             android:pathData="M79.6 185.5c-0.4 2 -2 -0.1 -2.7 -0.2 1 -1.7 1.6 0.6 2.7 0.2m4.8 2.2c-1 0.3 -1 -1 -1.5 -1.5l0.5 -0.4z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M83 187.3c0.2 0.7 -0.8 1.3 0.1 1.8l0.7 -0.7c0.8 0.2 1.6 0.4 2.1 1 0.6 1.6 -1 1.6 -1.8 2h-0.8c0.2 -0.5 -0.4 -0.7 -0.6 -1a0.8 0.8 0 0 0 -0.9 0.4c0.2 1 1.4 1.7 0.1 2.5 -1 0 -2.5 0.4 -2.4 -1 -0.4 -0.8 1 -2 -0.5 -2 -0.5 1 -1 2 -2.3 1l0.1 -1.5c1.2 0 2.7 0.2 3.3 -1.2 0.3 -1 -0.6 -1.9 0.2 -2.7 1.3 -0.3 2 0.6 2.6 1.4"
             android:fillColor="#FFFF00" />
@@ -298,6 +298,6 @@
             android:fillColor="#000000" />
         <path
             android:pathData="M81.3 190c-0.1 0.3 -0.3 0.2 -0.5 0.3l-0.2 -1c0.4 0 0.9 0.2 0.7 0.8"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
 </vector>

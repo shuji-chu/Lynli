@@ -12,7 +12,7 @@
         <path
             android:pathData="M0 0l5 3M0 3l5 -3"
             android:fillColor="#000000"
-            android:strokeColor="#FFFFFF"
+            android:strokeColor="@color/white"
             android:strokeWidth="0.6" />
     </group>
 </vector>

@@ -9,7 +9,7 @@
     <path
         android:pathData="M0 0l256 256m0 -256L0 256"
         android:fillColor="#000000"
-        android:strokeColor="#FFFFFF"
+        android:strokeColor="@color/white"
         android:strokeWidth="50" />
     <group>
         <clip-path
@@ -23,7 +23,7 @@
     <path
         android:pathData="M128 0v298.7M0 128h298.7"
         android:fillColor="#000000"
-        android:strokeColor="#FFFFFF"
+        android:strokeColor="@color/white"
         android:strokeWidth="75" />
     <path
         android:pathData="M128 0v298.7M0 128h298.7"
@@ -35,7 +35,7 @@
         android:fillColor="#012169" />
     <path
         android:pathData="M323.6 224.1c0 90.4 9.8 121.5 29.4 142.5a179.4 179.4 0 0 0 35 30 179.7 179.7 0 0 0 35 -30c19.5 -21 29.3 -52.1 29.3 -142.5 -14.2 6.5 -22.3 9.7 -34 9.5a78.4 78.4 0 0 1 -30.3 -9.5 78.4 78.4 0 0 1 -30.3 9.5c-11.7 0.2 -19.8 -3 -34 -9.5z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <group
         android:scaleX="1.96"
         android:scaleY="2.002"
@@ -47,7 +47,7 @@
         <path
             android:pathData="M282.1 91.1A0.8 0.8 0 0 1 280.5 91.1A0.8 0.8 0 0 1 282.1 91.1Z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-90.33553"
@@ -63,7 +63,7 @@
             <path
                 android:pathData="M282.1 91.1A0.8 0.8 0 0 1 280.5 91.1A0.8 0.8 0 0 1 282.1 91.1Z"
                 android:fillType="evenOdd"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
     </group>
     <group
@@ -80,7 +80,7 @@
             <path
                 android:pathData="M282.1 91.1A0.8 0.8 0 0 1 280.5 91.1A0.8 0.8 0 0 1 282.1 91.1Z"
                 android:fillType="evenOdd"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
     </group>
     <path

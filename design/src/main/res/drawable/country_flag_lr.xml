@@ -9,7 +9,7 @@
         <path
             android:pathData="M0 0h767.9v512H0z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M0 0h232.7v232.8H0z"
             android:fillType="evenOdd"
@@ -25,6 +25,6 @@
         <path
             android:pathData="M166.3 177.5l-50.7 -31 -50.4 31.3 18.7 -50.9 -50.3 -31.4 62.3 -0.4 19.3 -50.7L135 95h62.3l-50.1 31.7z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
 </vector>

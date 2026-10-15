@@ -29,7 +29,7 @@
             android:strokeWidth="20" />
         <path
             android:pathData="M0 0v420l280 -210z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M106.5 104.4L162 275.1 16.8 169.6h179.5L51 275.1z"
             android:fillColor="#D40000" />

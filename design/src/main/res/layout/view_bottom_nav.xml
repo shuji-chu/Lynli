@@ -25,7 +25,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_clash"
-            app:tint="#2E5BFF"/>
+            app:tint="@color/primary"/>
 
         <TextView
             android:id="@+id/nav_home_text"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="主页"
             android:textSize="12sp"
-            android:textColor="#2E5BFF"
+            android:textColor="@color/primary"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 
@@ -53,7 +53,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_baseline_view_list"
-            app:tint="#94A3B8"/>
+            app:tint="@color/icon_muted"/>
 
         <TextView
             android:id="@+id/nav_plan_text"
@@ -81,7 +81,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_person_raised_hand_24px"
-            app:tint="#94A3B8"/>
+            app:tint="@color/icon_muted"/>
 
         <TextView
             android:id="@+id/nav_mine_text"

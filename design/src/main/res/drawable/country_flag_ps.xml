@@ -16,7 +16,7 @@
         <path
             android:pathData="M0 164.5h987V329H0z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M0 329h987v164.5H0z"
             android:fillType="evenOdd"

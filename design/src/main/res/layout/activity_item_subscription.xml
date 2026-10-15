@@ -24,7 +24,7 @@
                 android:id="@+id/tv_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#2E5BFF"
+                android:background="@color/primary"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:paddingTop="3dp"

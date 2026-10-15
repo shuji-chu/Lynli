@@ -33,7 +33,7 @@
                     android:layout_height="40dp"
                     android:padding="8dp"
                     android:src="@drawable/ic_baseline_arrow_back"
-                    app:tint="#1F2937"
+                    app:tint="@color/icon_default"
                     android:background="?attr/selectableItemBackgroundBorderless"/>
 
                 <TextView

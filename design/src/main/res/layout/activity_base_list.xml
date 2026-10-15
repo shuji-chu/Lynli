@@ -43,14 +43,14 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_headset"
-                    app:tint="#FFFFFF"/>
+                    app:tint="@color/white"/>
 
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginStart="4dp"
                     android:src="@drawable/ic_chat_bubble"
-                    app:tint="#FFFFFF"/>
+                    app:tint="@color/white"/>
             </LinearLayout>
 
             <Space
@@ -69,7 +69,7 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_bell"
-                    app:tint="#1F2937"/>
+                    app:tint="@color/icon_default"/>
             </FrameLayout>
         </LinearLayout>
 
@@ -194,7 +194,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_home_tab"
-                    app:tint="#94A3B8"/>
+                    app:tint="@color/icon_muted"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_plan_tab"
-                    app:tint="#2E5BFF"/>
+                    app:tint="@color/primary"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -244,7 +244,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_person_tab"
-                    app:tint="#94A3B8"/>
+                    app:tint="@color/icon_muted"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

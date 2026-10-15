@@ -23,4 +23,16 @@
     <color name="danger">#E53935</color>
     <color name="success">#0A9F52</color>
     <color name="warning">#D97706</color>
+    <color name="bg_soft">#F5F7FB</color>
+    <color name="icon_default">#1F2937</color>
+    <color name="icon_muted">#94A3B8</color>
+    <color name="input_hint">#9CA3AF</color>
+    <color name="progress_bg">#E0E9FF</color>
+    <color name="avatar_service">#FF8B3D</color>
+    <color name="chat_bg">#F0F4FA</color>
+    <color name="danger_soft">#FFE0E0</color>
+    <color name="border_light">#E2E8F0</color>
+    <color name="success_deep">#2A9843</color>
+    <color name="btn_disabled">#D1D5D9</color>
+    <color name="login_gradient_start">#2E4A8E</color>
 </resources>

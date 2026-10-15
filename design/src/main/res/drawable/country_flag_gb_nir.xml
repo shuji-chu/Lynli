@@ -5,7 +5,7 @@
     android:height="512dp">
     <path
         android:pathData="M0 0h512v512H0z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <path
         android:pathData="M0 204.8H512V307.2H0V204.8Z"
         android:fillType="evenOdd"
@@ -31,7 +31,7 @@
         android:translateY="-34.1">
         <path
             android:pathData="M320 389.6l-30.9 -64.2 -70.9 5.4 40 -58.8 -40 -58.8 71 5.4 30.8 -64.1 30.9 64 70.9 -5.3 -40 58.8 40 58.8 -71 -5.4z"
-            android:fillColor="#FFFFFF"
+            android:fillColor="@color/white"
             android:strokeColor="#161111"
             android:strokeWidth="1.6" />
     </group>

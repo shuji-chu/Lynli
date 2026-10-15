@@ -14,7 +14,7 @@
         android:fillColor="#EA2839" />
     <path
         android:pathData="M312.6 274H199.4L256 85.3Z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <group
         android:rotation="36"
         android:scaleX="-1"
@@ -23,7 +23,7 @@
         android:translateY="646.1437">
         <path
             android:pathData="M312.6 274H199.4L256 85.3Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-72"
@@ -31,7 +31,7 @@
         android:translateY="432.7998">
         <path
             android:pathData="M312.6 274H199.4L256 85.3Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="72"
@@ -39,7 +39,7 @@
         android:translateY="-54.14112">
         <path
             android:pathData="M312.6 274H199.4L256 85.3Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <group
         android:rotation="-36"
@@ -49,6 +49,6 @@
         android:translateY="345.1976">
         <path
             android:pathData="M312.6 274H199.4L256 85.3Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
 </vector>

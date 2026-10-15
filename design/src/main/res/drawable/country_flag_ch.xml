@@ -10,9 +10,9 @@
     <path
         android:pathData="M96 208h320v96H96z"
         android:fillType="evenOdd"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <path
         android:pathData="M208 96h96v320h-96z"
         android:fillType="evenOdd"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
 </vector>

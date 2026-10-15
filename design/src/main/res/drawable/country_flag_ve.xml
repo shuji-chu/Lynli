@@ -23,38 +23,38 @@
                 android:translateY="-36">
                 <path
                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
                 <group
                     android:rotation="-0"
                     android:scaleX="-1">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                 </group>
                 <group
                     android:rotation="72">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                 </group>
                 <group
                     android:rotation="-72">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                 </group>
                 <group
@@ -63,25 +63,25 @@
                     android:scaleY="-1">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                     <group
                         android:rotation="72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                 </group>
@@ -93,38 +93,38 @@
                 android:translateY="-36">
                 <path
                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
                 <group
                     android:rotation="-0"
                     android:scaleX="-1">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                 </group>
                 <group
                     android:rotation="72">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                 </group>
                 <group
                     android:rotation="-72">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                 </group>
                 <group
@@ -133,25 +133,25 @@
                     android:scaleY="-1">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                     <group
                         android:rotation="72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                 </group>
@@ -165,38 +165,38 @@
                     android:translateY="-36">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                     <group
                         android:rotation="72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
                         android:rotation="-72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
@@ -205,25 +205,25 @@
                         android:scaleY="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                         <group
                             android:rotation="72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                     </group>
@@ -235,38 +235,38 @@
                     android:translateY="-36">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                     <group
                         android:rotation="72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
                         android:rotation="-72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
@@ -275,25 +275,25 @@
                         android:scaleY="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                         <group
                             android:rotation="72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                     </group>
@@ -316,38 +316,38 @@
                     android:translateY="-36">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                     <group
                         android:rotation="72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
                         android:rotation="-72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
@@ -356,25 +356,25 @@
                         android:scaleY="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                         <group
                             android:rotation="72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                     </group>
@@ -386,38 +386,38 @@
                     android:translateY="-36">
                     <path
                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                        android:fillColor="#FFFFFF" />
+                        android:fillColor="@color/white" />
                     <group
                         android:rotation="-0"
                         android:scaleX="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                     </group>
                     <group
                         android:rotation="72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
                         android:rotation="-72">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                     </group>
                     <group
@@ -426,25 +426,25 @@
                         android:scaleY="-1">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                         <group
                             android:rotation="72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                     </group>
@@ -458,38 +458,38 @@
                         android:translateY="-36">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                         <group
                             android:rotation="72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                         <group
                             android:rotation="-72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                         <group
@@ -498,25 +498,25 @@
                             android:scaleY="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                             <group
                                 android:rotation="72">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                                 <group
                                     android:rotation="-0"
                                     android:scaleX="-1">
                                     <path
                                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                        android:fillColor="#FFFFFF" />
+                                        android:fillColor="@color/white" />
                                 </group>
                             </group>
                         </group>
@@ -528,38 +528,38 @@
                         android:translateY="-36">
                         <path
                             android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                            android:fillColor="#FFFFFF" />
+                            android:fillColor="@color/white" />
                         <group
                             android:rotation="-0"
                             android:scaleX="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                         </group>
                         <group
                             android:rotation="72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                         <group
                             android:rotation="-72">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                         </group>
                         <group
@@ -568,25 +568,25 @@
                             android:scaleY="-1">
                             <path
                                 android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                android:fillColor="#FFFFFF" />
+                                android:fillColor="@color/white" />
                             <group
                                 android:rotation="-0"
                                 android:scaleX="-1">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                             </group>
                             <group
                                 android:rotation="72">
                                 <path
                                     android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                    android:fillColor="#FFFFFF" />
+                                    android:fillColor="@color/white" />
                                 <group
                                     android:rotation="-0"
                                     android:scaleX="-1">
                                     <path
                                         android:pathData="M0 -5L-1.5 -0.2l2.8 0.9z"
-                                        android:fillColor="#FFFFFF" />
+                                        android:fillColor="@color/white" />
                                 </group>
                             </group>
                         </group>

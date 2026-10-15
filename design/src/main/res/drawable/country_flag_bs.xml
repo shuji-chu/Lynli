@@ -13,7 +13,7 @@
         <path
             android:pathData="M990 506.2H9.4V27.6H990z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M990 370.6H9.4V169.2H990z"
             android:fillType="evenOdd"

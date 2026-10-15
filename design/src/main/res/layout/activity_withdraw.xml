@@ -145,7 +145,7 @@
                             android:id="@+id/rb_alipay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#2E5BFF"
+                            android:buttonTint="@color/primary"
                             android:checked="true"/>
 
                         <TextView
@@ -181,7 +181,7 @@
                             android:id="@+id/rb_usdt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#2E5BFF"/>
+                            android:buttonTint="@color/primary"/>
 
                         <TextView
                             android:layout_width="0dp"

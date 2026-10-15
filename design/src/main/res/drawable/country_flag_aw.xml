@@ -39,7 +39,7 @@
         <path
             android:pathData="M121.7 32.9L105 96.2l-63.5 17.2 63.3 16.5 16.9 63.3 16.9 -63.3 63.2 -16.9 -63.3 -16.8z"
             android:fillColor="#CC0000"
-            android:strokeColor="#FFFFFF"
+            android:strokeColor="@color/white"
             android:strokeWidth="3" />
         <path
             android:pathData="M129.2 47.1l2.4 2.4z"

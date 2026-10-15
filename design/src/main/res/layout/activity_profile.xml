@@ -57,14 +57,14 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/ic_headset"
-                        app:tint="#FFFFFF"/>
+                        app:tint="@color/white"/>
 
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginStart="4dp"
                         android:src="@drawable/ic_chat_bubble"
-                        app:tint="#FFFFFF"/>
+                        app:tint="@color/white"/>
                 </LinearLayout>
 
                 <Space
@@ -85,7 +85,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_bell"
-                        app:tint="#1F2937"/>
+                        app:tint="@color/icon_default"/>
                 </FrameLayout>
             </LinearLayout>
 
@@ -114,7 +114,7 @@
                         android:layout_height="56dp"
                         android:src="@drawable/ic_person_tab"
                         android:scaleType="centerCrop"
-                        app:tint="#2E5BFF"
+                        app:tint="@color/primary"
                         android:background="@drawable/status_container_background"/>
 
                     <LinearLayout
@@ -217,8 +217,8 @@
                         android:layout_marginTop="10dp"
                         android:max="100"
                         android:progress="@{account_ProgressValue}"
-                        android:progressTint="#2E5BFF"
-                        android:progressBackgroundTint="#E0E9FF"/>
+                        android:progressTint="@color/primary"
+                        android:progressBackgroundTint="@color/progress_bg"/>
 
                     <Button
                         android:layout_width="match_parent"
@@ -344,7 +344,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_customer_service"
-                            app:tint="#2E5BFF"/>
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -380,7 +380,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_shopping_cart_24px"
-                            app:tint="#2E5BFF"/>
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -415,7 +415,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_baseline_assignment"
-                            app:tint="#2E5BFF"/>
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -451,7 +451,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_baseline_help_center"
-                            app:tint="#2E5BFF"/>
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -486,7 +486,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_host_24px"
-                            app:tint="#2E5BFF"/>
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -521,7 +521,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_swap_driving_apps_wheel_24px"
-                            app:tint="#2E5BFF"/>
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -581,7 +581,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home_tab"
-                app:tint="#94A3B8"/>
+                app:tint="@color/icon_muted"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -606,7 +606,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_plan_tab"
-                app:tint="#94A3B8"/>
+                app:tint="@color/icon_muted"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -631,7 +631,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_person_tab"
-                app:tint="#2E5BFF"/>
+                app:tint="@color/primary"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

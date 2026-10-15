@@ -8,7 +8,7 @@
         android:fillColor="#F7E017" />
     <path
         android:pathData="M0 35.6V263l512 106.7v-121z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <path
         android:pathData="M0 156.4v106.7l512 213.3V369.8z"
         android:fillColor="#000001" />

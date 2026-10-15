@@ -23,6 +23,6 @@
         <path
             android:pathData="M181.9 288.9l-59 -13L93 327l-5 -57.8 -58.8 -13 53.1 -24 -3.2 -57.5 39 42 53.6 -24.4 -28 52.2 38 44.4z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
 </vector>

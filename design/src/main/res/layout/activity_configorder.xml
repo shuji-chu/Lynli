@@ -15,7 +15,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EEF4FF"
+        android:background="@color/bg_page"
         android:paddingStart="@{self.surface.insets.start}"
         android:paddingEnd="@{self.surface.insets.end}">
 
@@ -127,14 +127,14 @@
                                 android:layout_width="0dp"
                                 android:layout_height="44dp"
                                 android:layout_weight="1"
-                                android:background="#F5F7FB"
+                                android:background="@color/bg_soft"
                                 android:hint="输入优惠码"
                                 android:inputType="textCapCharacters"
                                 android:paddingStart="14dp"
                                 android:paddingEnd="14dp"
                                 android:singleLine="true"
                                 android:textColor="@color/text_body"
-                                android:textColorHint="#9CA3AF"
+                                android:textColorHint="@color/input_hint"
                                 android:textSize="14sp"/>
 
                             <Button

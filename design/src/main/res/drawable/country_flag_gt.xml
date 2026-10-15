@@ -8,7 +8,7 @@
         android:fillColor="#4997D0" />
     <path
         android:pathData="M170.7 0h170.6v512H170.7Z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <group
         android:scaleX="0.7063"
         android:scaleY="0.71942"
@@ -747,7 +747,7 @@
                     android:gradientRadius="0.293121"
                     android:tileMode="clamp">
                     <item
-                        android:color="#FFFFFF"
+                        android:color="@color/white"
                         android:offset="0" />
                     <item
                         android:color="#00FFFFFF"

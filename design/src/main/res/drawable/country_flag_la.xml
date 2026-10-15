@@ -20,6 +20,6 @@
         <path
             android:pathData="M684.2 354.3a152.7 152.7 0 1 1 -305.4 0 152.7 152.7 0 0 1 305.4 0"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
 </vector>

@@ -9,7 +9,7 @@
     <path
         android:pathData="M0 58h512M0 137h512M0 216h512M0 295h512M0 374h512M0 453h512"
         android:fillColor="#000000"
-        android:strokeColor="#FFFFFF"
+        android:strokeColor="@color/white"
         android:strokeWidth="40" />
     <path
         android:pathData="M0 0h390v275H0z"

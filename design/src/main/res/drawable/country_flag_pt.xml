@@ -152,7 +152,7 @@
         android:translateY="28.4">
         <path
             android:pathData="M180.6 211a58.7 58.7 0 0 0 17.5 41.7 59 59 0 0 0 41.8 17.6 59.4 59.4 0 0 0 42 -17.4 59 59 0 0 0 17.4 -41.8v-79.2l-118.7 -0.2z"
-            android:fillColor="#FFFFFF"
+            android:fillColor="@color/white"
             android:strokeColor="#000000"
             android:strokeWidth="0.7" />
         <path
@@ -546,19 +546,19 @@
             android:fillColor="#003399" />
         <path
             android:pathData="M237.6 195.7A1.5 1.5 0 0 1 234.6 195.7A1.5 1.5 0 0 1 237.6 195.7Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M245.9 195.7A1.5 1.5 0 0 1 242.9 195.7A1.5 1.5 0 0 1 245.9 195.7Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M241.7 199.7A1.5 1.5 0 0 1 238.7 199.7A1.5 1.5 0 0 1 241.7 199.7Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M237.6 203.9A1.5 1.5 0 0 1 234.6 203.9A1.5 1.5 0 0 1 237.6 203.9Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M245.9 203.9A1.5 1.5 0 0 1 242.9 203.9A1.5 1.5 0 0 1 245.9 203.9Z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:translateY="-26">
             <path
@@ -566,19 +566,19 @@
                 android:fillColor="#003399" />
             <path
                 android:pathData="M237.6 195.7A1.5 1.5 0 0 1 234.6 195.7A1.5 1.5 0 0 1 237.6 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 195.7A1.5 1.5 0 0 1 242.9 195.7A1.5 1.5 0 0 1 245.9 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M241.7 199.7A1.5 1.5 0 0 1 238.7 199.7A1.5 1.5 0 0 1 241.7 199.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M237.6 203.9A1.5 1.5 0 0 1 234.6 203.9A1.5 1.5 0 0 1 237.6 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 203.9A1.5 1.5 0 0 1 242.9 203.9A1.5 1.5 0 0 1 245.9 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:translateX="-20.8">
@@ -587,19 +587,19 @@
                 android:fillColor="#003399" />
             <path
                 android:pathData="M237.6 195.7A1.5 1.5 0 0 1 234.6 195.7A1.5 1.5 0 0 1 237.6 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 195.7A1.5 1.5 0 0 1 242.9 195.7A1.5 1.5 0 0 1 245.9 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M241.7 199.7A1.5 1.5 0 0 1 238.7 199.7A1.5 1.5 0 0 1 241.7 199.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M237.6 203.9A1.5 1.5 0 0 1 234.6 203.9A1.5 1.5 0 0 1 237.6 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 203.9A1.5 1.5 0 0 1 242.9 203.9A1.5 1.5 0 0 1 245.9 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:translateX="20.8">
@@ -608,19 +608,19 @@
                 android:fillColor="#003399" />
             <path
                 android:pathData="M237.6 195.7A1.5 1.5 0 0 1 234.6 195.7A1.5 1.5 0 0 1 237.6 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 195.7A1.5 1.5 0 0 1 242.9 195.7A1.5 1.5 0 0 1 245.9 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M241.7 199.7A1.5 1.5 0 0 1 238.7 199.7A1.5 1.5 0 0 1 241.7 199.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M237.6 203.9A1.5 1.5 0 0 1 234.6 203.9A1.5 1.5 0 0 1 237.6 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 203.9A1.5 1.5 0 0 1 242.9 203.9A1.5 1.5 0 0 1 245.9 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:translateY="25.8">
@@ -629,19 +629,19 @@
                 android:fillColor="#003399" />
             <path
                 android:pathData="M237.6 195.7A1.5 1.5 0 0 1 234.6 195.7A1.5 1.5 0 0 1 237.6 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 195.7A1.5 1.5 0 0 1 242.9 195.7A1.5 1.5 0 0 1 245.9 195.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M241.7 199.7A1.5 1.5 0 0 1 238.7 199.7A1.5 1.5 0 0 1 241.7 199.7Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M237.6 203.9A1.5 1.5 0 0 1 234.6 203.9A1.5 1.5 0 0 1 237.6 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <path
                 android:pathData="M245.9 203.9A1.5 1.5 0 0 1 242.9 203.9A1.5 1.5 0 0 1 245.9 203.9Z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
     </group>
 </vector>

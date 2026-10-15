@@ -15,7 +15,7 @@
         <path
             android:pathData="M0 155h744v15.5H0z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M0 170.5h744v155H0z"
             android:fillType="evenOdd"
@@ -23,7 +23,7 @@
         <path
             android:pathData="M0 325.5h744V341H0z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M0 341h744v155H0z"
             android:fillType="evenOdd"
@@ -39,7 +39,7 @@
         <path
             android:pathData="M99.6 281.9h35.8c2.9 3.2 9.3 4.5 15.4 0 11.2 -6.2 32.9 0 32.9 0l4.3 -4.6 -10.4 -34.1 -3.8 -4s-8 -4.8 -23.2 -3.2c-15.2 1.6 -20.5 -0.6 -20.5 -0.6S116.7 237 113 239l-4.3 4.3 -9 38.7z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF"
+            android:fillColor="@color/white"
             android:strokeColor="#000000"
             android:strokeWidth="1.1"
             android:strokeLineCap="round"

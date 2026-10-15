@@ -8,7 +8,7 @@
         android:fillColor="#0067C6" />
     <path
         android:pathData="M0 170.7h512v170.6H0z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <path
         android:pathData="M179.2 255.4l8.5 0.6 0.1 -1.3 -3.4 -0.2 0.3 -4 3.6 -2.6v-1.6l-3.7 2.7c-0.1 -0.9 -0.6 -1.8 -1.5 -2.1 -0.8 -0.3 -1.7 -0.4 -2.4 0.2 -0.8 0.6 -1 1.8 -1.1 2.7zm1.3 -1.1l0.3 -4.2c0.1 -0.7 0.2 -1.5 0.8 -2a1 1 0 0 1 1.6 0.6c0.5 1 0.3 2.2 0.2 3.3l-0.2 2.5zm-0.2 -12l8.3 2 2 -8.1 -1.3 -0.3 -1.6 7 -2.5 -0.7 1.4 -6.2 -1.1 -0.3 -1.5 6.2 -2.2 -0.5 1.5 -6.6 -1.2 -0.3zm3 -11.1l8 2.8 0.5 -1.2 -3.2 -1 1.3 -3.7c0.2 -1 0.4 -2.2 -0.2 -3.1a2.6 2.6 0 0 0 -2.1 -1.1c-1 0 -1.7 0.7 -2.1 1.5 -0.6 1.1 -1 2.4 -1.4 3.6zm1.6 -0.8l1.3 -3.6c0.2 -0.7 0.6 -1.4 1.3 -1.6 0.6 -0.2 1.3 0.3 1.3 1 0.2 1 -0.3 2.2 -0.7 3.2l-0.6 2zm2.9 -9.5l4.5 2.6c0.9 0.5 2 0.8 2.9 0.2 1.2 -0.6 2 -2 2.6 -3.1 0.4 -1 0.8 -2.3 0.2 -3.4 -0.7 -1 -1.9 -1.5 -2.9 -2.2l-3 -1.7 -0.5 1c1.4 1 2.9 1.8 4.3 2.6 0.7 0.4 1.3 1.2 1.1 2a6 6 0 0 1 -1.2 2.7c-0.5 0.7 -1.3 1.2 -2.1 1 -1 -0.1 -1.6 -0.7 -2.4 -1.1l-3 -1.7zm6.1 -10l6.8 5.1 3.1 -4.1c0.6 -0.9 1.2 -2 0.8 -3a2.6 2.6 0 0 0 -2.2 -1.6c-0.4 0 -1 0.2 -1.2 0.4 0.2 -1 -0.5 -1.8 -1.3 -2 -1 -0.4 -2 0.3 -2.7 1 -0.8 0.8 -1.5 1.8 -2.2 2.7zm1.7 -0.3l2.4 -3c0.4 -0.5 1 -1 1.6 -0.7 0.6 0.3 0.7 1 0.4 1.4 -0.4 1 -1 1.6 -1.6 2.4l-1 1.3zm2.8 2l2.4 -3c0.5 -0.5 1 -1.1 1.7 -1 0.6 0.2 1 0.8 0.9 1.4 -0.4 1.1 -1.2 2 -1.9 3l-1 1.3 -2.1 -1.6zm3.2 -10.8l5.8 6.2 5 -4.8 -0.8 -0.8 -4 3.8h-0.2l-5 -5.3zm7.5 -6.6l5.2 6.8 1 -0.8 -5.2 -6.8zm7.6 -5.2a7.2 7.2 0 0 0 -2 1.9 3.8 3.8 0 0 0 -0.2 4.5 4.4 4.4 0 0 0 1.7 1.6c0.7 0.3 1.4 0.5 2.2 0.4a7.7 7.7 0 0 0 5 -3.3 3.7 3.7 0 0 0 0.3 -2.5l-1.2 0.5c0.3 1.7 -0.8 2.5 -2 3.3 -2 1.1 -3.8 1 -5 -0.7 -1.1 -2 0.2 -3.6 1.8 -4.7 1.2 -0.7 2.3 -1.2 3.4 -0.5l1 -0.8a3.4 3.4 0 0 0 -2.2 -0.6c-0.9 0 -1.8 0.3 -2.8 1zm10.1 -5l-0.9 9.5 1.4 -0.5 0.2 -3 4.4 -1.7 2.2 2 1.3 -0.6 -7.2 -6.3zm1.2 1l2.8 2.4 -3.2 1.3zm17.5 -6.3l0.6 8.5 4.6 -0.3c1.2 -0.1 2.5 -0.4 3.3 -1.4a5 5 0 0 0 0.8 -4.4 3.8 3.8 0 0 0 -3 -2.5c-1.2 -0.3 -2.5 -0.1 -3.9 0zm1.3 1.1l3.7 -0.2a3.1 3.1 0 0 1 2 0.6 2.9 2.9 0 0 1 1.2 2.7 2.9 2.9 0 0 1 -2 2.6l-2 0.3 -2.5 0.1zm10.6 -1.6l-0.5 8.5 8.3 0.5V187l-7 -0.4 0.2 -2.6 6.3 0.4 0.1 -1.2 -6.3 -0.4v-2.3l6.9 0.4v-1.2zm22.3 3.6l-3 8 1 0.3 2.5 -6.3v-0.3l0.2 0.4 3 8.4 1.4 0.6 3 -8 -1 -0.4 -2.5 6.3v0.3l-0.2 -0.3 -3 -8.5zm11.5 4.9l-4 7.6 -1 -0.6 3.8 -7.6zm6.4 3.8a7.2 7.2 0 0 0 -2.5 -1.1 3.8 3.8 0 0 0 -4.2 1.7 4.4 4.4 0 0 0 -0.8 2.1c0 0.8 0.2 1.6 0.6 2.3a7 7 0 0 0 2.2 2c1 0.7 1.9 1 2.8 1.1 1 0 1.7 -0.2 2.5 -0.7l-1 -1c-1.4 1 -2.6 0.4 -3.8 -0.4 -1.9 -1.2 -2.6 -3 -1.5 -4.7 1.3 -2 3.4 -1.5 5 -0.4 1.2 0.7 2.1 1.6 2 2.9l1 0.5a3.4 3.4 0 0 0 -0.3 -2.3 5.8 5.8 0 0 0 -2 -2m8.1 6l-8.9 3.6 1 1 2.8 -1.1 3.6 3 -0.7 3 1 0.9 2.3 -9.4 -1 -1zm-0.3 1.6l-1 3.6 -2.5 -2.2zm6.8 4.4l-6.6 5.4 0.8 1 2.6 -2.1 2.6 3.1 -0.8 4.3 1 1.3 0.8 -4.6c0.8 0.6 1.9 1 2.7 0.4 0.8 -0.3 1.5 -1 1.5 -1.9 0.1 -1.2 -0.7 -2.1 -1.4 -3zm-0.2 1.7c1 1.2 2 2.3 2.8 3.5 0.4 0.6 1 1.4 0.4 2.1 -0.3 0.6 -1.2 0.6 -1.7 0.2 -1 -0.7 -1.7 -1.8 -2.6 -2.7l-1 -1.3zm10.1 11.9l-9.6 0.4 0.8 1.3 3 -0.2 2.3 4 -1.7 2.6 0.8 1.2 5.2 -8 -0.7 -1.3zm-0.8 1.3l-2 3.1 -1.7 -3zm6.3 10c-0.5 -1.5 -1.4 -3 -2.8 -3.7a4 4 0 0 0 -4.8 1c-1 1.2 -1 2.8 -0.8 4.2a9 9 0 0 0 2.2 4.5l-0.6 0.2 0.4 1.1 4 -1.4 -1.6 -4.3 -0.9 0.3 1.2 3.2 -1.4 0.5a7.5 7.5 0 0 1 -2.2 -4c-0.3 -1.2 -0.3 -2.6 0.6 -3.4 1 -1 2.7 -1.4 4 -0.5a6.2 6.2 0 0 1 2 3.6c0.3 0.9 0.3 2 -0.4 2.7 -0.2 0.1 0 0.3 0.1 0.5l0.4 0.5a3 3 0 0 0 1.1 -2.4c0 -0.9 -0.2 -1.8 -0.5 -2.6m2.5 6.7l-4.8 0.9c-0.9 0.2 -1.5 0.4 -2 0.8 -0.4 0.4 -0.7 0.9 -0.9 1.6a6.8 6.8 0 0 0 0.1 2.6c0.2 1 0.5 1.8 1 2.4 0.3 0.6 0.8 1 1.3 1.2 0.6 0.1 1.3 0.2 2.2 0l4.7 -1 -0.2 -1.2 -4.6 1c-2.1 0.3 -2.8 -0.8 -3.2 -2.6 -0.4 -2 -0.1 -3.2 2 -3.6l4.6 -1zm2.6 14.5l-8.8 -3.8v1.4l2.8 1.2 0.3 4.6 -2.5 1.6 0.1 1.4 8.2 -5zm-1.3 0.8l-3.2 2 -0.3 -3.5zm-145.6 21.3l-1.2 0.3 1.3 5.2 1.3 -0.3zm140.4 0l1.2 0.3 -1.3 5.2 -1.3 -0.3zM199 293.5l-9.5 1.1 0.8 1.2 3 -0.3 2.5 3.9 -1.4 2.6 0.8 1.2 4.6 -8.5zm-0.7 1.4l-1.8 3.3 -2 -2.9zm4.4 3.9l-6.1 5.6 0.8 1 5.1 -4.9 -2.7 7.4 1 1 7.3 -2.2 -5 4.7 0.8 0.8 6 -5.6 -1.2 -1.4 -7.4 2.3 2.8 -7.3zm8.8 9l-5.1 6.8 6.6 5 0.7 -1 -5.6 -4.2 1.6 -2 5 3.7 0.8 -1 -5.1 -3.8 1.4 -1.8 5.4 4.1 0.7 -1zm8.4 6.1l-4 7.5 1 0.6 1.6 -3 3.7 2 0.8 4.3 1.4 0.7 -0.9 -4.5c1 0.3 2 0.1 2.7 -0.6 0.5 -0.6 0.9 -1.5 0.6 -2.3 -0.3 -1.1 -1.4 -1.7 -2.3 -2.2zm0.5 1.7l3.9 2c0.5 0.5 1.3 1 1.2 1.8 0 0.7 -0.8 1 -1.4 1 -1.3 -0.3 -2.3 -1 -3.4 -1.6l-1.6 -0.8zm9.1 3.3l-3.2 8 1.2 0.4 3.2 -7.9zm7.7 2.7a7.2 7.2 0 0 0 -2.7 -0.4 3.8 3.8 0 0 0 -3.6 2.7 4.4 4.4 0 0 0 -0.2 2.3c0.2 0.8 0.6 1.5 1.2 2a7 7 0 0 0 2.6 1.5c1.1 0.4 2.1 0.4 3 0.3a3.7 3.7 0 0 0 2.2 -1.4l-1.1 -0.6c-1.2 1.3 -2.5 1 -3.9 0.6 -2.1 -0.8 -3.2 -2.3 -2.6 -4.3 0.7 -2.2 2.8 -2.2 4.7 -1.6 1.3 0.4 2.4 1 2.6 2.3l1.2 0.1a3.4 3.4 0 0 0 -1 -2 5.8 5.8 0 0 0 -2.4 -1.5m8.6 2l-5.6 7.7 1.4 0.2 1.7 -2.4 4.6 0.7 1 2.8 1.4 0.2 -3.1 -9 -1.4 -0.3zm0.5 1.4l1.2 3.5 -3.4 -0.5zm19.5 -1.4a7.2 7.2 0 0 0 -2.6 1 3.8 3.8 0 0 0 -1.8 4.1 4.4 4.4 0 0 0 1 2c0.5 0.7 1.2 1 2 1.3 0.8 0.2 1.8 0.2 3 0a5.8 5.8 0 0 0 2.7 -1.3 3.7 3.7 0 0 0 1.3 -2.2H270c-0.3 1.7 -1.6 2 -3 2.4 -2.3 0.4 -4 -0.4 -4.4 -2.4 -0.4 -2.3 1.4 -3.4 3.3 -3.8 1.3 -0.3 2.6 -0.3 3.3 0.7l1.2 -0.4a3.4 3.4 0 0 0 -1.8 -1.3 5.8 5.8 0 0 0 -3 -0.1zm5.7 -1l2.4 8.2 8 -2.4 -0.4 -1.2 -6.7 2 -0.8 -2.4 6.1 -1.9 -0.3 -1.1 -6.1 1.8 -0.7 -2.2 6.5 -2 -0.3 -1.1zm9.2 -3l3.6 7.8 1 -0.5 -3 -6.4 8.3 3.8h0.6l1 -0.6 -3.5 -7.7 -1 0.5 2.9 6.4 -8.5 -3.9zm9.4 -4.3l0.7 1 3 -2 0.1 -0.1 4 6.1 1 -0.7 -3.9 -6v-0.2l3.1 -2 -0.6 -1zm8.6 -6l5.8 6.4 0.9 -0.9 -2.3 -2.4 3 -2.8 4.4 0.5 1.1 -1 -4.6 -0.6c0.6 -0.8 0.8 -2 0.3 -2.8 -0.4 -0.7 -1.1 -1.3 -2 -1.3 -1.2 0 -2 0.8 -3 1.6zm1.7 0.1l3.3 -3c0.5 -0.4 1.4 -1 2.1 -0.5 0.6 0.4 0.6 1.2 0.2 1.8 -0.6 1 -1.6 1.8 -2.5 2.7l-1.2 1zm8.2 -10l3.8 8.9 1 -1.1 -1.3 -2.8 3 -3.6 2.9 0.7 0.9 -1.2 -9.4 -2zm1.5 0.4l3.7 0.7 -2.2 2.7zm2.2 -5.2l7.2 4.7 3.7 -5.8 -1 -0.7 -3 4.6v0.2l-0.2 -0.1 -6 -4z"
         android:fillColor="#C8A400" />
@@ -20,7 +20,7 @@
             android:pathData="M500 226.4l-63.7 110.3h127.4z" />
         <path
             android:pathData="M500 226.4l-31.5 54.5 -15.4 26.7h93.8l-14.7 -25.4z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M500 226.4l-2.4 4 2.4 55 2.4 -55z"
             android:fillColor="#17C0EB"
@@ -30,7 +30,7 @@
             android:strokeWidth="0.1" />
         <path
             android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:rotation="72"
             android:translateX="617.0181"
@@ -44,7 +44,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:rotation="-36"
@@ -61,7 +61,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:rotation="36"
@@ -78,7 +78,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:rotation="-72"
@@ -93,7 +93,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
         </group>
         <group
             android:rotation="8"
@@ -108,7 +108,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -122,7 +122,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -139,7 +139,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -156,7 +156,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -171,7 +171,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -187,7 +187,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -201,7 +201,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -218,7 +218,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -235,7 +235,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -250,7 +250,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -266,7 +266,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -280,7 +280,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -297,7 +297,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -314,7 +314,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -329,7 +329,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -345,7 +345,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -359,7 +359,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -376,7 +376,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -393,7 +393,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -408,7 +408,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -424,7 +424,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -438,7 +438,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -455,7 +455,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -472,7 +472,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -487,7 +487,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -503,7 +503,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -517,7 +517,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -534,7 +534,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -551,7 +551,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -566,7 +566,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -582,7 +582,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -596,7 +596,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -613,7 +613,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -630,7 +630,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -645,7 +645,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <group
@@ -661,7 +661,7 @@
                 android:strokeWidth="0.1" />
             <path
                 android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                android:fillColor="#FFFFFF" />
+                android:fillColor="@color/white" />
             <group
                 android:rotation="72"
                 android:translateX="617.0181"
@@ -675,7 +675,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-36"
@@ -692,7 +692,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="36"
@@ -709,7 +709,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
             <group
                 android:rotation="-72"
@@ -724,7 +724,7 @@
                     android:strokeWidth="0.1" />
                 <path
                     android:pathData="M500 277.5h-0.1l0.1 3 0.1 -3z"
-                    android:fillColor="#FFFFFF" />
+                    android:fillColor="@color/white" />
             </group>
         </group>
         <path
@@ -806,7 +806,7 @@
             android:fillColor="#FF3A3A" />
         <path
             android:pathData="M453.1 307.6l-10 17.3H557l-10 -17.2h-93.8z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M449.7 321.4a36 36 0 0 0 -4.7 0.3l-0.5 0.9c2.4 -0.3 4.7 -0.7 7.2 -0.7 3.2 0 6.2 0.8 9.7 0.8h4.6c3.5 0 6.4 -0.8 9.7 -0.8 3.3 0 6.3 0.8 9.8 0.8h4.6c3.5 0 6.4 -0.8 9.7 -0.8 3.3 0 6.3 0.8 9.8 0.8h4.5c3.5 0 6.5 -0.8 9.8 -0.8 3.3 0 6.3 0.8 9.8 0.8h4.5c3.5 0 6.5 -0.8 9.8 -0.8 2.6 0 5 0.5 7.5 0.7l-0.5 -1a38 38 0 0 0 -4.4 -0.2h-4.5c-3.5 0 -6.5 0.7 -9.8 0.8 -3.3 0 -6.3 -0.8 -9.8 -0.8H522c-3.5 0 -6.5 0.7 -9.8 0.8 -3.3 0 -6.3 -0.8 -9.8 -0.8H498c-3.5 0 -6.5 0.7 -9.8 0.8 -3.3 0 -6.3 -0.8 -9.8 -0.8h-4.5c-3.5 0 -6.5 0.7 -9.8 0.8 -3.3 0 -6.2 -0.8 -9.7 -0.8z">
             <aapt:attr
@@ -1248,7 +1248,7 @@
         </group>
         <path
             android:pathData="M556.5 324.7c-0.6 0.2 -4.4 -0.2 -6.4 0l-1.3 0.3h-3.3c-3.6 0 -6.7 1 -10.1 1 -3.4 0 -6.5 -1 -10 -1H522c-3.6 0 -6.7 1 -10.1 1 -3.4 0 -6.5 -1 -10 -1h-3.4c-3.6 0 -6.7 1 -10 1 -3.5 0 -6.5 -1 -10.1 -1H475c-3.6 0 -6.6 1 -10 1 -3.5 0 -6.5 -1 -10.1 -1h-3.4c-2.8 0 -6.2 0.6 -8.9 0.8l-6.3 10.9h127.4z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M548 323.1h-0.6c-3.2 0.1 -5.6 1.1 -11.2 1.1s-6.2 -1 -12.6 -0.8c-6 0 -8.4 1.2 -11.7 1.2 -3.2 0 -8.4 -0.7 -12.5 -0.3 -4 0.4 -8.8 1.3 -12 1.3 -3.9 0 -7.8 -0.7 -11.8 -0.3 -4.1 0.4 -6 1.5 -11.1 1.5 -4.4 0 -9 -0.7 -12.8 -0.7 -3.4 0 -7.2 1 -10 1.4l-0.9 1.5c2.3 -0.3 8.6 -1.3 10.8 -1.3 2.4 0 10.7 0.5 15.3 0.3 4.7 -0.1 5.2 -1.2 10.7 -1.2 3.8 0 6.6 0.4 10.5 0.4 2.5 0 4.7 -1.2 8.4 -1.2l2.8 -0.1c3.1 -0.5 8.4 0 12 0.2 3.3 0.2 5.5 -0.6 9 -0.7l4.4 -0.1c3.5 -0.2 6.4 0.6 9.7 0.6 3.2 -0.2 6.4 -1 9.8 -1l4.5 -0.2c2.3 0 5.9 0 8.3 0.5l-0.8 -1.4c-2.4 -0.1 -5.3 -0.7 -8.2 -0.7">
             <aapt:attr
@@ -1498,7 +1498,7 @@
             android:fillColor="#97C924" />
         <path
             android:pathData="M550 324.6l4 0.3a91.4 91.4 0 0 0 2.9 0.3l-0.4 -0.5c-0.6 0.2 -4.4 -0.2 -6.4 0z"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
     </group>
     <path
         android:pathData="M256 191.9l-27.4 47.5 -28 48.6h110.8L284 240.5zm0 2.5l27 46.7 26.3 45.6H202.8l26.9 -46.6z"

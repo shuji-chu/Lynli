@@ -12,7 +12,7 @@
         <path
             android:pathData="M0 0h1063v708.7H0z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="1.1302"
             android:scaleY="1.1302"

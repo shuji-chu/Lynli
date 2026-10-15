@@ -6,7 +6,7 @@
     <path
         android:pathData="M0 0h512v512H0Z"
         android:fillType="evenOdd"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <group
         android:rotation="-56.3"
         android:scaleX="9.375"
@@ -28,7 +28,7 @@
             android:pathData="M0 17v10"
             android:fillType="evenOdd"
             android:fillColor="#000000"
-            android:strokeColor="#FFFFFF"
+            android:strokeColor="@color/white"
             android:strokeWidth="1" />
         <path
             android:pathData="M0 -12a12 12 0 0 1 0 24Z"
@@ -64,7 +64,7 @@
             android:pathData="M0 -23.5v3M0 17v3.5m0 3v3"
             android:fillType="evenOdd"
             android:fillColor="#000000"
-            android:strokeColor="#FFFFFF"
+            android:strokeColor="@color/white"
             android:strokeWidth="1" />
     </group>
 </vector>

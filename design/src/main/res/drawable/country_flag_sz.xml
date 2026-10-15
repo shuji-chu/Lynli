@@ -19,7 +19,7 @@
         android:translateY="58.8">
         <path
             android:pathData="M492.9 154.3l-24.3 8.6 24.2 8.5 24.3 -8.5z"
-            android:fillColor="#FFFFFF"
+            android:fillColor="@color/white"
             android:strokeColor="#000000"
             android:strokeWidth="1" />
         <path
@@ -37,7 +37,7 @@
             android:translateY="17.1">
             <path
                 android:pathData="M492.9 154.3l-24.3 8.6 24.2 8.5 24.3 -8.5z"
-                android:fillColor="#FFFFFF"
+                android:fillColor="@color/white"
                 android:strokeColor="#000000"
                 android:strokeWidth="1" />
             <path
@@ -59,7 +59,7 @@
     </group>
     <path
         android:pathData="M394.2 256c-28.1 28.2 -65.7 84.5 -140.8 84.5 -65.8 0 -112.7 -56.3 -141 -84.5 28.3 -28.2 75.2 -84.5 141 -84.5 75 0 112.7 56.3 140.8 84.5z"
-        android:fillColor="#FFFFFF"
+        android:fillColor="@color/white"
         android:strokeColor="#000000"
         android:strokeWidth="1" />
     <path
@@ -73,14 +73,14 @@
         <path
             android:pathData="M214 192.4v-22.9m13.8 0v22.9m13.8 -22.9v22.9"
             android:fillColor="#000000"
-            android:strokeColor="#FFFFFF"
+            android:strokeColor="@color/white"
             android:strokeWidth="6.9" />
         <group
             android:translateY="38.1">
             <path
                 android:pathData="M214 192.4v-22.9m13.8 0v22.9m13.8 -22.9v22.9"
                 android:fillColor="#000000"
-                android:strokeColor="#FFFFFF"
+                android:strokeColor="@color/white"
                 android:strokeWidth="6.9" />
         </group>
         <group
@@ -88,14 +88,14 @@
             <path
                 android:pathData="M214 192.4v-22.9m13.8 0v22.9m13.8 -22.9v22.9"
                 android:fillColor="#000000"
-                android:strokeColor="#FFFFFF"
+                android:strokeColor="@color/white"
                 android:strokeWidth="6.9" />
             <group
                 android:translateY="38.1">
                 <path
                     android:pathData="M214 192.4v-22.9m13.8 0v22.9m13.8 -22.9v22.9"
                     android:fillColor="#000000"
-                    android:strokeColor="#FFFFFF"
+                    android:strokeColor="@color/white"
                     android:strokeWidth="6.9" />
             </group>
         </group>

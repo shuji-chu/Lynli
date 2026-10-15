@@ -29,11 +29,11 @@
         <path
             android:pathData="M-260 276.8H772.6v50.1H-260z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <path
             android:pathData="M276.2 0h48.5v512h-48.5z"
             android:fillType="evenOdd"
-            android:fillColor="#FFFFFF" />
+            android:fillColor="@color/white" />
         <group
             android:scaleX="-1"
             android:scaleY="-1">

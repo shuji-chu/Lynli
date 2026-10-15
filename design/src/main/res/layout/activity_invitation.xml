@@ -420,7 +420,7 @@
                     android:focusable="true"
                     android:drawableStart="@android:drawable/ic_menu_myplaces"
                     android:drawablePadding="4dp"
-                    android:drawableTint="#2E5BFF"
+                    android:drawableTint="@color/primary"
                     android:text="钱包"
                     android:textColor="@color/primary"
                     android:textSize="14sp"

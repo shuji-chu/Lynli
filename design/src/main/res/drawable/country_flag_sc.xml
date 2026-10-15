@@ -5,7 +5,7 @@
     android:height="512dp">
     <path
         android:pathData="M0 0h512v512H0Z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="@color/white" />
     <path
         android:pathData="M0 512V0h512v170.7z"
         android:fillColor="#D92223" />
