@@ -169,12 +169,16 @@ class MainActivity : BaseActivity<MainDesign>() {
                     // 用缓存更新流量卡（避免 5 分钟内进 APP 显示旧数据）
                     try {
                         val _d = subcache.data
+                        println("[traffic-cache] data=" + (_d != null))
                         if (_d != null) {
                             val _used = (_d.u ?: 0) + (_d.d ?: 0)
                             val _total = _d.transfer_enable ?: 0
+                            println("[traffic-cache] used=$_used total=$_total")
                             design?.setUserTraffic(_used.toLong(), _total.toLong())
                         }
-                    } catch (_: Throwable) {}
+                    } catch (e: Throwable) {
+                        println("[traffic-cache] err: " + e.message)
+                    }
                     subData =  subcache.data
 
                     //存储到本地

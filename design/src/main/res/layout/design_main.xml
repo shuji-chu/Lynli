@@ -222,7 +222,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
-                                    android:text="当前节点：易搜加速·美西"
+                                    android:text="当前节点：未连接"
                                     android:textColor="@color/text_hint"
                                     android:textSize="12sp"/>
                         </LinearLayout>
