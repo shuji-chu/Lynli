@@ -72,6 +72,9 @@ interface ApiService {
     @GET("user/order/detail") //period=half_year_price&plan_id=2&coupon_code=
     suspend fun getOrderdetail(@Header("Authorization") auth_data: String, @Query("trade_no") trade_no: String): Response<QueryOrderResponse>
 
+    @POST("user/coupon/check")
+    suspend fun checkCoupon(@Header("Authorization") auth_data: String, @Body request: CouponCheckRequest): Response<CouponCheckResponse>
+
     @GET("user/order/getPaymentMethod")
     suspend fun getPaymentList(@Header("Authorization") auth_data: String): Response<PaymentResponse>
 
@@ -369,6 +372,28 @@ data class SaveOrderRequest(
     val plan_id: Int,
     val coupon_code: String?,
     val payment: String = "alipay"
+)
+
+
+data class CouponCheckRequest(
+    val code: String,
+    val plan_id: Int,
+    val period: String
+)
+
+data class CouponCheckData(
+    val valid: Boolean? = null,
+    val reason: String? = null,
+    val type: String? = null,
+    val value: Int? = null,
+    val original_amount: Long? = null,
+    val discounted_amount: Long? = null
+)
+
+data class CouponCheckResponse(
+    val data: CouponCheckData?,
+    val message: String?,
+    val status: String?
 )
 
 

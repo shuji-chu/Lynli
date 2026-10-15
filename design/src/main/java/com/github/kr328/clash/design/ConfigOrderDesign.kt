@@ -16,6 +16,7 @@ import com.github.kr328.clash.network.ApiService
 import com.github.kr328.clash.network.ConfigResponse
 import com.github.kr328.clash.network.PlanData
 import com.github.kr328.clash.network.SaveOrderRequest
+import com.github.kr328.clash.network.CouponCheckRequest
 import com.github.kr328.clash.network.SubmitOrderResponse
 import com.github.kr328.clash.network.safeApiRequestCall
 import com.github.kr328.clash.utity.LoadingDialog
@@ -30,6 +31,8 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
 
     private  var  currentChoose: Map<String,String>? = null
     public  var trade_no:String = ""
+    private  var couponCode: String = ""
+    private  var originalAmountCents: Long = 0L
     enum class Request {
         SubmitOrder,
     }
@@ -55,7 +58,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
             CoroutineScope(Dispatchers.IO).launch {
                 val apiService = ApiClient.retrofit.create(ApiService::class.java)
 
-                safeApiRequestCall { apiService.saveOrder(PreferenceManager.loginauthData, SaveOrderRequest("${currentChoose?.get("period")}",(currentChoose?.get("plan_id") ?: "0").toInt(),""))}.let {
+                safeApiRequestCall { apiService.saveOrder(PreferenceManager.loginauthData, SaveOrderRequest("${currentChoose?.get("period")}",(currentChoose?.get("plan_id") ?: "0").toInt(),couponCode))}.let {
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
@@ -112,6 +115,7 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
             plan?.month_price != null && plan.month_price > 0 -> plan.month_price
             else -> 0L
         }
+        originalAmountCents = priceCents
         binding.configorderPlanamount = "¥ %.2f".format(priceCents / 100.0)
 
         var selectedIndex = 0
@@ -193,6 +197,9 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
                     currentChoose = item
 
                     binding.configorderPlantype2 = item.get("type")
+                    originalAmountCents = (item.get("amount")?.toLong() ?: 0L)
+                    couponCode = ""
+                    try { binding.couponInput.setText("") } catch (_: Throwable) {}
                     binding.configorderPlanamount = "¥ %.2f".format((item.get("amount")?.toDouble() ?: 0.0) / 100.0)
 
                     for (j in 0 until binding.container.childCount) {
@@ -219,6 +226,50 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
             }
         }
 
+    }
+
+    /**
+     * 用户点"应用"按钮：校验优惠码，成功则刷新总额
+     */
+    fun applyCoupon() {
+        val code = binding.couponInput.text?.toString()?.trim()?.uppercase() ?: ""
+        if (code.isEmpty()) {
+            showToast("请输入优惠码", ToastDuration.Short)
+            return
+        }
+        val choose = currentChoose
+        if (choose == null) {
+            showToast("请先选择周期", ToastDuration.Short)
+            return
+        }
+        LoadingDialog.show(context, "校验中...")
+        CoroutineScope(Dispatchers.IO).launch {
+            val apiService = ApiClient.retrofit.create(ApiService::class.java)
+            val req = CouponCheckRequest(
+                code = code,
+                plan_id = (choose.get("plan_id") ?: "0").toInt(),
+                period = choose.get("period") ?: "month_price"
+            )
+            safeApiRequestCall { apiService.checkCoupon(PreferenceManager.loginauthData, req) }.let { resp ->
+                withContext(Dispatchers.Main) { LoadingDialog.hide() }
+                val body = resp?.body()
+                if (resp != null && resp.isSuccessful && body?.status == "success" && body.data?.valid == true) {
+                    couponCode = code
+                    val newCents = body.data.discounted_amount ?: 0L
+                    withContext(Dispatchers.Main) {
+                        binding.configorderPlanamount = "¥ %.2f".format(newCents / 100.0)
+                        showToast("优惠码已生效，立减 ¥%.2f".format((originalAmountCents - newCents) / 100.0), ToastDuration.Short)
+                    }
+                } else {
+                    couponCode = ""
+                    val msg = body?.message ?: "优惠码无效"
+                    withContext(Dispatchers.Main) {
+                        binding.configorderPlanamount = "¥ %.2f".format(originalAmountCents / 100.0)
+                        showToast(msg, ToastDuration.Short)
+                    }
+                }
+            }
+        }
     }
 
 }
