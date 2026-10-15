@@ -117,7 +117,16 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             val _api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
             val _auth = PreferenceManager.loginauthData ?: ""
             val _r = com.github.kr328.clash.network.safeApiRequestCall { _api.getSubscribe(_auth) }
-            val _sid = _r?.body()?.data?.short_id ?: 0
+            var _sid = _r?.body()?.data?.short_id ?: 0
+            if (_sid == 0) {
+                try {
+                    val cached = PreferenceManager.cached_userSubscritedata
+                    if (cached.isNotEmpty()) {
+                        val _c = Gson().fromJson(cached, SubscribeResponse::class.java)
+                        _sid = _c?.data?.short_id ?: 0
+                    }
+                } catch (_: Throwable) {}
+            }
             binding.accountEmail = "ID: " + _sid.toString()
         } catch (_: Throwable) {}
 
@@ -173,15 +182,15 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             }else{
                 binding.accountPlantime = "到期时间：${ formatTimestamp((APIGlobalObject.subData?.expired_at ?: 0) * 1000L)}"
             }
-            val total = APIGlobalObject.subData?.plan?.transfer_enable ?: 0
-            val upmb = (APIGlobalObject.subData?.d ?: 0.00).toDouble().div(1024).div(1024).div(1024)
+            val total = (APIGlobalObject.subData?.plan?.transfer_enable ?: 0L).toDouble() / 1024.0 / 1024.0 / 1024.0
             val downmb = (APIGlobalObject.subData?.u ?: 0.00).toDouble().div(1024).div(1024).div(1024)
+            val upmb = (APIGlobalObject.subData?.d ?: 0.00).toDouble().div(1024).div(1024).div(1024)
             val usd =  upmb + downmb
-            binding.accountPlanuseinfo = "已用 ${String.format("%.2f", usd)}GB/总计 ${total}GB"
+            binding.accountPlanuseinfo = "已用 ${String.format("%.2f", usd)}GB / 总计 ${String.format("%.0f", total)}GB"
 
             if (total>0 && usd>0) {
                 binding.accountProgressValue = (usd /total.toDouble()  * 100).toInt()
-                if(usd > total){
+                if(total > 0 && usd > total){
                     binding.useedprogressBar.progressTintList =  ColorStateList.valueOf(
 //                        context.resolveThemedColor(R.attr.colorOnPrimary)
                         Color.parseColor("#ce665e")
