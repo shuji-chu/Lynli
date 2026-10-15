@@ -154,6 +154,25 @@ class MainActivity : BaseActivity<MainDesign>() {
             val currentTime = System.currentTimeMillis()
             val cacheExpiryTime = 5 * 60 * 1000
 
+            // 进 APP 时后台静默预下载配置（下次连接秒开）
+            try {
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val _has = withProfile { queryActive() } != null
+                        val _url = subData?.subscribe_url ?: ""
+                        val _pname = subData?.plan?.name ?: ""
+                        val _pid = subData?.plan?.id ?: 0
+                        if (!_has && _url.isNotEmpty() && _pname.isNotEmpty() && _pid > 0) {
+                            val _u = withProfile {
+                                create(Profile.Type.Url, _pname).also { patch(it, _pname, _url, 0) }
+                            }
+                            withProfile { try { commit(_u) { } } catch (_: Throwable) {} }
+                            println("[prefetch] ok: " + _u)
+                        }
+                    } catch (e: Throwable) { println("[prefetch] err: " + e.message) }
+                }
+            } catch (_: Throwable) {}
+
             // 大厂模式：先用缓存秒渲，再后台拉最新覆盖
             try {
                 val _cached = PreferenceManager.cached_userSubscritedata
@@ -608,14 +627,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     private suspend fun MainDesign.startClash() {
 
-        //删除所有节点
-        withProfile {
-            var allProfiles = queryAll()
-            if (allProfiles.isNotEmpty() && allProfiles.count() > 1){ //删除超过多余的 1 个节点之外的节点
-                allProfiles.forEach { delete(it.uuid) }
-               //删除所有节点
-            }
-        }
+        // 不再每次删除配置，让第二次连接秒开
 
 
 //        val activeProfile = withProfile { queryActive() }
