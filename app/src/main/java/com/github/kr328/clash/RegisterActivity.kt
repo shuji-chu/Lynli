@@ -276,6 +276,7 @@ class RegisterActivity : AppCompatActivity() {
 
     // ===================== 发验证码 =====================
     private fun sendCode() {
+      try {
         val email = binding.loginEmailEditText.text.toString().trim()
         binding.loginSendCodeButton.isEnabled = false
         binding.loginSendCodeButton.text = "发送中..."
@@ -296,7 +297,10 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-
+      } catch (e: Throwable) {
+        try { binding.loginSendCodeButton.isEnabled = true; binding.loginSendCodeButton.text = "获取验证码" } catch (_: Throwable) {}
+        Toast.makeText(this@RegisterActivity, "发送失败：" + (e.message ?: ""), Toast.LENGTH_SHORT).show()
+      }
     private fun startCountdown() {
         countDownTimer?.cancel()
         countDownTimer = object : CountDownTimer(60_000L, 1000L) {

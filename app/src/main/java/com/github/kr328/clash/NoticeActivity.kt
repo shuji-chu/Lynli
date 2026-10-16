@@ -83,6 +83,7 @@ class NoticeActivity : AppCompatActivity() {
 
         LoadingDialog.show(this, "加载中...")
         CoroutineScope(Dispatchers.IO).launch {
+          try {
             val api = ApiClient.retrofit.create(ApiService::class.java)
             safeApiRequestCall { api.getNotices(PreferenceManager.loginauthData) }.let { resp ->
                 withContext(Dispatchers.Main) { LoadingDialog.hide() }
@@ -116,6 +117,9 @@ class NoticeActivity : AppCompatActivity() {
                     }
                 }
             }
+          } catch (e: Throwable) {
+            withContext(Dispatchers.Main) { LoadingDialog.hide() }
+          }
         }
     }
 

@@ -47,6 +47,7 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
                     // 执行确认操作
                     //  startActivity(PlansActivity::class.intent)
                     CoroutineScope(Dispatchers.IO).launch {
+                      try {
                         val apiService = ApiClient.retrofit.create(ApiService::class.java)
                         val fieldMap = mutableMapOf<String, Int>()
 
@@ -78,6 +79,9 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
                                     }
                                 }
                             }
+                      } catch (e: Throwable) {
+                        try { Toast.makeText(this@GongdanActivity, "操作失败", Toast.LENGTH_SHORT).show() } catch (_: Throwable) {}
+                      }
                     }
                 },
                 onNegativeClick = {
@@ -151,13 +155,17 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
 
 
 
-        val apiService = ApiClient.retrofit.create(ApiService::class.java)
-        safeApiRequestCall { apiService.getTickets(PreferenceManager.loginauthData)}.let {
-            if (it != null && it.isSuccessful) {
-                callback(it.body()?.data,null)
-            }else{
-                callback(null, Throwable("请求失败"))
+        try {
+            val apiService = ApiClient.retrofit.create(ApiService::class.java)
+            safeApiRequestCall { apiService.getTickets(PreferenceManager.loginauthData)}.let {
+                if (it != null && it.isSuccessful) {
+                    callback(it.body()?.data,null)
+                }else{
+                    callback(null, Throwable("请求失败"))
+                }
             }
+        } catch (e: Throwable) {
+            callback(null, Throwable("请求失败"))
         }
     }
 

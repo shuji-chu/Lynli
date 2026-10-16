@@ -87,9 +87,11 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         )
                         ProfileDesign.Request.OpenCustomView -> {
                             try {
+                                val _cfg = com.github.kr328.clash.design.PreferenceManager.getConfigFromPreferences(this@ProfileActivity)
+                                val _url = if (!_cfg?.mivraurl.isNullOrEmpty()) _cfg!!.mivraurl!! else "https://m.mivra.im/SOCKS5"
                                 val _i = android.content.Intent(
                                     android.content.Intent.ACTION_VIEW,
-                                    android.net.Uri.parse("https://m.mivra.im/SOCKS5")
+                                    android.net.Uri.parse(_url)
                                 )
                                 startActivity(_i)
                             } catch (_: Throwable) {

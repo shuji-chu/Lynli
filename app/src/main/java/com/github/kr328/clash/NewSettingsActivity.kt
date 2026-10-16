@@ -111,9 +111,15 @@ class NewSettingsActivity : AppCompatActivity() {
         }
         // 官网
         findViewById<View>(R.id.item_official)?.setOnClickListener {
-            startActivity(Intent(this, H5WebActivity::class.java).apply {
-                putExtra("url", "https://yisoujiasu.pages.dev")
-            })
+            val _cfg = com.github.kr328.clash.design.PreferenceManager.getConfigFromPreferences(this)
+            val _url = _cfg?.websiteURL ?: ""
+            if (_url.isNullOrEmpty()) {
+                Toast.makeText(this, "官网暂未配置", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, H5WebActivity::class.java).apply {
+                    putExtra("url", _url)
+                })
+            }
         }
         // 关于
         findViewById<View>(R.id.item_about)?.setOnClickListener {

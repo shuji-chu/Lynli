@@ -258,6 +258,7 @@ class RedeemActivity : AppCompatActivity() {
         LoadingDialog.show(this, "兑换中...")
         btn.isEnabled = false
         CoroutineScope(Dispatchers.IO).launch {
+          try {
             val api = ApiClient.retrofit.create(ApiService::class.java)
             safeApiRequestCall {
                 api.redeemCode(PreferenceManager.loginauthData, mapOf("code" to code))
@@ -285,6 +286,9 @@ class RedeemActivity : AppCompatActivity() {
                     }
                 }
             }
+          } catch (e: Throwable) {
+            withContext(Dispatchers.Main) { LoadingDialog.hide(); btn.isEnabled = true }
+          }
         }
     }
 }

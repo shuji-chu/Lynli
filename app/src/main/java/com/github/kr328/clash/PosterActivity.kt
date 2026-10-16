@@ -95,7 +95,11 @@ class PosterActivity : AppCompatActivity() {
         val ver = try {
             packageManager.getPackageInfo(packageName, 0).versionName ?: "0.4.87"
         } catch (_: Throwable) { "0.4.87" }
-        val dlUrl = "https://dl.yisoujiasu.de5.net/v$ver/Lynli.apk"
+        val _cfg = com.github.kr328.clash.design.PreferenceManager.getConfigFromPreferences(this)
+        val dlUrl = if (!_cfg?.appDownloadUrl.isNullOrEmpty())
+            _cfg!!.appDownloadUrl!!
+        else
+            "https://github.com/shuji-chu/Lynli-Release/releases/latest/download/Lynli.apk"
 
         val qrSize = (w * 0.56f).toInt()
         val qr = makeQR(dlUrl, qrSize)
