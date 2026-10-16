@@ -33,6 +33,7 @@ import com.github.kr328.clash.design.util.resolveThemedColor
 import com.github.kr328.clash.design.util.root
 import com.github.kr328.clash.service.model.AccessControlMode
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
@@ -284,6 +285,22 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         binding.trafficStats?.setOnClickListener { try { val _i = android.content.Intent(); _i.setClassName(context, "com.github.kr328.clash.TrafficDetailActivity"); context.startActivity(_i) } catch (_: Throwable) {} }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
         binding.btnNotice?.setOnClickListener { request(Request.OpenNotice) }
+
+        // 拉公告未读数 → 红点
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+                val resp = com.github.kr328.clash.network.safeApiRequestCall {
+                    api.getNotices(com.github.kr328.clash.design.PreferenceManager.loginauthData)
+                }
+                val list = resp?.body()?.data ?: emptyList()
+                val unread = list.count { it.read != true }
+                withContext(Dispatchers.Main) {
+                    binding.root.findViewById<android.view.View>(R.id.notice_dot)?.visibility =
+                        if (unread > 0) android.view.View.VISIBLE else android.view.View.GONE
+                }
+            } catch (_: Throwable) {}
+        }
         binding.root.findViewById<android.view.View>(R.id.btn_access_control)?.setOnClickListener {
             request(Request.OpenAccessControl)
         }

@@ -468,7 +468,8 @@ data class NoticeData(
     val type: String? = null,
     val title: String? = null,
     val content: String? = null,
-    val created_at: Long? = null
+    val created_at: Long? = null,
+    val read: Boolean? = null
 )
 
 data class NoticesResponse(

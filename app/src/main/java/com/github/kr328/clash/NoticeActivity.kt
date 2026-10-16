@@ -104,7 +104,8 @@ class NoticeActivity : AppCompatActivity() {
                                 listContainer.addView(noticeCard(
                                     n.title ?: "无标题",
                                     n.content ?: "",
-                                    fmt.format(Date((n.created_at ?: 0L) * 1000L))
+                                    fmt.format(Date((n.created_at ?: 0L) * 1000L)),
+                                    n.read != true
                                 ))
                             }
                         }
@@ -118,26 +119,57 @@ class NoticeActivity : AppCompatActivity() {
         }
     }
 
-    private fun noticeCard(title: String, content: String, time: String): LinearLayout {
+    private fun noticeCard(title: String, content: String, time: String, unread: Boolean): LinearLayout {
         val card = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(18), dp(16), dp(18), dp(16))
             background = GradientDrawable().apply {
                 cornerRadius = dp(14).toFloat()
                 setColor(Color.WHITE)
-                setStroke(dp(1), Color.parseColor("#E2E8F0"))
+                setStroke(dp(1), Color.parseColor(if (unread) "#2E5BFF" else "#E2E8F0"))
             }
             val lp = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             lp.bottomMargin = dp(12)
             layoutParams = lp
         }
-        card.addView(TextView(this).apply {
+        // 标题行（未读加蓝点 + NEW）
+        val titleRow = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+        }
+        if (unread) {
+            titleRow.addView(TextView(this).apply {
+                text = "●"
+                textSize = 10f
+                setTextColor(Color.parseColor("#2E5BFF"))
+                setPadding(0, 0, dp(6), 0)
+            })
+        }
+        titleRow.addView(TextView(this).apply {
             text = title
             textSize = 16f
             typeface = Typeface.DEFAULT_BOLD
             setTextColor(Color.parseColor("#0F1A3C"))
         })
+        if (unread) {
+            titleRow.addView(TextView(this).apply {
+                text = "NEW"
+                textSize = 10f
+                typeface = Typeface.DEFAULT_BOLD
+                setTextColor(Color.WHITE)
+                setPadding(dp(8), dp(2), dp(8), dp(2))
+                background = GradientDrawable().apply {
+                    cornerRadius = dp(8).toFloat()
+                    setColor(Color.parseColor("#2E5BFF"))
+                }
+                val lp = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                lp.leftMargin = dp(8)
+                layoutParams = lp
+            })
+        }
+        card.addView(titleRow)
         if (content.isNotBlank()) {
             card.addView(TextView(this).apply {
                 text = content
