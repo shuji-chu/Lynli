@@ -70,6 +70,9 @@ object ApiClient {
 
 
 object ApiClientConfig {
+    // 订阅转接（不需要就留空）
+    const val ConfigNodeURL = ""
+
     // ====== 域名候选（第一个通就用，顺序=优先级）======
     // 换域名 / 挂域名，改这一处，重新打包即可
     private val HOSTS = listOf(
