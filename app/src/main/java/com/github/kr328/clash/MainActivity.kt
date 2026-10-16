@@ -325,12 +325,19 @@ class MainActivity : BaseActivity<MainDesign>() {
                             MainDesign.Request.ToggleStatus -> {
                                 _log("ToggleStatus clashRunning=" + clashRunning + " state=" + Remote.broadcasts.connectionState)
                                 if (clashRunning) {
-                                    // 立即切 Disconnecting，IPC 回来再落 Idle
-                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Disconnecting)
+                                    // 立即切 Disconnecting + 锁定 3 秒，防广播抖动
+                                    Remote.broadcasts.setConnectionState(
+                                        com.github.kr328.clash.design.state.ConnectionState.Disconnecting,
+                                        lockMs = 3000
+                                    )
                                     this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Disconnecting) } catch (_: Throwable) {} }
                                     stopClashService()
                                 } else {
-                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Connecting)
+                                    // 立即切 Connecting + 锁定 5 秒，防广播抖动
+                                    Remote.broadcasts.setConnectionState(
+                                        com.github.kr328.clash.design.state.ConnectionState.Connecting,
+                                        lockMs = 5000
+                                    )
                                     this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Connecting) } catch (_: Throwable) {} }
                                     design.startClash()
                                 }

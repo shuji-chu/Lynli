@@ -30,7 +30,11 @@ class Broadcasts(private val context: Application) {
     var connectionState: ConnectionState = ConnectionState.Idle
         private set
 
-    fun setConnectionState(state: ConnectionState) {
+    // 锁定窗口：用户点击后 N ms 内不接受广播覆盖（防止按钮抖动）
+    private var stateLockedUntil: Long = 0
+
+    fun setConnectionState(state: ConnectionState, lockMs: Long = 0) {
+        if (lockMs > 0) stateLockedUntil = System.currentTimeMillis() + lockMs
         if (connectionState == state) return
         connectionState = state
         clashRunning = state.isRunning
@@ -38,6 +42,9 @@ class Broadcasts(private val context: Application) {
             try { it.onConnectionStateChanged(state) } catch (_: Throwable) {}
         }
     }
+
+    private fun isStateLocked(): Boolean =
+        System.currentTimeMillis() < stateLockedUntil
 
     private var registered = false
     private val receivers = mutableListOf<Observer>()
@@ -95,9 +102,9 @@ class Broadcasts(private val context: Application) {
     }
 
     fun refreshRunningState() {
+        if (isStateLocked()) return   // 锁定期内不覆盖用户意图
         val running = StatusClient(context).currentProfile() != null
         clashRunning = running
-        // 只在 Idle / Connected 之间切，不动 Connecting/Disconnecting
         if (connectionState != ConnectionState.Connecting &&
             connectionState != ConnectionState.Disconnecting) {
             setConnectionState(if (running) ConnectionState.Connected else ConnectionState.Idle)
