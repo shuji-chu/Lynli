@@ -914,10 +914,32 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
     private fun _log(msg: String) {
+        val line = "${java.util.Date()} $msg"
         try {
             val d = java.io.File(getExternalFilesDir(null), "crash"); d.mkdirs()
-            java.io.File(d, "main.txt").appendText("${java.util.Date()} $msg\n")
+            java.io.File(d, "main.txt").appendText("$line\n")
         } catch (_: Exception) {}
+        try {
+            Thread {
+                try {
+                    val base = com.github.kr328.clash.network.ApiClientConfig.activeBaseUrl
+                    val url = base.trimEnd('/') + "/log/report"
+                    val json = org.json.JSONObject().apply {
+                        put("tag", "main")
+                        put("line", line.take(2000))
+                    }.toString()
+                    val conn = java.net.URL(url).openConnection() as java.net.HttpURLConnection
+                    conn.requestMethod = "POST"
+                    conn.connectTimeout = 5000
+                    conn.readTimeout = 5000
+                    conn.doOutput = true
+                    conn.setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                    conn.outputStream.use { it.write(json.toByteArray(Charsets.UTF_8)) }
+                    conn.responseCode
+                    conn.disconnect()
+                } catch (_: Throwable) {}
+            }.apply { isDaemon = true }.start()
+        } catch (_: Throwable) {}
     }
 
     private suspend fun activeProfile(){
