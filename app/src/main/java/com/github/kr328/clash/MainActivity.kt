@@ -60,6 +60,7 @@ import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.timer
+import com.github.kr328.clash.remote.Remote
 
 class MainActivity : BaseActivity<MainDesign>() {
 
