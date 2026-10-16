@@ -308,7 +308,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(ProfileActivity::class.intent)
                             }
                             MainDesign.Request.ToggleStatus -> {
-                                android.util.Log.d("Lynli", "ToggleStatus clashRunning=" + clashRunning)
+                                _log("ToggleStatus clashRunning=" + clashRunning)
                                 if (clashRunning)
                                     stopClashService()
                                 else
@@ -655,7 +655,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 //        }
         val activeProfile = withProfile { queryActive() }
-        android.util.Log.d("Lynli", "startClash activeProfile=" + activeProfile)
+        _log("startClash activeProfile=" + activeProfile)
         println("当前订阅文件：${activeProfile}")
         if (activeProfile == null ) { //|| !activeProfile.imported
 
@@ -782,7 +782,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 //                }
 //            }
 
-            android.util.Log.d("Lynli", "startClash hasProfile -> startServer")
+            _log("startClash hasProfile -> startServer")
             println("当前订阅文件>> ${activeProfile.type.name}  ${activeProfile.uuid} ${activeProfile.imported} ")
             withProfile {
                 activeProfile.uuid
@@ -820,10 +820,10 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private  suspend fun startServer(){
-        android.util.Log.d("Lynli", "startServer in")
+        _log("startServer in")
 
         val vpnRequest = startClashService()
-        android.util.Log.d("Lynli", "startServer vpnRequest=" + vpnRequest)
+        _log("startServer vpnRequest=" + vpnRequest)
 
         try {
             if (vpnRequest != null) {
@@ -831,30 +831,30 @@ class MainActivity : BaseActivity<MainDesign>() {
                     ActivityResultContracts.StartActivityForResult(),
                     vpnRequest
                 )
-                android.util.Log.d("Lynli", "startServer vpn perm result=" + result.resultCode)
+                _log("startServer vpn perm result=" + result.resultCode)
 
                 if (result.resultCode == RESULT_OK) {
-                    android.util.Log.d("Lynli", "startServer vpn granted")
+                    _log("startServer vpn granted")
                     startClashService()
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
                 } else {
-                    android.util.Log.d("Lynli", "startServer vpn DENIED, abort")
+                    _log("startServer vpn DENIED, abort")
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
                     return
                 }
             } else {
-                android.util.Log.d("Lynli", "startServer vpn already granted")
+                _log("startServer vpn already granted")
             }
 
             println("缓存配置模式：${PreferenceManager.modeName}")
             CoroutineScope(Dispatchers.Main).launch {
                 delay(80)
                 withClash {
-                    android.util.Log.d("Lynli", "startServer withClash begin")
+                    _log("startServer withClash begin")
                     val override = queryOverride(Clash.OverrideSlot.Session)
 
                     if (PreferenceManager.modeName == TunnelState.Mode.Global.name){
@@ -896,18 +896,25 @@ class MainActivity : BaseActivity<MainDesign>() {
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
-                    android.util.Log.d("Lynli", "startServer withClash end")
+                    _log("startServer withClash end")
                 }
             }
 
         } catch (e: Exception) {
-            android.util.Log.e("Lynli", "startServer exception: " + e.message, e)
+            _log("startServer exception: " + e.message)
             withContext(Dispatchers.Main) {
                 LoadingDialog.hide()
             }
         }
     }
 
+
+    private fun _log(msg: String) {
+        try {
+            val d = java.io.File(getExternalFilesDir(null), "crash"); d.mkdirs()
+            java.io.File(d, "main.txt").appendText("${java.util.Date()} $msg\n")
+        } catch (_: Exception) {}
+    }
 
     private suspend fun activeProfile(){
         withProfile {
