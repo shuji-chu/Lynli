@@ -174,6 +174,28 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         }
                         ProfileDesign.Request.OpenTabMine -> { /* 已在本页 */ }
                         ProfileDesign.Request.OpenRedeem -> startActivity(android.content.Intent(this@ProfileActivity, RedeemActivity::class.java))
+                        ProfileDesign.Request.RefreshSub -> {
+                            Toast.makeText(this@ProfileActivity, "正在刷新订阅...", Toast.LENGTH_SHORT).show()
+                            lifecycleScope.launch {
+                                try {
+                                    withContext(Dispatchers.IO) {
+                                        com.github.kr328.clash.util.withProfile {
+                                            val active = queryActive()
+                                            if (active != null) {
+                                                commit(active.uuid) { /* 忽略进度回调 */ }
+                                            }
+                                        }
+                                    }
+                                    withContext(Dispatchers.Main) {
+                                        Toast.makeText(this@ProfileActivity, "订阅已刷新", Toast.LENGTH_SHORT).show()
+                                    }
+                                } catch (e: Throwable) {
+                                    withContext(Dispatchers.Main) {
+                                        Toast.makeText(this@ProfileActivity, "刷新失败：" + (e.message ?: ""), Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -49,7 +49,8 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
         OpenTabHome,
         OpenTabPlan,
         OpenTabMine,
-        OpenRedeem
+        OpenRedeem,
+        RefreshSub
     }
 
     private  var  subData: SubscribeData? = null
@@ -74,6 +75,9 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
             request(Request.OpenMyInvites)
         }
         binding.btnRedeem.setOnClickListener { request(Request.OpenRedeem) }
+        binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_refresh_sub)?.setOnClickListener {
+            request(Request.RefreshSub)
+        }
         binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.btn_business)?.setOnClickListener {
             request(Request.OpenBusiness)
         }

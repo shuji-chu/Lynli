@@ -283,6 +283,13 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         } catch (_: Throwable) {}
 
         binding.connectionButton?.setOnClickListener { request(Request.ToggleStatus) }
+        // 首页"当前节点"点一下 → 跳节点页（大厂做法）
+        try {
+            binding.root.findViewById<android.view.View>(R.id.node_text)?.setOnClickListener {
+                request(Request.OpenProxy)
+            }
+            binding.root.findViewById<android.view.View>(R.id.node_text)?.isClickable = true
+        } catch (_: Throwable) {}
 
         try {
             val _openCheckin = android.view.View.OnClickListener {
