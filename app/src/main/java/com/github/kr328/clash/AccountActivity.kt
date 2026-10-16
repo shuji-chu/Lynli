@@ -189,7 +189,11 @@ class AccountActivity : AppCompatActivity() {
             val uri = data.data!!
             try {
                 val input = contentResolver.openInputStream(uri) ?: return
-                val bmp = BitmapUtil.decodeSampledStream(input, 256, 256)
+                val bmp = BitmapUtil.decodeSampledStream(input, 256, 256) ?: run {
+                    input.close()
+                    Toast.makeText(this, "读取图片失败", Toast.LENGTH_SHORT).show()
+                    return
+                }
                 input.close()
                 // 缩放
                 val maxSize = 256

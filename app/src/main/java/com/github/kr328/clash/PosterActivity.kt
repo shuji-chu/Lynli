@@ -87,6 +87,7 @@ class PosterActivity : AppCompatActivity() {
 
     private fun generatePoster(inviteCode: String): Bitmap {
         val bg = BitmapUtil.decodeSampledStream(assets.open("haibao.jpg"), 1080, 1920)
+            ?: return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
         val w = bg.width
         val h = bg.height
         val out = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
