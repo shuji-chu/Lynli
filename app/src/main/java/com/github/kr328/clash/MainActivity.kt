@@ -788,6 +788,29 @@ class MainActivity : BaseActivity<MainDesign>() {
 
             _log("startClash hasProfile -> startServer")
             println("当前订阅文件>> ${activeProfile.type.name}  ${activeProfile.uuid} ${activeProfile.imported} ")
+            // ===== 订阅自动更新：超过 12 小时就静默拉新 =====
+            try {
+                val intervalMs = 12L * 3600 * 1000
+                val lastUpdate = activeProfile.updatedAt
+                val now = System.currentTimeMillis()
+                val diffMs = if (lastUpdate > 0) now - lastUpdate else Long.MAX_VALUE
+                if (diffMs > intervalMs) {
+                    _log("startClash 自动更新订阅（距上次 " + (diffMs / 3600000) + " 小时）")
+                    withProfile {
+                        try {
+                            commit(activeProfile.uuid) { }
+                            _log("startClash 订阅已自动更新")
+                        } catch (e: Exception) {
+                            _log("startClash 订阅更新失败：" + e.message)
+                        }
+                    }
+                } else {
+                    _log("startClash 订阅还在缓存期（" + (diffMs / 3600000) + " 小时）")
+                }
+            } catch (e: Exception) {
+                _log("startClash 自动更新异常：" + e.message)
+            }
+            // ===== 自动更新结束 =====
             withProfile {
                 activeProfile.uuid
             }
