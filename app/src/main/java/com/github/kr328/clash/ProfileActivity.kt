@@ -27,6 +27,8 @@ import java.util.concurrent.TimeUnit
 
 class ProfileActivity  : BaseActivity<ProfileDesign>()  {
 
+    private var subscribeJob: kotlinx.coroutines.Job? = null
+
 
     private suspend fun queryAppVersionName(): String {
         return withContext(Dispatchers.IO) {
@@ -47,6 +49,17 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
         setContentDesign(design)
 
         try { design.requestdataDisible() } catch (e: Throwable) { }
+
+        // 30 秒自动刷新订阅数据（实时）
+        subscribeJob?.cancel()
+        subscribeJob = GlobalScope.launch(Dispatchers.IO) {
+            while (isActive) {
+                delay(30_000)
+                try {
+                    withContext(Dispatchers.Main) { design.requestdataDisible() }
+                } catch (_: Throwable) {}
+            }
+        }
 
         val ticker = ticker(TimeUnit.SECONDS.toMillis(1))
         design.queryVersion(queryAppVersionName())
@@ -165,4 +178,11 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
         }
     }
 
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try { subscribeJob?.cancel() } catch (_: Throwable) {}
+        subscribeJob = null
+    }
 }
