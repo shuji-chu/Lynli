@@ -476,6 +476,48 @@
             </LinearLayout>
         </ScrollView>
 
+        <!-- 骨架屏占位（数据加载完隐藏） -->
+        <FrameLayout
+            android:id="@+id/skeleton_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_page"
+            android:paddingTop="60dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/bg_skeleton"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_skeleton"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_skeleton"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_skeleton"/>
+            </LinearLayout>
+        </FrameLayout>
+
         <LinearLayout
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"

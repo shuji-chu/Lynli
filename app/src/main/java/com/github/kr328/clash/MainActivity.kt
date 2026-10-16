@@ -143,11 +143,19 @@ class MainActivity : BaseActivity<MainDesign>() {
         if (PreferenceManager.isLoginin){
             setContentDesign(design)
 
+            // 骨架屏：先显示灰色占位，数据回来后淡出
+            try { design?.setLoading(true) } catch (_: Throwable) {}
+
             // 大厂模式：立即出 UI，网络/IO 全部丢后台静默
             try { com.github.kr328.clash.utity.LoadingDialog.hide() } catch (_: Throwable) {}
             CoroutineScope(Dispatchers.IO).launch {
                 try { design?.fetch() } catch (_: Throwable) {}
                 try { design?.startBannsers() } catch (_: Throwable) {}
+                // 至少显示 350ms，避免骨架一闪而过
+                kotlinx.coroutines.delay(350)
+                withContext(Dispatchers.Main) {
+                    try { design?.setLoading(false) } catch (_: Throwable) {}
+                }
             }
 
 
@@ -315,12 +323,12 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 _log("ToggleStatus clashRunning=" + clashRunning + " state=" + Remote.broadcasts.connectionState)
                                 if (clashRunning) {
                                     // 立即切 Disconnecting，IPC 回来再落 Idle
-                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Disconnecting)
-                                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Disconnecting) } catch (_: Throwable) {} }
+                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Disconnecting)
+                                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Disconnecting) } catch (_: Throwable) {} }
                                     stopClashService()
                                 } else {
-                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Connecting)
-                                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Connecting) } catch (_: Throwable) {} }
+                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Connecting)
+                                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Connecting) } catch (_: Throwable) {} }
                                     design.startClash()
                                 }
                             }
@@ -877,8 +885,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                     }
                 } else {
                     _log("startServer vpn DENIED, abort")
-                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed)
-                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed) } catch (_: Throwable) {} }
+                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Failed)
+                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Failed) } catch (_: Throwable) {} }
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
@@ -939,8 +947,8 @@ class MainActivity : BaseActivity<MainDesign>() {
 
         } catch (e: Exception) {
             _log("startServer exception: " + e.message)
-            Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed)
-            this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed) } catch (_: Throwable) {} }
+            Remote.broadcasts.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Failed)
+            this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.design.state.ConnectionState.Failed) } catch (_: Throwable) {} }
             withContext(Dispatchers.Main) {
                 LoadingDialog.hide()
             }

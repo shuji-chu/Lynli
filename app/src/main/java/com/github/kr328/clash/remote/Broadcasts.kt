@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import com.github.kr328.clash.common.constants.Intents
 import com.github.kr328.clash.common.log.Log
 import java.util.*
+import com.github.kr328.clash.design.state.ConnectionState
 
 class Broadcasts(private val context: Application) {
     interface Observer {

@@ -204,7 +204,7 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
         }
     }
 
-    override fun onConnectionStateChanged(state: com.github.kr328.clash.remote.ConnectionState) {
+    override fun onConnectionStateChanged(state: com.github.kr328.clash.design.state.ConnectionState) {
         events.trySend(Event.ConnectionStateChanged(state))
     }
 
@@ -259,6 +259,6 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
         ProfileChanged,
         ProfileUpdateCompleted,
         ProfileUpdateFailed,
-        ConnectionStateChanged(com.github.kr328.clash.remote.ConnectionState),
+        ConnectionStateChanged(com.github.kr328.clash.design.state.ConnectionState),
     }
 }

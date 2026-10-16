@@ -86,6 +86,23 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 
     }
 
+    /**
+     * 骨架屏控制：true = 显示灰色占位块，false = 淡出真实内容
+     */
+    suspend fun setLoading(loading: Boolean) {
+        withContext(Dispatchers.Main) {
+            val sk = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.skeleton_overlay)
+            if (loading) {
+                sk?.visibility = View.VISIBLE
+                sk?.alpha = 1f
+            } else {
+                sk?.animate()?.alpha(0f)?.setDuration(220)?.withEndAction {
+                    sk?.visibility = View.GONE
+                }?.start()
+            }
+        }
+    }
+
     suspend fun setSelectNodeName(name: String?) {
         withContext(Dispatchers.Main) {
             binding.selectnodeName = name
@@ -121,12 +138,12 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
      *   Disconnecting→ "断开中…"
      *   Failed       → "点击连接"（+ 用户点后重试）
      */
-    suspend fun setConnectionState(state: com.github.kr328.clash.remote.ConnectionState) {
+    suspend fun setConnectionState(state: com.github.kr328.clash.design.state.ConnectionState) {
         withContext(Dispatchers.Main) {
             val outer = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.connection_ring_outer)
             val inner = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.connection_ring_inner)
             when (state) {
-                com.github.kr328.clash.remote.ConnectionState.Connected -> {
+                com.github.kr328.clash.design.state.ConnectionState.Connected -> {
                     binding.clashRunning = true
                     binding.trafficStats.visibility = View.VISIBLE
                     binding.connectionButtonText.setText("点击断开")
@@ -134,7 +151,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                     outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer_red)
                     inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner_red)
                 }
-                com.github.kr328.clash.remote.ConnectionState.Connecting -> {
+                com.github.kr328.clash.design.state.ConnectionState.Connecting -> {
                     binding.clashRunning = false
                     binding.trafficStats.visibility = View.GONE
                     binding.connectionButtonText.setText("连接中…")
@@ -142,7 +159,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                     outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer)
                     inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner)
                 }
-                com.github.kr328.clash.remote.ConnectionState.Disconnecting -> {
+                com.github.kr328.clash.design.state.ConnectionState.Disconnecting -> {
                     binding.clashRunning = true
                     binding.trafficStats.visibility = View.GONE
                     binding.connectionButtonText.setText("断开中…")
@@ -150,8 +167,8 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                     outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer_red)
                     inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner_red)
                 }
-                com.github.kr328.clash.remote.ConnectionState.Failed,
-                com.github.kr328.clash.remote.ConnectionState.Idle -> {
+                com.github.kr328.clash.design.state.ConnectionState.Failed,
+                com.github.kr328.clash.design.state.ConnectionState.Idle -> {
                     binding.clashRunning = false
                     binding.trafficStats.visibility = View.GONE
                     binding.connectionButtonText.setText("点击连接")
