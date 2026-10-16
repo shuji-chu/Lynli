@@ -3,7 +3,6 @@ package com.github.kr328.clash.network
 import android.content.Context
 import com.github.kr328.clash.design.PreferenceManager
 import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,8 +21,6 @@ object ApiClient {
             level = HttpLoggingInterceptor.Level.BODY
         })
         .addInterceptor { chain ->
-            // 演示模式：所有请求直接返回空 JSON，不联网，不崩
-            // Demo mode: return empty JSON for all requests
             if (PreferenceManager.loginToken == "demo-token") {
                 val empty = okhttp3.Response.Builder()
                     .request(chain.request())
@@ -52,23 +49,15 @@ object ApiClient {
         }
         .build()
 
-    // Lazy initialization of configURL
     private val configURL: String
         get() {
             var url = PreferenceManager.baseURL
-            if (url.isNullOrEmpty()) {
-                return "https://lynli.kz.ci/api/v1/"
-            }
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "https://$url"
-            }
+            if (url.isNullOrEmpty()) return ApiClientConfig.activeBaseUrl
+            if (!url.startsWith("http://") && !url.startsWith("https://")) url = "https://$url"
             url = url.trimEnd('/')
-            // 保证以 /api/v1 结尾（后端返回的 baseURL 不带这个路径）
             return if (url.endsWith("/api/v1")) "$url/" else "$url/api/v1/"
         }
 
-
-    // Retrofit initialization
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(configURL)
@@ -78,12 +67,44 @@ object ApiClient {
     }
 }
 
+
 object ApiClientConfig {
-        private const val ConfigURL = "https://lynli.kz.ci/api/v1/" // BASE 请求配置文件地址 见说明文档
-//    private const val ConfigURL = "https://uuvpn.oss-cn-hongkong.aliyuncs.com/api/test/" // BASE 请求配置文件地址 见说明文档
-    //这个链接主要是为了配置转化，一般有的订阅地址被墙之后国内无法访问，这里就是了防止被墙，使用我们的香港服务器进行顶级域名防护
-    //const val ConfigNodeURL = "https://api.xxxx.com/api/parseyamlclash.php?target=clashmeta&url=" //通过香港服务器转接一次Clash转化的订阅地址
-    const val ConfigNodeURL = ""
+    // ====== 域名候选（第一个通就用，顺序=优先级）======
+    // 换域名 / 挂域名，改这一处，重新打包即可
+    private val HOSTS = listOf(
+        "https://lynli.kz.ci",              // 主
+        "https://api.lynli.me",             // 备1（Cloudflare Worker，配好自动生效）
+        "https://api.yisoujiasu.de5.net"    // 备2
+    )
+
+    @Volatile
+    var activeBaseUrl: String = HOSTS[0] + "/api/v1/"
+        private set
+
+    // 后台线程探测一次（不阻塞主线程）
+    init {
+        Thread {
+            detect()
+        }.apply { isDaemon = true }.start()
+    }
+
+    private fun detect() {
+        for (h in HOSTS) {
+            try {
+                val req = okhttp3.Request.Builder().url("$h/api/v1/config").get().build()
+                val probe = okhttp3.OkHttpClient.Builder()
+                    .connectTimeout(4, TimeUnit.SECONDS)
+                    .readTimeout(4, TimeUnit.SECONDS)
+                    .build()
+                probe.newCall(req).execute().use { resp ->
+                    if (resp.code in 200..499) {
+                        activeBaseUrl = "$h/api/v1/"
+                        return
+                    }
+                }
+            } catch (_: Throwable) {}
+        }
+    }
 
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
@@ -95,9 +116,11 @@ object ApiClientConfig {
         })
         .build()
 
-    val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(ConfigURL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient)
-        .build()
+    // 每次创建都读 activeBaseUrl（探测完自动切）
+    val retrofit: Retrofit
+        get() = Retrofit.Builder()
+            .baseUrl(activeBaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
 }
