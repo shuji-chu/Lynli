@@ -148,14 +148,17 @@ class MainActivity : BaseActivity<MainDesign>() {
 
             // 大厂模式：立即出 UI，网络/IO 全部丢后台静默
             try { com.github.kr328.clash.utity.LoadingDialog.hide() } catch (_: Throwable) {}
+
+            // 骨架屏淡出（独立协程，最多 800ms 强制淡出，不受 fetch 卡住影响）
+            CoroutineScope(Dispatchers.Main).launch {
+                kotlinx.coroutines.delay(800)
+                try { design?.setLoading(false) } catch (_: Throwable) {}
+            }
+
+            // 数据加载（独立协程，慢也不挡 UI）
             CoroutineScope(Dispatchers.IO).launch {
                 try { design?.fetch() } catch (_: Throwable) {}
                 try { design?.startBannsers() } catch (_: Throwable) {}
-                // 至少显示 350ms，避免骨架一闪而过
-                kotlinx.coroutines.delay(350)
-                withContext(Dispatchers.Main) {
-                    try { design?.setLoading(false) } catch (_: Throwable) {}
-                }
             }
 
 
