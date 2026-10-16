@@ -27,6 +27,12 @@ interface ApiService {
     @POST("passport/auth/send-code")
     suspend fun sendCode(@Body request: SendCodeRequest): Response<SendCodeResponse>
 
+    @GET("auth/captcha")
+    suspend fun getCaptcha(): Response<CaptchaResponse>
+
+    @POST("auth/captcha/check")
+    suspend fun checkCaptcha(@Body request: Map<String, Any>): Response<CaptchaCheckResponse>
+
     @POST("passport/auth/register")
     suspend fun registerUser(@Body request: RegisterRequest): Response<LoginResponse>
 
@@ -561,6 +567,30 @@ data class RegisterRequest(
 )
 
 data class SendCodeRequest(val email: String)
+
+data class CaptchaData(
+    val id: String? = null,
+    val image: String? = null,
+    val hint: String? = null,
+    val width: Int? = null,
+    val height: Int? = null
+)
+
+data class CaptchaResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: CaptchaData? = null
+)
+
+data class CaptchaCheckData(
+    val pass: Boolean? = null
+)
+
+data class CaptchaCheckResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: CaptchaCheckData? = null
+)
 
 data class SendCodeResponse(
     val message: String?,

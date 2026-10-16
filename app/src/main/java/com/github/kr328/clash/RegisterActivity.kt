@@ -147,7 +147,7 @@ class RegisterActivity : AppCompatActivity() {
                 binding.loginEmailEditText.error = "请先输入正确的邮箱"
                 return@setOnClickListener
             }
-            sendCode()
+            showCaptcha()
         }
 
         binding.loginLoginButton.setOnClickListener {
@@ -166,6 +166,112 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.loginPrivacy.setOnClickListener { showAgreementDialog() }
     }
+
+    // ===================== 图形验证码 =====================
+    private fun showCaptcha() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+            val res = com.github.kr328.clash.network.safeApiRequestCall { api.getCaptcha() }
+            val d = res?.body()?.data
+            withContext(Dispatchers.Main) {
+                if (d == null || d.image.isNullOrEmpty()) {
+                    Toast.makeText(this@RegisterActivity, "验证码加载失败", Toast.LENGTH_SHORT).show()
+                    return@withContext
+                }
+                showCaptchaDialog(d.id ?: "", d.image, d.hint ?: "请点击提示字符", d.width ?: 320, d.height ?: 200)
+            }
+        }
+    }
+
+    private fun showCaptchaDialog(cid: String, imgDataUrl: String, hint: String, w: Int, h: Int) {
+        val b64 = imgDataUrl.substringAfter(",")
+        val bytes = android.util.Base64.decode(b64, android.util.Base64.DEFAULT)
+        val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        if (bmp == null) {
+            Toast.makeText(this, "验证码图片解析失败", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val dlg = android.app.Dialog(this)
+        dlg.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        val box = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(40, 40, 40, 40)
+            setBackgroundColor(android.graphics.Color.WHITE)
+        }
+        box.addView(android.widget.TextView(this).apply {
+            text = hint
+            textSize = 16f
+            setTypeface(typeface, android.graphics.Typeface.BOLD)
+            setTextColor(android.graphics.Color.parseColor("#0F1A3C"))
+            gravity = android.view.Gravity.CENTER
+        })
+        box.addView(android.widget.TextView(this).apply {
+            text = "点错会换一张新的"
+            textSize = 12f
+            setTextColor(android.graphics.Color.parseColor("#94A3B8"))
+            gravity = android.view.Gravity.CENTER
+            setPadding(0, 8, 0, 12)
+        })
+
+        val img = android.widget.ImageView(this)
+        img.setImageBitmap(bmp)
+        val lp = android.widget.LinearLayout.LayoutParams(w, h)
+        img.layoutParams = lp
+        img.scaleType = android.widget.ImageView.ScaleType.FIT_XY
+
+        img.setOnClickListener { v ->
+            val touchX = lastTouchX
+            val touchY = lastTouchY
+            val realX = touchX / v.width.toFloat() * w
+            val realY = touchY / v.height.toFloat() * h
+            CoroutineScope(Dispatchers.IO).launch {
+                val api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+                val body = mapOf<String, Any>("id" to cid, "x" to realX, "y" to realY)
+                val r = com.github.kr328.clash.network.safeApiRequestCall { api.checkCaptcha(body) }
+                withContext(Dispatchers.Main) {
+                    if (r?.body()?.code == 1 && r.body()?.data?.pass == true) {
+                        dlg.dismiss()
+                        sendCode()
+                    } else {
+                        Toast.makeText(this@RegisterActivity, r?.body()?.message ?: "点错了", Toast.LENGTH_SHORT).show()
+                        dlg.dismiss()
+                        showCaptcha()
+                    }
+                }
+            }
+        }
+
+        img.setOnTouchListener { v, ev ->
+            if (ev.action == android.view.MotionEvent.ACTION_DOWN) {
+                lastTouchX = ev.x
+                lastTouchY = ev.y
+            }
+            false
+        }
+        img.isClickable = true
+
+        box.addView(img)
+
+        val refresh = android.widget.TextView(this).apply {
+            text = "换一张"
+            textSize = 13f
+            setTextColor(android.graphics.Color.parseColor("#2E5BFF"))
+            gravity = android.view.Gravity.CENTER
+            setPadding(0, 16, 0, 0)
+            setOnClickListener {
+                dlg.dismiss()
+                showCaptcha()
+            }
+        }
+        box.addView(refresh)
+
+        dlg.setContentView(box)
+        dlg.show()
+    }
+
+    private var lastTouchX = 0f
+    private var lastTouchY = 0f
 
     // ===================== 发验证码 =====================
     private fun sendCode() {
