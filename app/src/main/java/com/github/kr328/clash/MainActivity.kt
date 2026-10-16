@@ -879,7 +879,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
             println("缓存配置模式：${PreferenceManager.modeName}")
             CoroutineScope(Dispatchers.Main).launch {
-                delay(80)
                 withClash {
                     _log("startServer withClash begin")
                     val override = queryOverride(Clash.OverrideSlot.Session)
@@ -985,9 +984,12 @@ class MainActivity : BaseActivity<MainDesign>() {
             lastForeground = true
             startTrafficPolling()
         }
-        // 每次回前台主动刷新真实连接状态（不信内存变量）
+        // 回前台只刷运行状态（1 次 IPC），其余懒加载
         CoroutineScope(Dispatchers.Main).launch {
-            try { design?.fetch() } catch (_: Throwable) {}
+            try {
+                withContext(Dispatchers.IO) { Remote.broadcasts.refreshRunningState() }
+                design?.setClashRunning(Remote.broadcasts.clashRunning)
+            } catch (_: Throwable) {}
         }
     }
 
@@ -999,12 +1001,8 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private fun startTrafficPolling() {
+        // 不再每 30 秒轮询订阅：订阅自动更新已由 startClash 里 12 小时机制接管
         trafficTimer?.cancel()
-        trafficTimer = CoroutineScope(Dispatchers.IO).launch {
-            while (true) {
-                kotlinx.coroutines.delay(30_000)
-                try { performSubscrite() } catch (_: Throwable) {}
-            }
-        }
+        trafficTimer = null
     }
 }

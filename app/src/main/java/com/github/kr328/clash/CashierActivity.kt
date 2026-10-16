@@ -28,6 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.lifecycle.lifecycleScope
 
 class CashierActivity : AppCompatActivity() {
 
@@ -223,8 +224,8 @@ class CashierActivity : AppCompatActivity() {
 
         setContentView(root)
 
-        // 轮询
-        CoroutineScope(Dispatchers.IO).launch {
+        // 轮询（绑生命周期，页面销毁自动停）
+        lifecycleScope.launch {
             repeat(300) {
                 if (paid) return@launch
                 delay(3000)

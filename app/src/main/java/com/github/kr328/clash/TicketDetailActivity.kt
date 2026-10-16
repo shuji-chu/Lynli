@@ -29,6 +29,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URLEncoder
+import androidx.lifecycle.lifecycleScope
 
 class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
 
@@ -177,7 +178,7 @@ class TicketDetailActivity  : BaseListActivity<TicketMessage>() {
                 fieldMap.put("message", "" + messageProperty1)
                 fieldMap.put("id", "" + ticketid)
 
-                GlobalScope.launch {
+                lifecycleScope.launch {
                     val apiService = ApiClient.retrofit.create(ApiService::class.java)
                     safeApiRequestCall { apiService.replyTicket(PreferenceManager.loginauthData, fieldMap) }.let {
                         if (it != null && it.isSuccessful) {

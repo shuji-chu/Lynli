@@ -24,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.lifecycle.lifecycleScope
 
 class ChatActivity : AppCompatActivity() {
 
@@ -125,7 +126,7 @@ class ChatActivity : AppCompatActivity() {
 
         loadHistory(initial = true)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             while (true) {
                 delay(2500)
                 loadHistory(initial = false)
