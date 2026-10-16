@@ -129,6 +129,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
+        // ============ GitHub OAuth via WebView（不改 Manifest、不跳外部浏览器）============
+        binding.btnGithubLogin.setOnClickListener { openGithubLogin() }
+
         apiService = ApiClientConfig.retrofit.create(ApiService::class.java)
 
         //获取 Config 数据
@@ -236,6 +239,101 @@ class LoginActivity : AppCompatActivity() {
             .setOnDismissListener { webView.destroy() }
             .create()
             .show()
+    }
+
+    private fun openGithubLogin() {
+        val dlg = android.app.Dialog(this)
+        dlg.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+
+        val root = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setBackgroundColor(android.graphics.Color.WHITE)
+        }
+
+        val title = android.widget.TextView(this).apply {
+            text = "GitHub 授权"
+            textSize = 16f
+            setTypeface(typeface, android.graphics.Typeface.BOLD)
+            setTextColor(android.graphics.Color.parseColor("#0F1A3C"))
+            setPadding(40, 40, 40, 20)
+        }
+        root.addView(title)
+
+        val wv = android.webkit.WebView(this).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.userAgentString = settings.userAgentString + " LynliApp"
+            webViewClient = object : android.webkit.WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: android.webkit.WebView?, url: String?): Boolean {
+                    if (url != null && url.contains("/passport/oauth/github/callback") && url.contains("code=")) {
+                        val code = android.net.Uri.parse(url).getQueryParameter("code") ?: ""
+                        if (code.isNotEmpty()) {
+                            dlg.dismiss()
+                            exchangeGithubCode(code)
+                            return true
+                        }
+                    }
+                    return false
+                }
+            }
+        }
+        root.addView(wv, android.widget.LinearLayout.LayoutParams(
+            android.widget.LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f
+        ))
+
+        val cancel = android.widget.TextView(this).apply {
+            text = "取消"
+            textSize = 14f
+            setTextColor(android.graphics.Color.parseColor("#64748B"))
+            gravity = android.view.Gravity.CENTER
+            setPadding(0, 30, 0, 30)
+            setOnClickListener { dlg.dismiss() }
+        }
+        root.addView(cancel)
+
+        dlg.setContentView(root)
+        dlg.setOnShowListener {
+            dlg.window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.92).toInt(),
+                (resources.displayMetrics.heightPixels * 0.80).toInt()
+            )
+        }
+        dlg.show()
+        wv.loadUrl("https://lynli.kz.ci/api/v1/passport/oauth/github/start")
+    }
+
+    private fun exchangeGithubCode(code: String) {
+        LoadingDialog.show(this, "登录中...")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val api = ApiClient.retrofit.create(ApiService::class.java)
+                val resp = safeApiRequestCall { api.oauthGithubExchange(mapOf("code" to code)) }
+                withContext(Dispatchers.Main) { LoadingDialog.hide() }
+                val body = resp?.body()
+                if (resp != null && resp.isSuccessful && body?.code == 1 && body.data?.token?.isNotEmpty() == true) {
+                    PreferenceManager.loginauthData = body.data.token ?: ""
+                    PreferenceManager.loginToken = body.data.token ?: ""
+                    PreferenceManager.loginemail = body.data.email ?: ""
+                    PreferenceManager.isLoginin = true
+                    withContext(Dispatchers.Main) {
+                        val i = Intent(this@LoginActivity, MainActivity::class.java)
+                        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(i)
+                        finish()
+                    }
+                } else {
+                    val msg = body?.message ?: "登录失败"
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@LoginActivity, msg, Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Throwable) {
+                withContext(Dispatchers.Main) {
+                    LoadingDialog.hide()
+                    Toast.makeText(this@LoginActivity, "网络异常: " + (e.message ?: ""), Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun performLogin(email: String, password: String) {
