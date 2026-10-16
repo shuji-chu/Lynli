@@ -43,7 +43,7 @@ class Broadcasts(private val context: Application) {
         }
     }
 
-    private fun isStateLocked(): Boolean =
+    fun isStateLocked(): Boolean =
         System.currentTimeMillis() < stateLockedUntil
 
     private var registered = false
@@ -63,7 +63,8 @@ class Broadcasts(private val context: Application) {
                 }
                 Intents.ACTION_CLASH_STARTED -> {
                     clashRunning = true
-                    setConnectionState(ConnectionState.Connected)
+                    // 锁定期内不覆盖用户意图
+                    if (!isStateLocked()) setConnectionState(ConnectionState.Connected)
 
                     receivers.forEach {
                         it.onStarted()
@@ -71,7 +72,7 @@ class Broadcasts(private val context: Application) {
                 }
                 Intents.ACTION_CLASH_STOPPED -> {
                     clashRunning = false
-                    setConnectionState(ConnectionState.Idle)
+                    if (!isStateLocked()) setConnectionState(ConnectionState.Idle)
 
                     receivers.forEach {
                         it.onStopped(intent.getStringExtra(Intents.EXTRA_STOP_REASON))

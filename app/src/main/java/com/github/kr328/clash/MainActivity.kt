@@ -324,7 +324,10 @@ class MainActivity : BaseActivity<MainDesign>() {
                             }
                             MainDesign.Request.ToggleStatus -> {
                                 _log("ToggleStatus clashRunning=" + clashRunning + " state=" + Remote.broadcasts.connectionState)
-                                if (clashRunning) {
+                                // 防抖：正在连接/断开中，忽略点击
+                                if (Remote.broadcasts.connectionState.isBusy) {
+                                    _log("ToggleStatus ignored: busy")
+                                } else if (clashRunning) {
                                     // 立即切 Disconnecting + 锁定 3 秒，防广播抖动
                                     Remote.broadcasts.setConnectionState(
                                         com.github.kr328.clash.design.state.ConnectionState.Disconnecting,
