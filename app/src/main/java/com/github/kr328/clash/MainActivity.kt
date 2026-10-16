@@ -127,6 +127,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     private lateinit var apiService: ApiService
     private var isSubscribing = false
+    private var _lastSubStart = 0L
     private  var  subData: SubscribeData? = null
 
 
@@ -141,8 +142,12 @@ class MainActivity : BaseActivity<MainDesign>() {
         if (PreferenceManager.isLoginin){
             setContentDesign(design)
 
-            design.fetch()
-            design.startBannsers()
+            // 大厂模式：立即出 UI，网络/IO 全部丢后台静默
+            try { com.github.kr328.clash.utity.LoadingDialog.hide() } catch (_: Throwable) {}
+            CoroutineScope(Dispatchers.IO).launch {
+                try { design.fetch() } catch (_: Throwable) {}
+                try { design.startBannsers() } catch (_: Throwable) {}
+            }
 
 
             //1 : 查询 config 信息
@@ -509,8 +514,9 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private fun performSubscrite(){
-        if (isSubscribing) return
-        isSubscribing = true
+        val _nowMs = System.currentTimeMillis()
+        if (_nowMs - _lastSubStart < 5000) return
+        _lastSubStart = _nowMs
 
         // 演示模式：跳过网络请求 / Demo mode: skip network
         if (PreferenceManager.loginToken == "demo-token") {
