@@ -310,10 +310,11 @@ class LoginActivity : AppCompatActivity() {
                 val resp = safeApiRequestCall { api.oauthGithubExchange(mapOf("code" to code)) }
                 withContext(Dispatchers.Main) { LoadingDialog.hide() }
                 val body = resp?.body()
-                if (resp != null && resp.isSuccessful && body?.code == 1 && body.data?.token?.isNotEmpty() == true) {
-                    PreferenceManager.loginauthData = body.data.token ?: ""
-                    PreferenceManager.loginToken = body.data.token ?: ""
-                    PreferenceManager.loginemail = body.data.email ?: ""
+                val d = body?.data
+                if (resp != null && resp.isSuccessful && body?.code == 1 && d?.token?.isNotEmpty() == true) {
+                    PreferenceManager.loginauthData = d.token ?: ""
+                    PreferenceManager.loginToken = d.token ?: ""
+                    PreferenceManager.loginemail = d.email ?: ""
                     PreferenceManager.isLoginin = true
                     withContext(Dispatchers.Main) {
                         val i = Intent(this@LoginActivity, MainActivity::class.java)
