@@ -174,11 +174,12 @@ class RegisterActivity : AppCompatActivity() {
             val res = com.github.kr328.clash.network.safeApiRequestCall { api.getCaptcha() }
             val d = res?.body()?.data
             withContext(Dispatchers.Main) {
-                if (d == null || d.image.isNullOrEmpty()) {
+                val img = d?.image
+                if (d == null || img.isNullOrEmpty()) {
                     Toast.makeText(this@RegisterActivity, "验证码加载失败", Toast.LENGTH_SHORT).show()
                     return@withContext
                 }
-                showCaptchaDialog(d.id ?: "", d.image, d.hint ?: "请点击提示字符", d.width ?: 320, d.height ?: 200)
+                showCaptchaDialog(d.id ?: "", img, d.hint ?: "请点击提示字符", d.width ?: 320, d.height ?: 200)
             }
         }
     }
