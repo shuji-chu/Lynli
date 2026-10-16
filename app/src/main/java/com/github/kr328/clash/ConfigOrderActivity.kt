@@ -30,10 +30,10 @@ class ConfigOrderActivity : BaseActivity<ConfigOrderDesign>()  {
         while (isActive) {
             select<Unit> {
                 events.onReceive {
-                    println("events  : " + it.name)
+                    println("events  : " + it.toString())
                 }
                 design.requests.onReceive {
-                    println("requests  : " + it.name)
+                    println("requests  : " + it.toString())
                     when (it) {
                         ConfigOrderDesign.Request.SubmitOrder -> {
                             startActivity(SubmitOrderActivity::class.intent.putExtra("trade_no",design.trade_no))

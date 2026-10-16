@@ -23,6 +23,7 @@ import kotlinx.coroutines.selects.select
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
 
 
 class ProfileActivity  : BaseActivity<ProfileDesign>()  {
@@ -66,10 +67,10 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
         while (isActive) {
             select<Unit> {
                 events.onReceive {
-                    println("events  : " + it.name)
+                    println("events  : " + it.toString())
                 }
                 design.requests.onReceive {
-                    println("requests  : " + it.name)
+                    println("requests  : " + it.toString())
                     when (it) {
 
                         ProfileDesign.Request.OpenBuyPlan -> startActivity(PlansActivity::class.intent)
