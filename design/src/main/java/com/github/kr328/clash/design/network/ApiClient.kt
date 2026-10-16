@@ -4,6 +4,7 @@ import android.content.Context
 import com.github.kr328.clash.design.PreferenceManager
 import com.google.gson.GsonBuilder
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
