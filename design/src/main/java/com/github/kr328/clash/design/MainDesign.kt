@@ -60,6 +60,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         OpenModeDirect,
         OpenRedeem,
         OpenNotice,
+        OpenAccessControl,
         OpenChangeMode,
         OpenModeGlobal,
         OpenModeRule,
@@ -249,6 +250,9 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
         binding.trafficStats?.setOnClickListener { try { val _i = android.content.Intent(); _i.setClassName(context, "com.github.kr328.clash.TrafficDetailActivity"); context.startActivity(_i) } catch (_: Throwable) {} }
         binding.btnRedeem?.setOnClickListener { request(Request.OpenRedeem) }
         binding.btnNotice?.setOnClickListener { request(Request.OpenNotice) }
+        binding.root.findViewById<android.view.View>(R.id.btn_access_control)?.setOnClickListener {
+            request(Request.OpenAccessControl)
+        }
         binding.btnSupport.setOnClickListener {
             request(Request.OpenSupport)
         }

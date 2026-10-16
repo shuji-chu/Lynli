@@ -338,6 +338,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(android.content.Intent(this@MainActivity, RedeemActivity::class.java))
                             MainDesign.Request.OpenNotice ->
                                 startActivity(android.content.Intent(this@MainActivity, NoticeActivity::class.java))
+                            MainDesign.Request.OpenAccessControl ->
+                                startActivity(android.content.Intent(this@MainActivity, AccessControlActivity::class.java))
 
                             MainDesign.Request.OpenModeDirect ->
 
@@ -839,7 +841,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                 // Delay for 3 seconds
                 //第一次全部使用全局模式连接
 
-                delay(500)
+                delay(80)
                 withClash {
                     // Query the current mode
                     val override = queryOverride(Clash.OverrideSlot.Session)
@@ -856,7 +858,6 @@ class MainActivity : BaseActivity<MainDesign>() {
                     // Optional: Log or display the current mode for verification
                     println("模式切换 Clash mode is now set to: ${override.mode}")
 
-                    delay(500)
                     //如果切换全局模式，默认 直接主动选择节点 根据缓存来
                     //if (override.mode == TunnelState.Mode.Global){
                         val names =  queryProxyGroupNames(uiStore.proxyExcludeNotSelectable)

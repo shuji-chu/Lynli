@@ -289,6 +289,47 @@
                                     android:text="当前节点：未连接"
                                     android:textColor="@color/text_hint"
                                     android:textSize="12sp"/>
+
+                            <LinearLayout
+                                android:id="@+id/btn_access_control"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:background="?attr/selectableItemBackground"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="12dp"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="6dp"
+                                android:backgroundTint="@color/primary_soft">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="⚙"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:text="分应用代理"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="→"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/primary"/>
+                            </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
