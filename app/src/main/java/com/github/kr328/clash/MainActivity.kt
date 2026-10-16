@@ -649,6 +649,35 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     private suspend fun MainDesign.startClash() {
 
+        // 傻瓜模式核心：每次点连接前，先拉一次最新订阅
+        // 用户买了新套餐 / 后端换了节点 → 订阅 URL 变化 → 自动重建 profile
+        // 用户完全无感，不用手动刷
+        _log("startClash 准备拉最新订阅")
+        try {
+            withContext(Dispatchers.IO) {
+                val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
+                safeApiRequestCall {
+                    apiServiceApp.getSubscribe(PreferenceManager.loginauthData)
+                }?.let { resp ->
+                    if (resp.isSuccessful) {
+                        val newData = resp.body()?.data
+                        if (newData != null) {
+                            subData = newData
+                            APIGlobalObject.subData = newData
+                            try {
+                                PreferenceManager.cached_userSubscritedata =
+                                    Gson().toJson(resp.body())
+                            } catch (_: Throwable) {}
+                            _log("startClash 订阅已刷新 plan=" + (newData.plan?.name ?: "?")
+                                 + " sub_url=" + (newData.subscribe_url ?: "").take(60))
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            _log("startClash 刷订阅失败（不阻塞连接）: " + e.message)
+        }
+
         // 不再每次删除配置，让第二次连接秒开
 
 
@@ -664,7 +693,33 @@ class MainActivity : BaseActivity<MainDesign>() {
 //        }
         val activeProfile = withProfile { queryActive() }
         _log("startClash activeProfile=" + activeProfile)
-        if (activeProfile == null ) { //|| !activeProfile.imported
+
+        // 傻瓜模式核心：对比现有 profile 和最新 subData.subscribe_url
+        // 不一致（用户买了新套餐 / 后端换节点）→ 删旧建新，用户无感
+        val latestSubUrl = subData?.subscribe_url ?: ""
+        val needRebuild = activeProfile != null &&
+                          latestSubUrl.isNotEmpty() &&
+                          !activeProfile.source.contains(
+                              java.net.URLEncoder.encode(latestSubUrl, "utf-8"),
+                              ignoreCase = true
+                          ) &&
+                          !latestSubUrl.contains(activeProfile.source, ignoreCase = true)
+
+        if (needRebuild) {
+            _log("startClash 订阅 URL 变化，删旧建新")
+            _log("  old=" + (activeProfile?.source ?: "").take(80))
+            _log("  new=" + latestSubUrl.take(80))
+            try {
+                withProfile { delete(activeProfile!!.uuid) }
+                _log("startClash 旧 profile 已删")
+            } catch (e: Exception) {
+                _log("startClash 删旧 profile 失败: " + e.message)
+            }
+        }
+
+        // 重新查询（因为可能刚删了）
+        val activeProfile2 = withProfile { queryActive() }
+        if (activeProfile2 == null ) { //|| !activeProfile.imported
 
             LoadingDialog.show(this@MainActivity, "正在请求节点数据...")
 
@@ -788,14 +843,14 @@ class MainActivity : BaseActivity<MainDesign>() {
             // ===== 订阅自动更新：超过 12 小时就静默拉新 =====
             try {
                 val intervalMs = 12L * 3600 * 1000
-                val lastUpdate = activeProfile.updatedAt
+                val lastUpdate = activeProfile2.updatedAt
                 val now = System.currentTimeMillis()
                 val diffMs = if (lastUpdate > 0) now - lastUpdate else Long.MAX_VALUE
                 if (diffMs > intervalMs) {
                     _log("startClash 自动更新订阅（距上次 " + (diffMs / 3600000) + " 小时）")
                     withProfile {
                         try {
-                            commit(activeProfile.uuid) { }
+                            commit(activeProfile2.uuid) { }
                             _log("startClash 订阅已自动更新")
                         } catch (e: Exception) {
                             _log("startClash 订阅更新失败：" + e.message)
@@ -809,7 +864,7 @@ class MainActivity : BaseActivity<MainDesign>() {
             }
             // ===== 自动更新结束 =====
             withProfile {
-                activeProfile.uuid
+                activeProfile2.uuid
             }
             startServer()
         }
