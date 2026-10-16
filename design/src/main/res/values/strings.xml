@@ -230,7 +230,6 @@
     <string name="tips_properties"><![CDATA[Accept Only <strong>Clash Config</strong>(including <strong>Proxy</strong>/<strong>Rules</strong>)]]></string>
     <string name="tips_help"><![CDATA[LiteVPN is a <strong>freeware</strong> and we do <strong>NOT</strong> provide any service for it]]></string>
 
-    <string name="google_play_url" translatable="false">https://play.google.com/store/apps/details?id=com.github.kr328.clash</string>
 
     <string name="app">App</string>
     <string name="service">Service</string>
@@ -341,5 +340,5 @@
     <string name="force_dns_mapping">Force DNS Mapping</string>
     <string name="parse_pure_ip">Parse Pure IP</string>
     <string name="override_destination">Override Destination</string>
-    <string name="github_issues_zeus">https://github.com/nicolastinkl</string>
+    <string name="github_issues_zeus">https://m.mivra.im/MTProxybot</string>
 </resources>
