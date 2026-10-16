@@ -126,6 +126,9 @@ interface ApiService {
     @GET("user/bot/status")
     suspend fun getBotStatus(@Header("Authorization") auth_data: String): Response<BotStatusResponse>
 
+    @POST("passport/oauth/github/exchange")
+    suspend fun oauthGithubExchange(@Body request: Map<String, String>): Response<OauthGithubResponse>
+
 }
 
 
@@ -758,6 +761,19 @@ data class BotStatusData(
     val traffic_mb: Long? = null,
     val mivra_url: String? = null,
     val guide: String? = null
+)
+
+data class OauthGithubData(
+    val token: String? = null,
+    val short_id: Int? = null,
+    val email: String? = null,
+    val nickname: String? = null
+)
+
+data class OauthGithubResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: OauthGithubData? = null
 )
 
 data class BotStatusResponse(
