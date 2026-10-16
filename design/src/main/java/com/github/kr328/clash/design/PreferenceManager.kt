@@ -27,6 +27,12 @@ object PreferenceManager {
             prefs.edit().putString("cached_userSubscritedata", value).apply()
         }
 
+    var cached_active_host: String
+        get() = prefs.getString("cached_active_host", "") ?: ""
+        set(value) {
+            prefs.edit().putString("cached_active_host", value).apply()
+        }
+
     var cache_timestamp: Long
         get() = prefs.getLong("cache_timestamp", 0) ?: 0
         set(value) {

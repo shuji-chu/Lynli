@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.CountDownLatch
 
 
 object ApiClient {
@@ -25,10 +26,6 @@ object ApiClient {
                     cache(okhttp3.Cache(java.io.File(ctx.cacheDir, "http_cache"), 10L * 1024 * 1024))
                 }
             } catch (_: Throwable) {}
-        }
-        .addInterceptor { chain ->
-            val req = chain.request()
-            chain.proceed(req)
         }
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BASIC
@@ -46,16 +43,16 @@ object ApiClient {
             }
             chain.proceed(chain.request())
         }
+        // 所有方法（GET + POST）重试 3 次，指数退避
         .addInterceptor { chain ->
             val req = chain.request()
-            if (req.method != "GET") return@addInterceptor chain.proceed(req)
             var lastEx: java.io.IOException? = null
             for (i in 0..2) {
                 try {
                     return@addInterceptor chain.proceed(req)
                 } catch (e: java.io.IOException) {
                     lastEx = e
-                    if (i < 2) try { Thread.sleep(300L * (i + 1)) } catch (_: InterruptedException) {}
+                    if (i < 2) try { Thread.sleep(400L * (i + 1)) } catch (_: InterruptedException) {}
                 }
             }
             throw lastEx ?: java.io.IOException("request failed after retries")
@@ -64,11 +61,17 @@ object ApiClient {
 
     private val configURL: String
         get() {
+            // 优先用已探测好的
+            if (ApiClientConfig.isReady()) return ApiClientConfig.activeBaseUrl
+            // 其次用用户上次保存的
             var url = PreferenceManager.baseURL
-            if (url.isNullOrEmpty()) return ApiClientConfig.activeBaseUrl
-            if (!url.startsWith("http://") && !url.startsWith("https://")) url = "https://$url"
-            url = url.trimEnd('/')
-            return if (url.endsWith("/api/v1")) "$url/" else "$url/api/v1/"
+            if (!url.isNullOrEmpty()) {
+                if (!url.startsWith("http://") && !url.startsWith("https://")) url = "https://$url"
+                url = url.trimEnd('/')
+                return if (url.endsWith("/api/v1")) "$url/" else "$url/api/v1/"
+            }
+            // 最后 fallback 到默认
+            return ApiClientConfig.activeBaseUrl
         }
 
     val retrofit: Retrofit by lazy {
@@ -82,43 +85,89 @@ object ApiClient {
 
 
 object ApiClientConfig {
-    // 订阅转接（不需要就留空）
     const val ConfigNodeURL = ""
 
-    // ====== 域名候选（第一个通就用，顺序=优先级）======
-    // 换域名 / 挂域名，改这一处，重新打包即可
+    // ====== 域名候选（CF 优先，国内最稳）======
     private val HOSTS = listOf(
+        "https://api.lynli.me",             // CF 反代（国内最稳）
         "https://lynli.kz.ci",              // 主
-        "https://api.lynli.me",             // 备1（Cloudflare Worker，配好自动生效）
-        "https://api.yisoujiasu.de5.net"    // 备2
+        "https://api.yisoujiasu.de5.net"    // 备用
     )
 
     @Volatile
-    var activeBaseUrl: String = HOSTS[0] + "/api/v1/"
-        private set
+    private var _activeBaseUrl: String = HOSTS[0] + "/api/v1/"
 
-    // 后台线程探测一次（不阻塞主线程）
+    @Volatile
+    private var _ready: Boolean = false
+
+    @Volatile
+    private var _latch: CountDownLatch = CountDownLatch(1)
+
+    val activeBaseUrl: String
+        get() = _activeBaseUrl
+
+    fun isReady(): Boolean = _ready
+
+    // 启动并发探测（3 个域名同时测，谁先回通用谁），1.5 秒内至少返回一个结果
     init {
+        // 先读上次缓存（秒用）
+        try {
+            val cached = PreferenceManager.cached_active_host
+            if (cached.isNotEmpty()) {
+                _activeBaseUrl = cached
+                _ready = true
+            }
+        } catch (_: Throwable) {}
+
         Thread {
-            detect()
+            detectParallel()
+            _latch.countDown()
         }.apply { isDaemon = true }.start()
     }
 
-    private fun detect() {
+    /**
+     * 阻塞等待探测完成（最多 2 秒）
+     * UI 线程调用前先看 isReady()，没 ready 才等
+     */
+    fun await(maxMs: Long = 2000) {
+        if (_ready) return
+        try { _latch.await(maxMs, TimeUnit.MILLISECONDS) } catch (_: Throwable) {}
+    }
+
+    private fun detectParallel() {
+        val latch = CountDownLatch(HOSTS.size)
+        val okUrl = java.util.concurrent.atomic.AtomicReference<String>("")
+
         for (h in HOSTS) {
-            try {
-                val req = okhttp3.Request.Builder().url("$h/api/v1/config").get().build()
-                val probe = okhttp3.OkHttpClient.Builder()
-                    .connectTimeout(4, TimeUnit.SECONDS)
-                    .readTimeout(4, TimeUnit.SECONDS)
-                    .build()
-                probe.newCall(req).execute().use { resp ->
-                    if (resp.code in 200..499) {
-                        activeBaseUrl = "$h/api/v1/"
-                        return
+            Thread {
+                try {
+                    val req = okhttp3.Request.Builder().url("$h/api/v1/config").get().build()
+                    val probe = okhttp3.OkHttpClient.Builder()
+                        .connectTimeout(6, TimeUnit.SECONDS)
+                        .readTimeout(6, TimeUnit.SECONDS)
+                        .build()
+                    probe.newCall(req).execute().use { resp ->
+                        if (resp.code in 200..499 && okUrl.get().isEmpty()) {
+                            okUrl.compareAndSet("", "$h/api/v1/")
+                        }
                     }
+                } catch (_: Throwable) {} finally {
+                    latch.countDown()
                 }
-            } catch (_: Throwable) {}
+            }.apply { isDaemon = true }.start()
+        }
+
+        try { latch.await(8, TimeUnit.SECONDS) } catch (_: Throwable) {}
+
+        val winner = okUrl.get()
+        if (winner.isNotEmpty()) {
+            _activeBaseUrl = winner
+            _ready = true
+            try { PreferenceManager.cached_active_host = winner } catch (_: Throwable) {}
+            android.util.Log.i("LynliNet", "API host detected: $winner")
+        } else {
+            _ready = true  // 一个都没通，用默认继续试
+            android.util.Log.w("LynliNet", "All hosts unreachable, fallback to ${_activeBaseUrl}")
         }
     }
 
@@ -128,14 +177,13 @@ object ApiClientConfig {
         .writeTimeout(15, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
         .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = HttpLoggingInterceptor.Level.BASIC
         })
         .build()
 
-    // 每次创建都读 activeBaseUrl（探测完自动切）
     val retrofit: Retrofit
         get() = Retrofit.Builder()
-            .baseUrl(activeBaseUrl)
+            .baseUrl(_activeBaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

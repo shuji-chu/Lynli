@@ -358,6 +358,9 @@ class LoginActivity : AppCompatActivity() {
         // Show the loading indicator with a custom message
         LoadingDialog.show(this, "正在登录...")
 
+        // 等待域名探测完成（最多 2 秒）
+        com.github.kr328.clash.network.ApiClientConfig.await(2000)
+
         val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
 
         //获取 Config 数据
