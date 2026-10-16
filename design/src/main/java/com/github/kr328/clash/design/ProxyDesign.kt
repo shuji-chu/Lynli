@@ -149,7 +149,6 @@ class ProxyDesign(
             // 初始化 RecyclerView
             recyclerView =binding.recyclerView
             recyclerView.layoutManager = LinearLayoutManager(context)
-                    try { setItemViewCacheSize(20); setHasStableIds(true) } catch (_: Throwable) {}
             adapter = ServerListAdapter( surface,
                 config){ name ->
                 requests.trySend(Request.Select(0, name))

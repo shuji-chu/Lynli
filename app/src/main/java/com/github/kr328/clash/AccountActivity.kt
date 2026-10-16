@@ -23,7 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
-import com.github.kr328.clash.util.BitmapUtil
+import com.github.kr328.clash.design.util.BitmapUtil
 
 class AccountActivity : AppCompatActivity() {
 

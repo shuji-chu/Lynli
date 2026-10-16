@@ -59,8 +59,7 @@ class LogcatDesign(
 
         binding.recyclerList.bindAppBarElevation(binding.activityBarLayout)
 
-        binding.recyclerList.layoutManager = LinearLayoutManager(context)
-                    try { setItemViewCacheSize(20); setHasStableIds(true) } catch (_: Throwable) {}.apply {
+        binding.recyclerList.layoutManager = LinearLayoutManager(context).apply {
             if (streaming) {
                 reverseLayout = true
                 stackFromEnd = true

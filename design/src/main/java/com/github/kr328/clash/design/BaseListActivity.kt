@@ -89,7 +89,6 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
         swipeRefreshLayout =binding.baseSwipeRefreshLayout
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-                    try { setItemViewCacheSize(20); setHasStableIds(true) } catch (_: Throwable) {}
         adapter = createAdapter()
         recyclerView.adapter = adapter
 

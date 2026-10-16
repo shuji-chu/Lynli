@@ -69,6 +69,8 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
+        // Android 13+ 请求通知权限（用户首次打开弹一次）
+        requestNotificationPermission()
 
         // 全局崩溃捕获：只记日志，不再给用户看堆栈
         val __prevHandler = Thread.getDefaultUncaughtExceptionHandler()
@@ -971,6 +973,22 @@ class MainActivity : BaseActivity<MainDesign>() {
         }
     }
 
+
+    private fun requestNotificationPermission() {
+        try {
+            if (android.os.Build.VERSION.SDK_INT < 33) return
+            val granted = androidx.core.content.ContextCompat.checkSelfPermission(
+                this, android.Manifest.permission.POST_NOTIFICATIONS
+            ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+            if (!granted) {
+                androidx.core.app.ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                    0x1234
+                )
+            }
+        } catch (_: Throwable) {}
+    }
 
     override fun onResume() {
         super.onResume()

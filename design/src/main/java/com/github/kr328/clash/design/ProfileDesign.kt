@@ -29,7 +29,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import com.github.kr328.clash.util.BitmapUtil
+import com.github.kr328.clash.design.util.BitmapUtil
 
 class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) {
 

@@ -1,4 +1,4 @@
-package com.github.kr328.clash.util
+package com.github.kr328.clash.design.util
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

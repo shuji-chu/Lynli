@@ -32,7 +32,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Hashtable
-import com.github.kr328.clash.util.BitmapUtil
+import com.github.kr328.clash.design.util.BitmapUtil
 
 class PosterActivity : AppCompatActivity() {
 

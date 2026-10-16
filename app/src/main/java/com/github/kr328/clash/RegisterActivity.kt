@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
-import com.github.kr328.clash.util.BitmapUtil
+import com.github.kr328.clash.design.util.BitmapUtil
 
 class RegisterActivity : AppCompatActivity() {
 
