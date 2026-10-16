@@ -308,6 +308,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(ProfileActivity::class.intent)
                             }
                             MainDesign.Request.ToggleStatus -> {
+                                android.util.Log.d("Lynli", "ToggleStatus clashRunning=" + clashRunning)
                                 if (clashRunning)
                                     stopClashService()
                                 else
@@ -654,6 +655,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 //        }
         val activeProfile = withProfile { queryActive() }
+        android.util.Log.d("Lynli", "startClash activeProfile=" + activeProfile)
         println("当前订阅文件：${activeProfile}")
         if (activeProfile == null ) { //|| !activeProfile.imported
 
@@ -780,6 +782,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 //                }
 //            }
 
+            android.util.Log.d("Lynli", "startClash hasProfile -> startServer")
             println("当前订阅文件>> ${activeProfile.type.name}  ${activeProfile.uuid} ${activeProfile.imported} ")
             withProfile {
                 activeProfile.uuid
@@ -817,11 +820,10 @@ class MainActivity : BaseActivity<MainDesign>() {
     }
 
     private  suspend fun startServer(){
-
-        //读取配置文件
-
+        android.util.Log.d("Lynli", "startServer in")
 
         val vpnRequest = startClashService()
+        android.util.Log.d("Lynli", "startServer vpnRequest=" + vpnRequest)
 
         try {
             if (vpnRequest != null) {
@@ -829,102 +831,81 @@ class MainActivity : BaseActivity<MainDesign>() {
                     ActivityResultContracts.StartActivityForResult(),
                     vpnRequest
                 )
+                android.util.Log.d("Lynli", "startServer vpn perm result=" + result.resultCode)
 
-                if (result.resultCode == RESULT_OK)
-                {
+                if (result.resultCode == RESULT_OK) {
+                    android.util.Log.d("Lynli", "startServer vpn granted")
                     startClashService()
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
+                } else {
+                    android.util.Log.d("Lynli", "startServer vpn DENIED, abort")
+                    withContext(Dispatchers.Main) {
+                        LoadingDialog.hide()
+                    }
+                    return
                 }
-
-
-
+            } else {
+                android.util.Log.d("Lynli", "startServer vpn already granted")
             }
 
             println("缓存配置模式：${PreferenceManager.modeName}")
             CoroutineScope(Dispatchers.Main).launch {
-                // Delay for 3 seconds
-                //第一次全部使用全局模式连接
-
                 delay(80)
                 withClash {
-                    // Query the current mode
+                    android.util.Log.d("Lynli", "startServer withClash begin")
                     val override = queryOverride(Clash.OverrideSlot.Session)
 
-                    // Toggle between Rule and Global modes
                     if (PreferenceManager.modeName == TunnelState.Mode.Global.name){
                         override.mode = TunnelState.Mode.Global
                     }else{
-                        override.mode = TunnelState.Mode.Rule //第一次默认使用智能 模式连接
+                        override.mode = TunnelState.Mode.Rule
                     }
-                    // Apply the new mode`
                     patchOverride(Clash.OverrideSlot.Session, override)
-                    //模式切换完毕
-                    // Optional: Log or display the current mode for verification
-                    println("模式切换 Clash mode is now set to: ${override.mode}")
+                    println("模式切换 Clash mode is now set to: " + override.mode)
 
-                    //如果切换全局模式，默认 直接主动选择节点 根据缓存来
-                    //if (override.mode == TunnelState.Mode.Global){
-                        val names =  queryProxyGroupNames(uiStore.proxyExcludeNotSelectable)
-                        println("模式切换>>>>>>>>>>>>>"+names)
-                        if ( names.size > 0){
-                            var progxys  = queryProxyGroup(names[0], ProxySort.Default)
+                    val names = queryProxyGroupNames(uiStore.proxyExcludeNotSelectable)
+                    println("模式切换>>>>>>>>>>>>>" + names)
+                    if (names.size > 0) {
+                        var progxys = queryProxyGroup(names[0], ProxySort.Default)
 
-                            if (progxys.proxies.first().title.length > 0){
-
-
-                                println("模式切换>>>>>>>>>>>>>: "+progxys.proxies.last())
-                                if ( progxys.proxies.size > 2)
-                                {
-
-                                    val zutuolist = progxys.proxies.filter {  it.title == "自动选择" }
-                                    var  autoNode = ""
-                                    if (PreferenceManager.selectnodeName.length > 0){
-                                        autoNode = PreferenceManager.selectnodeName
-
-                                    }  else{
-                                        if (zutuolist.size > 0){
-                                            //说明存在自动选择
-                                            autoNode = "自动选择"
-                                        }else{
-                                            autoNode = progxys.proxies.first().title
-                                        }
-                                        PreferenceManager.selectnodeName  = autoNode   // progxys.proxies.last().title
+                        if (progxys.proxies.first().title.length > 0) {
+                            println("模式切换>>>>>>>>>>>>>: " + progxys.proxies.last())
+                            if (progxys.proxies.size > 2) {
+                                val zutuolist = progxys.proxies.filter { it.title == "自动选择" }
+                                var autoNode = ""
+                                if (PreferenceManager.selectnodeName.length > 0) {
+                                    autoNode = PreferenceManager.selectnodeName
+                                } else {
+                                    if (zutuolist.size > 0) {
+                                        autoNode = "自动选择"
+                                    } else {
+                                        autoNode = progxys.proxies.first().title
                                     }
-
-
-                                    patchSelector(names.first(),autoNode) // progxys.proxies.last().title
-
-                                    withContext(Dispatchers.Main){
-                                        design?.setSelectNodeName(PreferenceManager.selectnodeName)
-                                    }
+                                    PreferenceManager.selectnodeName = autoNode
                                 }
-
+                                patchSelector(names.first(), autoNode)
+                                withContext(Dispatchers.Main) {
+                                    design?.setSelectNodeName(PreferenceManager.selectnodeName)
+                                }
                             }
-
                         }
+                    }
 
-                   // }
-
-
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
+                    android.util.Log.d("Lynli", "startServer withClash end")
                 }
-
             }
-
-
 
         } catch (e: Exception) {
-            withContext(Dispatchers.Main){
+            android.util.Log.e("Lynli", "startServer exception: " + e.message, e)
+            withContext(Dispatchers.Main) {
                 LoadingDialog.hide()
             }
-            //design?.showToast(R.string.unable_to_start_vpn, ToastDuration.Long)
         }
-
-
     }
 
 
