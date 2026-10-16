@@ -393,5 +393,18 @@
             android:exported="false"
             android:label="账户设置" />
 
+        <activity
+            android:name=".OAuthCallbackActivity"
+            android:configChanges="uiMode"
+            android:exported="true"
+            android:label="登录中">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="lynli" android:host="oauth" android:pathPrefix="/callback" />
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>

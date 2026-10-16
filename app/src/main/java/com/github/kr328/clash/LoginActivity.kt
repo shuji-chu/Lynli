@@ -129,6 +129,16 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
+        binding.btnGithubLogin.setOnClickListener {
+            try {
+                val url = "https://lynli.kz.ci/api/v1/passport/oauth/github/start"
+                val i = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                startActivity(i)
+            } catch (e: Throwable) {
+                Toast.makeText(this, "无法打开浏览器", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         apiService = ApiClientConfig.retrofit.create(ApiService::class.java)
 
         //获取 Config 数据
