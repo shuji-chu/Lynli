@@ -47,15 +47,23 @@ object ApiClient {
         .addInterceptor { chain ->
             val req = chain.request()
             var lastEx: java.io.IOException? = null
+            var lastResp: okhttp3.Response? = null
             for (i in 0..2) {
                 try {
-                    return@addInterceptor chain.proceed(req)
+                    val resp = chain.proceed(req)
+                    // 5xx 也重试
+                    if (resp.code in 500..599 && i < 2) {
+                        lastResp = resp
+                        try { Thread.sleep(400L * (i + 1)) } catch (_: InterruptedException) {}
+                        continue
+                    }
+                    return@addInterceptor resp
                 } catch (e: java.io.IOException) {
                     lastEx = e
                     if (i < 2) try { Thread.sleep(400L * (i + 1)) } catch (_: InterruptedException) {}
                 }
             }
-            throw lastEx ?: java.io.IOException("request failed after retries")
+            lastResp ?: throw (lastEx ?: java.io.IOException("request failed after retries"))
         }
         .build()
 

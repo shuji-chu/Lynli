@@ -54,7 +54,20 @@ class MainApplication : Application() {
                 )
             } catch (_: Exception) {}
 
-            // 非主线程崩溃：记录日志，不闪退，继续运行
+            // 网络类异常全部静默，不闪退
+            val __n = __e.javaClass.name
+            val __m = (__e.message ?: "").lowercase()
+            val __netCrash = __n.contains("IOException") || __n.contains("Timeout") ||
+                             __n.contains("SocketException") || __n.contains("UnknownHost") ||
+                             __n.contains("ConnectException") || __n.contains("Retrofit") ||
+                             __m.contains("unable to resolve host") || __m.contains("timeout") ||
+                             __m.contains("failed to connect") || __m.contains("connection")
+            if (__netCrash) {
+                Log.d("LynliCrash: swallowed net error: " + __n + " / " + __e.message)
+                return@setDefaultUncaughtExceptionHandler
+            }
+
+            // 其他非主线程崩溃：记录日志，不闪退
             if (__t != android.os.Looper.getMainLooper().thread) {
                 Log.d("LynliCrash: non-main thread crash: " + __e.message)
                 return@setDefaultUncaughtExceptionHandler
