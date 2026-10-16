@@ -145,8 +145,8 @@ class MainActivity : BaseActivity<MainDesign>() {
             // 大厂模式：立即出 UI，网络/IO 全部丢后台静默
             try { com.github.kr328.clash.utity.LoadingDialog.hide() } catch (_: Throwable) {}
             CoroutineScope(Dispatchers.IO).launch {
-                try { design.fetch() } catch (_: Throwable) {}
-                try { design.startBannsers() } catch (_: Throwable) {}
+                try { design?.fetch() } catch (_: Throwable) {}
+                try { design?.startBannsers() } catch (_: Throwable) {}
             }
 
 
@@ -602,7 +602,10 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
     private suspend fun MainDesign.fetch() {
-        setClashRunning(clashRunning)
+        withContext(Dispatchers.IO) {
+            Remote.broadcasts.refreshRunningState()
+        }
+        setClashRunning(Remote.broadcasts.clashRunning)
 
         val state = withClash {
             queryTunnelState()
@@ -935,6 +938,10 @@ class MainActivity : BaseActivity<MainDesign>() {
         if (!lastForeground) {
             lastForeground = true
             startTrafficPolling()
+        }
+        // 每次回前台主动刷新真实连接状态（不信内存变量）
+        CoroutineScope(Dispatchers.Main).launch {
+            try { design?.fetch() } catch (_: Throwable) {}
         }
     }
 

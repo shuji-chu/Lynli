@@ -77,6 +77,10 @@ class Broadcasts(private val context: Application) {
         }
     }
 
+    fun refreshRunningState() {
+        clashRunning = StatusClient(context).currentProfile() != null
+    }
+
     fun addObserver(observer: Observer) {
         receivers.add(observer)
     }
