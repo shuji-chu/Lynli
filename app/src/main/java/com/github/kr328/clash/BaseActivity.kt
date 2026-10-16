@@ -103,7 +103,16 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
         applySystemBars()
 
         launch {
-            main()
+            try {
+                main()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                com.github.kr328.clash.common.log.Log.e("BaseActivity main crash", e)
+                try {
+                    design?.showExceptionToast(e.message ?: "操作失败，请重试")
+                } catch (_: Throwable) {}
+            }
         }
     }
 
