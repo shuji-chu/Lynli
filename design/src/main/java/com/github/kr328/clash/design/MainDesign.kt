@@ -113,6 +113,56 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
     }
 
 
+    /**
+     * 状态机驱动 UI（大厂模型）：
+     *   Idle         → "点击连接"（默认）
+     *   Connecting   → "连接中…"（禁用感）
+     *   Connected    → "点击断开"（红圈）
+     *   Disconnecting→ "断开中…"
+     *   Failed       → "点击连接"（+ 用户点后重试）
+     */
+    suspend fun setConnectionState(state: com.github.kr328.clash.remote.ConnectionState) {
+        withContext(Dispatchers.Main) {
+            val outer = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.connection_ring_outer)
+            val inner = binding.root.findViewById<View>(com.github.kr328.clash.design.R.id.connection_ring_inner)
+            when (state) {
+                com.github.kr328.clash.remote.ConnectionState.Connected -> {
+                    binding.clashRunning = true
+                    binding.trafficStats.visibility = View.VISIBLE
+                    binding.connectionButtonText.setText("点击断开")
+                    binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.white))
+                    outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer_red)
+                    inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner_red)
+                }
+                com.github.kr328.clash.remote.ConnectionState.Connecting -> {
+                    binding.clashRunning = false
+                    binding.trafficStats.visibility = View.GONE
+                    binding.connectionButtonText.setText("连接中…")
+                    binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.text_primary))
+                    outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer)
+                    inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner)
+                }
+                com.github.kr328.clash.remote.ConnectionState.Disconnecting -> {
+                    binding.clashRunning = true
+                    binding.trafficStats.visibility = View.GONE
+                    binding.connectionButtonText.setText("断开中…")
+                    binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.white))
+                    outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer_red)
+                    inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner_red)
+                }
+                com.github.kr328.clash.remote.ConnectionState.Failed,
+                com.github.kr328.clash.remote.ConnectionState.Idle -> {
+                    binding.clashRunning = false
+                    binding.trafficStats.visibility = View.GONE
+                    binding.connectionButtonText.setText("点击连接")
+                    binding.connectionButtonText.setTextColor(ContextCompat.getColor(context, R.color.text_primary))
+                    outer?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_outer)
+                    inner?.setBackgroundResource(com.github.kr328.clash.design.R.drawable.bg_connect_inner)
+                }
+            }
+        }
+    }
+
     suspend fun setUploadedSeep(value: Long){
         withContext(Dispatchers.Main) {
             binding.uploadedseed = value.trafficUpload()

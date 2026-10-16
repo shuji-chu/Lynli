@@ -13,6 +13,7 @@ import java.util.*
 
 class Broadcasts(private val context: Application) {
     interface Observer {
+        fun onConnectionStateChanged(state: ConnectionState) {}
         fun onServiceRecreated()
         fun onStarted()
         fun onStopped(cause: String?)
@@ -23,6 +24,19 @@ class Broadcasts(private val context: Application) {
     }
 
     var clashRunning: Boolean = false
+
+    /** 连接状态机（大厂模型） */
+    var connectionState: ConnectionState = ConnectionState.Idle
+        private set
+
+    fun setConnectionState(state: ConnectionState) {
+        if (connectionState == state) return
+        connectionState = state
+        clashRunning = state.isRunning
+        receivers.forEach {
+            try { it.onConnectionStateChanged(state) } catch (_: Throwable) {}
+        }
+    }
 
     private var registered = false
     private val receivers = mutableListOf<Observer>()
@@ -41,6 +55,7 @@ class Broadcasts(private val context: Application) {
                 }
                 Intents.ACTION_CLASH_STARTED -> {
                     clashRunning = true
+                    setConnectionState(ConnectionState.Connected)
 
                     receivers.forEach {
                         it.onStarted()
@@ -48,6 +63,7 @@ class Broadcasts(private val context: Application) {
                 }
                 Intents.ACTION_CLASH_STOPPED -> {
                     clashRunning = false
+                    setConnectionState(ConnectionState.Idle)
 
                     receivers.forEach {
                         it.onStopped(intent.getStringExtra(Intents.EXTRA_STOP_REASON))
@@ -78,7 +94,13 @@ class Broadcasts(private val context: Application) {
     }
 
     fun refreshRunningState() {
-        clashRunning = StatusClient(context).currentProfile() != null
+        val running = StatusClient(context).currentProfile() != null
+        clashRunning = running
+        // 只在 Idle / Connected 之间切，不动 Connecting/Disconnecting
+        if (connectionState != ConnectionState.Connecting &&
+            connectionState != ConnectionState.Disconnecting) {
+            setConnectionState(if (running) ConnectionState.Connected else ConnectionState.Idle)
+        }
     }
 
     fun addObserver(observer: Observer) {
@@ -113,6 +135,7 @@ class Broadcasts(private val context: Application) {
             registered = true
 
             clashRunning = StatusClient(context).currentProfile() != null
+            connectionState = if (clashRunning) ConnectionState.Connected else ConnectionState.Idle
         } catch (e: Exception) {
             Log.w("Register global receiver: $e", e)
         }

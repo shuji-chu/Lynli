@@ -204,6 +204,10 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
         }
     }
 
+    override fun onConnectionStateChanged(state: com.github.kr328.clash.remote.ConnectionState) {
+        events.trySend(Event.ConnectionStateChanged(state))
+    }
+
     private fun queryDayNight(config: Configuration = resources.configuration): DayNight {
         return when (uiStore.darkMode) {
             DarkMode.Auto -> if (config.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) DayNight.Night else DayNight.Day
@@ -255,5 +259,6 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
         ProfileChanged,
         ProfileUpdateCompleted,
         ProfileUpdateFailed,
+        ConnectionStateChanged(com.github.kr328.clash.remote.ConnectionState),
     }
 }

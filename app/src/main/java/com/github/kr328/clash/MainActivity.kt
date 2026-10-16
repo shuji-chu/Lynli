@@ -296,6 +296,9 @@ class MainActivity : BaseActivity<MainDesign>() {
                             Event.ServiceRecreated,
                             Event.ClashStop, Event.ClashStart,
                             Event.ProfileLoaded, Event.ProfileChanged -> design.fetch()
+                            is Event.ConnectionStateChanged -> {
+                                try { design?.setConnectionState(it.state) } catch (_: Throwable) {}
+                            }
                             else -> Unit
                         }
                     }
@@ -309,13 +312,15 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 startActivity(ProfileActivity::class.intent)
                             }
                             MainDesign.Request.ToggleStatus -> {
-                                _log("ToggleStatus clashRunning=" + clashRunning)
+                                _log("ToggleStatus clashRunning=" + clashRunning + " state=" + Remote.broadcasts.connectionState)
                                 if (clashRunning) {
-                                    // 乐观更新：点击立即切 UI
-                                    this@MainActivity.launch { try { design?.setClashRunning(false) } catch (_: Throwable) {} }
+                                    // 立即切 Disconnecting，IPC 回来再落 Idle
+                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Disconnecting)
+                                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Disconnecting) } catch (_: Throwable) {} }
                                     stopClashService()
                                 } else {
-                                    this@MainActivity.launch { try { design?.setClashRunning(true) } catch (_: Throwable) {} }
+                                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Connecting)
+                                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Connecting) } catch (_: Throwable) {} }
                                     design.startClash()
                                 }
                             }
@@ -872,6 +877,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                     }
                 } else {
                     _log("startServer vpn DENIED, abort")
+                    Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed)
+                    this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed) } catch (_: Throwable) {} }
                     withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
                     }
@@ -932,6 +939,8 @@ class MainActivity : BaseActivity<MainDesign>() {
 
         } catch (e: Exception) {
             _log("startServer exception: " + e.message)
+            Remote.broadcasts.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed)
+            this@MainActivity.launch { try { design?.setConnectionState(com.github.kr328.clash.remote.ConnectionState.Failed) } catch (_: Throwable) {} }
             withContext(Dispatchers.Main) {
                 LoadingDialog.hide()
             }
