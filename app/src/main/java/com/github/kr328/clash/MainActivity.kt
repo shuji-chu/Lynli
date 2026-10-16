@@ -719,127 +719,48 @@ class MainActivity : BaseActivity<MainDesign>() {
 
         // 重新查询（因为可能刚删了）
         val activeProfile2 = withProfile { queryActive() }
-        if (activeProfile2 == null ) { //|| !activeProfile.imported
-
+        if (activeProfile2 == null) {
+            _log("startClash 无 profile，开始创建")
             LoadingDialog.show(this@MainActivity, "正在请求节点数据...")
-
-           // showToast("正在请求节点数据....", ToastDuration.Long)
-
-            //create(Profile.Type.Url, "VPN")
-            withProfile{
-                //https://hongxingdl.com/hxvip?token=bc2f2839ccc608f34d6a6fc90b6e7f15
-                //https://hongxingdl.com/api/v1/client/subscribe?token=bc2f2839ccc608f34d6a6fc90b6e7f15
-                //"https://api.0009.uk/api/v1/client/subscribe?token=5652e3eec20c553047dbe3fcf8754090"
-                if (subData?.subscribe_url != null && subData?.plan?.name != null  && subData?.plan?.id != null) {
-                    var suburl = subData?.subscribe_url ?: ""
-                    var encodeURL = java.net.URLEncoder.encode(suburl, "utf-8")
-                    encodeURL =  encodeURL.replace("?","%3F")
-                    var newULR =suburl
-
-                    if( ApiClientConfig.ConfigNodeURL.length > 3){
+            launch {
+                try {
+                    val suburl = subData?.subscribe_url ?: ""
+                    val planName = subData?.plan?.name ?: "VPN"
+                    if (suburl.isEmpty()) {
+                        _log("startClash 无 sub_url，触发 performSubscrite")
+                        performSubscrite()
+                        return@launch
+                    }
+                    var newULR = suburl
+                    if (ApiClientConfig.ConfigNodeURL.length > 3) {
+                        val encodeURL = java.net.URLEncoder.encode(suburl, "utf-8").replace("?", "%3F")
                         newULR = ApiClientConfig.ConfigNodeURL + encodeURL
                     }
-
-
-                    //val uuid: UUID = create(Profile.Type.Url,subData?.plan?.name ?: "VPN",newULR)
-
-                    launch {
-                        val uuid2 = withProfile {
-                            val type = Profile.Type.Url
-                            val name = subData?.plan?.name ?: "VPN"
-
-                            create(type, name).also {
-                                patch(it, name, newULR, 0)
-                            }
+                    _log("startClash 创建 profile name=" + planName)
+                    val uuid2 = withProfile {
+                        create(Profile.Type.Url, planName).also {
+                            patch(it, planName, newULR, 0)
                         }
-
-                        withProcessing { updateStatus ->
-                            withProfile {
-
-                               try {
-                                   commit(uuid2) {
-
-                                       launch {
-                                           activeProfile()
-                                           updateStatus(it)
-                                       }
-                                   }
-                               } catch (e: Exception) {
-                                   LoadingDialog.hide()
-                                   showExceptionToast("初始化节点数据失败，请检查网络重试")
-
-                               }
-                                coroutineScope {
-                                }
-                            }
-                        }
-
-                       /* coroutineScope {
-                            commit(uuid2) {
-                                if (it.action == FetchStatus.Action.Verifying){
-                                    // 在协程中启动 activeProfile 调用
-
-                                    CoroutineScope(Dispatchers.IO).launch {
-                                        activeProfile()
-                                        //自动开启订阅
-                                        startServer()
-                                    }
-                                }
-                            }
-                        }*/
-
-
                     }
-
-
-
-
-                    /* commit(uuid){
-                        if (it.action == FetchStatus.Action.Verifying){
-                            // 在协程中启动 activeProfile 调用
-                            CoroutineScope(Dispatchers.IO).launch {
-                                activeProfile()
-                                //自动开启订阅
-                                startServer()
-                            }
-                        }
-                    }*/
-                }else{
-                    //重新请求网络
-                    performSubscrite()
-                }
-
-/*
-                if (subData == null){
-                    withContext(Dispatchers.Main){
+                    _log("startClash profile created uuid=" + uuid2)
+                    withProfile { commit(uuid2) }
+                    _log("startClash commit done")
+                    activeProfile()
+                    _log("startClash profile activated")
+                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
+                    startServer()
+                } catch (e: Exception) {
+                    _log("startClash 创建 profile 失败: " + e.message)
+                    withContext(Dispatchers.Main) {
                         LoadingDialog.hide()
-                    }
-                    performSubscrite()
-                }else{
-
-                    val plainid =subData?.plan_id  ?: 0
-//                    或者检查使用量
-                    val guoqi = (subData?.u ?: 0) +  (subData?.d ?: 0) >  (subData?.transfer_enable ?: 0) && (subData?.transfer_enable ?: 0) > 0
-                    if ( plainid == 0 || guoqi ) {
-                        //提示到期
-                        performSubscrite()
+                        showExceptionToast("节点初始化失败：" + (e.message ?: ""))
                     }
                 }
-
- */
-
-
-
             }
+            return
+        }
 
-        }else{
-//            showToast(R.string.no_profile_selected, ToastDuration.Long) {
-//                setAction(R.string.profiles) {
-//                    startActivity(ProfilesActivity::class.intent)
-//                }
-//            }
-
-            _log("startClash hasProfile -> startServer")
+        _log("startClash hasProfile -> startServer")
             // ===== 订阅自动更新：超过 12 小时就静默拉新 =====
             try {
                 val intervalMs = 12L * 3600 * 1000
