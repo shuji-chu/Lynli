@@ -123,6 +123,9 @@ interface ApiService {
     @GET("user/notices")
     suspend fun getNotices(@Header("Authorization") auth_data: String): Response<NoticesResponse>
 
+    @GET("user/bot/status")
+    suspend fun getBotStatus(@Header("Authorization") auth_data: String): Response<BotStatusResponse>
+
 }
 
 
@@ -744,4 +747,21 @@ data class QueryPayResponse(
 
 data class QueryPayData(
     val paid: Boolean = false
+)
+
+
+data class BotStatusData(
+    val short_id: Int? = null,
+    val bound: Boolean? = null,
+    val tg_id: String? = null,
+    val last_sign: String? = null,
+    val traffic_mb: Long? = null,
+    val mivra_url: String? = null,
+    val guide: String? = null
+)
+
+data class BotStatusResponse(
+    val code: Int? = null,
+    val message: String? = null,
+    val data: BotStatusData? = null
 )

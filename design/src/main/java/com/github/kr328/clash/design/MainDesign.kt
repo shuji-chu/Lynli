@@ -1,5 +1,6 @@
 package com.github.kr328.clash.design
 
+import com.github.kr328.clash.design.util.showCustomDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -234,12 +235,45 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
 
         try {
             val _openCheckin = android.view.View.OnClickListener {
-                try {
-                    val url = "https://m.mivra.im/MTProxybot"
-                    val i = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
-                    context.startActivity(i)
-                } catch (e: Throwable) {
-                    android.widget.Toast.makeText(context, "无法打开，请手动前往 Mivra 机器人签到", android.widget.Toast.LENGTH_SHORT).show()
+                kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                    val api = com.github.kr328.clash.network.ApiClient.retrofit.create(com.github.kr328.clash.network.ApiService::class.java)
+                    val resp = com.github.kr328.clash.network.safeApiRequestCall {
+                        api.getBotStatus(com.github.kr328.clash.design.PreferenceManager.loginauthData)
+                    }
+                    val d = resp?.body()?.data
+                    kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                        if (d == null) {
+                            android.widget.Toast.makeText(context, "无法获取绑定状态", android.widget.Toast.LENGTH_SHORT).show()
+                            return@withContext
+                        }
+                        val url = d.mivra_url ?: "https://m.mivra.im/MTProxybot"
+                        if (d.bound == true) {
+                            // 已绑定 → 显示状态 + 打开机器人
+                            try {
+                                val i = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                                context.startActivity(i)
+                            } catch (_: Throwable) {
+                                android.widget.Toast.makeText(context, "无法打开 Mivra 机器人", android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            // 未绑定 → 弹窗提示数字ID + 跳转按钮
+                            val guide = (d.guide ?: "打开机器人 → 发送「绑定 {short_id}」 → 完成绑定即可签到")
+                                .replace("{short_id}", (d.short_id ?: 0).toString())
+                            context.showCustomDialog(
+                                title = "绑定 Mivra 机器人",
+                                message = "你的数字ID：" + (d.short_id ?: 0) + "\n\n" + guide,
+                                positiveButtonText = "打开机器人",
+                                negativeButtonText = "取消",
+                                onPositiveClick = {
+                                    try {
+                                        val i = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                                        context.startActivity(i)
+                                    } catch (_: Throwable) {}
+                                },
+                                onNegativeClick = {}
+                            )
+                        }
+                    }
                 }
             }
             binding.root.findViewById<android.view.View>(com.github.kr328.clash.design.R.id.checkin_card)?.setOnClickListener(_openCheckin)
