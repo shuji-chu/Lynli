@@ -25,7 +25,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_clash"
-            app:tint="@color/primary"/>
+            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
         <TextView
             android:id="@+id/nav_home_text"
@@ -34,7 +36,10 @@
             android:text="主页"
             android:textSize="12sp"
             android:textColor="@color/primary"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
     </LinearLayout>
 
     <LinearLayout
@@ -53,7 +58,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_baseline_view_list"
-            app:tint="@color/icon_muted"/>
+            app:tint="@color/icon_muted"
+                android:contentDescription="@null"
+                />
 
         <TextView
             android:id="@+id/nav_plan_text"
@@ -62,7 +69,10 @@
             android:text="套餐"
             android:textSize="12sp"
             android:textColor="@color/text_hint"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
     </LinearLayout>
 
     <LinearLayout
@@ -81,7 +91,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_person_raised_hand_24px"
-            app:tint="@color/icon_muted"/>
+            app:tint="@color/icon_muted"
+                android:contentDescription="@null"
+                />
 
         <TextView
             android:id="@+id/nav_mine_text"
@@ -90,7 +102,10 @@
             android:text="我的"
             android:textSize="12sp"
             android:textColor="@color/text_hint"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
     </LinearLayout>
 
 </LinearLayout>

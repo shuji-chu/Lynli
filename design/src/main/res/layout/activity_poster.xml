@@ -20,7 +20,9 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_baseline_arrow_back"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/text_primary"/>
+            app:tint="@color/text_primary"
+                android:contentDescription="@null"
+                />
 
         <TextView
             android:layout_width="0dp"
@@ -50,7 +52,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:contentDescription="@null"
+                />
 
             <TextView
                 android:id="@+id/tv_status"

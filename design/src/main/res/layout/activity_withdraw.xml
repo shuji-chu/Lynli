@@ -20,7 +20,9 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_baseline_arrow_back"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/text_primary"/>
+            app:tint="@color/text_primary"
+                android:contentDescription="@null"
+                />
 
         <TextView
             android:layout_width="0dp"
@@ -163,7 +165,10 @@
                             android:layout_height="wrap_content"
                             android:text="未绑定"
                             android:textColor="@color/text_hint"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
                     </LinearLayout>
 
                     <LinearLayout

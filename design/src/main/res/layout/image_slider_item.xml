@@ -19,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ad_banner"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+                android:contentDescription="@null"
+                />
 </androidx.cardview.widget.CardView>
 </layout>

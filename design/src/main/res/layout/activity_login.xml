@@ -25,7 +25,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/appstore"
-                    android:scaleType="fitCenter" />
+                    android:scaleType="fitCenter"
+                android:contentDescription="@null"
+                />
 
                 <TextView
                     android:id="@+id/login_welcomeText"
@@ -35,7 +37,10 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
                 <TextView
                     android:id="@+id/login_subText"
@@ -45,7 +50,10 @@
                     android:textSize="13sp"
                     android:textColor="@color/text_hint"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="36dp" />
+                    android:layout_marginBottom="36dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,7 +111,9 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:padding="12dp"
-                            android:src="@drawable/ic_visibility_off_24px" />
+                            android:src="@drawable/ic_visibility_off_24px"
+                android:contentDescription="@null"
+                />
                     </FrameLayout>
 
                     <Button
@@ -232,7 +242,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/text_hint"
                     android:layout_marginTop="32dp"
-                    android:gravity="center" />
+                    android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
             </LinearLayout>
         </ScrollView>

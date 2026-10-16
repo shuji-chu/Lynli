@@ -55,7 +55,10 @@
                         android:text="套餐"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary"/>
+                        android:textColor="@color/text_primary"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
                     <TextView
                         android:id="@+id/subscriptionTime"
@@ -63,7 +66,10 @@
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textSize="12sp"
-                        android:textColor="@color/text_secondary"/>
+                        android:textColor="@color/text_secondary"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
                 </LinearLayout>
 
                 <TextView
@@ -73,7 +79,10 @@
                     android:layout_marginTop="3dp"
                     android:text=""
                     android:textSize="12sp"
-                    android:textColor="@color/text_hint"/>
+                    android:textColor="@color/text_hint"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,8 +190,14 @@
                 <TextView android:id="@+id/onequietypriceday" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
                 <TextView android:id="@+id/helfyearpriceday" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
                 <TextView android:id="@+id/oneyearpriceday" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
-                <TextView android:id="@+id/subscriptionAmount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"/>
-                <TextView android:id="@+id/subscriptionStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"/>
+                <TextView android:id="@+id/subscriptionAmount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
+                <TextView android:id="@+id/subscriptionStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
                 <HorizontalScrollView android:id="@+id/groups_Scrollview" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>

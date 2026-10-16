@@ -17,6 +17,9 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/item_text_margin" />
+            android:layout_marginTop="@dimen/item_text_margin"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
     </LinearLayout>
 </layout>

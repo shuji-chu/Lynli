@@ -22,7 +22,10 @@
             android:text="#11 - 速速与"
             android:textSize="18sp"
             android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
         <!-- Created Time and Status Section -->
         <TextView
@@ -32,7 +35,10 @@
             android:layout_marginTop="8dp"
             android:text="创建时间：2024-11-07 21:18"
             android:textSize="14sp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
         <TextView
             android:id="@+id/statusTextView"
@@ -41,7 +47,10 @@
             android:layout_marginTop="4dp"
             android:text="当前状态：待回复"
             android:textSize="14sp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
         <!-- Action Buttons Section -->
         <LinearLayout

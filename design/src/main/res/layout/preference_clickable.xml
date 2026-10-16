@@ -27,7 +27,10 @@
                 android:id="@+id/title_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
             <TextView
                 android:id="@+id/summary_view"

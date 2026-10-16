@@ -51,7 +51,10 @@
                 android:layout_marginTop="@dimen/item_text_margin"
                 android:text="@{appInfo.packageName}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:visibility="@{appInfo.packageName.length() == 0 ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{appInfo.packageName.length() == 0 ? View.GONE : View.VISIBLE}"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
         </LinearLayout>
 
         <com.google.android.material.radiobutton.MaterialRadioButton

@@ -20,7 +20,9 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_baseline_arrow_back"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/text_primary"/>
+            app:tint="@color/text_primary"
+                android:contentDescription="@null"
+                />
 
         <TextView
             android:layout_width="0dp"
@@ -73,7 +75,10 @@
                         android:text="--"
                         android:textColor="@color/text_primary"
                         android:textSize="26sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

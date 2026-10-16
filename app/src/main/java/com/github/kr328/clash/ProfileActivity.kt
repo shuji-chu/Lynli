@@ -51,11 +51,11 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
 
         try { design.requestdataDisible() } catch (e: Throwable) { }
 
-        // 30 秒自动刷新订阅数据（实时）
+        // 5 分钟自动刷新订阅数据（原 30 秒 → 5 分钟，减少流量浪费）
         subscribeJob?.cancel()
         subscribeJob = lifecycleScope.launch(Dispatchers.IO) {
             while (isActive) {
-                delay(30_000)
+                delay(5 * 60_000L)
                 try {
                     withContext(Dispatchers.Main) { design.requestdataDisible() }
                 } catch (_: Throwable) {}

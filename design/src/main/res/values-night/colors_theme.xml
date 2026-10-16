@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 背景 -->
     <color name="bg_page">#0F1620</color>
     <color name="bg_card">#1C2430</color>
+    <color name="bg_card_alt">#161E2A</color>
+    <color name="bg_card_dark">#0A0E14</color>
+    <color name="bg_soft">#161E2A</color>
+
+    <!-- 主色 -->
+    <color name="primary">#4A6BFF</color>
+    <color name="primary_light">#5E7CFF</color>
+    <color name="primary_soft">#1E2B4D</color>
+
+    <!-- 文字 -->
     <color name="text_primary">#E8EAED</color>
     <color name="text_body">#D0D0D0</color>
     <color name="text_secondary">#98A2B3</color>
     <color name="text_hint">#7A8494</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_primary_dim">#CCFFFFFF</color>
+    <color name="text_on_primary_dimmer">#B3FFFFFF</color>
+
+    <!-- 分割线 / 边框 -->
     <color name="divider">#2A323E</color>
     <color name="divider2">#2A323E</color>
+    <color name="border_light">#2A323E</color>
+
+    <!-- 状态色 -->
+    <color name="danger">#EF4444</color>
+    <color name="danger_soft">#4A1F1F</color>
+    <color name="success">#10B981</color>
+    <color name="success_deep">#34D399</color>
+    <color name="warning">#F59E0B</color>
+
+    <!-- 图标 -->
+    <color name="icon_default">#E8EAED</color>
+    <color name="icon_muted">#7A8494</color>
+    <color name="input_hint">#6B7280</color>
+
+    <!-- 进度条 -->
+    <color name="progress_bg">#2A323E</color>
+    <color name="progress_ok">#22C55E</color>
+    <color name="progress_warn">#F59E0B</color>
+    <color name="progress_danger">#EF4444</color>
+
+    <!-- 其他 -->
+    <color name="avatar_service">#FF8B3D</color>
+    <color name="chat_bg">#161E2A</color>
+    <color name="btn_disabled">#3A4250</color>
+    <color name="login_gradient_start">#1E2B4D</color>
 </resources>

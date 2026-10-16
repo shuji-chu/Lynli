@@ -79,7 +79,9 @@
                         android:padding="@dimen/toolbar_image_action_padding"
                         android:onClick="@{() -> self.requestRefereshTesting()}"
                         app:tint="@color/white"
-                        android:src="@drawable/ic_baseline_replay" />
+                        android:src="@drawable/ic_baseline_replay"
+                android:contentDescription="@null"
+                />
 
                 </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

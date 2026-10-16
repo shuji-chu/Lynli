@@ -27,7 +27,10 @@
                 android:layout_weight="1"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
             <TextView
                 android:id="@+id/tv_id"

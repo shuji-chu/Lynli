@@ -7,5 +7,8 @@
         android:paddingVertical="@dimen/item_padding_vertical"
         android:paddingStart="@{@dimen/item_header_component_size + @dimen/item_header_margin * 2}"
         android:paddingEnd="@dimen/item_tailing_margin"
-        android:textColor="?attr/colorControlActivated" />
+        android:textColor="?attr/colorControlActivated"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 </layout>

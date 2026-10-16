@@ -31,7 +31,9 @@
         android:layout_height="25dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/icon_ai" />
+        android:src="@drawable/icon_ai"
+                android:contentDescription="@null"
+                />
 
     <!-- 线路信息 -->
     <LinearLayout
@@ -65,7 +67,8 @@
         android:layout_width="24dp"
         android:layout_height="20dp"
         android:src="@drawable/ic_signal_three"
-      />
+                android:contentDescription="@null"
+                />
 
     <!-- 延迟 -->
     <TextView

@@ -114,7 +114,7 @@
             android:name=".NewProfileActivity"
             android:configChanges="uiMode"
             android:exported="false"
-            android:label="@string/create_profile" />
+            android:label="@string/create_profile"  android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".PropertiesActivity"
             android:configChanges="uiMode"
@@ -192,7 +192,7 @@
             android:name=".LoginActivity"
             android:configChanges="uiMode"
             android:exported="false"
-             />
+              android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".SplashActivity"
@@ -219,7 +219,7 @@
             android:configChanges="uiMode"
             android:exported="false"
             android:label="配置订阅"
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".SubmitOrderActivity"
@@ -233,7 +233,7 @@
             android:configChanges="uiMode"
             android:exported="false"
             android:label="兑换码"
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".CashierActivity"
@@ -247,7 +247,7 @@
             android:configChanges="uiMode"
             android:exported="false"
             android:label="在线客服"
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".NoticeActivity"
@@ -261,14 +261,14 @@
             android:configChanges="uiMode"
             android:exported="false"
             android:label="我的工单"
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".NewGongdanActivity"
             android:configChanges="uiMode"
             android:exported="false"
             android:label="新建工单"
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
 
 
@@ -298,13 +298,13 @@
         <activity
             android:name=".WithdrawActivity"
             android:configChanges="uiMode"
-            android:exported="false" />
+            android:exported="false"  android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".TicketDetailActivity"
             android:configChanges="uiMode"
             android:exported="false"
             android:label=""
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
 
 
@@ -313,7 +313,7 @@
             android:configChanges="uiMode"
             android:exported="false"
             android:label="注册"
-            />
+             android:windowSoftInputMode="adjustResize"/>
 
 
         <activity
@@ -325,7 +325,7 @@
 
         <activity
             android:name=".MyCustomersActivity"
-            android:exported="false" />
+            android:exported="false"  android:windowSoftInputMode="adjustResize"/>
 
         <service
             android:name=".LogcatService"
@@ -374,7 +374,7 @@
             android:name=".NewSettingsActivity"
             android:configChanges="uiMode"
             android:exported="false"
-            android:label="设置" />
+            android:label="设置"  android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".TextPageActivity"

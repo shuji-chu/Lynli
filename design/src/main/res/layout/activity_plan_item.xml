@@ -18,7 +18,10 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="@color/text_body"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
         <TextView
             android:id="@+id/amountTextView"
@@ -26,7 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textSize="13sp"
-            android:textColor="@color/primary"/>
+            android:textColor="@color/primary"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
     </LinearLayout>
 </FrameLayout>
 </layout>

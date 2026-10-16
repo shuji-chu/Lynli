@@ -35,7 +35,9 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_baseline_arrow_back"
                     app:tint="@color/text_primary"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -34,7 +34,9 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_baseline_arrow_back"
                     app:tint="@color/icon_default"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                />
 
                 <TextView
                     android:id="@+id/tv_page_title"
@@ -44,7 +46,10 @@
                     android:text="用户协议"
                     android:textColor="@color/text_primary"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -66,7 +71,10 @@
                     android:text=""
                     android:textColor="@color/text_body"
                     android:textSize="14sp"
-                    android:lineSpacingExtra="6dp"/>
+                    android:lineSpacingExtra="6dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

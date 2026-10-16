@@ -48,7 +48,10 @@
                     android:text="支付宝"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="@color/text_primary"/>
+                    android:textColor="@color/text_primary"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
                 <TextView
                     android:id="@+id/amountTextView"
@@ -57,7 +60,10 @@
                     android:layout_marginTop="2dp"
                     android:text="推荐使用支付宝完成支付"
                     android:textSize="11sp"
-                    android:textColor="@color/text_hint"/>
+                    android:textColor="@color/text_hint"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
             </LinearLayout>
 
             <TextView

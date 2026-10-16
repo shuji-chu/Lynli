@@ -24,7 +24,10 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
         <TextView
             android:id="@+id/dialogMessage"

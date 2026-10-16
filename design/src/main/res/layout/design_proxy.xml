@@ -131,7 +131,8 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        />
+                android:contentDescription="@null"
+                />
 
                 </RelativeLayout>
             </com.github.kr328.clash.design.view.ActivityBarLayout>

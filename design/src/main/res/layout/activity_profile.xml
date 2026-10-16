@@ -57,14 +57,18 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/ic_headset"
-                        app:tint="@color/white"/>
+                        app:tint="@color/white"
+                android:contentDescription="@null"
+                />
 
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginStart="4dp"
                         android:src="@drawable/ic_chat_bubble"
-                        app:tint="@color/white"/>
+                        app:tint="@color/white"
+                android:contentDescription="@null"
+                />
                 </LinearLayout>
 
                 <Space
@@ -86,7 +90,9 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:src="@android:drawable/ic_popup_sync"
-                        app:tint="@color/icon_default"/>
+                        app:tint="@color/icon_default"
+                android:contentDescription="@null"
+                />
                 </FrameLayout>
 
                 <FrameLayout
@@ -102,7 +108,9 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_bell"
-                        app:tint="@color/icon_default"/>
+                        app:tint="@color/icon_default"
+                android:contentDescription="@null"
+                />
                 </FrameLayout>
             </LinearLayout>
 
@@ -132,7 +140,9 @@
                         android:src="@drawable/ic_person_tab"
                         android:scaleType="centerCrop"
                         app:tint="@color/primary"
-                        android:background="@drawable/status_container_background"/>
+                        android:background="@drawable/status_container_background"
+                android:contentDescription="@null"
+                />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -148,7 +158,10 @@
                             android:text="易搜用户"
                             android:textColor="@color/text_primary"
                             android:textSize="16sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -361,7 +374,9 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_customer_service"
-                            app:tint="@color/primary"/>
+                            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -397,7 +412,9 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_shopping_cart_24px"
-                            app:tint="@color/primary"/>
+                            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -432,7 +449,9 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_baseline_assignment"
-                            app:tint="@color/primary"/>
+                            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -468,7 +487,9 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_baseline_help_center"
-                            app:tint="@color/primary"/>
+                            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -503,7 +524,9 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_host_24px"
-                            app:tint="@color/primary"/>
+                            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -538,7 +561,9 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_swap_driving_apps_wheel_24px"
-                            app:tint="@color/primary"/>
+                            app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -567,7 +592,10 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:textColor="@color/text_hint"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                />
 
         </LinearLayout>
     </ScrollView>
@@ -598,7 +626,9 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home_tab"
-                app:tint="@color/icon_muted"/>
+                app:tint="@color/icon_muted"
+                android:contentDescription="@null"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -623,7 +653,9 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_plan_tab"
-                app:tint="@color/icon_muted"/>
+                app:tint="@color/icon_muted"
+                android:contentDescription="@null"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -648,7 +680,9 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_person_tab"
-                app:tint="@color/primary"/>
+                app:tint="@color/primary"
+                android:contentDescription="@null"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
