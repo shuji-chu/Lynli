@@ -67,10 +67,8 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
         while (isActive) {
             select<Unit> {
                 events.onReceive {
-                    println("events  : " + it.toString())
                 }
                 design.requests.onReceive {
-                    println("requests  : " + it.toString())
                     when (it) {
 
                         ProfileDesign.Request.OpenBuyPlan -> startActivity(PlansActivity::class.intent)
@@ -127,11 +125,9 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                                     launch {
                                         withProfile {
                                             var allProfiles = queryAll()
-                                            println(allProfiles)
                                             if (allProfiles.isNotEmpty() && allProfiles.count() > 0) {
                                                 allProfiles.forEach {
                                                     delete(it.uuid)
-                                                    println("删除节点：${it.source}")
                                                 }
                                                 //删除所有节点
                                             }
@@ -143,7 +139,6 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
 // 在协程作用域中执行
                                     lifecycleScope.launch(Dispatchers.Main) {
                                         delay(2000)  // 协程延迟2000毫秒（2秒）
-                                        println("协程中的延迟执行")
                                         LoadingDialog.hide()
                                         startActivity(LoginActivity::class.intent)
                                         finish()

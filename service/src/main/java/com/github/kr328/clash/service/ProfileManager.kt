@@ -198,11 +198,11 @@ class ProfileManager(private val context: Context) : IProfileManager,
 
                 PendingDao().remove(new.uuid)
                 context.sendProfileChanged(new.uuid)
-                // println(response.body!!.string())
+                // android.util.Log.d("Lynli", response.body!!.string())
             }
 
         } catch (e: Exception) {
-            System.out.println(e)
+            android.util.Log.e("Lynli", "profile manager error", e)
         }
     }
 

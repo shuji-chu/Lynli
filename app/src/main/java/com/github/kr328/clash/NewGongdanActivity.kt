@@ -27,10 +27,8 @@ class NewGongdanActivity : BaseActivity<HelpDesign>() {
         while (isActive) {
             select<Unit> {
                 events.onReceive {
-                    println("events  : " + it.toString())
                 }
                 design.requests.onReceive {
-                    println("requests  : " + it.toString())
                     when (it) {
                         HelpDesign.Request.CommitSuccess -> {
                             withContext(Dispatchers.Main) {

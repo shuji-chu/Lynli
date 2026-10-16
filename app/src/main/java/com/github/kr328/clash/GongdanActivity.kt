@@ -139,7 +139,6 @@ class GongdanActivity  : BaseListActivity<TicketsData>() {
             val data = result.data
             val resultData = data?.getStringExtra("resultKey")
             // Process the result
-            println("registerForActivityResult : resultData : ${resultData} ")
             if (resultData == "shuaxin"){
 
                 refereshData()

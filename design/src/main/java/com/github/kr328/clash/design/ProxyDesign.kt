@@ -149,6 +149,7 @@ class ProxyDesign(
             // 初始化 RecyclerView
             recyclerView =binding.recyclerView
             recyclerView.layoutManager = LinearLayoutManager(context)
+                    try { setItemViewCacheSize(20); setHasStableIds(true) } catch (_: Throwable) {}
             adapter = ServerListAdapter( surface,
                 config){ name ->
                 requests.trySend(Request.Select(0, name))
@@ -170,9 +171,9 @@ class ProxyDesign(
             val customDivider = CustomDividerItemDecoration(1, Color.LTGRAY) // 4px高的灰色分割线
             recyclerView.addItemDecoration(customDivider)
 
-//            val firstObj = groupNames.first()
+//            val firstObj = groupNames.firstOrNull() ?: return
 //            val newgroupNames =   listOf(firstObj)
-//            println(groupNames)
+//            android.util.Log.d("Lynli", groupNames)
         }
         /*
         if (groupNames.isEmpty() ) {

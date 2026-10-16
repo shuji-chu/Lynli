@@ -96,7 +96,7 @@ class PropertiesActivity : BaseActivity<PropertiesDesign>() {
                                 commit(profile.uuid) {
                                     launch {
                                         withProfile {
-                                            setActive(queryAll().first())
+                                            queryAll().firstOrNull()?.let { setActive(it) }
                                         }
                                         updateStatus(it)
                                     }

@@ -89,6 +89,7 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
         swipeRefreshLayout =binding.baseSwipeRefreshLayout
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+                    try { setItemViewCacheSize(20); setHasStableIds(true) } catch (_: Throwable) {}
         adapter = createAdapter()
         recyclerView.adapter = adapter
 
@@ -144,14 +145,11 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
 
     fun requestRightClick(){
         // 使用安全调用，确保在 onRightClick 不为 null 时执行
-        println("requestRightClick...")
         onRightClick?.invoke()
-        println("requestRightClick invoke()...")
     }
 
     fun setRightButtonVisible(onRightClickEvent: (() -> Unit) ){
 
-        println("setRightButtonVisible...")
         mainBinding?.rightButton?.visibility = View.VISIBLE
         onRightClick = onRightClickEvent
         mainBinding?.rightButton?.setOnClickListener {
@@ -271,7 +269,7 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
             is OrdersDataAdapter -> (adapter as OrdersDataAdapter).setData(data as List<OrderData>)
             is TicketsDataAdapter -> (adapter as TicketsDataAdapter).setData(data as List<TicketsData>)
             is TicketDetailAdapter -> (adapter as TicketDetailAdapter).setData(data as List<TicketMessage>)
-            else -> println("Unknown adapter type.")
+            else -> android.util.Log.d("Lynli", "Unknown adapter type.")
         }
         adapter.notifyDataSetChanged()
     }

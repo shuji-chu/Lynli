@@ -234,7 +234,6 @@ class ConfigOrderDesign (context: Context) : Design<ConfigOrderDesign.Request>(c
 
                     for (j in 0 until binding.container.childCount) {
                         val child = binding.container.getChildAt(j)
-                        println("selectedIndex: ${selectedIndex}  ${ child.background} ")
                         child.background = ContextCompat.getDrawable(
                             context,
                             if (j == selectedIndex) R.drawable.card_border_selected else R.drawable.card_border

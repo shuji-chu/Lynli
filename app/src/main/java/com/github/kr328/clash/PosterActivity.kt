@@ -32,6 +32,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Hashtable
+import com.github.kr328.clash.util.BitmapUtil
 
 class PosterActivity : AppCompatActivity() {
 
@@ -85,7 +86,7 @@ class PosterActivity : AppCompatActivity() {
     }
 
     private fun generatePoster(inviteCode: String): Bitmap {
-        val bg = BitmapFactory.decodeStream(assets.open("haibao.jpg"))
+        val bg = BitmapUtil.decodeSampledStream(assets.open("haibao.jpg"), 1080, 1920)
         val w = bg.width
         val h = bg.height
         val out = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)

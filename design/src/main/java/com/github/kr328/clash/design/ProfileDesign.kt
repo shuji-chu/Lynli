@@ -29,6 +29,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.github.kr328.clash.util.BitmapUtil
 
 class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) {
 
@@ -150,7 +151,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
                 try {
                     val b64 = cachedAv.substringAfter(",")
                     val bytes = android.util.Base64.decode(b64, android.util.Base64.DEFAULT)
-                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    val bmp = BitmapUtil.decodeSampled(bytes, 256, 256)
                     val iv = binding.root.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.iv_profile_avatar)
                     iv?.setImageBitmap(bmp)
                     iv?.imageTintList = null
@@ -174,7 +175,7 @@ class ProfileDesign (context: Context) : Design<ProfileDesign.Request>(context) 
                 try {
                     val b64 = _av.substringAfter(",")
                     val bytes = android.util.Base64.decode(b64, android.util.Base64.DEFAULT)
-                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    val bmp = BitmapUtil.decodeSampled(bytes, 256, 256)
                     val iv = binding.root.findViewById<android.widget.ImageView>(com.github.kr328.clash.design.R.id.iv_profile_avatar)
                     iv?.setImageBitmap(bmp)
                     iv?.imageTintList = null

@@ -250,7 +250,6 @@ class InvitationDesign  (context: Context) : Design<InvitationDesign.Request>(co
                               //  frameLayout.timeTextView.text =   "${formatTimestamp((item.created_at ?: 0) * 1000L)}"
 
                                 frameLayout.planitemFrameLayout.setOnClickListener {
-                                    println("click ${item}")
                                     launch {
                                         this@InvitationDesign.copytoSys(item.code ?: "")
                                     }

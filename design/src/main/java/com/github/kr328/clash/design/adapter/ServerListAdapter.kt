@@ -76,7 +76,6 @@ class ServerListAdapter(private val surface: Surface,
         }
 
        /* states.forEach {
-            println(">>>>> ${it.proxy.title}  ${it.proxy.subtitle}    ${it.proxy.type.name}  ${it.proxy.delay}")
         }*/
         val newstates =  states.filterNot {
             it.proxy.title.uppercase() == "DIRECT"

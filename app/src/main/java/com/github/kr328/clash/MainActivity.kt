@@ -187,9 +187,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                                 create(Profile.Type.Url, _pname).also { patch(it, _pname, _url, 0) }
                             }
                             withProfile { try { commit(_u) { } } catch (_: Throwable) {} }
-                            println("[prefetch] ok: " + _u)
                         }
-                    } catch (e: Throwable) { println("[prefetch] err: " + e.message) }
+                    } catch (e: Throwable) { android.util.Log.d("Lynli", "[prefetch] err: " + e.message) }
                 }
             } catch (_: Throwable) {}
 
@@ -223,20 +222,15 @@ class MainActivity : BaseActivity<MainDesign>() {
                 // 使用缓存数据
                 val gson = Gson()
                 val configResponse =  gson.fromJson(PreferenceManager.cached_data, ConfigResponse::class.java)
-                println(configResponse)
-                println("Using cached data: ${PreferenceManager.cached_data}")
-                println("Using cached_userSubscritedata  : ${PreferenceManager.cached_userSubscritedata}")
                 if (PreferenceManager.cached_userSubscritedata.length > 0){
                     val subcache =  gson.fromJson(PreferenceManager.cached_userSubscritedata, SubscribeResponse::class.java)
 
                     // 用缓存更新流量卡（避免 5 分钟内进 APP 显示旧数据）
                     try {
                         val _d = subcache.data
-                        println("[traffic-cache] data=" + (_d != null))
                         if (_d != null) {
                             val _used = (_d.u ?: 0) + (_d.d ?: 0)
                             val _total = _d.transfer_enable ?: 0
-                            println("[traffic-cache] used=$_used total=$_total")
                             design?.setUserTraffic(_used.toLong(), _total.toLong())
                             try {
                                 val pName = _d.plan?.name ?: "标准套餐"
@@ -249,7 +243,6 @@ class MainActivity : BaseActivity<MainDesign>() {
                             } catch (_: Throwable) {}
                         }
                     } catch (e: Throwable) {
-                        println("[traffic-cache] err: " + e.message)
                     }
                     subData =  subcache.data
 
@@ -262,12 +255,10 @@ class MainActivity : BaseActivity<MainDesign>() {
                         //删除所有节点
                         withProfile {
                             var allProfiles = queryAll()
-                            println(allProfiles)
                             //删除所有节点
                             if (allProfiles.isNotEmpty() && allProfiles.count() > 0){
                                 allProfiles.forEach {
                                     delete(it.uuid)
-                                    println("Deleted ${it.uuid} ${it.name}: ${it.source}")
                                 }
                             }
 
@@ -280,13 +271,11 @@ class MainActivity : BaseActivity<MainDesign>() {
 
                 }
 
-                println("subData ： ${subData}")
 
 
 
             }else{
                 // 缓存已过期，后台静默刷新（不弹窗，避免打扰用户）
-                println("Cache expired, silent refresh")
                 configRequesting()
 
             }
@@ -470,7 +459,6 @@ class MainActivity : BaseActivity<MainDesign>() {
         val env = try {
             safeApiCall { apiService.getConfig() }
         } catch (e: Exception) {
-            println("getConfig 异常: " + e.message)
             null
         }
         if (env != null && env.code == 1) {
@@ -478,12 +466,9 @@ class MainActivity : BaseActivity<MainDesign>() {
                 PreferenceManager.saveConfigToPreferences(env)
                 PreferenceManager.cache_timestamp = currentTime
                 PreferenceManager.cached_data = gson.toJson(env)
-                println("config 网络获取成功")
             } catch (e: Exception) {
-                println("saveConfig 异常: " + e.message)
             }
         } else {
-            println("config 网络失败，走兜底")
             var restored = false
             try {
                 val cached = PreferenceManager.cached_data
@@ -492,31 +477,25 @@ class MainActivity : BaseActivity<MainDesign>() {
                     if (cfg != null && cfg.baseURL.isNotEmpty()) {
                         PreferenceManager.saveConfigToPreferences(cfg)
                         restored = true
-                        println("已从缓存恢复 config")
                     }
                 }
             } catch (e: Exception) {
-                println("缓存恢复异常: " + e.message)
             }
             if (!restored) {
                 try {
                     PreferenceManager.saveConfigToPreferences(ConfigResponse(baseURL = "https://lynli.kz.ci"))
-                    println("使用默认 config 兜底")
                 } catch (e: Exception) {
-                    println("默认 config 异常: " + e.message)
                 }
             }
         }
         try {
             withContext(Dispatchers.Main) { LoadingDialog.hide() }
         } catch (e: Exception) {
-            println("hide loading 异常: " + e.message)
         }
         try {
             performSubscrite()
             loadNodeLocation()
         } catch (e: Exception) {
-            println("performSubscrite 异常: " + e.message)
         }
     }
 
@@ -567,7 +546,6 @@ class MainActivity : BaseActivity<MainDesign>() {
                 }
                 if (it != null &&
                     it.isSuccessful) {
-                    println(" performSubscrite : ${it.body()?.data}")
                     subData = it.body()?.data
 
                     // 首页流量卡片：显示真实已用/总量/百分比
@@ -598,7 +576,6 @@ class MainActivity : BaseActivity<MainDesign>() {
                         //删除所有节点
                         withProfile {
                             var allProfiles = queryAll()
-                            println(allProfiles)
                             if (allProfiles.isNotEmpty() && allProfiles.count() > 1){
                                 allProfiles.forEach { delete(it.uuid) }
                                //删除所有节点
@@ -614,13 +591,10 @@ class MainActivity : BaseActivity<MainDesign>() {
                             var profileActive = queryActive()
                             if (profileActive != null){
                                 try {
-                                    println(">>>>>>>>> 更新节点订阅地址：${profileActive.uuid}  ${profileActive.source}")
                                     update(profileActive.uuid)
                                 }catch (e: Exception){
-                                    println(">>>>>>>>> 更新节点订阅地址 catch：${e.message}")
                                 }
                                 finally {
-                                    println(">>>>>>>>> 更新节点订阅地址 完成 finally")
                                 }
                             }
 
@@ -642,15 +616,13 @@ class MainActivity : BaseActivity<MainDesign>() {
             queryTunnelState()
         }
 
-        println("运行时查询系统mode模式： ${state}")
 
         val providers = withClash {
             queryProviders()
         }
 
         if (providers.isNotEmpty()) {
-            println("模式providers： ${providers}")
-            providers.forEach { println("The element is ${it.name}") }
+            providers.forEach { android.util.Log.d("Lynli", "The element is ${it.name}") }
         }
 
         setMode(state.mode)
@@ -690,7 +662,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 //        }
         val activeProfile = withProfile { queryActive() }
         _log("startClash activeProfile=" + activeProfile)
-        println("当前订阅文件：${activeProfile}")
         if (activeProfile == null ) { //|| !activeProfile.imported
 
             LoadingDialog.show(this@MainActivity, "正在请求节点数据...")
@@ -699,7 +670,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
             //create(Profile.Type.Url, "VPN")
             withProfile{
-                println(">>>>>>>>>${subData}")
                 //https://hongxingdl.com/hxvip?token=bc2f2839ccc608f34d6a6fc90b6e7f15
                 //https://hongxingdl.com/api/v1/client/subscribe?token=bc2f2839ccc608f34d6a6fc90b6e7f15
                 //"https://api.0009.uk/api/v1/client/subscribe?token=5652e3eec20c553047dbe3fcf8754090"
@@ -709,12 +679,10 @@ class MainActivity : BaseActivity<MainDesign>() {
                     encodeURL =  encodeURL.replace("?","%3F")
                     var newULR =suburl
 
-                    println(">>>>>>>>> "+suburl)
                     if( ApiClientConfig.ConfigNodeURL.length > 3){
                         newULR = ApiClientConfig.ConfigNodeURL + encodeURL
                     }
 
-                    println(">>>>>>>>> "+newULR)
 
                     //val uuid: UUID = create(Profile.Type.Url,subData?.plan?.name ?: "VPN",newULR)
 
@@ -751,7 +719,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
                        /* coroutineScope {
                             commit(uuid2) {
-                                println(">>>>>>>>>> ${it.progress}  ${it.action}  ${it.args.toString()} ${it} ")
                                 if (it.action == FetchStatus.Action.Verifying){
                                     // 在协程中启动 activeProfile 调用
 
@@ -771,7 +738,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
 
                     /* commit(uuid){
-                       println(">> ${it.progress}  ${it.action}  ${it.args.toString()} ")
                         if (it.action == FetchStatus.Action.Verifying){
                             // 在协程中启动 activeProfile 调用
                             CoroutineScope(Dispatchers.IO).launch {
@@ -817,7 +783,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 //            }
 
             _log("startClash hasProfile -> startServer")
-            println("当前订阅文件>> ${activeProfile.type.name}  ${activeProfile.uuid} ${activeProfile.imported} ")
             // ===== 订阅自动更新：超过 12 小时就静默拉新 =====
             try {
                 val intervalMs = 12L * 3600 * 1000
@@ -857,7 +822,6 @@ class MainActivity : BaseActivity<MainDesign>() {
 
             executeTask {
                     // applyFrom(it)
-                    println("applyFrom ${it.progress}  ${it}")
                 if (it.action == FetchStatus.Action.Verifying) {
                     //验证通过
                     CoroutineScope(Dispatchers.IO).launch {
@@ -909,7 +873,6 @@ class MainActivity : BaseActivity<MainDesign>() {
                 _log("startServer vpn already granted")
             }
 
-            println("缓存配置模式：${PreferenceManager.modeName}")
             CoroutineScope(Dispatchers.Main).launch {
                 withClash {
                     _log("startServer withClash begin")
@@ -921,15 +884,12 @@ class MainActivity : BaseActivity<MainDesign>() {
                         override.mode = TunnelState.Mode.Rule
                     }
                     patchOverride(Clash.OverrideSlot.Session, override)
-                    println("模式切换 Clash mode is now set to: " + override.mode)
 
                     val names = queryProxyGroupNames(uiStore.proxyExcludeNotSelectable)
-                    println("模式切换>>>>>>>>>>>>>" + names)
                     if (names.size > 0) {
                         var progxys = queryProxyGroup(names[0], ProxySort.Default)
 
-                        if (progxys.proxies.first().title.length > 0) {
-                            println("模式切换>>>>>>>>>>>>>: " + progxys.proxies.last())
+                        if (progxys.proxies.isNotEmpty() && progxys.proxies.first().title.length > 0) {
                             if (progxys.proxies.size > 2) {
                                 val zutuolist = progxys.proxies.filter { it.title == "自动选择" }
                                 var autoNode = ""
@@ -939,11 +899,11 @@ class MainActivity : BaseActivity<MainDesign>() {
                                     if (zutuolist.size > 0) {
                                         autoNode = "自动选择"
                                     } else {
-                                        autoNode = progxys.proxies.first().title
+                                        autoNode = progxys.proxies.firstOrNull()?.title ?: ""
                                     }
                                     PreferenceManager.selectnodeName = autoNode
                                 }
-                                patchSelector(names.first(), autoNode)
+                                names.firstOrNull()?.let { patchSelector(it, autoNode) }
                                 withContext(Dispatchers.Main) {
                                     design?.setSelectNodeName(PreferenceManager.selectnodeName)
                                 }
@@ -1000,7 +960,7 @@ class MainActivity : BaseActivity<MainDesign>() {
 
     private suspend fun activeProfile(){
         withProfile {
-            setActive(queryAll().first())
+            queryAll().firstOrNull()?.let { setActive(it) }
         }
 
     }

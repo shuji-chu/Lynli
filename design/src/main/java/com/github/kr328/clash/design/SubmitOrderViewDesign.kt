@@ -165,7 +165,6 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                         //继续获取支付方式
                         safeApiRequestCall { apiService.getPaymentList(PreferenceManager.loginauthData)}.let {
                             if(it != null && it.isSuccessful){
-                                println("${it.body()}")
                                 withContext(Dispatchers.Main) {
                                     it.body().let {
                                         it?.data.let {
@@ -205,7 +204,6 @@ class SubmitOrderViewDesign  (context: Context) : Design<SubmitOrderViewDesign.R
                                                         for (j in 0 until binding.container.childCount) {
                                                             val child =
                                                                 binding.container.getChildAt(j)
-                                                            println("selectedIndex: ${selectedIndex}  ${child.background} ")
                                                             child.background =
                                                                 ContextCompat.getDrawable(
                                                                     context,

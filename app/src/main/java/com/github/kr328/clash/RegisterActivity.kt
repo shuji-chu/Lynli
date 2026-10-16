@@ -37,6 +37,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
+import com.github.kr328.clash.util.BitmapUtil
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -187,7 +188,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun showCaptchaDialog(cid: String, imgDataUrl: String, hint: String, w: Int, h: Int) {
         val b64 = imgDataUrl.substringAfter(",")
         val bytes = android.util.Base64.decode(b64, android.util.Base64.DEFAULT)
-        val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        val bmp = BitmapUtil.decodeSampled(bytes, 256, 256)
         if (bmp == null) {
             Toast.makeText(this, "验证码图片解析失败", Toast.LENGTH_SHORT).show()
             return

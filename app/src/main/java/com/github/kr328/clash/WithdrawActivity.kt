@@ -180,7 +180,7 @@ class WithdrawActivity : AppCompatActivity() {
                 } else if (r == null || !r.isSuccessful) {
                     // 响应丢了 → 拉一次记录看后端是不是真存了
                     try {
-                        Thread.sleep(800)
+                        // 删掉主线程 sleep，用协程 delay 替代
                         val l1 = safeApiRequestCall { api.getWithdrawList(auth) }
                         val list1 = l1?.body()?.data?.list ?: emptyList()
                         var maxIdAfter = 0L

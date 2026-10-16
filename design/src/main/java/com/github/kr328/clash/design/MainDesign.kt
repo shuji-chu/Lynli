@@ -244,7 +244,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                 pb?.progressTintList = android.content.res.ColorStateList.valueOf(
                     android.graphics.Color.parseColor(colorHex)
                 )
-            } catch (e: Throwable) { println("[setUserTraffic] err: " + e.message) }
+            } catch (e: Throwable) { android.util.Log.d("Lynli", "[setUserTraffic] err: " + e.message) }
         }
     }
 

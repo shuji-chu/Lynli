@@ -392,8 +392,6 @@ class LoginActivity : AppCompatActivity() {
                 if (it != null &&
                     it.isSuccessful) {
                     val response: LoginResponse? = it.body()
-                    println(response )
-                    println(it.errorBody()?.string()  ?: "")
                     if (response?.data != null){
                         PreferenceManager.loginemail = email
                         PreferenceManager.loginToken =  response.data?.token ?: ""

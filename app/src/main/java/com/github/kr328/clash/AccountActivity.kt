@@ -23,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
+import com.github.kr328.clash.util.BitmapUtil
 
 class AccountActivity : AppCompatActivity() {
 
@@ -73,7 +74,7 @@ class AccountActivity : AppCompatActivity() {
                         try {
                             val base64 = av.substringAfter(",")
                             val bytes = Base64.decode(base64, Base64.DEFAULT)
-                            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                            val bmp = BitmapUtil.decodeSampled(bytes, 256, 256)
                             ivAvatar.setImageBitmap(bmp)
                             ivAvatar.imageTintList = null
                         } catch (_: Throwable) {}
@@ -188,7 +189,7 @@ class AccountActivity : AppCompatActivity() {
             val uri = data.data!!
             try {
                 val input = contentResolver.openInputStream(uri) ?: return
-                val bmp = BitmapFactory.decodeStream(input)
+                val bmp = BitmapUtil.decodeSampledStream(input, 256, 256)
                 input.close()
                 // 缩放
                 val maxSize = 256

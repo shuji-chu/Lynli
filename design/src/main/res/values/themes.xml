@@ -113,6 +113,7 @@
     </style>
 
     <style name="AppThemeLightBase" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/LynliActivityAnim</item>
         <item name="android:windowBackground">@color/color_light_background</item>
         <item name="android:ambientShadowAlpha">0.08</item>
         <item name="android:spotShadowAlpha">0.08</item>
@@ -135,6 +136,7 @@
     </style>
 
     <style name="AppThemeDarkBase" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/LynliActivityAnim</item>
         <item name="android:windowBackground">@color/color_dark_background</item>
         <item name="android:ambientShadowAlpha">0.08</item>
         <item name="android:spotShadowAlpha">0.08</item>
@@ -158,12 +160,21 @@
     </style>
 
     <style name="AppThemeLight" parent="AppThemeLightBase">
+        <item name="android:windowAnimationStyle">@style/LynliActivityAnim</item>
         <item name="android:statusBarColor">@color/color_system_ui_overlay</item>
         <item name="android:navigationBarColor">@color/color_system_ui_overlay</item>
     </style>
 
     <style name="AppThemeDark" parent="AppThemeDarkBase">
+        <item name="android:windowAnimationStyle">@style/LynliActivityAnim</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="LynliActivityAnim" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 </resources>

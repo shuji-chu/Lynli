@@ -15,6 +15,7 @@ import kotlin.reflect.KMutableProperty0
 
 fun RecyclerView.applyLinearAdapter(context: Context, adapter: RecyclerView.Adapter<*>) {
     this.layoutManager = LinearLayoutManager(context)
+                    try { setItemViewCacheSize(20); setHasStableIds(true) } catch (_: Throwable) {}
     this.adapter = adapter
 }
 

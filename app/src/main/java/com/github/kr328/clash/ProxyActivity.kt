@@ -39,10 +39,10 @@ class ProxyActivity : BaseActivity<ProxyDesign>() {
         setContentDesign(design)
 
 
-        //刷新所以Groups
-        //design.requests.send(ProxyDesign.Request.ReloadAll)
-
-        design.requests.send(ProxyDesign.Request.Reload(0))
+        //刷新所有Groups（names 空则跳过，防止 names[0] 崩）
+        if (names.isNotEmpty()) {
+            design.requests.send(ProxyDesign.Request.Reload(0))
+        }
 
         while (isActive) {
             select<Unit> {
@@ -76,6 +76,10 @@ class ProxyActivity : BaseActivity<ProxyDesign>() {
                         }
                         is ProxyDesign.Request.Reload -> {
                             launch {
+                                // 索引越界保护
+                                if (it.index < 0 || it.index >= names.size) {
+                                    return@launch
+                                }
                                 design.urlTesting = false
                                 val group = reloadLock.withPermit {
                                     withClash {
@@ -85,11 +89,13 @@ class ProxyActivity : BaseActivity<ProxyDesign>() {
                                 var state = states[it.index]
 
 
-                                println(">>>>>>>>>>>> ${names}")
-                                println(">>>>>>>>>>>> ${it.index} group: "+group + "  ${group.type.name}  ${group.proxies.size}")
+
+                                // 空列表直接返回，避免 first() 崩
+                                if (group.proxies.isEmpty()) {
+                                    return@launch
+                                }
 
                                 if (group.proxies.first().name == "GLOBAL"){
-                                    println(">>>>>>>>>>>> GLOBAL ")
                                 }
 
                                 if (PreferenceManager.selectnodeName.length  > 0){
@@ -98,8 +104,6 @@ class ProxyActivity : BaseActivity<ProxyDesign>() {
                                     state.now =  group.now
                                 }
 
-                                println(">>>>>>>>>>>>unorderedStates : ${unorderedStates}")
-                                println(">>>>>>>>>>>> state: "+state)
                                 //PreferenceManager.selectnodeName  =  state.now //刷新目前使用的节点名称
 //                                >>>>>>>>>>>> state: ProxyState(now=?)
 //                                >>>>>>>>>>>> 0 group: 距离下次重置剩余：18 天  Selector
@@ -136,6 +140,7 @@ class ProxyActivity : BaseActivity<ProxyDesign>() {
                             }
                         }
                         is ProxyDesign.Request.Select -> {
+                            if (it.index < 0 || it.index >= names.size) return@onReceive
                             withClash {
                                 patchSelector(names[it.index], it.name)
                                 states[it.index].now = it.name
@@ -148,6 +153,7 @@ class ProxyActivity : BaseActivity<ProxyDesign>() {
                         }
                         is ProxyDesign.Request.UrlTest -> {
                             launch {
+                                if (it.index < 0 || it.index >= names.size) return@launch
                                 withClash {
                                     healthCheck(names[it.index])
                                 }

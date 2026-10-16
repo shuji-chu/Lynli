@@ -202,17 +202,13 @@ suspend fun <T> safeApiCall(
         if (response.isSuccessful) {
             response.body()
         } else {
-            println("请求失败，错误码: ${response.code()}")
             null
         }
     } catch (e: TimeoutException) {
-        println("请求超时，请检查网络连接: ${e.message}")
         null
     } catch (e: IOException) {
-        println("网络错误，请检查网络连接: ${e.message}")
         null
     } catch (e: Exception) {
-        println("未知错误: ${e.message}")
         null
     }
 }
@@ -229,17 +225,13 @@ suspend fun <T> safeApiRequestCall(
         if (response.isSuccessful) {
             response
         } else {
-            println("请求失败，错误码: ${response.code()}")
             response
         }
     } catch (e: TimeoutException) {
-        println("请求超时，请检查网络连接: ${e.message}")
         null
     } catch (e: IOException) {
-        println("网络错误，请检查网络连接: ${e.message}")
         null
     } catch (e: Exception) {
-        println("未知错误: ${e.message}")
         null
     }
 }
