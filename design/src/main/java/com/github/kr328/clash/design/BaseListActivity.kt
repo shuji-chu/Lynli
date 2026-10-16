@@ -23,6 +23,7 @@ import com.github.kr328.clash.design.databinding.ActivityBaseListBinding
 // import com.github.kr328.clash.design.databinding.DesignSettingsCommonBinding
 import com.github.kr328.clash.design.ui.DayNight
 import com.github.kr328.clash.design.ui.Surface
+import com.github.kr328.clash.design.util.MemoryCache
 import com.github.kr328.clash.design.util.applyFrom
 // import com.github.kr328.clash.design.util.layoutInflater
 import com.github.kr328.clash.design.util.resolveThemedBoolean
@@ -129,6 +130,14 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
             }
         } catch (_: Throwable) {}
 
+        // 内存缓存：先展示上次数据，秒开
+        try {
+            val cached = MemoryCache.get<List<T>>(this::class.java.name + "#page1")
+            if (!cached.isNullOrEmpty()) {
+                initList(cached)
+            }
+        } catch (_: Throwable) {}
+
         refereshData()
 
     }
@@ -222,6 +231,7 @@ abstract class BaseListActivity<T> : AppCompatActivity() {
         if (data.isNullOrEmpty()) {
             showEmptyDataToast()
         } else {
+            try { MemoryCache.put(this::class.java.name + "#page1", data) } catch (_: Throwable) {}
             updateAdapterDataOnUiThread(data)
         }
     }
