@@ -53,6 +53,8 @@ class MainApplication : Application() {
                     "TIME: ${java.util.Date()}\nPROC: ${currentProcessName}\nTHREAD: ${__t.name}\n\n${__e.stackTraceToString()}"
                 )
             } catch (_: Exception) {}
+            // 静默上报到后端（不阻塞主线程、网络失败无感）
+            try { reportCrashToServer(__t.name, __e.stackTraceToString()) } catch (_: Throwable) {}
 
             // 网络类异常全部静默，不闪退
             val __n = __e.javaClass.name
@@ -144,6 +146,43 @@ class MainApplication : Application() {
                 assets.open("ASN.mmdb").copyTo(it);
             }
         }
+    }
+
+    private fun reportCrashToServer(thread: String, stack: String) {
+        Thread {
+            try {
+                val ver = try {
+                    packageManager.getPackageInfo(packageName, 0).versionName ?: "?"
+                } catch (_: Throwable) { "?" }
+                val dev = android.os.Build.MODEL ?: "?"
+                val token = try {
+                    com.github.kr328.clash.design.PreferenceManager.loginToken ?: ""
+                } catch (_: Throwable) { "" }
+
+                val base = com.github.kr328.clash.network.ApiClientConfig.activeBaseUrl
+                val url = base.trimEnd('/') + "/crash/report"
+
+                val json = org.json.JSONObject().apply {
+                    put("stack", stack.take(8000))
+                    put("ver", ver)
+                    put("device", dev)
+                    put("thread", thread)
+                }.toString()
+
+                val conn = java.net.URL(url).openConnection() as java.net.HttpURLConnection
+                conn.requestMethod = "POST"
+                conn.connectTimeout = 8000
+                conn.readTimeout = 8000
+                conn.doOutput = true
+                conn.setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                if (!token.isNullOrEmpty()) {
+                    conn.setRequestProperty("Authorization", "Bearer $token")
+                }
+                conn.outputStream.use { it.write(json.toByteArray(Charsets.UTF_8)) }
+                conn.responseCode
+                conn.disconnect()
+            } catch (_: Throwable) {}
+        }.apply { isDaemon = true }.start()
     }
 
     fun finalize() {
