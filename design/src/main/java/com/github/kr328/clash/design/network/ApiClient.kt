@@ -14,11 +14,52 @@ import java.util.concurrent.CountDownLatch
 
 
 object ApiClient {
+    private val INFLIGHT = HashMap<String, ByteArray>()
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
+        // 请求去重：GET 3 秒内同 URL 只发一次（缓存字节，命中时构造新 Response）
+        .addInterceptor { chain ->
+            val req = chain.request()
+            val key = req.method + "|" + req.url.toString()
+            val map = INFLIGHT
+
+            // 命中：构造全新 Response（body 用缓存字节）
+            if (req.method == "GET") {
+                val cached = synchronized(map) { map[key] }
+                if (cached != null) {
+                    return@addInterceptor okhttp3.Response.Builder()
+                        .request(req)
+                        .protocol(okhttp3.Protocol.HTTP_1_1)
+                        .code(200)
+                        .message("OK")
+                        .body(cached.toResponseBody("application/json".toMediaType()))
+                        .build()
+                }
+            }
+
+            val resp = chain.proceed(req)
+
+            // 只缓存 GET 200 的 body 字节
+            if (req.method == "GET" && resp.code == 200) {
+                val bytes = try { resp.body?.bytes() } catch (_: Throwable) { null }
+                if (bytes != null) {
+                    synchronized(map) {
+                        map[key] = bytes
+                        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                            synchronized(map) { map.remove(key) }
+                        }, 3000)
+                    }
+                    // 原 body 已被读掉，用 bytes 重建
+                    return@addInterceptor resp.newBuilder()
+                        .body(bytes.toResponseBody(resp.body?.contentType()))
+                        .build()
+                }
+            }
+            resp
+        }
         .apply {
             try {
                 val ctx = com.github.kr328.clash.design.util.AppContext.getOrNull()

@@ -11,7 +11,6 @@ import com.github.kr328.clash.design.ProxyDesign
 import com.github.kr328.clash.design.model.ProxyState
 import com.github.kr328.clash.util.withClash
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch

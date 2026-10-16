@@ -16,13 +16,13 @@ import com.github.kr328.clash.util.stopClashService
 import com.github.kr328.clash.util.withProfile
 import com.github.kr328.clash.utity.LoadingDialog
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.selects.select
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
+import androidx.lifecycle.lifecycleScope
 
 
 class ProfileActivity  : BaseActivity<ProfileDesign>()  {
@@ -52,7 +52,7 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
 
         // 30 秒自动刷新订阅数据（实时）
         subscribeJob?.cancel()
-        subscribeJob = GlobalScope.launch(Dispatchers.IO) {
+        subscribeJob = lifecycleScope.launch(Dispatchers.IO) {
             while (isActive) {
                 delay(30_000)
                 try {
@@ -140,7 +140,7 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
 
                                     //2s 后执行
 // 在协程作用域中执行
-                                    GlobalScope.launch(Dispatchers.Main) {
+                                    lifecycleScope.launch(Dispatchers.Main) {
                                         delay(2000)  // 协程延迟2000毫秒（2秒）
                                         println("协程中的延迟执行")
                                         LoadingDialog.hide()

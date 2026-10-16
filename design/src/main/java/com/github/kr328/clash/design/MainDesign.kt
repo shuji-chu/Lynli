@@ -437,7 +437,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) ,PopupM
                 }
 
                 // 3 秒自动轮播
-                kotlinx.coroutines.GlobalScope.launch(kotlinx.coroutines.Dispatchers.Main) {
+                launch(kotlinx.coroutines.Dispatchers.Main) {
                     var __idx = 0
                     while (true) {
                         kotlinx.coroutines.delay(3000)

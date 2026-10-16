@@ -20,7 +20,6 @@ import com.github.kr328.clash.design.util.firstVisibleView
 import com.github.kr328.clash.design.util.invalidateChildren
 import com.github.kr328.clash.design.util.swapDataSet
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.withContext
 import okhttp3.internal.filterList
 

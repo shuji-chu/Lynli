@@ -25,7 +25,6 @@ import com.github.kr328.clash.network.TicketMessage
 import com.github.kr328.clash.network.safeApiRequestCall
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URLEncoder

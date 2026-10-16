@@ -26,7 +26,6 @@ import com.github.kr328.clash.utity.LoadingDialog
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -252,13 +251,13 @@ class InvitationDesign  (context: Context) : Design<InvitationDesign.Request>(co
 
                                 frameLayout.planitemFrameLayout.setOnClickListener {
                                     println("click ${item}")
-                                    GlobalScope.launch {
+                                    launch {
                                         this@InvitationDesign.copytoSys(item.code ?: "")
                                     }
 
                                 }
                                 frameLayout.copyInvitecodeButton.setOnClickListener {
-                                    GlobalScope.launch {
+                                    launch {
                                         this@InvitationDesign.copytoSys(item.code ?: "")
 
                                     }

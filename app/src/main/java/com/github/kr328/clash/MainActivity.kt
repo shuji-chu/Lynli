@@ -310,10 +310,14 @@ class MainActivity : BaseActivity<MainDesign>() {
                             }
                             MainDesign.Request.ToggleStatus -> {
                                 _log("ToggleStatus clashRunning=" + clashRunning)
-                                if (clashRunning)
+                                if (clashRunning) {
+                                    // 乐观更新：点击立即切 UI
+                                    this@MainActivity.launch { try { design?.setClashRunning(false) } catch (_: Throwable) {} }
                                     stopClashService()
-                                else
+                                } else {
+                                    this@MainActivity.launch { try { design?.setClashRunning(true) } catch (_: Throwable) {} }
                                     design.startClash()
+                                }
                             }
                             MainDesign.Request.OpenProxy ->
                                 startActivity(ProxyActivity::class.intent)
