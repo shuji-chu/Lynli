@@ -192,8 +192,16 @@ class ChatActivity : AppCompatActivity() {
                 api.chatSend(PreferenceManager.loginauthData, mapOf("content" to text))
             }.let { resp ->
                 if (resp == null || !resp.isSuccessful || resp.body()?.code != 1) {
+                    val detail = buildString {
+                        append("发送失败")
+                        if (resp == null) append(" [null]")
+                        else {
+                            append(" HTTP=" + resp.code())
+                            try { append(" body=" + (resp.errorBody()?.string() ?: resp.body()?.message ?: "")) } catch (_: Throwable) {}
+                        }
+                    }
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(this@ChatActivity, "发送失败", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@ChatActivity, detail, Toast.LENGTH_LONG).show()
                     }
                 } else {
                     delay(2500)
