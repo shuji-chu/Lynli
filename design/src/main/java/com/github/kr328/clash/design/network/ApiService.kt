@@ -518,6 +518,7 @@ data class ConfigResponse (
     val websiteURL: String = "",
     @SerializedName("mivraUrl") val mivraurl: String = "",
     val appDownloadUrl: String = "",
+    val speedtestUrl: String = "",
     val siteName: String = "",
     val crisptoken: String = "",
     val banners: List<BannerData>? = null,

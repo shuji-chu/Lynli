@@ -161,7 +161,11 @@ class ProfileActivity  : BaseActivity<ProfileDesign>()  {
                         )//  startActivity(NetworkSettingsActivity::class.intent)
                         ProfileDesign.Request.OpenMyGongdan ->startActivity(GongdanActivity::class.intent)
                         ProfileDesign.Request.OpenCustomViewIPtest -> startActivity(android.content.Intent(this@ProfileActivity, IpQueryActivity::class.java))
-                        ProfileDesign.Request.OpenCustomViewSpeed ->  startActivity(H5WebActivity::class.intent.putExtra("url","https://fast.com/"))
+                        ProfileDesign.Request.OpenCustomViewSpeed -> {
+                            val _spdCfg = com.github.kr328.clash.design.PreferenceManager.getConfigFromPreferences(this@ProfileActivity)
+                            val _spdUrl = if (!_spdCfg?.speedtestUrl.isNullOrEmpty()) _spdCfg!!.speedtestUrl!! else "https://fast.com/"
+                            startActivity(H5WebActivity::class.intent.putExtra("url", _spdUrl))
+                        }
                         ProfileDesign.Request.OpenTabHome -> {
                             startActivity(android.content.Intent(this@ProfileActivity, MainActivity::class.java).apply {
                                 addFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)

@@ -122,6 +122,10 @@ object PreferenceManager {
         editor.putString("websiteURL", configResponse.websiteURL)
         editor.putString("crisptoken", configResponse.crisptoken)
         editor.putString("banners", Gson().toJson(configResponse.banners ?: emptyList<BannerData>()))
+        // 这些字段原来漏存了，导致 APP 只能走 fallback 硬编码
+        editor.putString("mivraurl", configResponse.mivraurl)
+        editor.putString("appDownloadUrl", configResponse.appDownloadUrl)
+        editor.putString("speedtestUrl", configResponse.speedtestUrl)
 
         // Apply changes
         editor.apply()
@@ -140,6 +144,9 @@ object PreferenceManager {
         val kefuurl = prefs.getString("kefuurl", null) ?: ""
         val websiteURL = prefs.getString("websiteURL", null) ?: ""
         val crisptoken = prefs.getString("crisptoken", null) ?: ""
+        val mivraurl = prefs.getString("mivraurl", null) ?: ""
+        val appDownloadUrl = prefs.getString("appDownloadUrl", null) ?: ""
+        val speedtestUrl = prefs.getString("speedtestUrl", null) ?: ""
         val bannersString = prefs.getString("banners", null) ?: "[]"
         val banners: List<BannerData> = try {
             Gson().fromJson(bannersString, object : TypeToken<List<BannerData>>() {}.type)
@@ -156,6 +163,9 @@ object PreferenceManager {
             kefuurl = kefuurl,
             websiteURL = websiteURL,
             crisptoken = crisptoken,
+            mivraurl = mivraurl,
+            appDownloadUrl = appDownloadUrl,
+            speedtestUrl = speedtestUrl,
             banners = banners, message = "", code = 1
         )
     }
