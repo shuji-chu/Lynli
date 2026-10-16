@@ -31,6 +31,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        com.github.kr328.clash.design.util.AppContext.init(this)
         try {
             val mode = com.github.kr328.clash.design.PreferenceManager.darkMode
             val nightMode = when (mode) {

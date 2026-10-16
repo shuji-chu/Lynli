@@ -18,8 +18,18 @@ object ApiClient {
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
+        .cache(okhttp3.Cache(java.io.File(com.github.kr328.clash.design.util.AppContext.ctx.cacheDir, "http_cache"), 10L * 1024 * 1024))
+        .addInterceptor { chain ->
+            var req = chain.request()
+            // 无网时用缓存
+            val hasNet = NetCheck.isOnline(com.github.kr328.clash.design.util.AppContext.ctx)
+            req = req.newBuilder()
+                .header("Cache-Control", if (hasNet) "public, max-age=60" else "public, only-if-cached, max-stale=604800")
+                .build()
+            chain.proceed(req)
+        }
         .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = HttpLoggingInterceptor.Level.BASIC
         })
         .addInterceptor { chain ->
             if (PreferenceManager.loginToken == "demo-token") {
