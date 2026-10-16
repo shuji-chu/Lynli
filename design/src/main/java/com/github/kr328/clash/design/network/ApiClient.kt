@@ -18,14 +18,16 @@ object ApiClient {
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
-        .cache(okhttp3.Cache(java.io.File(com.github.kr328.clash.design.util.AppContext.ctx.cacheDir, "http_cache"), 10L * 1024 * 1024))
+        .apply {
+            try {
+                val ctx = com.github.kr328.clash.design.util.AppContext.getOrNull()
+                if (ctx != null) {
+                    cache(okhttp3.Cache(java.io.File(ctx.cacheDir, "http_cache"), 10L * 1024 * 1024))
+                }
+            } catch (_: Throwable) {}
+        }
         .addInterceptor { chain ->
-            var req = chain.request()
-            // 无网时用缓存
-            val hasNet = NetCheck.isOnline(com.github.kr328.clash.design.util.AppContext.ctx)
-            req = req.newBuilder()
-                .header("Cache-Control", if (hasNet) "public, max-age=60" else "public, only-if-cached, max-stale=604800")
-                .build()
+            val req = chain.request()
             chain.proceed(req)
         }
         .addInterceptor(HttpLoggingInterceptor().apply {

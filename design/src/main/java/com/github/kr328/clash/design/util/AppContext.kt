@@ -3,10 +3,14 @@ package com.github.kr328.clash.design.util
 import android.content.Context
 
 object AppContext {
-    lateinit var ctx: Context
-        private set
+    private var _ctx: Context? = null
+
+    val ctx: Context
+        get() = _ctx ?: throw IllegalStateException("AppContext not initialized")
 
     fun init(c: Context) {
-        ctx = c.applicationContext
+        _ctx = c.applicationContext
     }
+
+    fun getOrNull(): Context? = _ctx
 }

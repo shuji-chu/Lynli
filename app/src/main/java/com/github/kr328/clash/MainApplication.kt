@@ -25,13 +25,15 @@ class MainApplication : Application() {
         PreferenceManagerServer.init(this)
         PreferenceManager.init(this)
 
+        // 最先初始化 AppContext（供 ApiClient 用）
+        try { com.github.kr328.clash.design.util.AppContext.init(this) } catch (_: Throwable) {}
+
         Global.init(this)
 
     }
 
     override fun onCreate() {
         super.onCreate()
-        com.github.kr328.clash.design.util.AppContext.init(this)
         try {
             val mode = com.github.kr328.clash.design.PreferenceManager.darkMode
             val nightMode = when (mode) {
