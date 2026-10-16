@@ -89,7 +89,8 @@ class PlansActivity : BaseListActivity<PlanData>() {
             val gson = com.google.gson.Gson()
 
             var showedCache = false
-            if (page == 0) {
+            // 首次进入（page<=1）先用缓存秒渲
+            if (page <= 1) {
                 val cached = PreferenceManager.cached_plans
                 if (cached.isNotEmpty()) {
                     try {
@@ -113,7 +114,7 @@ class PlansActivity : BaseListActivity<PlanData>() {
                 if (resp != null && resp.isSuccessful) {
                     val data = resp.body()?.data
                     _log("数据 size=" + (data?.size ?: -1))
-                    if (page == 0 && !data.isNullOrEmpty()) {
+                    if (page <= 1 && !data.isNullOrEmpty()) {
                         try {
                             PreferenceManager.cached_plans = gson.toJson(data)
                         } catch (_: Throwable) {}
