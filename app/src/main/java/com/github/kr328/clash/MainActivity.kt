@@ -1002,4 +1002,3 @@ class MainActivity : BaseActivity<MainDesign>() {
         trafficTimer?.cancel()
         trafficTimer = null
     }
-}
