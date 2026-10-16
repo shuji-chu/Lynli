@@ -84,9 +84,41 @@ class MainApplication : Application() {
 
         if (processName == packageName) {
             Remote.launch()
+            registerGlobalNetworkListener()
         } else {
             sendServiceRecreated()
         }
+    }
+
+    private var _lastNetState: Int = -1  // 0=offline 1=online
+    private fun registerGlobalNetworkListener() {
+        try {
+            val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
+            cm.registerDefaultNetworkCallback(object : android.net.ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: android.net.Network) {
+                    if (_lastNetState == 1) return
+                    _lastNetState = 1
+                    toastMain("网络已恢复")
+                }
+                override fun onLost(network: android.net.Network) {
+                    if (_lastNetState == 0) return
+                    _lastNetState = 0
+                    toastMain("网络已断开，请检查网络")
+                }
+            })
+        } catch (e: Throwable) {
+            Log.d("LynliNet: register failed: " + e.message)
+        }
+    }
+
+    private fun toastMain(msg: String) {
+        try {
+            android.os.Handler(android.os.Looper.getMainLooper()).post {
+                try {
+                    android.widget.Toast.makeText(this@MainApplication, msg, android.widget.Toast.LENGTH_SHORT).show()
+                } catch (_: Throwable) {}
+            }
+        } catch (_: Throwable) {}
     }
 
     private fun extractGeoFiles() {
