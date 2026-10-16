@@ -972,11 +972,20 @@ class MainActivity : BaseActivity<MainDesign>() {
             lastForeground = true
             startTrafficPolling()
         }
-        // 回前台只刷运行状态（1 次 IPC），其余懒加载
+        // 回前台刷运行状态
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 withContext(Dispatchers.IO) { Remote.broadcasts.refreshRunningState() }
                 design?.setClashRunning(Remote.broadcasts.clashRunning)
+            } catch (_: Throwable) {}
+        }
+        // 从"支付成功页"回来 → 强制重拉订阅 → 首页卡片立刻更新
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                kotlinx.coroutines.delay(300)
+                withContext(Dispatchers.Main) {
+                    try { performSubscrite() } catch (_: Throwable) {}
+                }
             } catch (_: Throwable) {}
         }
     }

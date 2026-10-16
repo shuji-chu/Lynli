@@ -251,8 +251,8 @@ class CashierActivity : AppCompatActivity() {
             if (r?.body()?.data?.paid == true) {
                 paid = true
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@CashierActivity, "支付成功，套餐已开通", Toast.LENGTH_LONG).show()
                     setResult(RESULT_OK)
+                    startActivity(Intent(this@CashierActivity, PurchaseSuccessActivity::class.java))
                     finish()
                 }
                 true

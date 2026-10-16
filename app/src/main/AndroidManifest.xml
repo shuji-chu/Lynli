@@ -243,6 +243,12 @@
             />
 
         <activity
+            android:name=".PurchaseSuccessActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="支付成功" />
+
+        <activity
             android:name=".ChatActivity"
             android:configChanges="uiMode"
             android:exported="false"
