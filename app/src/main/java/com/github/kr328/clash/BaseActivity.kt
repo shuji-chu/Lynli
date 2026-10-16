@@ -249,16 +249,18 @@ abstract class BaseActivity<D : Design<*>> : AppCompatActivity(),
     }
 
 
-    enum class Event {
-        ServiceRecreated,
-        ActivityStart,
-        ActivityStop,
-        ClashStop,
-        ClashStart,
-        ProfileLoaded,
-        ProfileChanged,
-        ProfileUpdateCompleted,
-        ProfileUpdateFailed,
-        ConnectionStateChanged(com.github.kr328.clash.design.state.ConnectionState),
+    sealed class Event {
+        object ServiceRecreated : Event()
+        object ActivityStart : Event()
+        object ActivityStop : Event()
+        object ClashStop : Event()
+        object ClashStart : Event()
+        object ProfileLoaded : Event()
+        object ProfileChanged : Event()
+        object ProfileUpdateCompleted : Event()
+        object ProfileUpdateFailed : Event()
+        data class ConnectionStateChanged(
+            val state: com.github.kr328.clash.design.state.ConnectionState
+        ) : Event()
     }
 }
