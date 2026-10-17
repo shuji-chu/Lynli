@@ -753,7 +753,8 @@ class MainActivity : BaseActivity<MainDesign>() {
                     }
                     
                     withProfile { commit(uuid2) }
-                    val newProfile = withProfile { query(uuid2) }
+                    // 从全部列表中找出刚创建的那个 Profile
+                    val newProfile = withProfile { queryAll().find { it.uuid == uuid2 } }
                     if (newProfile != null) {
                         withProfile { setActive(newProfile) }
                     }
