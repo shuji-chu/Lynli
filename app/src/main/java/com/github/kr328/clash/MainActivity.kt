@@ -717,91 +717,62 @@ class MainActivity : BaseActivity<MainDesign>() {
             }
         }
 
-        // 强制清理旧 Profile，防止读到之前的脏数据
+                // 强制清理旧 Profile
         withProfile {
             val all = queryAll()
             all.forEach { delete(it.uuid) }
         }
         
-        // 重新查询
-        val activeProfile2 = withProfile { queryActive() }
-        if (activeProfile2 == null) {
-            _log("startClash 无 profile，开始创建")
-            LoadingDialog.show(this@MainActivity, "正在请求节点数据...")
-            launch(Dispatchers.IO) {
-                try {
-                    var suburl = subData?.subscribe_url ?: ""
-                    var planName = subData?.plan?.name ?: "VPN"
-                    if (suburl.isEmpty()) {
-                        _log("startClash 无 sub_url，协程内主动拉取")
-                        val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
-                        val resp = try { apiServiceApp.getSubscribe(PreferenceManager.loginauthData) } catch (_: Exception) { null }
-                        if (resp != null && resp.isSuccessful && resp.body()?.data != null) {
-                            subData = resp.body()?.data
-                            suburl = subData?.subscribe_url ?: ""
-                            planName = subData?.plan?.name ?: "VPN"
-                        }
+        LoadingDialog.show(this@MainActivity, "正在初始化...")
+        
+        launch(Dispatchers.IO) {
+            try {
+                val yamlText = "mixed-port: 7890\n" +
+                        "allow-lan: false\n" +
+                        "mode: rule\n" +
+                        "log-level: warning\n" +
+                        "external-controller: 127.0.0.1:9090\n" +
+                        "proxies:\n" +
+                        "  - name: \"Lynli\"\n" +
+                        "    type: vless\n" +
+                        "    server: us1.yisoujiasu.de5.net\n" +
+                        "    port: 52610\n" +
+                        "    uuid: a9ed8ff8-aa4c-463e-801e-21405abf8525\n" +
+                        "    network: tcp\n" +
+                        "    udp: true\n" +
+                        "    tls: true\n" +
+                        "    flow: xtls-rprx-vision\n" +
+                        "    servername: www.microsoft.com\n" +
+                        "    reality-opts:\n" +
+                        "      public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0\n" +
+                        "      short-id: b316cc48\n" +
+                        "    client-fingerprint: chrome\n" +
+                        "proxy-groups:\n" +
+                        "  - name: \"PROXY\"\n" +
+                        "    type: select\n" +
+                        "    proxies:\n" +
+                        "      - \"Lynli\"\n" +
+                        "      - DIRECT\n" +
+                        "rules:\n" +
+                        "  - GEOIP,CN,DIRECT\n" +
+                        "  - MATCH,PROXY\n"
+                
+                val saveFile = java.io.File(filesDir, "final_config.yaml")
+                saveFile.writeText(yamlText)
+                
+                val planName = "Lynli节点"
+                val uuid2 = withProfile {
+                    create(Profile.Type.File, planName).also {
+                        patch(it, planName, saveFile.absolutePath, 0)
                     }
-                    if (suburl.isEmpty()) {
-                        _log("startClash 获取节点配置失败，抛出异常")
-                        throw Exception("获取节点配置失败，请检查网络")
-                    }
-                    var newULR = suburl
-                    if (ApiClientConfig.ConfigNodeURL.length > 3) {
-                        val encodeURL = java.net.URLEncoder.encode(suburl, "utf-8").replace("?", "%3F")
-                        newULR = ApiClientConfig.ConfigNodeURL + encodeURL
-                    }
-                    _log("startClash 本地生成节点配置（0网络请求）")
-                    val saveFile = java.io.File(filesDir, "profile_" + System.currentTimeMillis() + ".yaml")
-                    val userUUID = subData?.uuid ?: "a9ed8ff8-aa4c-463e-801e-21405abf8525"
-                    val yamlText = StringBuilder().apply {
-                        append("mixed-port: 7890\n")
-                        append("allow-lan: false\n")
-                        append("mode: rule\n")
-                        append("log-level: warning\n")
-                        append("external-controller: 127.0.0.1:9090\n")
-                        append("proxies:\n")
-                        append("  - name: \"Lynli节点\"\n")
-                        append("    type: vless\n")
-                        append("    server: us1.yisoujiasu.de5.net\n")
-                        append("    port: 52610\n")
-                        append("    uuid: $userUUID\n")
-                        append("    network: tcp\n")
-                        append("    udp: true\n")
-                        append("    tls: true\n")
-                        append("    flow: xtls-rprx-vision\n")
-                        append("    servername: www.microsoft.com\n")
-                        append("    reality-opts:\n")
-                        append("      public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0\n")
-                        append("      short-id: b316cc48\n")
-                        append("    client-fingerprint: chrome\n")
-                        append("proxy-groups:\n")
-                        append("  - name: \"PROXY\"\n")
-                        append("    type: select\n")
-                        append("    proxies:\n")
-                        append("      - \"Lynli节点\"\n")
-                        append("      - DIRECT\n")
-                        append("rules:\n")
-                        append("  - GEOIP,CN,DIRECT\n")
-                        append("  - MATCH,PROXY\n")
-                    }.toString()
-                    withContext(Dispatchers.IO) {
-                        saveFile.writeText(yamlText)
-                    }
-                    _log("startClash 订阅已保存至 " + saveFile.absolutePath)
-                    _log("startClash 创建 profile name=" + planName)
-                    val uuid2 = withProfile {
-                        create(Profile.Type.File, planName).also {
-                            patch(it, planName, saveFile.absolutePath, 0)
-                        }
-                    }
-                    _log("startClash profile created uuid=" + uuid2)
-                    withProfile { commit(uuid2) }
-                    _log("startClash commit done")
-                    activeProfile()
-                    _log("startClash profile activated")
-                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
-                    startServer()
+                }
+                withProfile { commit(uuid2) }
+                activeProfile()
+                
+                withContext(Dispatchers.Main) {
+                    LoadingDialog.hide()
+                }
+                startServer()
                 } catch (e: Exception) {
                     _log("startClash 创建 profile 失败: " + e.message)
                     withContext(Dispatchers.Main) {
