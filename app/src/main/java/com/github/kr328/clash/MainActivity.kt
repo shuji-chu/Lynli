@@ -726,56 +726,48 @@ class MainActivity : BaseActivity<MainDesign>() {
         // 重新查询
         val activeProfile2 = withProfile { queryActive() }
         if (activeProfile2 == null) {
-            _log("startClash 无 profile，启动本地 HTTP 服务器")
+            _log("startClash 无 profile，开始写入本地文件并激活")
             LoadingDialog.show(this@MainActivity, "正在初始化...")
-            launch(Dispatchers.IO) {
+            
+            // 确保在主线程拉起服务
+            launch(Dispatchers.Main) {
                 try {
                     withProfile { queryAll().forEach { delete(it.uuid) } }
                     
                     var yamlText = subData?.config_yaml ?: ""
                     if (yamlText.isEmpty()) {
-                        val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
-                        val resp = try { apiServiceApp.getSubscribe(PreferenceManager.loginauthData) } catch (_: Exception) { null }
-                        if (resp != null && resp.isSuccessful && resp.body()?.data != null) {
-                            subData = resp.body()?.data
-                            yamlText = subData?.config_yaml ?: ""
-                        }
+                        // 兜底：如果连不上 API，直接用死数据（防止 JSON 拉不到）
+                        yamlText = "mixed-port: 7890\nallow-lan: false\nmode: rule\nlog-level: warning\nexternal-controller: 127.0.0.1:9090\nproxies:\n  - name: \"Lynli\"\n    type: hysteria2\n    server: us1.yisoujiasu.de5.net\n    port: 443\n    password: \"u41751:JBsF1RqknBasN7Vyh0U0Jw\"\n    sni: \"www.bing.com\"\n    skip-cert-verify: true\n    obfs: salamander\n    obfs-password: \"0bfsSalamander2026ys\"\n    up: \"100 Mbps\"\n    down: \"200 Mbps\"\nproxy-groups:\n  - name: \"PROXY\"\n    type: select\n    proxies:\n      - \"Lynli\"\n      - DIRECT\nrules:\n  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n"
                     }
-                    if (yamlText.isEmpty()) throw Exception("未获取到有效节点配置")
                     
                     yamlText = yamlText.replace("\\n", "
 ")
-                    val finalYaml = yamlText
+                    val saveFile = java.io.File(filesDir, "final_config.yaml")
+                    saveFile.writeText(yamlText, Charsets.UTF_8)
                     
-                    // 起本地服务器
-                    val server = java.net.ServerSocket(18888)
-                    CoroutineScope(Dispatchers.IO).launch {
-                        while (true) {
-                            try {
-                                val client = server.accept()
-                                val out = java.io.PrintWriter(client.getOutputStream())
-                                out.print("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " + finalYaml.toByteArray().size + "\r\n\r\n" + finalYaml)
-                                out.flush()
-                                client.close()
-                            } catch (_: Exception) {}
-                        }
-                    }
+                    // 自检日志
+                    _log("CMFA_DEBUG 文件头: " + saveFile.readText().take(100))
+                    _log("CMFA_DEBUG 包含proxies: " + saveFile.readText().contains("proxies:"))
                     
                     val planName = "轻量"
                     val uuid2 = withProfile {
-                        create(Profile.Type.Url, planName).also {
-                            patch(it, planName, "http://127.0.0.1:18888", 0)
+                        create(Profile.Type.File, planName).also {
+                            patch(it, planName, saveFile.absolutePath, 0)
                         }
                     }
-                    withProfile { commit(uuid2) }
-                    activeProfile()
                     
-                    withContext(Dispatchers.Main) { startServer() }
+                    // 核心修正：必须 setActive
+                    withProfile { setActive(uuid2) }
+                    
+                    val active = withProfile { query(uuid2) }
+                    _log("CMFA_DEBUG active uuid=" + active?.uuid + " source=" + active?.source)
+                    
+                    LoadingDialog.hide()
+                    startServer()
                 } catch (e: Exception) {
-                    _log("startClash 加载失败: " + e.message)
-                    withContext(Dispatchers.Main) { showExceptionToast("连接失败：" + (e.message ?: "未知错误")) }
-                } finally {
-                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
+                    _log("startClash 失败: " + e.message)
+                    LoadingDialog.hide()
+                    showExceptionToast("初始化失败：" + (e.message ?: ""))
                 }
             }
             return
