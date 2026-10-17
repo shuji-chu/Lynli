@@ -742,11 +742,6 @@ class MainActivity : BaseActivity<MainDesign>() {
                         yamlText = "mixed-port: 7890\nallow-lan: false\nmode: rule\nlog-level: warning\nexternal-controller: 127.0.0.1:9090\nproxies:\n  - name: \"Lynli\"\n    type: hysteria2\n    server: us1.yisoujiasu.de5.net\n    port: 443\n    password: \"u41751:JBsF1RqknBasN7Vyh0U0Jw\"\n    sni: \"www.bing.com\"\n    skip-cert-verify: true\n    obfs: salamander\n    obfs-password: \"0bfsSalamander2026ys\"\n    up: \"100 Mbps\"\n    down: \"200 Mbps\"\nproxy-groups:\n  - name: \"PROXY\"\n    type: select\n    proxies:\n      - \"Lynli\"\n      - DIRECT\nrules:\n  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n"
                     }
                     
-                    // 修复转义问题
-                    yamlText = yamlText.replace("\\\\n", "\n")
-                    yamlText = yamlText.replace("\\n", "
-")
-                    
                     val saveFile = java.io.File(filesDir, "final_config.yaml")
                     saveFile.writeText(yamlText, Charsets.UTF_8)
                     
