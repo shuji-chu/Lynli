@@ -4,26 +4,23 @@ mode: rule
 log-level: warning
 external-controller: 127.0.0.1:9090
 proxies:
-  - name: "Lynli节点"
-    type: vless
+  - name: "易搜加速·美西"
+    type: hysteria2
     server: us1.yisoujiasu.de5.net
-    port: 52610
-    uuid: a9ed8ff8-aa4c-463e-801e-21405abf8525
-    network: tcp
-    udp: true
-    tls: true
-    flow: xtls-rprx-vision
-    servername: www.microsoft.com
-    reality-opts:
-      public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0
-      short-id: b316cc48
-    client-fingerprint: chrome
+    port: 443
+    password: "u41751:JBsF1RqknBasN7Vyh0U0Jw"
+    sni: "www.bing.com"
+    skip-cert-verify: true
+    obfs: salamander
+    obfs-password: "0bfsSalamander2026ys"
+    up: "100 Mbps"
+    down: "200 Mbps"
 proxy-groups:
-  - name: "PROXY"
+  - name: "🚀 节点选择"
     type: select
     proxies:
-      - "Lynli节点"
+      - "易搜加速·美西"
       - DIRECT
 rules:
   - GEOIP,CN,DIRECT
-  - MATCH,PROXY
+  - MATCH,🚀 节点选择
