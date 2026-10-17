@@ -791,7 +791,6 @@ class MainActivity : BaseActivity<MainDesign>() {
         }
 
 
-    }
 
 
     suspend fun withProcessing(executeTask: suspend (suspend (FetchStatus) -> Unit) -> Unit) {
@@ -1002,3 +1001,4 @@ class MainActivity : BaseActivity<MainDesign>() {
         trafficTimer?.cancel()
         trafficTimer = null
     }
+}
