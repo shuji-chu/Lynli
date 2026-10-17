@@ -726,48 +726,60 @@ class MainActivity : BaseActivity<MainDesign>() {
         // 重新查询
         val activeProfile2 = withProfile { queryActive() }
         if (activeProfile2 == null) {
-            _log("startClash 无 profile，开始写入本地文件并激活")
+            _log("startClash 准备写入本地文件")
             LoadingDialog.show(this@MainActivity, "正在初始化...")
             
-            // 确保在主线程拉起服务
+            // 必须在主线程发起，避开 ForegroundServiceStartNotAllowedException
             launch(Dispatchers.Main) {
                 try {
+                    // 1. 清理
                     withProfile { queryAll().forEach { delete(it.uuid) } }
                     
+                    // 2. 从后端拿 YAML（若后端未返回，用硬编码兜底）
                     var yamlText = subData?.config_yaml ?: ""
                     if (yamlText.isEmpty()) {
-                        // 兜底：如果连不上 API，直接用死数据（防止 JSON 拉不到）
+                        // 兜底：如果连不上 API，直接用死数据（防止空跑）
                         yamlText = "mixed-port: 7890\nallow-lan: false\nmode: rule\nlog-level: warning\nexternal-controller: 127.0.0.1:9090\nproxies:\n  - name: \"Lynli\"\n    type: hysteria2\n    server: us1.yisoujiasu.de5.net\n    port: 443\n    password: \"u41751:JBsF1RqknBasN7Vyh0U0Jw\"\n    sni: \"www.bing.com\"\n    skip-cert-verify: true\n    obfs: salamander\n    obfs-password: \"0bfsSalamander2026ys\"\n    up: \"100 Mbps\"\n    down: \"200 Mbps\"\nproxy-groups:\n  - name: \"PROXY\"\n    type: select\n    proxies:\n      - \"Lynli\"\n      - DIRECT\nrules:\n  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n"
                     }
                     
+                    // 修复转义问题（防止后端传过来的是带反斜杠的
+）
                     yamlText = yamlText.replace("\\n", "
 ")
+                    
                     val saveFile = java.io.File(filesDir, "final_config.yaml")
                     saveFile.writeText(yamlText, Charsets.UTF_8)
                     
-                    // 自检日志
-                    _log("CMFA_DEBUG 文件头: " + saveFile.readText().take(100))
+                    // 自检：确保写入的内容合法
                     _log("CMFA_DEBUG 包含proxies: " + saveFile.readText().contains("proxies:"))
+                    _log("CMFA_DEBUG 文件头: " + saveFile.readText().take(50))
                     
                     val planName = "轻量"
+                    // 创建并 patch
                     val uuid2 = withProfile {
                         create(Profile.Type.File, planName).also {
                             patch(it, planName, saveFile.absolutePath, 0)
                         }
                     }
                     
-                    // 核心修正：必须 setActive
+                    // 关键修复：必须 setActive，否则内核读的是空
                     withProfile { setActive(uuid2) }
+                    withProfile { commit(uuid2) }
                     
                     val active = withProfile { query(uuid2) }
-                    _log("CMFA_DEBUG active uuid=" + active?.uuid + " source=" + active?.source)
+                    _log("CMFA_DEBUG active source: " + active?.source)
                     
-                    LoadingDialog.hide()
-                    startServer()
+                    // 启动服务
+                    withContext(Dispatchers.IO) {
+                        startServer()
+                    }
                 } catch (e: Exception) {
                     _log("startClash 失败: " + e.message)
-                    LoadingDialog.hide()
-                    showExceptionToast("初始化失败：" + (e.message ?: ""))
+                    withContext(Dispatchers.Main) {
+                        showExceptionToast("初始化失败：" + (e.message ?: ""))
+                    }
+                } finally {
+                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
                 }
             }
             return
