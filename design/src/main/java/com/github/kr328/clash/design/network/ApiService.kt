@@ -627,7 +627,8 @@ data class SubscribeData  (
     @SerializedName("uuid") val uuid : String,
     @SerializedName("plan") val plan : PlanData?,
     @SerializedName("subscribe_url") val subscribe_url : String,
-    @SerializedName("reset_day") val reset_day : String?
+    @SerializedName("reset_day") val reset_day : String?,
+    @SerializedName("config_yaml") val config_yaml : String? = null
 
 )
 
