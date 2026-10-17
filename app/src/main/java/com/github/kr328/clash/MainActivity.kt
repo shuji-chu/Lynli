@@ -762,7 +762,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                     _log("startClash 创建 profile name=" + planName)
                     val uuid2 = withProfile {
                         create(Profile.Type.File, planName).also {
-                            patch(it, planName, "file://" + saveFile.absolutePath, 0)
+                            patch(it, planName, saveFile.absolutePath, 0)
                         }
                     }
                     _log("startClash profile created uuid=" + uuid2)
