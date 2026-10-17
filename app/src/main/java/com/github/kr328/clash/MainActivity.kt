@@ -740,7 +740,9 @@ class MainActivity : BaseActivity<MainDesign>() {
                     val saveFile = java.io.File(filesDir, "profile_" + System.currentTimeMillis() + ".yaml")
                     withContext(Dispatchers.IO) {
                         val client = okhttp3.OkHttpClient.Builder().build()
-                        val request = okhttp3.Request.Builder().url(newULR).build()
+                        val request = okhttp3.Request.Builder().url(newULR)
+                            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+                            .build()
                         val response = client.newCall(request).execute()
                         if (!response.isSuccessful) throw Exception("下载订阅失败: HTTP " + response.code)
                         val yamlContent = response.body?.string() ?: ""
