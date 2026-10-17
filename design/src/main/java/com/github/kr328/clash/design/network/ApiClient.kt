@@ -15,11 +15,10 @@ import java.util.concurrent.CountDownLatch
 
 object ApiClient {
     private val INFLIGHT = HashMap<String, ByteArray>()
-    val okHttpClient = OkHttpClient.Builder()
-        .callTimeout(5000, TimeUnit.MILLISECONDS)
-        .connectTimeout(2000, TimeUnit.MILLISECONDS)
-        .readTimeout(3000, TimeUnit.MILLISECONDS)
-        .writeTimeout(2000, TimeUnit.MILLISECONDS)
+    private val okHttpClient = OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
         // 请求去重：GET 3 秒内同 URL 只发一次（缓存字节，命中时构造新 Response）
         .addInterceptor { chain ->
@@ -193,9 +192,8 @@ object ApiClientConfig {
                 try {
                     val req = okhttp3.Request.Builder().url("$h/api/v1/config").get().build()
                     val probe = okhttp3.OkHttpClient.Builder()
-        .callTimeout(5000, TimeUnit.MILLISECONDS)
-                        .connectTimeout(2000, TimeUnit.MILLISECONDS)
-                        .readTimeout(3000, TimeUnit.MILLISECONDS)
+                                .connectTimeout(15, TimeUnit.SECONDS)
+                        .readTimeout(30, TimeUnit.SECONDS)
                         .build()
                     probe.newCall(req).execute().use { resp ->
                         if (resp.code in 200..499 && okUrl.get().isEmpty()) {
@@ -222,11 +220,10 @@ object ApiClientConfig {
         }
     }
 
-    val okHttpClient = OkHttpClient.Builder()
-        .callTimeout(5000, TimeUnit.MILLISECONDS)
-        .connectTimeout(2000, TimeUnit.MILLISECONDS)
-        .readTimeout(3000, TimeUnit.MILLISECONDS)
-        .writeTimeout(2000, TimeUnit.MILLISECONDS)
+    private val okHttpClient = OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BASIC
