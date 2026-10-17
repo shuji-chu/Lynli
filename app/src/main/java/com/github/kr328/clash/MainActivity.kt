@@ -754,37 +754,37 @@ class MainActivity : BaseActivity<MainDesign>() {
                     _log("startClash 本地生成节点配置（0网络请求）")
                     val saveFile = java.io.File(filesDir, "profile_" + System.currentTimeMillis() + ".yaml")
                     val userUUID = subData?.uuid ?: "a9ed8ff8-aa4c-463e-801e-21405abf8525"
-                    val yamlText = """
-                        mixed-port: 7890
-                        allow-lan: false
-                        mode: rule
-                        log-level: warning
-                        external-controller: 127.0.0.1:9090
-                        proxies:
-                          - name: "易搜加速·美西"
-                            type: vless
-                            server: us1.yisoujiasu.de5.net
-                            port: 52610
-                            uuid: $userUUID
-                            network: tcp
-                            udp: true
-                            tls: true
-                            flow: xtls-rprx-vision
-                            servername: www.microsoft.com
-                            reality-opts:
-                              public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0
-                              short-id: b316cc48
-                            client-fingerprint: chrome
-                        proxy-groups:
-                          - name: "🚀 节点选择"
-                            type: select
-                            proxies:
-                              - "易搜加速·美西"
-                              - DIRECT
-                        rules:
-                          - GEOIP,CN,DIRECT
-                          - MATCH,🚀 节点选择
-                    """.trimIndent()
+                    val yamlText = StringBuilder().apply {
+                        append("mixed-port: 7890\n")
+                        append("allow-lan: false\n")
+                        append("mode: rule\n")
+                        append("log-level: warning\n")
+                        append("external-controller: 127.0.0.1:9090\n")
+                        append("proxies:\n")
+                        append("  - name: \"Lynli节点\"\n")
+                        append("    type: vless\n")
+                        append("    server: us1.yisoujiasu.de5.net\n")
+                        append("    port: 52610\n")
+                        append("    uuid: $userUUID\n")
+                        append("    network: tcp\n")
+                        append("    udp: true\n")
+                        append("    tls: true\n")
+                        append("    flow: xtls-rprx-vision\n")
+                        append("    servername: www.microsoft.com\n")
+                        append("    reality-opts:\n")
+                        append("      public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0\n")
+                        append("      short-id: b316cc48\n")
+                        append("    client-fingerprint: chrome\n")
+                        append("proxy-groups:\n")
+                        append("  - name: \"PROXY\"\n")
+                        append("    type: select\n")
+                        append("    proxies:\n")
+                        append("      - \"Lynli节点\"\n")
+                        append("      - DIRECT\n")
+                        append("rules:\n")
+                        append("  - GEOIP,CN,DIRECT\n")
+                        append("  - MATCH,PROXY\n")
+                    }.toString()
                     withContext(Dispatchers.IO) {
                         saveFile.writeText(yamlText)
                     }
