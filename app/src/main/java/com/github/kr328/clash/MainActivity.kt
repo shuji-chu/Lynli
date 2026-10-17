@@ -717,43 +717,46 @@ class MainActivity : BaseActivity<MainDesign>() {
             }
         }
 
-                // 强制清理旧 Profile
+        // 强制清理旧 Profile，防止读到之前的脏数据
         withProfile {
             val all = queryAll()
             all.forEach { delete(it.uuid) }
         }
         
-        LoadingDialog.show(this@MainActivity, "正在初始化...")
-        
-        launch(Dispatchers.IO) {
-            try {
-                // 清理旧数据
-                withProfile {
-                    val all = queryAll()
-                    all.forEach { delete(it.uuid) }
-                }
-                
-                // 读取 assets/config.yaml
-                val saveFile = java.io.File(filesDir, "final_config.yaml")
-                assets.open("config.yaml").use { input ->
-                    saveFile.outputStream().use { output ->
-                        input.copyTo(output)
+        // 重新查询
+        val activeProfile2 = withProfile { queryActive() }
+        if (activeProfile2 == null) {
+            _log("startClash 无 profile，开始从本地加载配置")
+            LoadingDialog.show(this@MainActivity, "正在初始化...")
+            launch(Dispatchers.IO) {
+                try {
+                    // 清理旧数据
+                    withProfile {
+                        val all = queryAll()
+                        all.forEach { delete(it.uuid) }
                     }
-                }
-                
-                val planName = "轻量"
-                val uuid2 = withProfile {
-                    create(Profile.Type.File, planName).also {
-                        patch(it, planName, saveFile.absolutePath, 0)
+                    
+                    // 读取 assets/config.yaml
+                    val saveFile = java.io.File(filesDir, "final_config.yaml")
+                    assets.open("config.yaml").use { input ->
+                        saveFile.outputStream().use { output ->
+                            input.copyTo(output)
+                        }
                     }
-                }
-                withProfile { commit(uuid2) }
-                activeProfile()
-                
-                withContext(Dispatchers.Main) {
-                    LoadingDialog.hide()
-                }
-                startServer()
+                    
+                    val planName = "轻量"
+                    val uuid2 = withProfile {
+                        create(Profile.Type.File, planName).also {
+                            patch(it, planName, saveFile.absolutePath, 0)
+                        }
+                    }
+                    withProfile { commit(uuid2) }
+                    activeProfile()
+                    
+                    withContext(Dispatchers.Main) {
+                        LoadingDialog.hide()
+                    }
+                    startServer()
                 } catch (e: Exception) {
                     _log("startClash 创建 profile 失败: " + e.message)
                     withContext(Dispatchers.Main) {
@@ -764,7 +767,6 @@ class MainActivity : BaseActivity<MainDesign>() {
             }
             return
         }
-
         _log("startClash hasProfile -> startServer")
             // ===== 订阅自动更新：超过 12 小时就静默拉新 =====
             try {
