@@ -722,7 +722,7 @@ class MainActivity : BaseActivity<MainDesign>() {
         if (activeProfile2 == null) {
             _log("startClash 无 profile，开始创建")
             LoadingDialog.show(this@MainActivity, "正在请求节点数据...")
-            launch {
+            launch(Dispatchers.IO) {
                 try {
                     var suburl = subData?.subscribe_url ?: ""
                     var planName = subData?.plan?.name ?: "VPN"
