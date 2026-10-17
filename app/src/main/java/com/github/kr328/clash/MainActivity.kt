@@ -736,10 +736,22 @@ class MainActivity : BaseActivity<MainDesign>() {
                         val encodeURL = java.net.URLEncoder.encode(suburl, "utf-8").replace("?", "%3F")
                         newULR = ApiClientConfig.ConfigNodeURL + encodeURL
                     }
+                    _log("startClash 正在下载订阅: " + newULR)
+                    val saveFile = java.io.File(filesDir, "profile_" + System.currentTimeMillis() + ".yaml")
+                    withContext(Dispatchers.IO) {
+                        val client = okhttp3.OkHttpClient.Builder().build()
+                        val request = okhttp3.Request.Builder().url(newULR).build()
+                        val response = client.newCall(request).execute()
+                        if (!response.isSuccessful) throw Exception("下载订阅失败: HTTP " + response.code)
+                        val yamlContent = response.body?.string() ?: ""
+                        if (yamlContent.isEmpty()) throw Exception("下载订阅为空")
+                        saveFile.writeText(yamlContent)
+                    }
+                    _log("startClash 订阅已保存至 " + saveFile.absolutePath)
                     _log("startClash 创建 profile name=" + planName)
                     val uuid2 = withProfile {
-                        create(Profile.Type.Url, planName).also {
-                            patch(it, planName, newULR, 0)
+                        create(Profile.Type.File, planName).also {
+                            patch(it, planName, saveFile.absolutePath, 0)
                         }
                     }
                     _log("startClash profile created uuid=" + uuid2)
