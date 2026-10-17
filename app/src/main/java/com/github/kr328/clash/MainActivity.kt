@@ -762,12 +762,16 @@ class MainActivity : BaseActivity<MainDesign>() {
                         }
                     }
                     
-                    // 关键修复：必须 setActive，否则内核读的是空
-                    withProfile { setActive(uuid2) }
+                    // 关键修复：先 commit，再 query 出 Profile 对象，最后 setActive
                     withProfile { commit(uuid2) }
                     
-                    val active = withProfile { query(uuid2) }
-                    _log("CMFA_DEBUG active source: " + active?.source)
+                    val newProfile = withProfile { query(uuid2) }
+                    if (newProfile != null) {
+                        withProfile { setActive(newProfile) }
+                        _log("CMFA_DEBUG setActive 成功: " + newProfile.source)
+                    } else {
+                        _log("CMFA_DEBUG 找不到刚创建的 profile")
+                    }
                     
                     // 启动服务
                     withContext(Dispatchers.IO) {
