@@ -726,59 +726,44 @@ class MainActivity : BaseActivity<MainDesign>() {
         // 重新查询
         val activeProfile2 = withProfile { queryActive() }
         if (activeProfile2 == null) {
-            _log("startClash 准备写入本地文件")
+            _log("startClash 无 profile，本地生成")
             LoadingDialog.show(this@MainActivity, "正在初始化...")
-            
-            // 必须在主线程发起，避开 ForegroundServiceStartNotAllowedException
             launch(Dispatchers.Main) {
                 try {
-                    // 1. 清理
                     withProfile { queryAll().forEach { delete(it.uuid) } }
                     
-                    // 2. 从后端拿 YAML（若后端未返回，用硬编码兜底）
                     var yamlText = subData?.config_yaml ?: ""
                     if (yamlText.isEmpty()) {
-                        // 兜底：如果连不上 API，直接用死数据（防止空跑）
                         yamlText = "mixed-port: 7890\nallow-lan: false\nmode: rule\nlog-level: warning\nexternal-controller: 127.0.0.1:9090\nproxies:\n  - name: \"Lynli\"\n    type: hysteria2\n    server: us1.yisoujiasu.de5.net\n    port: 443\n    password: \"u41751:JBsF1RqknBasN7Vyh0U0Jw\"\n    sni: \"www.bing.com\"\n    skip-cert-verify: true\n    obfs: salamander\n    obfs-password: \"0bfsSalamander2026ys\"\n    up: \"100 Mbps\"\n    down: \"200 Mbps\"\nproxy-groups:\n  - name: \"PROXY\"\n    type: select\n    proxies:\n      - \"Lynli\"\n      - DIRECT\nrules:\n  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n"
+                    }
+                    
+                    if (yamlText.contains("\\n")) {
+                        yamlText = yamlText.replace("\\n", "\n")
                     }
                     
                     val saveFile = java.io.File(filesDir, "final_config.yaml")
                     saveFile.writeText(yamlText, Charsets.UTF_8)
                     
-                    // 自检：确保写入的内容合法
                     _log("CMFA_DEBUG 包含proxies: " + saveFile.readText().contains("proxies:"))
-                    _log("CMFA_DEBUG 文件头: " + saveFile.readText().take(50))
-                    
                     val planName = "轻量"
-                    // 创建并 patch
                     val uuid2 = withProfile {
                         create(Profile.Type.File, planName).also {
                             patch(it, planName, saveFile.absolutePath, 0)
                         }
                     }
                     
-                    // 关键修复：先 commit，再 query 出 Profile 对象，最后 setActive
                     withProfile { commit(uuid2) }
-                    
                     val newProfile = withProfile { query(uuid2) }
                     if (newProfile != null) {
                         withProfile { setActive(newProfile) }
-                        _log("CMFA_DEBUG setActive 成功: " + newProfile.source)
-                    } else {
-                        _log("CMFA_DEBUG 找不到刚创建的 profile")
                     }
                     
-                    // 启动服务
-                    withContext(Dispatchers.IO) {
-                        startServer()
-                    }
+                    LoadingDialog.hide()
+                    startServer()
                 } catch (e: Exception) {
                     _log("startClash 失败: " + e.message)
-                    withContext(Dispatchers.Main) {
-                        showExceptionToast("初始化失败：" + (e.message ?: ""))
-                    }
-                } finally {
-                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
+                    LoadingDialog.hide()
+                    showExceptionToast("失败：" + (e.message ?: ""))
                 }
             }
             return
