@@ -15,7 +15,7 @@ import java.util.concurrent.CountDownLatch
 
 object ApiClient {
     private val INFLIGHT = HashMap<String, ByteArray>()
-    private val okHttpClient = OkHttpClient.Builder()
+    val okHttpClient = OkHttpClient.Builder()
         .callTimeout(5000, TimeUnit.MILLISECONDS)
         .connectTimeout(2000, TimeUnit.MILLISECONDS)
         .readTimeout(3000, TimeUnit.MILLISECONDS)
@@ -222,7 +222,7 @@ object ApiClientConfig {
         }
     }
 
-    private val okHttpClient = OkHttpClient.Builder()
+    val okHttpClient = OkHttpClient.Builder()
         .callTimeout(5000, TimeUnit.MILLISECONDS)
         .connectTimeout(2000, TimeUnit.MILLISECONDS)
         .readTimeout(3000, TimeUnit.MILLISECONDS)

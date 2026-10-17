@@ -748,7 +748,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                     _log("startClash 正在下载订阅: " + newULR)
                     val saveFile = java.io.File(filesDir, "profile_" + System.currentTimeMillis() + ".yaml")
                     withContext(Dispatchers.IO) {
-                        val client = okhttp3.OkHttpClient.Builder().connectTimeout(1500, java.util.concurrent.TimeUnit.MILLISECONDS).readTimeout(2000, java.util.concurrent.TimeUnit.MILLISECONDS).callTimeout(3000, java.util.concurrent.TimeUnit.MILLISECONDS).build()
+                        val client = com.github.kr328.clash.design.network.ApiClient.okHttpClient
                         val request = okhttp3.Request.Builder().url(newULR)
                             .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
                             .build()
