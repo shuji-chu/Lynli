@@ -727,40 +727,21 @@ class MainActivity : BaseActivity<MainDesign>() {
         
         launch(Dispatchers.IO) {
             try {
-                val yamlText = "mixed-port: 7890\n" +
-                        "allow-lan: false\n" +
-                        "mode: rule\n" +
-                        "log-level: warning\n" +
-                        "external-controller: 127.0.0.1:9090\n" +
-                        "proxies:\n" +
-                        "  - name: \"Lynli\"\n" +
-                        "    type: vless\n" +
-                        "    server: us1.yisoujiasu.de5.net\n" +
-                        "    port: 52610\n" +
-                        "    uuid: a9ed8ff8-aa4c-463e-801e-21405abf8525\n" +
-                        "    network: tcp\n" +
-                        "    udp: true\n" +
-                        "    tls: true\n" +
-                        "    flow: xtls-rprx-vision\n" +
-                        "    servername: www.microsoft.com\n" +
-                        "    reality-opts:\n" +
-                        "      public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0\n" +
-                        "      short-id: b316cc48\n" +
-                        "    client-fingerprint: chrome\n" +
-                        "proxy-groups:\n" +
-                        "  - name: \"PROXY\"\n" +
-                        "    type: select\n" +
-                        "    proxies:\n" +
-                        "      - \"Lynli\"\n" +
-                        "      - DIRECT\n" +
-                        "rules:\n" +
-                        "  - GEOIP,CN,DIRECT\n" +
-                        "  - MATCH,PROXY\n"
+                // 清理旧数据
+                withProfile {
+                    val all = queryAll()
+                    all.forEach { delete(it.uuid) }
+                }
                 
+                // 读取 assets/config.yaml
                 val saveFile = java.io.File(filesDir, "final_config.yaml")
-                saveFile.writeText(yamlText)
+                assets.open("config.yaml").use { input ->
+                    saveFile.outputStream().use { output ->
+                        input.copyTo(output)
+                    }
+                }
                 
-                val planName = "Lynli节点"
+                val planName = "轻量"
                 val uuid2 = withProfile {
                     create(Profile.Type.File, planName).also {
                         patch(it, planName, saveFile.absolutePath, 0)
