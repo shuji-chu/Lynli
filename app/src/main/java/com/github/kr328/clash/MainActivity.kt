@@ -726,11 +726,12 @@ class MainActivity : BaseActivity<MainDesign>() {
         // 重新查询
         val activeProfile2 = withProfile { queryActive() }
         if (activeProfile2 == null) {
-            _log("startClash 无 profile，直接从 JSON 拿 YAML")
+            _log("startClash 无 profile，启动本地 HTTP 服务器")
             LoadingDialog.show(this@MainActivity, "正在初始化...")
             launch(Dispatchers.IO) {
                 try {
                     withProfile { queryAll().forEach { delete(it.uuid) } }
+                    
                     var yamlText = subData?.config_yaml ?: ""
                     if (yamlText.isEmpty()) {
                         val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
@@ -742,14 +743,28 @@ class MainActivity : BaseActivity<MainDesign>() {
                     }
                     if (yamlText.isEmpty()) throw Exception("未获取到有效节点配置")
                     
-                    val saveFile = java.io.File(filesDir, "final_config.yaml")
-                    saveFile.writeText(yamlText)
-                    _log("startClash YAML 长度: " + yamlText.length)
+                    yamlText = yamlText.replace("\\n", "
+")
+                    val finalYaml = yamlText
+                    
+                    // 起本地服务器
+                    val server = java.net.ServerSocket(18888)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        while (true) {
+                            try {
+                                val client = server.accept()
+                                val out = java.io.PrintWriter(client.getOutputStream())
+                                out.print("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " + finalYaml.toByteArray().size + "\r\n\r\n" + finalYaml)
+                                out.flush()
+                                client.close()
+                            } catch (_: Exception) {}
+                        }
+                    }
                     
                     val planName = "轻量"
                     val uuid2 = withProfile {
-                        create(Profile.Type.File, planName).also {
-                            patch(it, planName, saveFile.absolutePath, 0)
+                        create(Profile.Type.Url, planName).also {
+                            patch(it, planName, "http://127.0.0.1:18888", 0)
                         }
                     }
                     withProfile { commit(uuid2) }
