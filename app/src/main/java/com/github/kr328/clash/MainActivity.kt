@@ -726,23 +726,25 @@ class MainActivity : BaseActivity<MainDesign>() {
         // 重新查询
         val activeProfile2 = withProfile { queryActive() }
         if (activeProfile2 == null) {
-            _log("startClash 无 profile，开始从本地加载配置")
+            _log("startClash 无 profile，直接从 JSON 拿 YAML")
             LoadingDialog.show(this@MainActivity, "正在初始化...")
             launch(Dispatchers.IO) {
                 try {
-                    // 清理旧数据
-                    withProfile {
-                        val all = queryAll()
-                        all.forEach { delete(it.uuid) }
-                    }
-                    
-                    // 读取 assets/config.yaml
-                    val saveFile = java.io.File(filesDir, "final_config.yaml")
-                    assets.open("config.yaml").use { input ->
-                        saveFile.outputStream().use { output ->
-                            input.copyTo(output)
+                    withProfile { queryAll().forEach { delete(it.uuid) } }
+                    var yamlText = subData?.config_yaml ?: ""
+                    if (yamlText.isEmpty()) {
+                        val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
+                        val resp = try { apiServiceApp.getSubscribe(PreferenceManager.loginauthData) } catch (_: Exception) { null }
+                        if (resp != null && resp.isSuccessful && resp.body()?.data != null) {
+                            subData = resp.body()?.data
+                            yamlText = subData?.config_yaml ?: ""
                         }
                     }
+                    if (yamlText.isEmpty()) throw Exception("未获取到有效节点配置")
+                    
+                    val saveFile = java.io.File(filesDir, "final_config.yaml")
+                    saveFile.writeText(yamlText)
+                    _log("startClash YAML 长度: " + yamlText.length)
                     
                     val planName = "轻量"
                     val uuid2 = withProfile {
@@ -753,16 +755,12 @@ class MainActivity : BaseActivity<MainDesign>() {
                     withProfile { commit(uuid2) }
                     activeProfile()
                     
-                    withContext(Dispatchers.Main) {
-                        LoadingDialog.hide()
-                    }
-                    startServer()
+                    withContext(Dispatchers.Main) { startServer() }
                 } catch (e: Exception) {
-                    _log("startClash 创建 profile 失败: " + e.message)
-                    withContext(Dispatchers.Main) {
-                        LoadingDialog.hide()
-                        showExceptionToast("节点初始化失败：" + (e.message ?: ""))
-                    }
+                    _log("startClash 加载失败: " + e.message)
+                    withContext(Dispatchers.Main) { showExceptionToast("连接失败：" + (e.message ?: "未知错误")) }
+                } finally {
+                    withContext(Dispatchers.Main) { LoadingDialog.hide() }
                 }
             }
             return
