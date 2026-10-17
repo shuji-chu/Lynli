@@ -734,7 +734,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                     
                     var yamlText = subData?.config_yaml ?: ""
                     if (yamlText.isEmpty()) {
-                        yamlText = "mixed-port: 7890\nallow-lan: false\nmode: rule\nlog-level: warning\nexternal-controller: 127.0.0.1:9090\nproxies:\n  - name: \"Lynli\"\n    type: hysteria2\n    server: us1.yisoujiasu.de5.net\n    port: 443\n    password: \"u41751:JBsF1RqknBasN7Vyh0U0Jw\"\n    sni: \"www.bing.com\"\n    skip-cert-verify: true\n    obfs: salamander\n    obfs-password: \"0bfsSalamander2026ys\"\n    up: \"100 Mbps\"\n    down: \"200 Mbps\"\nproxy-groups:\n  - name: \"PROXY\"\n    type: select\n    proxies:\n      - \"Lynli\"\n      - DIRECT\nrules:\n  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n"
+                        yamlText = "mixed-port: 7890\nallow-lan: false\nmode: rule\nlog-level: warning\nexternal-controller: 127.0.0.1:9090\nproxies:\n  - name: \"Lynli-Reality\"\n    type: vless\n    server: us1.yisoujiasu.de5.net\n    port: 52610\n    uuid: a9ed8ff8-aa4c-463e-801e-21405abf8525\n    network: tcp\n    udp: true\n    tls: true\n    flow: xtls-rprx-vision\n    servername: www.microsoft.com\n    reality-opts:\n      public-key: 8ZeOiFx6AFBRhJjJ7-8Nwg2qHYhChQdEyigsRmOHol0\n      short-id: b316cc48\n    client-fingerprint: chrome\nproxy-groups:\n  - name: \"PROXY\"\n    type: select\n    proxies:\n      - \"Lynli-Reality\"\n      - DIRECT\nrules:\n  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n"
                     }
                     
                     if (yamlText.contains("\\n")) {
