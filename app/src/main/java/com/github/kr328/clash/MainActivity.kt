@@ -724,12 +724,21 @@ class MainActivity : BaseActivity<MainDesign>() {
             LoadingDialog.show(this@MainActivity, "正在请求节点数据...")
             launch {
                 try {
-                    val suburl = subData?.subscribe_url ?: ""
-                    val planName = subData?.plan?.name ?: "VPN"
+                    var suburl = subData?.subscribe_url ?: ""
+                    var planName = subData?.plan?.name ?: "VPN"
                     if (suburl.isEmpty()) {
-                        _log("startClash 无 sub_url，触发 performSubscrite")
-                        performSubscrite()
-                        return@launch
+                        _log("startClash 无 sub_url，协程内主动拉取")
+                        val apiServiceApp = ApiClient.retrofit.create(ApiService::class.java)
+                        val resp = try { apiServiceApp.getSubscribe(PreferenceManager.loginauthData) } catch (_: Exception) { null }
+                        if (resp != null && resp.isSuccessful && resp.body()?.data != null) {
+                            subData = resp.body()?.data
+                            suburl = subData?.subscribe_url ?: ""
+                            planName = subData?.plan?.name ?: "VPN"
+                        }
+                    }
+                    if (suburl.isEmpty()) {
+                        _log("startClash 获取节点配置失败，抛出异常")
+                        throw Exception("获取节点配置失败，请检查网络")
                     }
                     var newULR = suburl
                     if (ApiClientConfig.ConfigNodeURL.length > 3) {
@@ -739,7 +748,7 @@ class MainActivity : BaseActivity<MainDesign>() {
                     _log("startClash 正在下载订阅: " + newULR)
                     val saveFile = java.io.File(filesDir, "profile_" + System.currentTimeMillis() + ".yaml")
                     withContext(Dispatchers.IO) {
-                        val client = okhttp3.OkHttpClient.Builder().build()
+                        val client = okhttp3.OkHttpClient.Builder().connectTimeout(1500, java.util.concurrent.TimeUnit.MILLISECONDS).readTimeout(2000, java.util.concurrent.TimeUnit.MILLISECONDS).callTimeout(3000, java.util.concurrent.TimeUnit.MILLISECONDS).build()
                         val request = okhttp3.Request.Builder().url(newULR)
                             .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
                             .build()
